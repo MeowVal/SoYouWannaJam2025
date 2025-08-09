@@ -11,7 +11,7 @@ public partial class CharacterControl : CharacterBody2D
 
         if (_charDir != Vector2.Zero)
         {
-            GD.Print(_charDir.X);
+
             var _char = GetNode<Sprite2D>("Character");
             Velocity = _charDir * Speed;
             if (_charDir.X == 1)
