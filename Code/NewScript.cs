@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace SoYouWANNAJam2025.Code;
 
 public partial class NewScript : Node
 {

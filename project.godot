@@ -23,7 +23,7 @@ window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="So you WANNA Jam 2025"
+project/assembly_name="So You WANNA Jam 2025"
 
 [file_customization]
 
@@ -34,3 +34,7 @@ folder_colors={
 "res://Resources/": "blue",
 "res://Scenes/": "purple"
 }
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

@@ -1,36 +1,32 @@
-[gd_scene load_steps=10 format=3 uid="uid://hxf0gtf3x5pb"]
+[gd_scene load_steps=9 format=3 uid="uid://hxf0gtf3x5pb"]
 
-[ext_resource type="Script" uid="uid://csq7y2gp26ang" path="res://Entities/NPC/Npc.cs" id="1_8ee2b"]
 [ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="2_mdhkh"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8ee2b"]
-size = Vector3(0.17424, 0.273167, 0.0101471)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ee2b"]
+atlas = ExtResource("2_mdhkh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdhkh"]
+atlas = ExtResource("2_mdhkh")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8w7w5"]
 atlas = ExtResource("2_mdhkh")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsprs"]
 atlas = ExtResource("2_mdhkh")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bggm2"]
 atlas = ExtResource("2_mdhkh")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j4ksm"]
-atlas = ExtResource("2_mdhkh")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3otve"]
-atlas = ExtResource("2_mdhkh")
 region = Rect2(32, 32, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6d28k"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_j4ksm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8w7w5")
+"texture": SubResource("AtlasTexture_8ee2b")
 }],
 "loop": true,
 "name": &"Idle",
@@ -38,32 +34,43 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_mdhkh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w7w5")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xsprs")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bggm2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j4ksm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3otve")
 }],
 "loop": true,
 "name": &"Rotate",
 "speed": 5.0
 }]
 
-[node name="NPC" type="RigidBody3D"]
-gravity_scale = 0.0
-script = ExtResource("1_8ee2b")
+[sub_resource type="CSharpScript" id="CSharpScript_6d28k"]
+script/source = "using Godot;
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00467682, 0.0156269, -0.000282288)
-shape = SubResource("BoxShape3D_8ee2b")
+namespace SoYouWANNAJam2025.Entities.NPC;
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-shaded = true
-texture_filter = 2
-sprite_frames = SubResource("SpriteFrames_6d28k")
+public partial class Npc : RigidBody3D
+{
+    public Sprite3D sprite;
+    public override void _Ready()
+    {
+        sprite = GetNode<Sprite3D>(\"Sprite\");
+    }
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+    }
+    
+}"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_j4ksm")
 animation = &"Idle"
+script = SubResource("CSharpScript_6d28k")

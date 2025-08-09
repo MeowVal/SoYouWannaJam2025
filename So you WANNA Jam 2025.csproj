@@ -2,6 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
-    <RootNamespace>SoyouWANNAJam2025</RootNamespace>
+    <RootNamespace>SoYouWANNAJam2025</RootNamespace>
   </PropertyGroup>
 </Project>
