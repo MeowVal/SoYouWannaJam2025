@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "So you WANNA Jam 2025", "So you WANNA Jam 2025.csproj", "{40B3144B-8F7D-4E03-B65A-C135C95E5A98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "So You WANNA Jam 2025", "So You WANNA Jam 2025.csproj", "{40B3144B-8F7D-4E03-B65A-C135C95E5A98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,10 +2,10 @@
 /shelf/
 /workspace.xml
 # Rider ignored files
-/contentModel.xml
 /modules.xml
+/contentModel.xml
+/.idea.SoYouWannaJam2025.iml
 /projectSettingsUpdater.xml
-/.idea.So you WANNA Jam 2025.iml
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
