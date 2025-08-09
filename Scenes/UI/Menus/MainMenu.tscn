@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwq6qt7xl4klm"]
+
+[ext_resource type="Theme" uid="uid://dbof2d7uwf2sk" path="res://Assets/Themes/BaseTheme.tres" id="1_7bd3e"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7bd3e")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0666667, 0.0862745, 0.121569, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_7bd3e")
+theme_override_font_sizes/font_size = 32
+text = "Dave's Blacksmith Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtensVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="StartGame" type="Button" parent="MarginContainer/VBoxContainer/ButtensVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../QuitGame")
+focus_neighbor_bottom = NodePath("../QuitGame")
+focus_next = NodePath("../QuitGame")
+focus_previous = NodePath("../QuitGame")
+theme = ExtResource("1_7bd3e")
+text = "Start Game
+"
+
+[node name="QuitGame" type="Button" parent="MarginContainer/VBoxContainer/ButtensVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../StartGame")
+focus_neighbor_bottom = NodePath("../StartGame")
+focus_next = NodePath("../StartGame")
+focus_previous = NodePath("../StartGame")
+theme = ExtResource("1_7bd3e")
+text = "Exit"
