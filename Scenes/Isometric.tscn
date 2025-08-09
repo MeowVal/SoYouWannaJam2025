@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dejbiswo8rnoi"]
+
+[ext_resource type="PackedScene" uid="uid://chudvyrcgphbr" path="res://Scenes/Resources.tscn" id="1_fo3sg"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_8kla7"]
+resource_name = "Resources"
+scenes/1/scene = ExtResource("1_fo3sg")
+scenes/1/display_placeholder = ExtResource("1_fo3sg")
+
+[sub_resource type="TileSet" id="TileSet_5yxma"]
+tile_shape = 1
+sources/0 = SubResource("TileSetScenesCollectionSource_8kla7")
+
+[node name="Isometric" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_5yxma")
