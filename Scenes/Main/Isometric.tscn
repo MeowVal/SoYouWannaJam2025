@@ -1,26 +1,12 @@
-[gd_scene load_steps=5 format=4 uid="uid://dejbiswo8rnoi"]
+[gd_scene load_steps=3 format=4 uid="uid://dejbiswo8rnoi"]
 
+[ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Scenes/Entities/Player/Character.tscn" id="1_m7oyx"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
-[ext_resource type="Texture2D" uid="uid://3ps2vy4q4qah" path="res://Assets/Sprites/characters/dwarf.png" id="2_m7oyx"]
-[ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/CharacterControl.cs" id="3_1akmr"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1akmr"]
 
 [node name="Isometric" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Character" parent="." instance=ExtResource("1_m7oyx")]
 position = Vector2(99, 89)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("CapsuleShape2D_1akmr")
-
-[node name="Character" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("2_m7oyx")
-script = ExtResource("3_1akmr")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D/Character"]
-position = Vector2(1, 0)
-zoom = Vector2(2, 2)
 
 [node name="BuildingMap" type="TileMapLayer" parent="."]
 y_sort_enabled = true

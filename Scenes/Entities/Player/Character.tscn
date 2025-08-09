@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4hvjp22ok276"]
+
+[ext_resource type="Texture2D" uid="uid://3ps2vy4q4qah" path="res://Assets/Sprites/characters/dwarf.png" id="1_b3ei2"]
+[ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/CharacterControl.cs" id="2_l3y44"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1akmr"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("2_l3y44")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1akmr")
+
+[node name="Character" type="Sprite2D" parent="."]
+texture = ExtResource("1_b3ei2")
+
+[node name="Camera2D" type="Camera2D" parent="Character"]
+position = Vector2(1, 0)
+zoom = Vector2(2, 2)
