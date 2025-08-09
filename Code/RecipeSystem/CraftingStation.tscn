@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/RecipeSystem/CraftingStation.cs" id="1_hr2aa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hll0y"]
+radius = 28.0179
 
 [node name="CraftingStationTrigger" type="Area2D"]
 script = ExtResource("1_hr2aa")
@@ -10,3 +11,5 @@ script = ExtResource("1_hr2aa")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hll0y")
 debug_color = Color(0.714305, 0.483455, 0, 0.42)
+
+[node name="RecipeTimer" type="Timer" parent="."]

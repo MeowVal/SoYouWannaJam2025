@@ -13,7 +13,7 @@ public enum WorkType
 public partial class BaseRecipe : Resource
 {
     [ExportGroup("Info")]
-    [Export] public string Name = "Unknown Recipe";
+    [Export] public string DisplayName = "Unknown";
     [Export] public string Description = "You need to actually set this lol.";
     [Export] public Texture2D Icon;
 

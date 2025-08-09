@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public partial class ModularWeapon : Node2D
 {
-    [ExportGroup("Info")] [Export] public string Name = "Base Upgrade";
-    [Export] public string Description = "This is an unset base class.";
+    [ExportGroup("Info")]
+    [Export] public string DisplayName = "Unknown";
+    [Export] public string Description = "You need to actually set this lol.";
     [Export] public Texture2D Icon;
 
     [ExportGroup("Damage")] [Export] // The root base damage of the weapon
