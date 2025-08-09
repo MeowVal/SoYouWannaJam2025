@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://md50e6tq42ee"]
+
+[ext_resource type="Texture2D" uid="uid://cn6144m0wh6e4" path="res://Assets/Sprites/environment/floors/oak_woodplanks.png" id="1_tijb6"]
+
+[node name="Resources" type="Node2D"]
+
+[node name="OakWoodplanks" type="Sprite2D" parent="."]
+texture = ExtResource("1_tijb6")
