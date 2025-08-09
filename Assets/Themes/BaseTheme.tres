@@ -1,5 +1,24 @@
-[gd_resource type="Theme" format=3 uid="uid://dbof2d7uwf2sk"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dbof2d7uwf2sk"]
+
+[ext_resource type="FontFile" uid="uid://c8lsw3hjr1baf" path="res://Assets/Fonts/InterVariable.ttf" id="1_nrhgs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgkog"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7h2a0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_grebg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gtj47"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wi4c3"]
 
 [resource]
 default_base_scale = 1.0
-default_font_size = 24
+default_font = ExtResource("1_nrhgs")
+default_font_size = 16
+Button/colors/font_focus_color = Color(0.25098, 0.384314, 0.592157, 1)
+Button/styles/disabled = SubResource("StyleBoxEmpty_kgkog")
+Button/styles/focus = SubResource("StyleBoxEmpty_7h2a0")
+Button/styles/hover = SubResource("StyleBoxEmpty_grebg")
+Button/styles/normal = SubResource("StyleBoxEmpty_gtj47")
+Button/styles/pressed = SubResource("StyleBoxEmpty_wi4c3")
