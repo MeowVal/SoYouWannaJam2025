@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://d1il8gelcfaqa"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://d1il8gelcfaqa"]
 
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/RecipeSystem/BaseRecipe.cs" id="1_iogdy"]
 [ext_resource type="Script" uid="uid://cefbqmeolsuvn" path="res://Code/ModularWeapons/BaseWeaponModifier.cs" id="1_j0tvg"]

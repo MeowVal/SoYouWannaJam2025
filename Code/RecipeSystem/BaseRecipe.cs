@@ -9,7 +9,8 @@ public enum WorkType
     Instant
 }
 
-public partial class Recipe : Resource
+[GlobalClass]
+public partial class BaseRecipe : Resource
 {
     [ExportGroup("Info")]
     [Export] public string Name = "Unknown Recipe";
