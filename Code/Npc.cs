@@ -2,11 +2,16 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code;
 
-public partial class Npc : Node
+public partial class Npc : CharacterBody2D
 {
-    public AnimatedSprite2D ;
+    private string _state = "idle";
+    private Vector2 _direction = Vector2.Down;
+    private string _directionSprite = "down";
+    [Export]
+    public NpcResource NpcResource;
     public override void _Ready()
     {
-        var sprite = 
+        
+        base._Ready();
     }
 }
