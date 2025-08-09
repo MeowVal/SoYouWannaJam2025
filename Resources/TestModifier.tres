@@ -1,20 +1,11 @@
-[gd_resource type="Resource" script_class="BaseWeaponStatModifier" load_steps=3 format=3 uid="uid://b6hqrx0yx57vn"]
+[gd_resource type="Resource" script_class="BaseWeaponModifier" load_steps=3 format=3 uid="uid://b6hqrx0yx57vn"]
 
 [ext_resource type="Texture2D" uid="uid://dehndwiutqrsl" path="res://Assets/Sprites/objects/materials/bronze_bar_3.png" id="1_84vdy"]
-[ext_resource type="Script" uid="uid://dkhk3vckqerhe" path="res://Code/ModularWeapons/BaseWeaponStatModifier.cs" id="1_uk3mr"]
+[ext_resource type="Script" uid="uid://cefbqmeolsuvn" path="res://Code/ModularWeapons/BaseWeaponModifier.cs" id="2_84vdy"]
 
 [resource]
-script = ExtResource("1_uk3mr")
-BaseDamage = 10.0
-FireMultiplier = 0.0
-PoisonMultiplier = 0.0
-BaseArmourPenetration = 1.0
-BaseDurability = 20.0
-UnbreakingChance = 1.0
-CritChance = 5.0
-CritMultiplier = 2.0
-CritBonus = 5.0
-Name = "Base Upgrade"
-Description = "This is an unset base class."
+script = ExtResource("2_84vdy")
+Name = "Test Upgrade"
+Description = "NYA! :3"
 Icon = ExtResource("1_84vdy")
 metadata/_custom_type_script = "uid://dkhk3vckqerhe"
