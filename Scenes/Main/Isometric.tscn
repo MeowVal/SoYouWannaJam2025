@@ -1,16 +1,28 @@
-[gd_scene load_steps=4 format=4 uid="uid://dejbiswo8rnoi"]
+[gd_scene load_steps=5 format=4 uid="uid://dejbiswo8rnoi"]
 
-[ext_resource type="PackedScene" uid="uid://md50e6tq42ee" path="res://Scenes/ResourcesTest_ToDelete.tscn" id="1_yppru"]
+[ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
+[ext_resource type="Texture2D" uid="uid://3ps2vy4q4qah" path="res://Assets/Sprites/characters/dwarf.png" id="2_m7oyx"]
+[ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/CharacterControl.cs" id="3_1akmr"]
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_8kla7"]
-resource_name = "Resources"
-scenes/1/scene = ExtResource("1_yppru")
-
-[sub_resource type="TileSet" id="TileSet_5yxma"]
-sources/0 = SubResource("TileSetScenesCollectionSource_8kla7")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1akmr"]
 
 [node name="Isometric" type="Node2D"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD/////AAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQD///7/AAAAAAAAAQD///3/AAAAAAAAAQAAAP7/AAAAAAAAAQAAAP//AAAAAAAAAQABAAAAAAAAAAAAAQABAP//AAAAAAAAAQABAP7/AAAAAAAAAQA=")
-tile_set = SubResource("TileSet_5yxma")
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(99, 89)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_1akmr")
+
+[node name="Character" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_m7oyx")
+script = ExtResource("3_1akmr")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D/Character"]
+position = Vector2(1, 0)
+zoom = Vector2(2, 2)
+
+[node name="BuildingMap" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAACAAwABAAAAAEAAAACAAsABAAAAAEAAAADAAwABAAAAAEAAAADAAsABAAAAAEAAAADAAoABAAAAAEAAAADAAkABAAAAAAAAAADAAgABAAAAAAAAAACAAkABAAAAAEAAAACAAoABAAAAAEAAAABAAsABAAAAAEAAAABAAwABAAAAAEAAAACAA0ABAAAAAEAAAADAA4ABAAAAAEAAAACAA4ABAAAAAEAAAABAA0ABAAAAAEAAAACAAgABAAAAAAAAAAAAA0ABAAAAAAAAAABAA4ABAAAAAAAAAABAA8ABAAAAAAAAAACAA8ABAAAAAEAAAADABAABAAAAAAAAAADAA8ABAAAAAAAAAAEAA4ABAAAAAAAAAADAA0ABAAAAAEAAAAEAAwABAAAAAEAAAAEAAsABAAAAAAAAAAEAAoABAAAAAAAAAAEABAABAABAAAAAAADABEABAABAAAAAAADABIABAABAAAAAAACABEABAAAAAAAAAACABIABAABAAAAAAABABEABAABAAAAAAACABAABAAAAAAAAAABABAABAABAAAAAAAAAA8ABAABAAAAAAAAAA4ABAABAAAAAAABAAkABAAAAAAAAAACAAcABAAAAAAAAAABAAoABAAAAAAAAAAAAAsABAAAAAAAAAAEAA0ABAAAAAAAAAAFAAwABAAAAAAAAAAFAAsABAABAAAAAAAFAAoABAABAAAAAAAEAAkABAABAAAAAAAEAAgABAABAAAAAAADAAcABAABAAAAAAADAAYABAABAAAAAAACAAUABAABAAAAAAACAAYABAABAAAAAAABAAcABAABAAAAAAABAAgABAABAAAAAAAAAAkABAABAAAAAAAAAAoABAABAAAAAAAAAAwABAAAAAAAAAD//wsABAABAAAAAAD//w0ABAABAAAAAAD//wwABAABAAAAAAACABMABAABAAAAAAAEAA8ABAABAAAAAAAFAA4ABAABAAAAAAAFAA0ABAABAAAAAAAGAAwABAABAAAAAAA=")
+tile_set = ExtResource("1_yppru")
