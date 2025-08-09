@@ -1,18 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4hvjp22ok276"]
+[gd_scene load_steps=5 format=3 uid="uid://c4hvjp22ok276"]
 
-[ext_resource type="Texture2D" uid="uid://3ps2vy4q4qah" path="res://Assets/Sprites/characters/dwarf.png" id="1_b3ei2"]
+[ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="2_b3ei2"]
 [ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/CharacterControl.cs" id="2_l3y44"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1akmr"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_b3ei2"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3y44"]
+atlas = ExtResource("2_b3ei2")
+filter_clip = true
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+z_index = 2
+y_sort_enabled = true
+motion_mode = 1
 script = ExtResource("2_l3y44")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_1akmr")
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_b3ei2")
 
 [node name="Character" type="Sprite2D" parent="."]
-texture = ExtResource("1_b3ei2")
+texture = SubResource("AtlasTexture_l3y44")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 position = Vector2(1, 0)

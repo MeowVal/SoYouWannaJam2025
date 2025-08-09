@@ -3,15 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://ds5yi8daglp35" path="res://Assets/texture.png" id="1_b37tu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8sf5w"]
+resource_name = "Floors"
 texture = ExtResource("1_b37tu")
 texture_region_size = Vector2i(32, 32)
 0:1/0 = 0
 0:1/0/z_index = -1
-0:1/0/y_sort_origin = 1
 1:0/0 = 0
 0:0/0 = 0
 0:0/0/z_index = 1
-0:0/0/y_sort_origin = -2
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -8, -16, 0, 0, 8, 16, 0)
 
 [resource]
 tile_shape = 1
