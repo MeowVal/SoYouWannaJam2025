@@ -1,10 +1,10 @@
 using Godot;
-using System;
+namespace SoYouWANNAJam2025.Code;
 
 public partial class CharacterControl : CharacterBody2D
 {
     private int Speed = 32;
-    
+
     public override void _PhysicsProcess(double delta)
     {
         var _charDir = Input.GetVector("left", "right", "up", "down");
@@ -26,11 +26,11 @@ public partial class CharacterControl : CharacterBody2D
             {
                 _char.RegionRect = new Rect2(0, 0, 32, 32); // character up sprite
             }
-             else if (_charDir.Y == -1)
+            else if (_charDir.Y == -1)
             {
                 _char.RegionRect = new Rect2(32, 0, 32, 32); // character down sprite
             }
-            
+
         }
         else
         {
