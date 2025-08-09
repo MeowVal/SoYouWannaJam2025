@@ -1,6 +1,7 @@
 using Godot;
-using System;
 
-public partial class CharacterControl : Sprite2D
+namespace SoYouWANNAJam2025.Code;
+
+public partial class CharacterControl : CharacterBody2D
 {
 }
