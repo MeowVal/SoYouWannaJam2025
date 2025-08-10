@@ -4,5 +4,5 @@ namespace SoYouWANNAJam2025.Code;
 
 public partial class Global : Node
 {
-    public static int GameScale = 4;
+    public const int GameScale = 4;
 }
