@@ -2,7 +2,7 @@ using System.Numerics;
 using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.ModularWeapons;
-
+using Vector2 = Godot.Vector2;
 
 
 namespace SoYouWANNAJam2025.Code;
