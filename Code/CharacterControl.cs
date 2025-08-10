@@ -6,6 +6,7 @@ namespace SoYouWANNAJam2025.Code;
 
 public partial class CharacterControl : CharacterBody2D
 {
+
     private int _speed = 32;
 
     public override void _Input(InputEvent @event)
@@ -24,6 +25,17 @@ public partial class CharacterControl : CharacterBody2D
                 _cam.SetZoom(new Vector2(Mathf.Clamp(oldZoom.X-1, 1,10),Mathf.Clamp(oldZoom.Y-1, 1,10)));
             }
         }
+
+    private int Speed = 32;
+    public ModularWeapon HeldItem;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        HeldItem = new ModularWeapon();
+        var resource = GD.Load<BaseWeaponModifier>("res://Resources/TestModifier.tres");
+        HeldItem.Modifiers.Add(resource);
+
     }
 
     public override void _PhysicsProcess(double delta)
@@ -39,6 +51,8 @@ public partial class CharacterControl : CharacterBody2D
             GD.Print(Input.GetActionStrength("left"));
 
             Velocity = _charDir * _speed;
+            var _char = GetNode<Sprite2D>("Character");
+            Velocity = _charDir * Speed;
             if (_charDir.X == 1)
             {
                 _char.RegionRect = new Rect2(0, 32, 32, 32); // character left sprite

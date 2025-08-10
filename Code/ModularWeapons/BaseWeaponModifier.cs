@@ -5,8 +5,9 @@ using SoyouWANNAJam2025.Code.ModularWeapons;
 [GlobalClass]
 public partial class BaseWeaponModifier : Resource, IBaseWeaponModifier
 {
-    [ExportGroup("Info")] [Export] public string Name = "Base Upgrade";
-    [Export] public string Description = "This is an unset base class.";
+    [ExportGroup("Info")]
+    [Export] public string DisplayName = "Unknown";
+    [Export] public string Description = "You need to actually set this lol.";
     [Export] public Texture2D Icon;
 
 
@@ -17,6 +18,6 @@ public partial class BaseWeaponModifier : Resource, IBaseWeaponModifier
 
     public string GetDescription()
     {
-        return Name;
+        return DisplayName;
     }
 }

@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public partial class ModularWeapon : Node2D
 {
-    [ExportGroup("Info")] [Export] public string Name = "Base Upgrade";
-    [Export] public string Description = "This is an unset base class.";
+    [ExportGroup("Info")]
+    [Export] public string DisplayName = "Unknown Modular Weapon";
+    [Export] public string Description = "You need to actually set this lol.";
     [Export] public Texture2D Icon;
 
     [ExportGroup("Damage")] [Export] // The root base damage of the weapon
@@ -30,13 +31,14 @@ public partial class ModularWeapon : Node2D
     public float CritBonus = 5;
 
     public List<BaseWeaponModifier> Modifiers = new List<BaseWeaponModifier>();
+    public List<BaseRecipe> CompletedRecipes = new List<BaseRecipe>();
 
     // Call this to update the final state of the weapon
     void CalculateModifiers()
     {
-        foreach (var Mod in Modifiers)
+        foreach (var wepMod in Modifiers)
         {
-            Mod.ApplyModifier(this);
+            wepMod.ApplyModifier(this);
         }
     }
 }

@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqh3oq2qyafiu"]
+[gd_scene load_steps=4 format=3 uid="uid://dqh3oq2qyafiu"]
 
 [ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/RecipeSystem/CraftingStation.cs" id="1_hr2aa"]
+[ext_resource type="Resource" uid="uid://d1il8gelcfaqa" path="res://Resources/Recipes/testRecipe.tres" id="2_jmwnm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hll0y"]
+radius = 28.0179
 
 [node name="CraftingStationTrigger" type="Area2D"]
 script = ExtResource("1_hr2aa")
+Recipes = [ExtResource("2_jmwnm")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hll0y")
 debug_color = Color(0.714305, 0.483455, 0, 0.42)
+
+[node name="RecipeTimer" type="Timer" parent="."]
+one_shot = true
