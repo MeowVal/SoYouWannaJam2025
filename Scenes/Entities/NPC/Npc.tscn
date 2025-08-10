@@ -158,8 +158,8 @@ radius = 8.0
 height = 16.0
 
 [node name="Npc" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 16
+collision_layer = 2
+collision_mask = 19
 script = ExtResource("1_623a7")
 NpcResource = ExtResource("2_jvg37")
 
@@ -183,3 +183,12 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_bj5yu")
 debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+path_postprocessing = 1
+avoidance_layers = 3
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0.223529, 0.137255, 1)
