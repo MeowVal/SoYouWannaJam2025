@@ -1,6 +1,6 @@
 using Godot;
+using Godot.Collections;
 using SoYouWANNAJam2025.Code.ModularWeapons;
-using Vector2 = Godot.Vector2;
 
 
 
@@ -20,6 +20,8 @@ public partial class CharacterControl : CharacterBody2D
 	private string _direction = "down";
 	private Vector2 _targetPos;
 	private int _moveThreshold = 3;
+	
+	public Array<Interactible> Interactable = [];
 
 	[ExportGroup("Inventory")]
 	public ModularWeapon HeldItem;
@@ -56,6 +58,14 @@ public partial class CharacterControl : CharacterBody2D
 			}
 		}
 
+		if (Input.IsActionJustPressed("ui_accept"))
+		{
+			if (Interactable.Count > 0)
+			{
+				Interactable[0].TriggerInteraction(this);
+			}
+		}
+		
 		if (Input.IsActionPressed("left"))
 		{
 			_direction = "left";
