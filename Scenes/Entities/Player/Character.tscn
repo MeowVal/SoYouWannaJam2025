@@ -20,12 +20,7 @@ script = ExtResource("2_l3y44")
 position = Vector2(0, 10)
 shape = SubResource("CircleShape2D_b3ei2")
 
-[node name="Character" type="Sprite2D" parent="."]
+[node name="CharSprite" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_l3y44")
 region_enabled = true
 region_rect = Rect2(32, 0, 32, 32)
-
-[node name="Camera2D" type="Camera2D" parent="Character"]
-position = Vector2(1, 0)
-scale = Vector2(0.994597, 0.986852)
-zoom = Vector2(2, 2)

@@ -7,74 +7,54 @@ namespace SoYouWANNAJam2025.Code;
 public partial class CharacterControl : CharacterBody2D
 {
 
-    private int _speed = 32;
+	[Export]public int MoveSpeed = 72;
+	[Export]public double AccelerationSpeed = 10;
+	[Export] public double DecelerationSpeed = 15;
+	public ModularWeapon HeldItem;
 
-    public override void _Input(InputEvent @event)
-    {
-        var _cam = GetNode<Camera2D>("Character/Camera2D");
-        if (@event is InputEventMouseButton mouseEvent)
-        {
-            if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
-            {
-                var oldZoom = _cam.GetZoom();
-                _cam.SetZoom(new Vector2(Mathf.Clamp(oldZoom.X+1, 1,10),Mathf.Clamp(oldZoom.Y+1, 1,10)));
-            }
-            else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
-            {
-                var oldZoom = _cam.GetZoom();
-                _cam.SetZoom(new Vector2(Mathf.Clamp(oldZoom.X-1, 1,10),Mathf.Clamp(oldZoom.Y-1, 1,10)));
-            }
-        }
+	private double _currentSpeed;
+	private Sprite2D _charSprite;
 
-    private int Speed = 32;
-    public ModularWeapon HeldItem;
+	public override void _Ready()
+	{
+		base._Ready();
+		HeldItem = new ModularWeapon();
+		var resource = GD.Load<BaseWeaponModifier>("res://Resources/TestModifier.tres");
+		HeldItem.Modifiers.Add(resource);
+		_charSprite = GetNode<Sprite2D>("CharSprite");
+	}
 
-    public override void _Ready()
-    {
-        base._Ready();
-        HeldItem = new ModularWeapon();
-        var resource = GD.Load<BaseWeaponModifier>("res://Resources/TestModifier.tres");
-        HeldItem.Modifiers.Add(resource);
+	public override void _PhysicsProcess(double delta)
+	{
+		
+		var charDir = Input.GetVector("left", "right", "up", "down");
+		
+		if (charDir != Vector2.Zero)
+		{
+			Velocity = Velocity.MoveToward(charDir * MoveSpeed, (float)(AccelerationSpeed));
+			
+			if (charDir.X == 1)
+			{
+				_charSprite.RegionRect = new Rect2(0, 32, 32, 32); // character left sprite
+			}
+			else if (charDir.X == -1)
+			{
+				_charSprite.RegionRect = new Rect2(32, 32, 32, 32); // character right sprite
+			}
+			else if (charDir.Y == 1)
+			{
+				_charSprite.RegionRect = new Rect2(0, 0, 32, 32); // character up sprite
+			}
+			else if (charDir.Y == -1)
+			{
+				_charSprite.RegionRect = new Rect2(32, 0, 32, 32); // character down sprite
+			}
 
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        var _char = GetNode<Sprite2D>("Character");
-        var _charDir = Input.GetVector("left", "right", "up", "down");
-        
-        if (_charDir != Vector2.Zero)
-        {
-            GD.Print(Input.GetActionStrength("down"));
-            GD.Print(Input.GetActionStrength("up"));
-            GD.Print(Input.GetActionStrength("right"));
-            GD.Print(Input.GetActionStrength("left"));
-
-            Velocity = _charDir * _speed;
-            var _char = GetNode<Sprite2D>("Character");
-            Velocity = _charDir * Speed;
-            if (_charDir.X == 1)
-            {
-                _char.RegionRect = new Rect2(0, 32, 32, 32); // character left sprite
-            }
-            else if (_charDir.X == -1)
-            {
-                _char.RegionRect = new Rect2(32, 32, 32, 32); // character right sprite
-            }
-            else if (_charDir.Y == 1)
-            {
-                _char.RegionRect = new Rect2(0, 0, 32, 32); // character up sprite
-            }
-            else if (_charDir.Y == -1)
-            {
-                _char.RegionRect = new Rect2(32, 0, 32, 32); // character down sprite
-            }
-
-        } 
-        else
-        {
-            Velocity = Vector2.Zero;
-        }
-        MoveAndSlide();
-    }
+		} 
+		else
+		{
+			Velocity = Velocity.MoveToward(Vector2.Zero, (float)(DecelerationSpeed));
+		}
+		MoveAndSlide();
+	}
 }
