@@ -20,7 +20,9 @@ public partial class CraftingStation : Area2D
     {
         base._Ready();
         _recipeTimer = GetNode<Timer>("RecipeTimer");
+        _recipeTimer.Timeout += _OnRecipeTimer;
         BodyEntered += OnCraftingStationBodyEntered;
+        BodyExited += OnCraftingStationBodyExited;
     }
 
     private void OnCraftingStationBodyEntered(Node2D body)
@@ -54,13 +56,14 @@ public partial class CraftingStation : Area2D
             switch (_currentRecipe.WorkType)
             {
                 case WorkType.Instant:
+                    GD.Print("Starting WorkType Instant.");
                     _RecipeComplete();
                     break;
                 case WorkType.SpamButton:
                     GD.Print("idk i didnt add this yet...");
                     break;
                 case WorkType.Timer:
-                    _recipeTimer.Timeout += _OnRecipeTimer;
+                    GD.Print("Starting WorkType Timer.");
                     _recipeTimer.Start(recipe.TimeToComplete);
                     break;
                 case WorkType.ButtonHold:
@@ -70,6 +73,13 @@ public partial class CraftingStation : Area2D
             GD.Print("Recipe started.");
             break;
         }
+    }
+
+    private void OnCraftingStationBodyExited(Node2D body)
+    {
+        if (_recipeTimer.IsStopped()) return;
+        _recipeTimer.Stop();
+        GD.Print("Recipe ended before complete");
     }
 
     private void _OnRecipeTimer()

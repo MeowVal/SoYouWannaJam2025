@@ -24,7 +24,7 @@ public partial class CharacterControl : CharacterBody2D
 	{
 		base._Ready();
 		HeldItem = new ModularWeapon();
-		var resource = GD.Load<BaseWeaponModifier>("res://Resources/TestModifier.tres");
+		var resource = GD.Load<BaseWeaponModifier>("res://Resources/WeaponModifiers/TestModifier.tres");
 		HeldItem.Modifiers.Add(resource);
 		_charSprite = GetNode<AnimatedSprite2D>("CharSprite");
 	}
