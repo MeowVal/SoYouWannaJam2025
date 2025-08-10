@@ -40,7 +40,8 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_7bd3e")
 theme_override_font_sizes/font_size = 32
-text = "Dave's Blacksmith Shop"
+text = "Dave's Blacksmith Shop
+(the game)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
