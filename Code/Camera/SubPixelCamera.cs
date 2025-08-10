@@ -5,7 +5,7 @@ namespace SoYouWANNAJam2025.Code.Camera;
 public partial class SubPixelCamera : Camera2D
 {
     [Export] public Node2D FollowingNode;
-    [Export] public double FollowSpeed = 5.0;
+    [Export(PropertyHint.Range, "1, 10")] public double SmoothingSpeed = 5.0;
     
     private Vector2 _actualCamPos;
 
@@ -14,16 +14,16 @@ public partial class SubPixelCamera : Camera2D
         _actualCamPos = FollowingNode.GlobalPosition;
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
-        _actualCamPos = _actualCamPos.Lerp(FollowingNode.GlobalPosition, (float)(FollowSpeed*delta));
-        //_actualCamPos = FollowingNode.GlobalPosition;
-
-        if (FindParent("SubViewportContainer") is SubViewportContainer { Material: ShaderMaterial shaderMaterial })
-        {
-            shaderMaterial.SetShaderParameter("cam_offset", _actualCamPos.Round() - _actualCamPos);
-        }
-
-        GlobalPosition = _actualCamPos.Round();
+      if (FollowingNode != null)
+      {
+          var weight = 0.0f;
+          var camPos = FollowingNode.GlobalPosition;
+          weight = (float)((11-SmoothingSpeed)/100);
+          _actualCamPos.X = Mathf.Lerp(GlobalPosition.X, FollowingNode.GlobalPosition.X, weight);
+          _actualCamPos.Y = Mathf.Lerp(GlobalPosition.Y, FollowingNode.GlobalPosition.Y, weight);
+      }
+      GlobalPosition = _actualCamPos.Floor();
     }
 }

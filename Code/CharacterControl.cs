@@ -16,6 +16,8 @@ public partial class CharacterControl : CharacterBody2D
 	private double _currentSpeed;
 	private AnimatedSprite2D _charSprite;
 	private string _direction = "down";
+	private Vector2 _targetPos;
+	private int _moveThreshold = 3;
 
 	[ExportGroup("Inventory")]
 	public ModularWeapon HeldItem;
@@ -32,86 +34,109 @@ public partial class CharacterControl : CharacterBody2D
 
 	private void PlayerMovement(double delta)
 	{
-		//Vector2 velocity = Velocity;
+		Vector2 velocity = Velocity;
 		//velocity.X = MoveSpeed;//, (float)(AccelerationSpeed);
 		//velocity.Y = (MoveSpeed / 2);//, (float)(AccelerationSpeed);
 		
 		var moveDir = Vector2.Zero;
-		
-		if (Input.IsActionPressed("left"))
+		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
-			/*velocity.X = -scaledMoveSpeed;
-			velocity.Y = (scaledMoveSpeed / 2);
-			Velocity = velocity;*/
-			
-			moveDir.X = -1;
-			
-			_direction = "left";
-			_charSprite.Play("RunSW");
-			//GD.Print("LEFT");
-		}
-		else if (Input.IsActionPressed("right"))
-		{
-			/*velocity.X = scaledMoveSpeed;
-			velocity.Y = -(scaledMoveSpeed / 2);
-			Velocity = velocity;*/
-
-			moveDir.X = 1;
-			
-			_direction = "right";
-			_charSprite.Play("RunNE");
-			//GD.Print("right");
-		}
-		else if (Input.IsActionPressed("up"))
-		{
-			/*velocity.X = -scaledMoveSpeed;
-			velocity.Y = -(scaledMoveSpeed / 2);
-			Velocity = velocity;*/
-			
-			moveDir.Y = -1;
-			
-			_direction = "up";
-			_charSprite.Play("RunNW");
-			//GD.Print("up");
-		}
-		else if (Input.IsActionPressed("down"))
-		{
-			/*velocity.X = scaledMoveSpeed;
-			velocity.Y = (scaledMoveSpeed / 2);
-			Velocity = velocity;*/
-			
-			moveDir.Y = 1;
-			
-			_direction = "down";
-			_charSprite.Play("RunSE");
-			//GD.Print("down");
-		}
-		
-		if (moveDir != Vector2.Zero)
-		{
-			//moveDir = moveDir.Rotated(Mathf.DegToRad(30));
-			Velocity = Velocity.MoveToward(moveDir*(MoveSpeed*Global.GameScale), (float)(AccelerationSpeed*Global.GameScale));
+			_targetPos = GetGlobalMousePosition();
+			if (_targetPos != Vector2.Zero)
+			{
+				var direction = (_targetPos - GlobalPosition).Normalized();
+				var distance = GlobalPosition.DistanceTo(_targetPos);
+				
+				if (distance < _moveThreshold) //idle
+				{
+					_targetPos = Vector2.Zero;
+				}
+				else //movement
+				{
+					velocity.X = direction.X * (MoveSpeed * Global.GameScale);
+					velocity.Y = direction.Y * (MoveSpeed * Global.GameScale);
+					
+					Velocity = velocity;
+				}
+			}
 		}
 		else
 		{
-			Velocity = Velocity.MoveToward(Vector2.Zero, (float)(DecelerationSpeed*Global.GameScale));
-			switch (_direction)
+			if (Input.IsActionPressed("left"))
 			{
-				case "right":
-					_charSprite.Play("idleNE");
-					break;
-				case "left":
-					_charSprite.Play("idleSW");
-					break;
-				case "up":
-					_charSprite.Play("idleNW");
-					break;
-				case "down":
-					_charSprite.Play("idleSE");
-					break;
+				/*velocity.X = -scaledMoveSpeed;
+				velocity.Y = (scaledMoveSpeed / 2);
+				Velocity = velocity;*/
+
+				moveDir.X = -1;
+
+				_direction = "left";
+				_charSprite.Play("RunSW");
+				//GD.Print("LEFT");
+			}
+			else if (Input.IsActionPressed("right"))
+			{
+				/*velocity.X = scaledMoveSpeed;
+				velocity.Y = -(scaledMoveSpeed / 2);
+				Velocity = velocity;*/
+
+				moveDir.X = 1;
+
+				_direction = "right";
+				_charSprite.Play("RunNE");
+				//GD.Print("right");
+			}
+			else if (Input.IsActionPressed("up"))
+			{
+				/*velocity.X = -scaledMoveSpeed;
+				velocity.Y = -(scaledMoveSpeed / 2);
+				Velocity = velocity;*/
+
+				moveDir.Y = -1;
+
+				_direction = "up";
+				_charSprite.Play("RunNW");
+				//GD.Print("up");
+			}
+			else if (Input.IsActionPressed("down"))
+			{
+				/*velocity.X = scaledMoveSpeed;
+				velocity.Y = (scaledMoveSpeed / 2);
+				Velocity = velocity;*/
+
+				moveDir.Y = 1;
+
+				_direction = "down";
+				_charSprite.Play("RunSE");
+				//GD.Print("down");
+			}
+
+			if (moveDir != Vector2.Zero)
+			{
+				//moveDir = moveDir.Rotated(Mathf.DegToRad(30));
+				Velocity = Velocity.MoveToward(moveDir * (MoveSpeed * Global.GameScale),
+					(float)(AccelerationSpeed * Global.GameScale));
+			}
+			else
+			{
+				Velocity = Velocity.MoveToward(Vector2.Zero, (float)(DecelerationSpeed * Global.GameScale));
+				switch (_direction)
+				{
+					case "right":
+						_charSprite.Play("idleNE");
+						break;
+					case "left":
+						_charSprite.Play("idleSW");
+						break;
+					case "up":
+						_charSprite.Play("idleNW");
+						break;
+					case "down":
+						_charSprite.Play("idleSE");
+						break;
+				}
 			}
 		}
-		
 		MoveAndSlide();
 	}
 	

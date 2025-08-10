@@ -400,6 +400,3 @@ shape = SubResource("CircleShape2D_b3ei2")
 [node name="CharSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qcvlp")
 animation = &"RunNE"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
