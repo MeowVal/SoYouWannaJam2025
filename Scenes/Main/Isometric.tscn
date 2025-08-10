@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://dejbiswo8rnoi"]
+[gd_scene load_steps=8 format=4 uid="uid://dejbiswo8rnoi"]
 
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Scenes/Entities/Player/Character.tscn" id="1_m7oyx"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
 [ext_resource type="PackedScene" uid="uid://dvpjmsh61huyx" path="res://Entities/CraftingStations/TestStation.tscn" id="3_1akmr"]
-[ext_resource type="PackedScene" uid="uid://w5m1b6map2ja" path="res://Entities/Items/ingotItem.tscn" id="4_tm7ya"]
-[ext_resource type="PackedScene" uid="uid://ccxhqwfuyr60" path="res://Scenes/UI/HUD.tscn" id="4_uaxa7"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/HUD.tscn" id="4_uaxa7"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/Camera.cs" id="4_vqmdy"]
-[ext_resource type="PackedScene" uid="uid://b53puqcp2u1qf" path="res://Entities/Items/logItem.tscn" id="4_yvvah"]
+[ext_resource type="Texture2D" uid="uid://3ps2vy4q4qah" path="res://Assets/Sprites/characters/dwarf.png" id="5_vqmdy"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vqmdy"]
 vertices = PackedVector2Array(1207.85, 703.992, 127.992, 1245.4, -1081.83, 639.992, 0, 97.5938)
@@ -44,11 +43,9 @@ navigation_polygon = SubResource("NavigationPolygon_vqmdy")
 navigation_layers = 3
 metadata/_edit_group_ = true
 
-[node name="ingotItem" parent="Isometric" instance=ExtResource("4_tm7ya")]
-position = Vector2(-78.5, 157.5)
-
-[node name="logItem" parent="Isometric" instance=ExtResource("4_yvvah")]
-position = Vector2(-101.75, 157.5)
+[node name="TestTarget" type="Sprite2D" parent="Isometric"]
+position = Vector2(456.75, 160.5)
+texture = ExtResource("5_vqmdy")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("4_vqmdy")
