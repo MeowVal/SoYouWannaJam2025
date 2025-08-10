@@ -1,14 +1,18 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using Godot.Collections;
+using SoYouWANNAJam2025.Code;
 
 public partial class CraftingStation : Area2D
 {
     [ExportGroup("Info")]
-    [Export] public string DisplayName = "Unknown";
+    [Export] public string DisplayName = "Unknown Crafting Station";
     [Export] public string Description = "You need to actually set this lol.";
     [Export] public Texture2D Icon;
-    [Export] public BaseRecipe Recipe;
+    [Export] public Array<BaseRecipe> Recipes = [];
 
+    private BaseRecipe _currentRecipe;
     private Timer _recipeTimer;
     private CharacterControl _player;
 
@@ -16,39 +20,69 @@ public partial class CraftingStation : Area2D
     {
         base._Ready();
         _recipeTimer = GetNode<Timer>("RecipeTimer");
+        BodyEntered += OnCraftingStationBodyEntered;
     }
 
-    private void OnCraftingStationBodyEntered(PhysicsBody2D body)
+    private void OnCraftingStationBodyEntered(Node2D body)
     {
         if (body is not CharacterControl character) return;
-        if (character.HeldItem is null) return;
         _player = character;
-        var hasInputs = false;
-        foreach (var wepMod in Recipe.Inputs)
+        if (_player.HeldItem is null) return;
+
+        foreach (var recipe in Recipes)
         {
-            if (_player.HeldItem.Modifiers.Contains(wepMod))
+            GD.Print("Attempting to start recipe: " + recipe.DisplayName);
+            if( _player.HeldItem.CompletedRecipes.Contains(recipe)) continue;
+
+            var hasInputs = false;
+            foreach (var wepMod in recipe.Inputs)
             {
-                hasInputs = true;
-                continue;
+                if (_player.HeldItem.Modifiers.Contains(wepMod))
+                {
+                    hasInputs = true;
+                    continue;
+                }
+                else
+                {
+                    hasInputs = false;
+                    break;
+                }
             }
-            else
+            if (!hasInputs) continue;
+            GD.Print("Weapon has required inputs");
+            _currentRecipe = recipe;
+            switch (_currentRecipe.WorkType)
             {
-                hasInputs = false;
-                break;
+                case WorkType.Instant:
+                    _RecipeComplete();
+                    break;
+                case WorkType.SpamButton:
+                    GD.Print("idk i didnt add this yet...");
+                    break;
+                case WorkType.Timer:
+                    _recipeTimer.Timeout += _OnRecipeTimer;
+                    _recipeTimer.Start(recipe.TimeToComplete);
+                    break;
             }
+            GD.Print("Recipe started.");
+            break;
         }
-        if (!hasInputs) return;
-        _recipeTimer.Timeout += _OnRecipeTimer;
-        _recipeTimer.Start(Recipe.TimeToComplete);
     }
 
     private void _OnRecipeTimer()
     {
+        GD.Print("Timer Complete");
+        _RecipeComplete();
+    }
+
+    private void _RecipeComplete()
+    {
         if (_player.HeldItem is null) return;
-        foreach (var wepMod in Recipe.Outputs)
+        foreach (var wepMod in _currentRecipe.Outputs)
         {
             _player.HeldItem.Modifiers.Add(wepMod);
         }
-        GD.Print("Completed recipe: " + Recipe.DisplayName);
+        _player.HeldItem.CompletedRecipes.Add(_currentRecipe);
+        GD.Print("Completed recipe: " + _currentRecipe.DisplayName);
     }
 }

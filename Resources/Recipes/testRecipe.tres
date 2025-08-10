@@ -1,20 +1,17 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://d1il8gelcfaqa"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://d1il8gelcfaqa"]
 
+[ext_resource type="Resource" uid="uid://b6hqrx0yx57vn" path="res://Resources/TestModifier.tres" id="1_3qpp4"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/RecipeSystem/BaseRecipe.cs" id="1_iogdy"]
-[ext_resource type="Script" uid="uid://cefbqmeolsuvn" path="res://Code/ModularWeapons/BaseWeaponModifier.cs" id="1_j0tvg"]
-
-[sub_resource type="Resource" id="Resource_3qpp4"]
-script = ExtResource("1_j0tvg")
-Name = "Base Upgrade"
-Description = "This is an unset base class."
-metadata/_custom_type_script = "uid://cefbqmeolsuvn"
+[ext_resource type="Texture2D" uid="uid://c0g50a5w4ya0o" path="res://Assets/Sprites/objects/materials/planks_3.png" id="1_ljfbq"]
+[ext_resource type="Resource" uid="uid://dqolrks1bco5h" path="res://Resources/TestModifier2.tres" id="2_ljfbq"]
 
 [resource]
 script = ExtResource("1_iogdy")
-Name = "Poggers"
+DisplayName = "Test Recipe"
 Description = "Lol... Lmao even"
-WorkType = 2
+Icon = ExtResource("1_ljfbq")
+WorkType = 1
 TimeToComplete = 1.5
-Inputs = [SubResource("Resource_3qpp4")]
-Outputs = []
+Inputs = [ExtResource("1_3qpp4")]
+Outputs = [ExtResource("2_ljfbq")]
 metadata/_custom_type_script = "uid://dpq804w6fy4nf"

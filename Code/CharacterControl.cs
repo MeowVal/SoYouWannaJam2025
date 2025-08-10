@@ -4,6 +4,15 @@ namespace SoYouWANNAJam2025.Code;
 public partial class CharacterControl : CharacterBody2D
 {
     private int Speed = 32;
+    public ModularWeapon HeldItem;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        HeldItem = new ModularWeapon();
+        var resource = GD.Load<BaseWeaponModifier>("res://Resources/TestModifier.tres");
+        HeldItem.Modifiers.Add(resource);
+    }
 
     public override void _PhysicsProcess(double delta)
     {
@@ -11,7 +20,6 @@ public partial class CharacterControl : CharacterBody2D
 
         if (_charDir != Vector2.Zero)
         {
-            GD.Print(_charDir.X);
             var _char = GetNode<Sprite2D>("Character");
             Velocity = _charDir * Speed;
             if (_charDir.X == 1)
