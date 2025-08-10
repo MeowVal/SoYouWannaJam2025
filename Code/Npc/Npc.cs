@@ -36,7 +36,8 @@ public partial class Npc : CharacterBody2D
         _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _sprite2D = GetNode<Sprite2D>("Sprite2D");
-        _navAgent.TargetPosition = Target.Position;
+        if (_navAgent != null) 
+            _navAgent.TargetPosition = Target.Position;
         if (NpcResource != null)
             SetupNpc();
         if(Engine.IsEditorHint()) return;
