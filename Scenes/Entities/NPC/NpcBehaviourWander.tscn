@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://b1edlwnu6gmlr" path="res://Code/Npc/NpcBehaviourWander.cs" id="1_anb2t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gdeh4"]
+radius = 64.0
 
 [node name="NpcWanderBehaviour" type="Node2D"]
 script = ExtResource("1_anb2t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gdeh4")
-debug_color = Color(0.65098, 0.521569, 0, 0)
+debug_color = Color(0.65098, 0.521569, 0, 0.243137)

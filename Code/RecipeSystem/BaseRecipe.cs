@@ -1,6 +1,7 @@
 using Godot;
-using System;
 using Godot.Collections;
+
+namespace SoYouWANNAJam2025.Code.RecipeSystem;
 
 public enum WorkType
 {
@@ -21,6 +22,6 @@ public partial class BaseRecipe : Resource
     [ExportGroup("Recipe Data")]
     [Export] public WorkType WorkType = WorkType.Instant;
     [Export] public float TimeToComplete = 1.5f;
-    [Export] public Array<BaseWeaponModifier> Inputs = [];
-    [Export] public Array<BaseWeaponModifier> Outputs = [];
+    [Export] public Array<ModularWeapons.BaseWeaponModifier> Inputs = [];
+    [Export] public Array<ModularWeapons.BaseWeaponModifier> Outputs = [];
 }

@@ -8,13 +8,13 @@ public partial class Npc : CharacterBody2D
     public delegate void DoBehaviorEnabledEventHandler();
     
     private Texture2D _lastTexture;
-    
+  
     public string State = "idle";
     public Vector2 Direction = Vector2.Down;
-    private string _directionName= "down";
+    private string _directionName= "Down";
     public bool DoBehaviour = true;
     
-    private NpcResource _npcResource;
+    private NpcResource _npcResource ;
     [Export]
     public NpcResource NpcResource
     {
@@ -43,30 +43,39 @@ public partial class Npc : CharacterBody2D
 
     public void UpdateAnimation()
     {
-        _animationPlayer.Play( State + "_" + _directionName );
+        if(_animationPlayer == null) return;
+        _animationPlayer.Play( State + _directionName );
     }
 
     public void UpdateDirection(Vector2 targetPosition)
     {
         Direction = GlobalPosition.DirectionTo(targetPosition);
         UpdateDirectionName();
+        GD.Print(Direction+ _directionName);
         
     }
 
     private void UpdateDirectionName()
     {
         const float threshold = 0.45f;
-        _directionName = Direction.Y switch
+        
+        if (Direction.Y < -threshold)
         {
-            < -threshold => "up",
-            > threshold => "down",
-            _ => Direction.X switch
-            {
-                < -threshold => "left",
-                > threshold => "right",
-                _ => _directionName
-            }
-        };
+            _directionName = "Up";
+        }
+        else if (Direction.Y > threshold)
+        {
+            _directionName = "Down";
+        }
+        else if (Direction.X > threshold)
+        {
+            _directionName = "Right";
+        }
+        else if (Direction.X < -threshold)
+        {
+            _directionName = "Left";
+        }
+    
     }
 
     private void SetupNpc()

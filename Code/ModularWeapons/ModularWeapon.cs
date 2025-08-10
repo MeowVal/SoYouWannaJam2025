@@ -1,6 +1,7 @@
-using Godot;
-using System;
 using System.Collections.Generic;
+using Godot;
+
+namespace SoYouWANNAJam2025.Code.ModularWeapons;
 
 public partial class ModularWeapon : Node2D
 {
@@ -31,7 +32,7 @@ public partial class ModularWeapon : Node2D
     public float CritBonus = 5;
 
     public List<BaseWeaponModifier> Modifiers = new List<BaseWeaponModifier>();
-    public List<BaseRecipe> CompletedRecipes = new List<BaseRecipe>();
+    public List<SoYouWANNAJam2025.Code.RecipeSystem.BaseRecipe> CompletedRecipes = new List<SoYouWANNAJam2025.Code.RecipeSystem.BaseRecipe>();
 
     // Call this to update the final state of the weapon
     void CalculateModifiers()

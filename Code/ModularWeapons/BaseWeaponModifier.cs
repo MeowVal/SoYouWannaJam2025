@@ -1,6 +1,8 @@
-using Godot;
 using System;
+using Godot;
 using SoyouWANNAJam2025.Code.ModularWeapons;
+
+namespace SoYouWANNAJam2025.Code.ModularWeapons;
 
 [GlobalClass]
 public partial class BaseWeaponModifier : Resource, IBaseWeaponModifier
@@ -11,7 +13,7 @@ public partial class BaseWeaponModifier : Resource, IBaseWeaponModifier
     [Export] public Texture2D Icon;
 
 
-    public void ApplyModifier(ModularWeapon ModWep)
+    public void ApplyModifier(SoYouWANNAJam2025.Code.ModularWeapons.ModularWeapon ModWep)
     {
         throw new NotImplementedException();
     }

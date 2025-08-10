@@ -2,7 +2,7 @@
 
 public interface IBaseWeaponModifier
 {
-    void ApplyModifier(ModularWeapon ModWep);
+    void ApplyModifier(SoYouWANNAJam2025.Code.ModularWeapons.ModularWeapon ModWep);
 
     public string GetDescription();
 }

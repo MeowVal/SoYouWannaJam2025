@@ -1,23 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://hxf0gtf3x5pb"]
+[gd_scene load_steps=16 format=3 uid="uid://hxf0gtf3x5pb"]
 
 [ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="1_5ya86"]
 [ext_resource type="Script" uid="uid://b4ntrd6icymju" path="res://Code/Npc/Npc.cs" id="1_623a7"]
 [ext_resource type="Texture2D" uid="uid://b5g8dj2bpwsm2" path="res://Assets/Sprites/characters/Shadow/Shadow.png" id="2_623a7"]
-
-[sub_resource type="Animation" id="Animation_y44xp"]
-resource_name = "idleDown"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 0]
-}
+[ext_resource type="Resource" uid="uid://0xv5lxlnyfl7" path="res://Resources/Npcs/Npc01.tres" id="2_jvg37"]
 
 [sub_resource type="Animation" id="Animation_jvg37"]
 length = 0.001
@@ -34,8 +20,8 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_2wnqt"]
-resource_name = "idleUp"
+[sub_resource type="Animation" id="Animation_y44xp"]
+resource_name = "idleDown"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -43,10 +29,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1, 1]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_6802k"]
@@ -79,13 +65,92 @@ tracks/0/keys = {
 "values": [2]
 }
 
+[sub_resource type="Animation" id="Animation_2wnqt"]
+resource_name = "idleUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_koqtm"]
+resource_name = "walkDown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_w50qj"]
+resource_name = "walkLeft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_4ubeo"]
+resource_name = "walkRight"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_ot8lt"]
+resource_name = "walkUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6802k"]
 _data = {
 &"RESET": SubResource("Animation_jvg37"),
 &"idleDown": SubResource("Animation_y44xp"),
 &"idleLeft": SubResource("Animation_6802k"),
 &"idleRight": SubResource("Animation_1e812"),
-&"idleUp": SubResource("Animation_2wnqt")
+&"idleUp": SubResource("Animation_2wnqt"),
+&"walkDown": SubResource("Animation_koqtm"),
+&"walkLeft": SubResource("Animation_w50qj"),
+&"walkRight": SubResource("Animation_4ubeo"),
+&"walkUp": SubResource("Animation_ot8lt")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bj5yu"]
@@ -96,6 +161,7 @@ height = 16.0
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("1_623a7")
+NpcResource = ExtResource("2_jvg37")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -13)
