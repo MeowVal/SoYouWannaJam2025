@@ -1,6 +1,5 @@
 using System;
 using Godot;
-using SoyouWANNAJam2025.Code.ModularWeapons;
 
 namespace SoYouWANNAJam2025.Code.ModularWeapons;
 

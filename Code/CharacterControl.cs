@@ -1,6 +1,8 @@
-using System.Numerics;
 using Godot;
+using SoYouWANNAJam2025.Code.ModularWeapons;
 using Vector2 = Godot.Vector2;
+
+
 
 namespace SoYouWANNAJam2025.Code;
 
@@ -65,8 +67,8 @@ public partial class CharacterControl : CharacterBody2D
 			if (Input.IsActionPressed("left"))
 			{
 				/*velocity.X = -scaledMoveSpeed;
-				velocity.Y = (scaledMoveSpeed / 2);
-				Velocity = velocity;*/
+			velocity.Y = (scaledMoveSpeed / 2);
+			Velocity = velocity;*/
 
 				moveDir.X = -1;
 
@@ -77,8 +79,8 @@ public partial class CharacterControl : CharacterBody2D
 			else if (Input.IsActionPressed("right"))
 			{
 				/*velocity.X = scaledMoveSpeed;
-				velocity.Y = -(scaledMoveSpeed / 2);
-				Velocity = velocity;*/
+			velocity.Y = -(scaledMoveSpeed / 2);
+			Velocity = velocity;*/
 
 				moveDir.X = 1;
 
@@ -89,8 +91,8 @@ public partial class CharacterControl : CharacterBody2D
 			else if (Input.IsActionPressed("up"))
 			{
 				/*velocity.X = -scaledMoveSpeed;
-				velocity.Y = -(scaledMoveSpeed / 2);
-				Velocity = velocity;*/
+			velocity.Y = -(scaledMoveSpeed / 2);
+			Velocity = velocity;*/
 
 				moveDir.Y = -1;
 
@@ -101,8 +103,8 @@ public partial class CharacterControl : CharacterBody2D
 			else if (Input.IsActionPressed("down"))
 			{
 				/*velocity.X = scaledMoveSpeed;
-				velocity.Y = (scaledMoveSpeed / 2);
-				Velocity = velocity;*/
+			velocity.Y = (scaledMoveSpeed / 2);
+			Velocity = velocity;*/
 
 				moveDir.Y = 1;
 

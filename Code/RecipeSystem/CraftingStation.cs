@@ -1,8 +1,7 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 using Godot.Collections;
-using SoYouWANNAJam2025.Code;
+
+namespace SoYouWANNAJam2025.Code.RecipeSystem;
 
 public partial class CraftingStation : Area2D
 {

@@ -1,4 +1,8 @@
-﻿namespace SoyouWANNAJam2025.Code.ModularWeapons;
+﻿
+
+
+
+namespace SoYouWANNAJam2025.Code.ModularWeapons;
 
 public interface IBaseWeaponModifier
 {
