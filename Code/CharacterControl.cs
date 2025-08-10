@@ -6,21 +6,25 @@ namespace SoYouWANNAJam2025.Code;
 
 public partial class CharacterControl : CharacterBody2D
 {
+	[ExportGroup("Info")]
+	[Export] public string DisplayName = "PlayerName";
 
-	[Export]public int MoveSpeed = 72;
-	[Export]public double AccelerationSpeed = 10;
+	[ExportGroup("Movement")]
+	[Export] public int MoveSpeed = 72;
+	[Export] public double AccelerationSpeed = 10;
 	[Export] public double DecelerationSpeed = 15;
-	public ModularWeapon HeldItem;
-
 	private double _currentSpeed;
 	private AnimatedSprite2D _charSprite;
 	private string _direction = "down";
+
+	[ExportGroup("Inventory")]
+	public ModularWeapon HeldItem;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		HeldItem = new ModularWeapon();
-		var resource = GD.Load<BaseWeaponModifier>("res://Resources/TestModifier.tres");
+		var resource = GD.Load<BaseWeaponModifier>("res://Resources/WeaponModifiers/TestModifier.tres");
 		HeldItem.Modifiers.Add(resource);
 		_charSprite = GetNode<AnimatedSprite2D>("CharSprite");
 		GetNode<Camera2D>("Camera2D").Scale = new Vector2(Global.GameScale, Global.GameScale);
