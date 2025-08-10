@@ -4,7 +4,14 @@ namespace SoYouWANNAJam2025.Code;
 
 public partial class Camera : Camera2D
 {
-    [Export] public Node2D FollowingNode;
+    private Node2D _followingNode;
+
+    [Export]public Node2D FollowingNode
+    {
+        get => _followingNode;
+        set {_followingNode = value; }
+    }
+    
     [Export(PropertyHint.Range, "1, 10")] public float SmoothingSpeed = 3.0f;
 
     

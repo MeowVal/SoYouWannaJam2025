@@ -1,3 +1,4 @@
+using System.Numerics;
 using Godot;
 using SoYouWANNAJam2025.Code.ModularWeapons;
 using Vector2 = Godot.Vector2;
@@ -24,6 +25,9 @@ public partial class CharacterControl : CharacterBody2D
 	[ExportGroup("Inventory")]
 	public ModularWeapon HeldItem;
 
+	private Node2D _camera;
+	private string _target; 
+	
 	public override void _Ready()
 	{
 		base._Ready();
@@ -31,6 +35,9 @@ public partial class CharacterControl : CharacterBody2D
 		var resource = GD.Load<BaseWeaponModifier>("res://Resources/WeaponModifiers/TestModifier.tres");
 		HeldItem.Modifiers.Add(resource);
 		_charSprite = GetNode<AnimatedSprite2D>("CharSprite");
+		
+		_camera = GetTree().Root.GetCamera2D(); // Gives controls over Camera properties and get a reference to it.
+		_camera.Scale = new Vector2(Global.GameScale, Global.GameScale);
 	}
 
 	private void PlayerMovement(double delta)
@@ -108,9 +115,34 @@ public partial class CharacterControl : CharacterBody2D
 		}
 		MoveAndSlide();
 	}
-	
+
+	private bool _canPress = true; // to Delete, camera target change test
 	public override void _PhysicsProcess(double delta)
 	{
 		PlayerMovement(delta); //cleaned up _PhysicsProcess and moved player movement to its own function.
+		
+		//Testing function for camera target change
+		if (Input.IsActionPressed("jump"))
+		{
+			if (_canPress)
+			{
+				_canPress = false;
+				if (_target == "Player")
+				{
+					_target = "Player2";
+					GD.Print(GetParent().GetNode<Node2D>("TestTarget"));
+					_camera.Set("FollowingNode", GetParent().GetNode<Node2D>("TestTarget"));
+				}
+				else
+				{
+					_target = "Player";
+					_camera.Set("FollowingNode", GetParent().GetNode<Node2D>("Character"));
+				}
+			}
+		}
+		else
+		{
+			_canPress = true;
+		}
 	}
 }
