@@ -2,20 +2,23 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code.Npc;
 
-public partial class NpcBehaviour : Node
+public partial class NpcBehaviour : Node2D
 {
-    private Npc _npc;
+    protected  Npc Npc;
 
 
     public override void _Ready()
     {
-        var p = GetParent(); 
-        if (p is Npc npc)
+        if (GetParent() is Npc npc)
         {
-            _npc = npc;
-            //connect to signal
+            Npc = npc;
+            Npc.DoBehaviorEnabled += Start;
+        
         }
-        
-        
+    }
+
+    public virtual async void Start()
+    {
+        // TODO: Implement behavior
     }
 }
