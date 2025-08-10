@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dejbiswo8rnoi" path="res://Scenes/Main/Isometric.tscn" id="1_p8rbg"]
 [ext_resource type="Script" uid="uid://bb070fjwhlhfp" path="res://Code/Camera/SubPixelResolution.gd" id="1_qtv3y"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3fi7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cmk6n"]
 shader = ExtResource("1_cmk6n")
 shader_parameter/cam_offset = Vector2(0, 0)
 
@@ -12,7 +12,7 @@ shader_parameter/cam_offset = Vector2(0, 0)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
-material = SubResource("ShaderMaterial_i3fi7")
+material = SubResource("ShaderMaterial_cmk6n")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
