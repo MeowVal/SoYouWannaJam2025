@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=4 uid="uid://dejbiswo8rnoi"]
+[gd_scene load_steps=7 format=4 uid="uid://dejbiswo8rnoi"]
 
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Scenes/Entities/Player/Character.tscn" id="1_m7oyx"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
 [ext_resource type="PackedScene" uid="uid://dvpjmsh61huyx" path="res://Entities/CraftingStations/TestStation.tscn" id="3_1akmr"]
 [ext_resource type="Script" uid="uid://bqpkyjd3uua7t" path="res://Code/Camera/SubPixelCamera.cs" id="4_uaxa7"]
+[ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Scenes/Entities/NPC/Npc.tscn" id="6_tm7ya"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vqmdy"]
+vertices = PackedVector2Array(294.039, 175.977, 31, 306.656, -263.289, 160.227, -0.25, 28.5938)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(31, 312.25, 305.25, 176, -0.25, 23, -274.5, 160.25)])
+agent_radius = 5.0
 
 [node name="Isometric" type="Node2D"]
 scale = Vector2(4, 4)
@@ -20,10 +27,9 @@ collision_visibility_mode = 1
 
 [node name="Collison" type="TileMapLayer" parent="BuildingMap"]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAALAAgAAQABAAEAAAAKAAcAAQABAAEAAAAKAAgAAQABAAEAAAALAAcAAQABAAEAAAA=")
+tile_map_data = PackedByteArray("AAALAAgAAQABAAEAAAAKAAcAAQABAAEAAAAKAAgAAQABAAEAAAALAAcAAQABAAEAAAANAAoAAAAJAAUAAAANAAgAAAAJAAUAAAALAAUAAAAJAAUAAAAHAAYAAAAJAAUAAAAGAAoAAAAJAAUAAAALAAwAAAAJAAUAAAAPAA0AAAAJAAUAAAA=")
 tile_set = ExtResource("1_yppru")
 x_draw_order_reversed = true
-collision_visibility_mode = 1
 
 [node name="CraftingStationTrigger" parent="." instance=ExtResource("3_1akmr")]
 position = Vector2(62, 155)
@@ -31,3 +37,11 @@ position = Vector2(62, 155)
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("4_uaxa7")
 FollowingNode = NodePath("../Character")
+
+[node name="Npc" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("6_tm7ya")]
+position = Vector2(215.5, 158.5)
+velocity = Vector2(0, -30)
+Target = NodePath("../CraftingStationTrigger")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_vqmdy")

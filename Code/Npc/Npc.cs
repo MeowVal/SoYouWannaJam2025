@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace SoYouWANNAJam2025.Code.Npc;
@@ -8,12 +9,17 @@ public partial class Npc : CharacterBody2D
     public delegate void DoBehaviorEnabledEventHandler();
     
     private Texture2D _lastTexture;
-  
+    
+    [Export] private float _speed = 30f;
+    [Export] public float NavTimer = 0.5f; 
     public string State = "idle";
     public Vector2 Direction = Vector2.Down;
     private string _directionName= "Down";
     public bool DoBehaviour = true;
+    [Export]
+    public Node2D Target;
     
+    private NavigationAgent2D _navAgent;
     private NpcResource _npcResource ;
     [Export]
     public NpcResource NpcResource
@@ -27,19 +33,55 @@ public partial class Npc : CharacterBody2D
     
     public override void _Ready()
     {
+        _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _sprite2D = GetNode<Sprite2D>("Sprite2D");
+        _navAgent.TargetPosition = Target.Position;
         if (NpcResource != null)
             SetupNpc();
         if(Engine.IsEditorHint()) return;
         EmitSignal(SignalName.DoBehaviorEnabled);
+        PathTimer();
     }
 
 
     public override void _PhysicsProcess(double delta)
     {
+        if(Engine.IsEditorHint()) return;
+        if (_navAgent == null) return;
+        if (_navAgent.IsTargetReached()) return;
+        
+        var targetPosition = _navAgent.GetTargetPosition();
+        var directionToTarget = targetPosition - GlobalPosition;
+        if (directionToTarget.Length() < _speed )
+        {
+            Velocity = Vector2.Zero;
+            Direction = Vector2.Zero;
+            return; // Stop movement if close enough
+        }
+        var navPointDir = directionToTarget.Normalized();
+        Velocity = navPointDir * _speed ; 
+        Direction = navPointDir;
+        UpdateDirection(GlobalPosition + navPointDir);
+        UpdateAnimation();
         MoveAndSlide();
     }
+
+    private void MakePath()
+    {
+        _navAgent.TargetPosition = Target.GlobalPosition;
+    }
+
+    private async void PathTimer()
+    {
+        while (true)
+        {
+            MakePath();
+            await ToSignal(GetTree().CreateTimer( NavTimer), "timeout");
+        }
+        
+    }
+    
 
     public void UpdateAnimation()
     {
@@ -51,7 +93,7 @@ public partial class Npc : CharacterBody2D
     {
         Direction = GlobalPosition.DirectionTo(targetPosition);
         UpdateDirectionName();
-        GD.Print(Direction+ _directionName);
+        //GD.Print(Direction+ _directionName);
         
     }
 
