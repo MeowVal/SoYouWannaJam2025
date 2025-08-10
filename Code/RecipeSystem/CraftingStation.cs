@@ -63,6 +63,9 @@ public partial class CraftingStation : Area2D
                     _recipeTimer.Timeout += _OnRecipeTimer;
                     _recipeTimer.Start(recipe.TimeToComplete);
                     break;
+                case WorkType.ButtonHold:
+                    GD.Print("idk i didnt add this yet...");
+                    break;
             }
             GD.Print("Recipe started.");
             break;

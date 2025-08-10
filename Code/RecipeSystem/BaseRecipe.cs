@@ -6,7 +6,8 @@ public enum WorkType
 {
     SpamButton,
     Timer,
-    Instant
+    Instant,
+    ButtonHold
 }
 
 [GlobalClass]
