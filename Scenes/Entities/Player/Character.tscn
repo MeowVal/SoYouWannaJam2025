@@ -27,4 +27,5 @@ region_rect = Rect2(32, 0, 32, 32)
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 position = Vector2(1, 0)
+scale = Vector2(0.994597, 0.986852)
 zoom = Vector2(2, 2)
