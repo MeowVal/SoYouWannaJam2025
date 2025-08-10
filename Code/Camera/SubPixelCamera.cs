@@ -16,8 +16,8 @@ public partial class SubPixelCamera : Camera2D
 
     public override void _Process(double delta)
     {
-        //GlobalPosition = GlobalPosition.Lerp(FollowingNode.GlobalPosition.Round(), (float)(FollowSpeed * delta));
         _actualCamPos = _actualCamPos.Lerp(FollowingNode.GlobalPosition, (float)(FollowSpeed*delta));
+        //_actualCamPos = FollowingNode.GlobalPosition;
 
         if (FindParent("SubViewportContainer") is SubViewportContainer { Material: ShaderMaterial shaderMaterial })
         {

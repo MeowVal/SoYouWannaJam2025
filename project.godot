@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="So You WANNA Jam 2025"
-run/main_scene="uid://qsw6gyiwmc8a"
+run/main_scene="uid://dejbiswo8rnoi"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="uid://c3hoqvnueuekg"
+
+[autoload]
+
+Global="*res://Code/Global.cs"
 
 [dotnet]
 
