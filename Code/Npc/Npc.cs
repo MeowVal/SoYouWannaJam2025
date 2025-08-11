@@ -40,7 +40,7 @@ public partial class Npc : CharacterBody2D
             SetupNpc();
         if(Engine.IsEditorHint()) return;
         EmitSignal(SignalName.DoBehaviorEnabled);
-        PathTimer();
+        //PathTimer();
     }
     
     public override void _PhysicsProcess(double delta)
@@ -48,11 +48,15 @@ public partial class Npc : CharacterBody2D
         if(Engine.IsEditorHint()) return;
         if (_navAgent == null) return;
         if (_navAgent.IsNavigationFinished()) return;
+        if (Target == null) return;
+        _navAgent.TargetPosition = Target.GlobalPosition;
+        
         var currentAgentPosition = GetGlobalPosition();
         var nextPathPosition = _navAgent.GetNextPathPosition();
-        Velocity = currentAgentPosition.DirectionTo(nextPathPosition).Normalized() * _speed;
+        var dir = currentAgentPosition.DirectionTo(nextPathPosition).Normalized();
+        Velocity = dir * _speed;
         
-        var targetPosition = _navAgent.GetTargetPosition();
+        /*var targetPosition = _navAgent.GetTargetPosition();
         var directionToTarget = targetPosition - GlobalPosition;
         if (directionToTarget.Length() < _speed )
         {
@@ -61,9 +65,9 @@ public partial class Npc : CharacterBody2D
             return; // Stop movement if close enough
         }
         var navPointDir = directionToTarget.Normalized();
-        //Velocity = navPointDir * _speed ; 
-        Direction = navPointDir;
-        UpdateDirection(GlobalPosition + navPointDir);
+        //Velocity = navPointDir * _speed ; */
+        Direction = dir;
+        UpdateDirection(GlobalPosition + dir);
         UpdateAnimation();
         MoveAndSlide();
     }
@@ -72,7 +76,7 @@ public partial class Npc : CharacterBody2D
     {
         try
         {
-            await ToSignal(GetTree(), "_physics_frame");
+            await ToSignal(GetTree(), "physics_frame");
             if(Target == null) return;
             _navAgent.TargetPosition = Target.GlobalPosition;
         }
@@ -82,7 +86,7 @@ public partial class Npc : CharacterBody2D
             GD.PrintErr(e);
         }
     }
-    private void MakePath()
+    /*private void MakePath()
     {
         _navAgent.TargetPosition = Target.GlobalPosition;
     }
@@ -96,7 +100,7 @@ public partial class Npc : CharacterBody2D
         }
         
     }
-    
+    */
 
     public void UpdateAnimation()
     {

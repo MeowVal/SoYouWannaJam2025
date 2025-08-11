@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://vsq7nymelad8" path="res://Assets/Sprites/characters/wolf-idle.png" id="2_b3ei2"]
 [ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/CharacterControl.cs" id="2_l3y44"]
 [ext_resource type="Texture2D" uid="uid://sfvtx6k8ixe8" path="res://Assets/Sprites/characters/wolf-run.png" id="2_yv7du"]
-[ext_resource type="PackedScene" path="res://Code/PlayerInteractor.tscn" id="4_yv7du"]
+[ext_resource type="PackedScene" uid="uid://dqaiamwd58cc" path="res://Code/PlayerInteractor.tscn" id="4_yv7du"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b3ei2"]
 radius = 5.0
@@ -393,6 +393,10 @@ z_index = 2
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("2_l3y44")
+DisplayName = null
+MoveSpeed = null
+AccelerationSpeed = null
+DecelerationSpeed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)
