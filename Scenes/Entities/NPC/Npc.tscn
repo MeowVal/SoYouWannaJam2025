@@ -171,6 +171,9 @@ _navAgent = NodePath("NavigationAgent2D")
 _npcResource = ExtResource("2_jvg37")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite2D = NodePath("Sprite2D")
+_lastTargetPosition = Vector2(0, 0)
+_stopThreshold = 5.0
+_pathUpdateThreshold = 32.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -13)
@@ -194,8 +197,8 @@ shape = SubResource("CapsuleShape2D_bj5yu")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 3.0
-target_desired_distance = 3.0
+path_desired_distance = 32.0
+target_desired_distance = 32.0
 path_postprocessing = 1
 avoidance_enabled = true
 avoidance_layers = 3

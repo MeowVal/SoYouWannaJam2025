@@ -3,7 +3,7 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code;
 
-public partial class Global : Node
+public partial class Global : Node2D
 {
     public const int GameScale = 4;
 }
