@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="BaseItem" load_steps=3 format=3 uid="uid://dpuw55q3eqwkm"]
 
 [ext_resource type="Texture2D" uid="uid://c3pp0e5o30kpd" path="res://Assets/Sprites/objects/materials/iron_bar.png" id="1_ed8v1"]
-[ext_resource type="Script" uid="uid://cbkhf81cbko6x" path="res://Code/Items/BaseItem.cs" id="1_sw3dx"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Items/BaseItem.cs" id="1_sw3dx"]
 
 [resource]
 script = ExtResource("1_sw3dx")
 DisplayName = "Ingot"
 Description = "You need to actually set this lol."
 Icon = ExtResource("1_ed8v1")
-metadata/_custom_type_script = "uid://cbkhf81cbko6x"
+Size = 10.0

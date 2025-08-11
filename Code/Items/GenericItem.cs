@@ -2,33 +2,44 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code.Items;
 
-public partial class GenericItem : Node2D
+[Tool]
+public partial class GenericItem : Interactible
 {
-    [Export] public BaseItem BaseItem = new BaseItem();
+    private BaseItem _baseItem;
+    
+    [Export]
+    public BaseItem ItemResource
+    {
+        set
+        { 
+            _baseItem = value;
+            if (value != null)
+            {
+                GetNode<Sprite2D>("ItemSprite").Texture = value.Icon;
+                ColliderRadius = value.Size;
+            }
+            else
+            {
+                GetNode<Sprite2D>("ItemSprite").Texture = null;
+                ColliderRadius = 16f;
+            }
+        }
+        get => _baseItem;
+    }
 
     private CharacterControl _player;
-    private Interactible _interactible;
 
     public override void _Ready()
     {
-        _interactible = GetNode<Interactible>("Interactible");
-        _interactible.Interact += OnInteractMethod;
-
-        if (BaseItem.Icon != null)
-        {
-            GetNode<Sprite2D>("ItemSprite").Texture = BaseItem.Icon;
-        }
-        /*if (GetNode<CollisionShape2D>("CollisionShape2D").GetShape() is CircleShape2D circleShape)
-        {
-            circleShape.Radius = BaseItem.Size;
-        }*/
+        if (Engine.IsEditorHint()) return;
+        Interact += OnInteractMethod;
     }
     
     private void OnInteractMethod(Node2D node)
     {
         if (node is not CharacterControl character) return;
         
-        GD.Print("Interacted with: ", BaseItem.DisplayName);
+        GD.Print("Interacted with: ", ItemResource.DisplayName);
     }
 
     private void Pickup()

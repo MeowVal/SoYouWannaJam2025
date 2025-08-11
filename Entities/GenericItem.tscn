@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cegbc5yym6dn2"]
+[gd_scene load_steps=3 format=3 uid="uid://cegbc5yym6dn2"]
 
-[ext_resource type="PackedScene" uid="uid://c5fknakn4m4yp" path="res://Code/Items/interactible.tscn" id="1_g4p1t"]
 [ext_resource type="Script" uid="uid://bdtxqnbwl6pt2" path="res://Code/Items/GenericItem.cs" id="1_xing1"]
 [ext_resource type="Texture2D" uid="uid://dq5nssdtppdda" path="res://Assets/Sprites/objects/bucket.png" id="2_nyjko"]
 
-[node name="GenericItem" type="Node2D"]
+[node name="GenericItem" type="Area2D"]
 script = ExtResource("1_xing1")
+metadata/_custom_type_script = "uid://de26gdg7krlfk"
 
-[node name="Interactible" parent="." instance=ExtResource("1_g4p1t")]
+[node name="Collider" type="CollisionShape2D" parent="."]
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="ItemSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_nyjko")

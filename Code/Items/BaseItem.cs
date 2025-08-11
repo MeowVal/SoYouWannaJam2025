@@ -3,7 +3,7 @@ using Godot.Collections;
 
 namespace SoYouWANNAJam2025.Code.Items;
 
-[GlobalClass]
+[GlobalClass][Tool]
 public partial class BaseItem: Resource
 {
     [Export] public string DisplayName = "Unknown";

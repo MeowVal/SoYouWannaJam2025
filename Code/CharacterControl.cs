@@ -44,11 +44,9 @@ public partial class CharacterControl : CharacterBody2D
 	private void PlayerMovement(double delta)
 	{
 		var moveDir = Vector2.Zero;
-		var deadzone = 0.5f;
-		float left = Input.GetActionStrength("left"), right = Input.GetActionStrength("right");
-		float up = Input.GetActionStrength("up"), down = Input.GetActionStrength("down");
-		moveDir.X = (right > deadzone ? right : 0) - (left > deadzone ? left : 0);
-		moveDir.Y = (down > deadzone ? down : 0) - (up > deadzone ? up : 0);
+		moveDir.X = Input.GetActionStrength("right") - Input.GetActionStrength("left");
+		moveDir.Y = Input.GetActionStrength("down") - Input.GetActionStrength("up");
+		moveDir = moveDir.Normalized();
 
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
