@@ -3,10 +3,14 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code;
 
+[GlobalClass]
 public partial class Interactible : Area2D
 {
 
     private bool _interactive = true;
+
+    [Export]
+    public float InteractibleRadius = 16f;
 
     [Export]
     public bool IsInteractive
@@ -14,7 +18,7 @@ public partial class Interactible : Area2D
         set 
         { 
             _interactive = value;
-            Monitoring = value;
+            Monitorable = value;
         }
         get => _interactive;
     }
@@ -25,6 +29,10 @@ public partial class Interactible : Area2D
     public override void _Ready()
     {
         Interact += OnInteractMethod;
+        if (GetNode<CollisionShape2D>("InteractibleCollider").GetShape() is CircleShape2D circleShape)
+        {
+            circleShape.Radius = InteractibleRadius;
+        }
     }
 
     private void OnInteractMethod(Node2D node)
@@ -41,7 +49,7 @@ public partial class Interactible : Area2D
 
     public void SetHighlight(bool enabled)
     {
-        var sprites = GetChildren()
+        var sprites = GetParent().GetChildren()
             .Where(child => child is Sprite2D)
             .Select(child => child)
             .Cast<Sprite2D>();

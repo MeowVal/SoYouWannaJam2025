@@ -3,7 +3,7 @@ using Godot.Collections;
 
 namespace SoYouWANNAJam2025.Code.RecipeSystem;
 
-public partial class CraftingStation : Area2D
+public partial class CraftingStation : Node2D
 {
     [ExportGroup("Info")]
     [Export] public string DisplayName = "Unknown Crafting Station";
@@ -14,17 +14,20 @@ public partial class CraftingStation : Area2D
     private BaseRecipe _currentRecipe;
     private Timer _recipeTimer;
     private CharacterControl _player;
+    private Interactible _interactible;
 
     public override void _Ready()
     {
-        base._Ready();
+        _interactible = GetNode<Interactible>("Interactible");
         _recipeTimer = GetNode<Timer>("RecipeTimer");
         _recipeTimer.Timeout += _OnRecipeTimer;
-        BodyEntered += OnCraftingStationBodyEntered;
-        BodyExited += OnCraftingStationBodyExited;
+        _interactible.BodyEntered += OnCraftingStationEntered;
+        _interactible.BodyExited += OnCraftingStationExited;
+        _interactible.AreaEntered += OnCraftingStationEntered;
+        _interactible.AreaExited += OnCraftingStationExited;
     }
 
-    private void OnCraftingStationBodyEntered(Node2D body)
+    private void OnCraftingStationEntered(Node2D body)
     {
         if (body is not CharacterControl character) return;
         _player = character;
@@ -74,7 +77,7 @@ public partial class CraftingStation : Area2D
         }
     }
 
-    private void OnCraftingStationBodyExited(Node2D body)
+    private void OnCraftingStationExited(Node2D body)
     {
         if (_recipeTimer.IsStopped()) return;
         _recipeTimer.Stop();

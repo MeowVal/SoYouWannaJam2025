@@ -22,14 +22,6 @@ public partial class PlayerInteractor : Area2D
         AreaExited += OnInteractableExited;
     }
 
-    public override void _Draw()
-    {
-        foreach (var target in PossibleTargets)
-        {
-            DrawLine(target.GlobalPosition, _player.GlobalPosition, Colors.Yellow, 10f, true);
-        }
-    }
-
     private void OnDistanceCheckTimer()
     {
         if (PossibleTargets.Count == 1)
@@ -41,11 +33,9 @@ public partial class PlayerInteractor : Area2D
         int nearestTarget = 0;
         float nearestDistance = float.MaxValue;
 
-        //GD.Print(PossibleTargets);
         for (var i = 0; i < PossibleTargets.Count; i++)
         {
             var distance = PossibleTargets[i].GlobalPosition.DistanceTo(_player.GlobalPosition);
-            GD.Print(PossibleTargets[i] + " | " + (distance < nearestDistance) + " | " +  distance);
             if (distance < nearestDistance)
             {
                 nearestDistance = distance;

@@ -2,19 +2,21 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code.Items;
 
-public partial class Item : Interactible
+public partial class GenericItem : Node2D
 {
     [Export] public BaseItem BaseItem = new BaseItem();
 
     private CharacterControl _player;
+    private Interactible _interactible;
 
     public override void _Ready()
     {
-        Interact += OnInteractMethod;
+        _interactible = GetNode<Interactible>("Interactible");
+        _interactible.Interact += OnInteractMethod;
 
         if (BaseItem.Icon != null)
         {
-            GetNode<Sprite2D>("Sprite2D").Texture = BaseItem.Icon;
+            GetNode<Sprite2D>("ItemSprite").Texture = BaseItem.Icon;
         }
         /*if (GetNode<CollisionShape2D>("CollisionShape2D").GetShape() is CircleShape2D circleShape)
         {
