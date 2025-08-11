@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dejbiswo8rnoi"]
+[gd_scene load_steps=15 format=4 uid="uid://dejbiswo8rnoi"]
 
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Scenes/Entities/Player/Character.tscn" id="1_m7oyx"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Code/RecipeSystem/CraftingStation.tscn" id="7_jey54"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/RecipeSystem/BaseRecipe.cs" id="8_jey54"]
 [ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Scenes/Entities/NPC/Npc.tscn" id="9_xa8a6"]
+[ext_resource type="Resource" uid="uid://0xv5lxlnyfl7" path="res://Resources/Npcs/Npc01.tres" id="13_j3d0r"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vqmdy"]
 vertices = PackedVector2Array(1207.85, 703.992, 127.992, 1245.4, -1081.83, 639.992, 0, 97.5938)
@@ -42,6 +43,7 @@ tile_set = ExtResource("1_yppru")
 x_draw_order_reversed = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Isometric"]
+visible = false
 scale = Vector2(0.25, 0.25)
 navigation_polygon = SubResource("NavigationPolygon_vqmdy")
 navigation_layers = 3
@@ -66,12 +68,25 @@ Recipes = Array[ExtResource("8_jey54")]([ExtResource("5_j3d0r")])
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("4_vqmdy")
-SmoothingSpeed = null
 FollowingNode = NodePath("../Isometric/Character")
+SmoothingSpeed = null
 
 [node name="Hud" parent="Camera2D" instance=ExtResource("4_uaxa7")]
 
-[node name="Npc" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("9_xa8a6")]
+[node name="Npc" parent="." node_paths=PackedStringArray("Target", "_navAgent", "_animationPlayer", "_sprite2D") instance=ExtResource("9_xa8a6")]
 position = Vector2(376, 1005)
 scale = Vector2(4, 4)
+_lastTexture = null
+_speed = 72.0
+State = "idle"
+Direction = Vector2(0, 1)
+_directionName = "Down"
+DoBehaviour = true
 Target = NodePath("../Isometric/CraftingStation")
+_navAgent = NodePath("NavigationAgent2D")
+_npcResource = ExtResource("13_j3d0r")
+_animationPlayer = NodePath("AnimationPlayer")
+_sprite2D = NodePath("Sprite2D")
+_lastTargetPosition = Vector2(0, 0)
+_stopThreshold = 5.0
+_pathUpdateThreshold = 32.0
