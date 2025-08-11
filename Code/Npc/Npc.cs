@@ -6,48 +6,49 @@ namespace SoYouWANNAJam2025.Code.Npc;
 public partial class Npc : CharacterBody2D
 {
     [Signal]
-    public delegate void DoBehaviorEnabledEventHandler();
-    
-    private Texture2D _lastTexture;
-    [Export] public float MoodDecreaseTimer = 10f;
-    [Export] public float MoodDecreaseAmount = 10;
-    [Export] private float _speed = 30f;
-    public string State = "idle";
-    public Vector2 Direction = Vector2.Down;
-    private string _directionName= "Down";
-    public bool DoBehaviour = true;
-    [Export] public Node2D Target;
-    [Export] public float Mood = 100;
-    private NavigationAgent2D _navAgent;
-    private NpcResource _npcResource ;
+    public delegate void DoBehaviorEnabledEventHandler(); // Signal for enabling behaviours 
+    [Export] public float MoodDecreaseTimer = 10f; // How often the npc's mode decreases
+    [Export] public float MoodDecreaseAmount = 10; // How much the npc's mood decreases by
+    [Export] private float _speed = 30f; // How fast the npc moves
+    public string State = "idle"; // The animation stat the npc is in
+    public Vector2 Direction = Vector2.Down; // The direction the npc is facing
+    private string _directionName= "Down"; // Variable for storing npc direction
+    public bool DoBehaviour = true; // Enables npc behaviours in the scene
+    [Export] public Node2D Target; // The target the npc move towards when spawned 
+    [Export] public float Mood = 100; // The mood of the npc 
+    private NavigationAgent2D _navAgent; // navigation agent for pathfinding
+    private NpcResource _npcResource ; // Local variable to store the npc resource
     [Export]
-    public NpcResource NpcResource
+    public NpcResource NpcResource // The npc resource
     {
         get => _npcResource;
         set => _setNpcResource(value);
     }
 
-    private AnimationPlayer _animationPlayer;
-    private Sprite2D _sprite2D;
+    private AnimationPlayer _animationPlayer; // The animation player for playing the animations on the npc
+    private Sprite2D _sprite2D; // The sprite of the npc
     private Vector2 _lastTargetPosition = Vector2.Zero;  // Store last target position
-    private float _stopThreshold = 5.0f;  // The threshold distance at which the NPC will stop or no longer recalculate path
+    private float _stopThreshold = 5.0f;  // The threshold distance at which the NPC will stop or no longer recalculate the path
     private float _pathUpdateThreshold = 32.0f;  // The distance at which to update the path
-    [Export] public Node2D LeaveAreaNode;
+    [Export] public Node2D LeaveAreaNode; // The node for where the npc should go to when it leaves when it's not satisfied  
     public override void _Ready()
     {
+        // gets the different nodes in the tree that is a child of the npc 
         _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _sprite2D = GetNode<Sprite2D>("Sprite2D");
+        
         CallDeferred("SetupNavAgent");
         if (NpcResource != null)
             SetupNpc();
         if(Engine.IsEditorHint()) return;
         UpdateMood();
+        // connects to the signal from the navigation agent 
         Callable callable = new Callable(this, "_VelocityComputed");
         _navAgent.Connect("velocity_computed", callable);
-        //PathTimer();
     }
     
+    // Used for Npc the pathfinding 
     public override void _PhysicsProcess(double delta)
     {
         if(Engine.IsEditorHint()) return;
@@ -88,10 +89,12 @@ public partial class Npc : CharacterBody2D
         MoveAndSlide();
     }
 
+    // Sets up the navigation agent for the pathfinder
     private async void SetupNavAgent()
     {
         try
         {
+            // waits until the first physics frame has rendered 
             await ToSignal(GetTree(), "physics_frame");
             
             if(Target == null) return;
@@ -105,24 +108,28 @@ public partial class Npc : CharacterBody2D
         }
     }
 
+    // The velocity calculated by the navigation agent for avoiding an obstacle
     private void _VelocityComputed(Vector2 safeVelocity)
     {
         Velocity = safeVelocity;
     }
+    
+    // Used to call the right animation on the animation player
     public void UpdateAnimation()
     {
         if(_animationPlayer == null) return;
         _animationPlayer.Play( State + _directionName );
     }
 
+    // Used to get the direction that the npc is moving
     public void UpdateDirection(Vector2 targetPosition)
     {
         Direction = GlobalPosition.DirectionTo(targetPosition);
         UpdateDirectionName();
-        //GD.Print(Direction+ _directionName);
         
     }
 
+    // Timer to update the mood of the npc 
     public async void UpdateMood()
     {
         while ((Mood > 0))
@@ -136,6 +143,7 @@ public partial class Npc : CharacterBody2D
         _navAgent.TargetPosition = Target.GlobalPosition;
     }
 
+    // Used for determining the animation depending on the direction the npc is moving
     private void UpdateDirectionName()
     {
         const float threshold = 0.45f;
@@ -159,6 +167,7 @@ public partial class Npc : CharacterBody2D
     
     }
 
+    // Sets the sprite of the npc from the npc resource
     private void SetupNpc()
     {
         if (NpcResource != null)
@@ -167,6 +176,7 @@ public partial class Npc : CharacterBody2D
         }
     }
     
+    // Used to set the npc resource
     private void _setNpcResource(NpcResource npc)
     {
         if (npc == null) return;
