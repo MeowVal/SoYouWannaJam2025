@@ -17,7 +17,7 @@
 vertices = PackedVector2Array(1207.85, 703.992, 127.992, 1245.4, -1081.83, 639.992, 0, 97.5938)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(0, 92, 1219, 704, 128, 1251, -1093, 640)])
-agent_radius = 5.0
+agent_radius = 32.0
 
 [node name="Node2D" type="Node2D"]
 
@@ -61,14 +61,22 @@ BaseItem = ExtResource("7_11nrr")
 
 [node name="CraftingStation" parent="Isometric" instance=ExtResource("7_jey54")]
 position = Vector2(63.75, 134.5)
+DisplayName = null
+Description = null
 Recipes = Array[ExtResource("8_jey54")]([ExtResource("5_j3d0r")])
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("4_vqmdy")
 FollowingNode = NodePath("../Isometric/Character")
+SmoothingSpeed = null
 
 [node name="Hud" parent="Camera2D" instance=ExtResource("4_uaxa7")]
 
-[node name="Npc" parent="." instance=ExtResource("9_xa8a6")]
-position = Vector2(254, 1080)
+[node name="Npc" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("9_xa8a6")]
+position = Vector2(376, 1005)
 scale = Vector2(4, 4)
+_speed = 72.0
+Target = NodePath("../Isometric/CraftingStation")
+
+[node name="LeaveArea" type="Node2D" parent="."]
+position = Vector2(640, 1024)
