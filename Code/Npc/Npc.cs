@@ -32,7 +32,7 @@ public partial class Npc : CharacterBody2D
     private Vector2 _lastTargetPosition = Vector2.Zero;  // Store last target position
     private float _stopThreshold = 5.0f;  // The threshold distance at which the NPC will stop or no longer recalculate path
     private float _pathUpdateThreshold = 32.0f;  // The distance at which to update the path
-    
+    [Export] public Node2D LeaveAreaNode;
     public override void _Ready()
     {
         _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
@@ -42,7 +42,6 @@ public partial class Npc : CharacterBody2D
         if (NpcResource != null)
             SetupNpc();
         if(Engine.IsEditorHint()) return;
-        EmitSignal(SignalName.DoBehaviorEnabled);
         UpdateMood();
         //PathTimer();
     }
@@ -51,10 +50,9 @@ public partial class Npc : CharacterBody2D
     {
         if(Engine.IsEditorHint()) return;
         if (_navAgent == null) return;
+        if (_navAgent.IsNavigationFinished() && Mood ==0) Free();
         if (_navAgent.IsNavigationFinished()) return;
         if (Target == null) return;
-        
-        //_navAgent.TargetPosition = Target.GlobalPosition;
         
         var currentAgentPosition = GetGlobalPosition();
         var nextPathPosition = _navAgent.GetNextPathPosition();
@@ -71,9 +69,6 @@ public partial class Npc : CharacterBody2D
             dir = Vector2.Zero;  // Stop the NPC if close enough
         
         Velocity = dir * _speed;
-        //GD.Print("Current Position: " + currentAgentPosition);
-        //GD.Print("Next Path Position: " + nextPathPosition);
-        //GD.Print("Direction to Target: " + dir);
         Direction = dir;
         UpdateDirection(GlobalPosition + dir);
         UpdateAnimation();
@@ -119,8 +114,9 @@ public partial class Npc : CharacterBody2D
             Mood -= MoodDecreaseAmount;
             GD.Print("Mood: " + Mood);
         }
-        Target = GetNode<Node2D>("LeaveArea");
-        if (Target == null) GD.PrintErr("Target is null");
+        Target = LeaveAreaNode;
+        if (Target == null) return;
+        _navAgent.TargetPosition = Target.GlobalPosition;
     }
 
     private void UpdateDirectionName()
