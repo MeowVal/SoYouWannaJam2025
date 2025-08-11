@@ -16,9 +16,8 @@ public partial class Npc : CharacterBody2D
     public Vector2 Direction = Vector2.Down;
     private string _directionName= "Down";
     public bool DoBehaviour = true;
-    [Export]
-    public Node2D Target;
-    
+    [Export] public Node2D Target;
+    [Export] public float Mood = 100;
     private NavigationAgent2D _navAgent;
     private NpcResource _npcResource ;
     [Export]
@@ -36,21 +35,22 @@ public partial class Npc : CharacterBody2D
         _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _sprite2D = GetNode<Sprite2D>("Sprite2D");
-        if (_navAgent != null) 
-            _navAgent.TargetPosition = Target.Position;
+        CallDeferred("SetupNavAgent");
         if (NpcResource != null)
             SetupNpc();
         if(Engine.IsEditorHint()) return;
         EmitSignal(SignalName.DoBehaviorEnabled);
         PathTimer();
     }
-
-
+    
     public override void _PhysicsProcess(double delta)
     {
         if(Engine.IsEditorHint()) return;
         if (_navAgent == null) return;
-        if (_navAgent.IsTargetReached()) return;
+        if (_navAgent.IsNavigationFinished()) return;
+        var currentAgentPosition = GetGlobalPosition();
+        var nextPathPosition = _navAgent.GetNextPathPosition();
+        Velocity = currentAgentPosition.DirectionTo(nextPathPosition).Normalized() * _speed;
         
         var targetPosition = _navAgent.GetTargetPosition();
         var directionToTarget = targetPosition - GlobalPosition;
@@ -61,13 +61,27 @@ public partial class Npc : CharacterBody2D
             return; // Stop movement if close enough
         }
         var navPointDir = directionToTarget.Normalized();
-        Velocity = navPointDir * _speed ; 
+        //Velocity = navPointDir * _speed ; 
         Direction = navPointDir;
         UpdateDirection(GlobalPosition + navPointDir);
         UpdateAnimation();
         MoveAndSlide();
     }
 
+    private async void SetupNavAgent()
+    {
+        try
+        {
+            await ToSignal(GetTree(), "_physics_frame");
+            if(Target == null) return;
+            _navAgent.TargetPosition = Target.GlobalPosition;
+        }
+        catch (Exception e)
+        {
+            GD.Print("This is bad...");
+            GD.PrintErr(e);
+        }
+    }
     private void MakePath()
     {
         _navAgent.TargetPosition = Target.GlobalPosition;
