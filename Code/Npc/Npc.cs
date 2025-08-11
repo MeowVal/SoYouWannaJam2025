@@ -29,6 +29,9 @@ public partial class Npc : CharacterBody2D
 
     private AnimationPlayer _animationPlayer;
     private Sprite2D _sprite2D;
+    private Vector2 _lastTargetPosition = Vector2.Zero;  // Store last target position
+    private float _stopThreshold = 5.0f;  // The threshold distance at which the NPC will stop or no longer recalculate path
+    private float _pathUpdateThreshold = 32.0f;  // The distance at which to update the path
     
     public override void _Ready()
     {
@@ -49,23 +52,27 @@ public partial class Npc : CharacterBody2D
         if (_navAgent == null) return;
         if (_navAgent.IsNavigationFinished()) return;
         if (Target == null) return;
-        _navAgent.TargetPosition = Target.GlobalPosition;
+        
+        //_navAgent.TargetPosition = Target.GlobalPosition;
         
         var currentAgentPosition = GetGlobalPosition();
         var nextPathPosition = _navAgent.GetNextPathPosition();
-        var dir = currentAgentPosition.DirectionTo(nextPathPosition).Normalized();
-        Velocity = dir * _speed;
         
-        /*var targetPosition = _navAgent.GetTargetPosition();
-        var directionToTarget = targetPosition - GlobalPosition;
-        if (directionToTarget.Length() < _speed )
+        if (_lastTargetPosition.DistanceTo(nextPathPosition) > _pathUpdateThreshold)
         {
-            Velocity = Vector2.Zero;
-            Direction = Vector2.Zero;
-            return; // Stop movement if close enough
+            _navAgent.TargetPosition = Target.GlobalPosition;
+            _lastTargetPosition = nextPathPosition;  
         }
-        var navPointDir = directionToTarget.Normalized();
-        //Velocity = navPointDir * _speed ; */
+        
+        var dir = currentAgentPosition.DirectionTo(nextPathPosition).Normalized();
+    
+        if (currentAgentPosition.DistanceTo(nextPathPosition) <= _stopThreshold)
+            dir = Vector2.Zero;  // Stop the NPC if close enough
+        
+        Velocity = dir * _speed;
+        GD.Print("Current Position: " + currentAgentPosition);
+        GD.Print("Next Path Position: " + nextPathPosition);
+        GD.Print("Direction to Target: " + dir);
         Direction = dir;
         UpdateDirection(GlobalPosition + dir);
         UpdateAnimation();

@@ -2,3 +2,16 @@
 .godot/
 /android/
 .idea/.idea.So you WANNA Jam 2025/.idea/.name
+# Default ignored files Rider
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/modules.xml
+/projectSettingsUpdater.xml
+/.idea.So You WANNA Jam 2025.iml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
