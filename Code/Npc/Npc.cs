@@ -11,7 +11,6 @@ public partial class Npc : CharacterBody2D
     private Texture2D _lastTexture;
     
     [Export] private float _speed = 30f;
-    [Export] public float NavTimer = 0.5f; 
     public string State = "idle";
     public Vector2 Direction = Vector2.Down;
     private string _directionName= "Down";
@@ -70,9 +69,9 @@ public partial class Npc : CharacterBody2D
             dir = Vector2.Zero;  // Stop the NPC if close enough
         
         Velocity = dir * _speed;
-        GD.Print("Current Position: " + currentAgentPosition);
-        GD.Print("Next Path Position: " + nextPathPosition);
-        GD.Print("Direction to Target: " + dir);
+        //GD.Print("Current Position: " + currentAgentPosition);
+        //GD.Print("Next Path Position: " + nextPathPosition);
+        //GD.Print("Direction to Target: " + dir);
         Direction = dir;
         UpdateDirection(GlobalPosition + dir);
         UpdateAnimation();
@@ -84,8 +83,10 @@ public partial class Npc : CharacterBody2D
         try
         {
             await ToSignal(GetTree(), "physics_frame");
+            
             if(Target == null) return;
             _navAgent.TargetPosition = Target.GlobalPosition;
+            //Free();
         }
         catch (Exception e)
         {
@@ -93,21 +94,6 @@ public partial class Npc : CharacterBody2D
             GD.PrintErr(e);
         }
     }
-    /*private void MakePath()
-    {
-        _navAgent.TargetPosition = Target.GlobalPosition;
-    }
-
-    private async void PathTimer()
-    {
-        while (true)
-        {
-            MakePath();
-            await ToSignal(GetTree().CreateTimer( NavTimer), "timeout");
-        }
-        
-    }
-    */
 
     public void UpdateAnimation()
     {
