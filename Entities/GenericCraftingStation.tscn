@@ -14,3 +14,6 @@ one_shot = true
 
 [node name="StationSprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_iwovp")
+
+[node name="ItemOffset" type="Node2D" parent="."]
+position = Vector2(0, -4)

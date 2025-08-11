@@ -37,13 +37,9 @@ public partial class GenericItem : Interactible
     
     private void OnInteractMethod(Node2D node)
     {
-        if (node is not CharacterControl character) return;
-        
+        if (node is not PlayerInteractor interactor) return;
+        interactor.PickupItem(this);
+
         GD.Print("Interacted with: ", ItemResource.DisplayName);
-    }
-
-    private void Pickup()
-    {
-
     }
 }

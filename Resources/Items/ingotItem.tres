@@ -8,4 +8,4 @@ script = ExtResource("1_sw3dx")
 DisplayName = "Ingot"
 Description = "You need to actually set this lol."
 Icon = ExtResource("1_ed8v1")
-Size = 10.0
+Size = 7.0
