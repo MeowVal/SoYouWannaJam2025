@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using Godot;
 using Godot.Collections;
@@ -65,7 +66,7 @@ public partial class CharacterControl : CharacterBody2D
 			}
 		}
 
-		if (Input.IsActionJustPressed("ui_accept"))
+		if (Input.IsActionJustPressed("interact"))
 		{
 			if (Interactable.Count > 0)
 			{

@@ -4,9 +4,7 @@ namespace SoYouWANNAJam2025.Code.Items;
 
 public partial class Item : Interactible
 {
-    [Export] public string DisplayName = "Unknown";
-    [Export] public string Description = "You need to actually set this lol.";
-    [Export] public Texture2D Icon;
+    [Export] public BaseItem BaseItem = new BaseItem();
     
     private CharacterControl _player;
     
@@ -16,6 +14,15 @@ public partial class Item : Interactible
         BodyEntered += OnItemBodyEntered;
         BodyExited += OnItemBodyExited;
         Interact += OnInteractMethod;
+
+        if (BaseItem.Icon != null)
+        {
+            GetNode<Sprite2D>("Sprite2D").Texture = BaseItem.Icon;
+        }
+        /*if (GetNode<CollisionShape2D>("CollisionShape2D").GetShape() is CircleShape2D circleShape)
+        {
+            circleShape.Radius = BaseItem.Size;
+        }*/
     }
 
     private void OnItemBodyEntered(Node2D body)
@@ -39,6 +46,11 @@ public partial class Item : Interactible
     {
         if (node is not CharacterControl character) return;
         
-        GD.Print("Interacted with: ", DisplayName);
+        GD.Print("Interacted with: ", BaseItem.DisplayName);
+    }
+
+    private void Pickup()
+    {
+        
     }
 }
