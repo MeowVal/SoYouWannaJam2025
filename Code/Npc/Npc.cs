@@ -43,6 +43,8 @@ public partial class Npc : CharacterBody2D
             SetupNpc();
         if(Engine.IsEditorHint()) return;
         UpdateMood();
+        Callable callable = new Callable(this, "_VelocityComputed");
+        _navAgent.Connect("velocity_computed", callable);
         //PathTimer();
     }
     
@@ -54,21 +56,32 @@ public partial class Npc : CharacterBody2D
         if (_navAgent.IsNavigationFinished()) return;
         if (Target == null) return;
         
+        // Get pathfinding information
         var currentAgentPosition = GetGlobalPosition();
         var nextPathPosition = _navAgent.GetNextPathPosition();
-        
+        //Makes sure the path only gets updated when necessary 
         if (_lastTargetPosition.DistanceTo(nextPathPosition) > _pathUpdateThreshold)
         {
             _navAgent.TargetPosition = Target.GlobalPosition;
             _lastTargetPosition = nextPathPosition;  
         }
-        
+        // Calculate the new direction
         var dir = currentAgentPosition.DirectionTo(nextPathPosition).Normalized();
+        var newVelocity = dir * _speed;
+        
     
         if (currentAgentPosition.DistanceTo(nextPathPosition) <= _stopThreshold)
-            dir = Vector2.Zero;  // Stop the NPC if close enough
+            newVelocity = Vector2.Zero;  // Stop the NPC if close enough
         
-        Velocity = dir * _speed;
+        // Set the correct velocity
+        if (_navAgent.AvoidanceEnabled)
+        {
+            _navAgent.SetVelocity(newVelocity);
+        }
+        else
+        {
+            _VelocityComputed(newVelocity);
+        }
         Direction = dir;
         UpdateDirection(GlobalPosition + dir);
         UpdateAnimation();
@@ -92,6 +105,10 @@ public partial class Npc : CharacterBody2D
         }
     }
 
+    private void _VelocityComputed(Vector2 safeVelocity)
+    {
+        Velocity = safeVelocity;
+    }
     public void UpdateAnimation()
     {
         if(_animationPlayer == null) return;
