@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using SoYouWANNAJam2025.Code.Items;
 
 namespace SoYouWANNAJam2025.Code.RecipeSystem;
 
@@ -15,6 +16,9 @@ public partial class CraftingStation : Interactible
     private BaseRecipe _currentRecipe;
     private Timer _recipeTimer;
     private CharacterControl _player;
+
+    private Node2D _itemOffset;
+    public GenericItem _heldItem;
     
     public override void _Ready()
     {
@@ -100,5 +104,16 @@ public partial class CraftingStation : Interactible
         }
         _player.HeldItem.CompletedRecipes.Add(_currentRecipe);
         GD.Print("Completed recipe: " + _currentRecipe.DisplayName);
+    }
+
+    private void OnInteractMethod(Node2D node)
+    {
+        if (node is not PlayerInteractor interactor) return;
+        _heldItem = interactor._heldItem;
+        interactor._heldItem = null;
+        _heldItem.Reparent(_itemOffset);
+        _heldItem.Position = Vector2.Zero;
+        _heldItem.IsInteractive = false;
+        _heldItem.SetHighlight(false);
     }
 }

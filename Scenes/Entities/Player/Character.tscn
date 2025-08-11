@@ -416,3 +416,6 @@ debug_color = Color(0.980392, 0, 0.376471, 0.0705882)
 [node name="DistanceCheckTimer" type="Timer" parent="PlayerInteractor"]
 wait_time = 0.1
 autostart = true
+
+[node name="ItemOffset" type="Node2D" parent="PlayerInteractor"]
+position = Vector2(0, -11)
