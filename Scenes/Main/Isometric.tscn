@@ -23,10 +23,6 @@ scale = Vector2(4, 4)
 
 [node name="Character" parent="Isometric" instance=ExtResource("1_m7oyx")]
 position = Vector2(0, 145)
-DisplayName = null
-MoveSpeed = null
-AccelerationSpeed = null
-DecelerationSpeed = null
 
 [node name="BuildingMap" type="TileMapLayer" parent="Isometric"]
 y_sort_enabled = true
