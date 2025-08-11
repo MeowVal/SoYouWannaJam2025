@@ -9,7 +9,8 @@ public partial class Npc : CharacterBody2D
     public delegate void DoBehaviorEnabledEventHandler();
     
     private Texture2D _lastTexture;
-    
+    [Export] public float MoodDecreaseTimer = 10f;
+    [Export] public float MoodDecreaseAmount = 10;
     [Export] private float _speed = 30f;
     public string State = "idle";
     public Vector2 Direction = Vector2.Down;
@@ -42,6 +43,7 @@ public partial class Npc : CharacterBody2D
             SetupNpc();
         if(Engine.IsEditorHint()) return;
         EmitSignal(SignalName.DoBehaviorEnabled);
+        UpdateMood();
         //PathTimer();
     }
     
@@ -107,6 +109,18 @@ public partial class Npc : CharacterBody2D
         UpdateDirectionName();
         //GD.Print(Direction+ _directionName);
         
+    }
+
+    public async void UpdateMood()
+    {
+        while ((Mood > 0))
+        {
+            await ToSignal(GetTree().CreateTimer(MoodDecreaseTimer), "timeout");
+            Mood -= MoodDecreaseAmount;
+            GD.Print("Mood: " + Mood);
+        }
+        Target = GetNode<Node2D>("LeaveArea");
+        if (Target == null) GD.PrintErr("Target is null");
     }
 
     private void UpdateDirectionName()
