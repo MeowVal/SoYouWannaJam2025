@@ -6,6 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_tdysy"]
 
 [node name="ingotItem" type="Area2D"]
+monitoring = false
 script = ExtResource("1_gvma5")
 DisplayName = "Ingot"
 

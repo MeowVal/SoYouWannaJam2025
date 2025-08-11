@@ -1,8 +1,9 @@
-[gd_scene load_steps=54 format=3 uid="uid://c4hvjp22ok276"]
+[gd_scene load_steps=55 format=3 uid="uid://c4hvjp22ok276"]
 
 [ext_resource type="Texture2D" uid="uid://vsq7nymelad8" path="res://Assets/Sprites/characters/wolf-idle.png" id="2_b3ei2"]
 [ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/CharacterControl.cs" id="2_l3y44"]
 [ext_resource type="Texture2D" uid="uid://sfvtx6k8ixe8" path="res://Assets/Sprites/characters/wolf-run.png" id="2_yv7du"]
+[ext_resource type="PackedScene" uid="uid://dqaiamwd58cc" path="res://Code/PlayerInteractor.tscn" id="4_yv7du"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b3ei2"]
 radius = 5.0
@@ -400,3 +401,5 @@ shape = SubResource("CircleShape2D_b3ei2")
 [node name="CharSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qcvlp")
 animation = &"RunNE"
+
+[node name="PlayerInteractor" parent="." instance=ExtResource("4_yv7du")]

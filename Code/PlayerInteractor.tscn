@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqaiamwd58cc"]
+
+[ext_resource type="Script" uid="uid://c1fa7ndulywpt" path="res://Code/PlayerInteractor.cs" id="1_cgv6d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c6rmn"]
+radius = 32.0
+
+[node name="PlayerInteractor" type="Area2D"]
+monitorable = false
+script = ExtResource("1_cgv6d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c6rmn")
+debug_color = Color(0.980392, 0, 0.376471, 0.0705882)
+
+[node name="DistanceCheckTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true

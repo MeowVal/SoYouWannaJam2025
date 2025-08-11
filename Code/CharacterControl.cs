@@ -21,10 +21,9 @@ public partial class CharacterControl : CharacterBody2D
 	private string _direction = "down";
 	private Vector2 _targetPos;
 	private int _moveThreshold = 3;
-	
-	public Array<Interactible> Interactable = [];
 
 	[ExportGroup("Inventory")]
+	private PlayerInteractor _interactor;
 	public ModularWeapon HeldItem;
 
 	private Node2D _camera;
@@ -32,7 +31,7 @@ public partial class CharacterControl : CharacterBody2D
 	
 	public override void _Ready()
 	{
-		base._Ready();
+		_interactor = GetNode<PlayerInteractor>("PlayerInteractor");
 		HeldItem = new ModularWeapon();
 		var resource = GD.Load<BaseWeaponModifier>("res://Resources/WeaponModifiers/TestModifier.tres");
 		HeldItem.Modifiers.Add(resource);
@@ -44,7 +43,6 @@ public partial class CharacterControl : CharacterBody2D
 
 	private void PlayerMovement(double delta)
 	{
-		
 		var moveDir = Input.GetVector("left", "right", "up",  "down");
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
@@ -67,10 +65,7 @@ public partial class CharacterControl : CharacterBody2D
 
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
-			if (Interactable.Count > 0)
-			{
-				Interactable[0].TriggerInteraction(this);
-			}
+			_interactor.TriggerInteraction();
 		}
 		
 		if (Input.IsActionPressed("left"))
