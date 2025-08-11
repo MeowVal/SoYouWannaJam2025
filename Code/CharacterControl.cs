@@ -43,7 +43,13 @@ public partial class CharacterControl : CharacterBody2D
 
 	private void PlayerMovement(double delta)
 	{
-		var moveDir = Input.GetVector("left", "right", "up",  "down");
+		var moveDir = Vector2.Zero;
+		var deadzone = 0.5f;
+		float left = Input.GetActionStrength("left"), right = Input.GetActionStrength("right");
+		float up = Input.GetActionStrength("up"), down = Input.GetActionStrength("down");
+		moveDir.X = (right > deadzone ? right : 0) - (left > deadzone ? left : 0);
+		moveDir.Y = (down > deadzone ? down : 0) - (up > deadzone ? up : 0);
+
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
 			_targetPos = GetGlobalMousePosition();
@@ -63,7 +69,7 @@ public partial class CharacterControl : CharacterBody2D
 			}
 		}
 
-		if (Input.IsActionJustPressed("ui_accept"))
+		if (Input.IsActionJustPressed("interact"))
 		{
 			_interactor.TriggerInteraction();
 		}
