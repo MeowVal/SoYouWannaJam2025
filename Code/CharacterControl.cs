@@ -69,15 +69,7 @@ public partial class CharacterControl : CharacterBody2D
 
 		if (Input.IsActionJustPressed("interact"))
 		{
-			if (_interactor._heldItem == null)
-			{
-				_interactor.TriggerInteraction();
-			}
-			else
-			{
-				_interactor.DropItem();
-			}
-
+			_interactor.TriggerInteraction();
 		}
 		
 		if (Input.IsActionPressed("left"))

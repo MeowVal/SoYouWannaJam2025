@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://6ycfxb3u38k1"]
+[gd_scene load_steps=6 format=3 uid="uid://6ycfxb3u38k1"]
 
 [ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/RecipeSystem/CraftingStation.cs" id="1_suvq8"]
 [ext_resource type="Texture2D" uid="uid://dgel6i8xrevwr" path="res://Assets/Sprites/objects/workbench.png" id="2_suvq8"]
 [ext_resource type="Texture2D" uid="uid://cnucm3x4h03tk" path="res://Assets/Sprites/objects/file.png" id="3_2xd2y"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/InventorySlot.cs" id="4_sd5kq"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2xd2y"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_sd5kq"]
 radius = 32.0
 
 [node name="CraftingBench" type="Area2D"]
@@ -12,7 +13,7 @@ script = ExtResource("1_suvq8")
 ColliderRadius = 32.0
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_2xd2y")
+shape = SubResource("CircleShape2D_sd5kq")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="RecipeTimer" type="Timer" parent="."]
@@ -24,3 +25,8 @@ texture = ExtResource("2_suvq8")
 [node name="tool" type="Sprite2D" parent="."]
 position = Vector2(12, -4)
 texture = ExtResource("3_2xd2y")
+
+[node name="InventorySlot" type="Node2D" parent="."]
+position = Vector2(0, -4)
+script = ExtResource("4_sd5kq")
+metadata/_custom_type_script = "uid://1cpfasjkacse"

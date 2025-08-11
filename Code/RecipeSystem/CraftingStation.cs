@@ -17,8 +17,7 @@ public partial class CraftingStation : Interactible
     private Timer _recipeTimer;
     private CharacterControl _player;
 
-    private Node2D _itemOffset;
-    public GenericItem _heldItem;
+    public InventorySlot InventorySlot;
     
     public override void _Ready()
     {
@@ -30,6 +29,9 @@ public partial class CraftingStation : Interactible
         BodyExited += OnCraftingStationExited;
         AreaEntered += OnCraftingStationEntered;
         AreaExited += OnCraftingStationExited;
+        Interact += OnInteractMethod;
+        
+        if (FindChild("InventorySlot") is InventorySlot slot) InventorySlot=slot;
     }
 
     private void OnCraftingStationEntered(Node2D body)
@@ -109,11 +111,13 @@ public partial class CraftingStation : Interactible
     private void OnInteractMethod(Node2D node)
     {
         if (node is not PlayerInteractor interactor) return;
-        _heldItem = interactor._heldItem;
-        interactor._heldItem = null;
-        _heldItem.Reparent(_itemOffset);
-        _heldItem.Position = Vector2.Zero;
-        _heldItem.IsInteractive = false;
-        _heldItem.SetHighlight(false);
+        if (InventorySlot.Item == null)
+        {
+            interactor.InventorySlot.TransferTo(InventorySlot);
+        }
+        else
+        {
+            InventorySlot.TransferTo(interactor.InventorySlot);
+        }
     }
 }
