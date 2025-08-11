@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Scenes/Entities/Player/Character.tscn" id="1_m7oyx"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
-[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/RecipeSystem/BaseRecipe.cs" id="4_jey54"]
 [ext_resource type="PackedScene" uid="uid://ccxhqwfuyr60" path="res://Scenes/UI/HUD.tscn" id="4_uaxa7"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/Camera.cs" id="4_vqmdy"]
 [ext_resource type="Resource" uid="uid://d1il8gelcfaqa" path="res://Resources/Recipes/testRecipe.tres" id="5_j3d0r"]
@@ -11,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="6_11nrr"]
 [ext_resource type="Resource" uid="uid://db5qq1a3ir2ty" path="res://Resources/Items/logItem.tres" id="7_11nrr"]
 [ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Code/RecipeSystem/CraftingStation.tscn" id="7_jey54"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/RecipeSystem/BaseRecipe.cs" id="8_jey54"]
 [ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Scenes/Entities/NPC/Npc.tscn" id="9_xa8a6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vqmdy"]
@@ -46,7 +46,6 @@ visible = false
 scale = Vector2(0.25, 0.25)
 navigation_polygon = SubResource("NavigationPolygon_vqmdy")
 navigation_layers = 3
-metadata/_edit_group_ = true
 
 [node name="TestTarget" type="Sprite2D" parent="Isometric"]
 position = Vector2(456.75, 160.5)
@@ -62,7 +61,7 @@ BaseItem = ExtResource("7_11nrr")
 
 [node name="CraftingStation" parent="Isometric" instance=ExtResource("7_jey54")]
 position = Vector2(63.75, 134.5)
-Recipes = Array[ExtResource("4_jey54")]([ExtResource("5_j3d0r")])
+Recipes = Array[ExtResource("8_jey54")]([ExtResource("5_j3d0r")])
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("4_vqmdy")
