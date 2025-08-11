@@ -10,9 +10,6 @@ public partial class Item : Interactible
 
     public override void _Ready()
     {
-        base._Ready();
-        BodyEntered += OnItemBodyEntered;
-        BodyExited += OnItemBodyExited;
         Interact += OnInteractMethod;
 
         if (BaseItem.Icon != null)
@@ -23,23 +20,6 @@ public partial class Item : Interactible
         {
             circleShape.Radius = BaseItem.Size;
         }*/
-    }
-
-    private void OnItemBodyEntered(Node2D body)
-    {
-        if (body is not CharacterControl character) return;
-        _player = character;
-        
-        _player.Interactable.Add(GetNode<Interactible>("."));
-        GD.Print(_player.Interactable);
-    }
-    
-    private void OnItemBodyExited(Node2D body)
-    {
-        if (body is not CharacterControl character) return;
-        
-        _player.Interactable.Remove(this);
-        GD.Print(_player.Interactable);
     }
     
     private void OnInteractMethod(Node2D node)
