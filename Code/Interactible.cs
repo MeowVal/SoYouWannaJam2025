@@ -1,5 +1,6 @@
 using System.Linq;
 using Godot;
+using Godot.Collections;
 
 namespace SoYouWANNAJam2025.Code;
 
@@ -15,6 +16,8 @@ public partial class Interactible : Area2D
 {
 
     private bool _interactive = true;
+    private Array<int> _defaultZIndices = [];
+    public Array<Sprite2D> Sprites = [];
 
     [Export]
     public bool IsInteractive
@@ -52,6 +55,15 @@ public partial class Interactible : Area2D
         if (Engine.IsEditorHint()) return;
         
         Interact += OnInteractMethod;
+        var foundSprites = GetChildren()
+            .Where(child => child is Sprite2D)
+            .Select(child => child)
+            .Cast<Sprite2D>();
+        foreach (var sprite in foundSprites)
+        {
+            Sprites.Add(sprite);
+            _defaultZIndices.Add(sprite.ZIndex);
+        }
     }
 
     private void OnInteractMethod(Node2D node, TriggerType trigger) { }
@@ -63,23 +75,24 @@ public partial class Interactible : Area2D
 
     public void SetHighlight(bool enabled)
     {
-        var sprites = GetChildren()
-            .Where(child => child is Sprite2D)
-            .Select(child => child)
-            .Cast<Sprite2D>();
-        if (enabled)
+        foreach (var sprite in Sprites)
         {
-            foreach (var sprite in sprites)
+            if (enabled)
             {
                 sprite.Modulate = new Color(1.5f, 1.5f, 1.5f, 1.5f);
             }
-        }
-        else
-        {
-            foreach (var sprite in sprites)
+            else
             {
                 sprite.Modulate = new Color(1, 1, 1, 1);
             }
+        }
+    }
+
+    public void SetZIndexOffset(int offset)
+    {
+        for (var i = 0; i < Sprites.Count; i++)
+        {
+            Sprites[i].ZIndex = _defaultZIndices[i] + offset;
         }
     }
 }

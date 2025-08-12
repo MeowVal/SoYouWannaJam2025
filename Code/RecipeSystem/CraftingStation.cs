@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Items;
+//using SoYouWANNAJam2025.Scenes.UI.Interactions;
 
 namespace SoYouWANNAJam2025.Code.RecipeSystem;
 
@@ -13,18 +14,20 @@ public partial class CraftingStation : Interactible
     [Export] public Texture2D Icon;
     [Export] public Array<BaseRecipe> Recipes = [];
 
-    private BaseRecipe _currentRecipe;
-    private Timer _recipeTimer;
-    private CharacterControl _player;
-
     public InventorySlot InventorySlot;
+    public BaseRecipe CurrentRecipe;
+    public Timer RecipeTimer;
+    private CharacterControl _player;
+    private CraftingStationInterface _interactionInterface;
+    private Node2D _interfaceLocation;
     
     public override void _Ready()
     {
         if (Engine.IsEditorHint()) return;
         base._Ready();
-        _recipeTimer = GetNode<Timer>("RecipeTimer");
-        _recipeTimer.Timeout += _OnRecipeTimer;
+        _interfaceLocation = GetNode<Node2D>("InterfaceLocation");
+        RecipeTimer = GetNode<Timer>("RecipeTimer");
+        RecipeTimer.Timeout += _OnRecipeTimer;
         Interact += OnInteractMethod;
         
         if (FindChild("InventorySlot") is InventorySlot slot) InventorySlot=slot;
@@ -41,9 +44,9 @@ public partial class CraftingStation : Interactible
             GD.Print(recipe.Inputs.ToString());
             if (!InventorySlot.ContainItem(recipe.Inputs, true)) continue;
 
-            _currentRecipe = recipe;
-            GD.Print($"Starting WorkType {_currentRecipe.WorkType}.");
-            switch (_currentRecipe.WorkType)
+            CurrentRecipe = recipe;
+            GD.Print($"Starting WorkType {CurrentRecipe.WorkType}.");
+            switch (CurrentRecipe.WorkType)
             {
                 case WorkType.Instant:
                     _RecipeComplete();
@@ -51,7 +54,8 @@ public partial class CraftingStation : Interactible
                 case WorkType.SpamButton:
                     return true;
                 case WorkType.Timer:
-                    _recipeTimer.Start(recipe.TimeToComplete);
+                    RecipeTimer.Start(recipe.TimeToComplete);
+                    CreateInteractionUi("res://Scenes/UI/Interactions/CraftingTimer.tscn");
                     return true;
                 case WorkType.ButtonHold:
                     return true;
@@ -60,10 +64,20 @@ public partial class CraftingStation : Interactible
         return false;
     }
 
+    private void CreateInteractionUi(string path)
+    {
+        var uiScene = GD.Load<PackedScene>(path);
+        _interactionInterface = uiScene.Instantiate<CraftingStationInterface>();
+        _interactionInterface.Init(this);
+        GetViewport().AddChild(_interactionInterface);
+        _interactionInterface.GlobalPosition = _interfaceLocation.GlobalPosition;
+    }
+
     private void OnCraftingStationExited(Node2D body)
     {
-        if (_recipeTimer.IsStopped()) return;
-        _recipeTimer.Stop();
+        if (RecipeTimer.IsStopped()) return;
+        RecipeTimer.Stop();
+        _interactionInterface.QueueFree();
         GD.Print("Recipe ended before completion");
     }
 
@@ -75,17 +89,18 @@ public partial class CraftingStation : Interactible
 
     private void _RecipeComplete()
     {
-        if (!InventorySlot.DestroyItem(_currentRecipe.Inputs))
+        _interactionInterface.QueueFree();
+        if (!InventorySlot.DestroyItem(CurrentRecipe.Inputs))
         {
-            GD.Print($"Failed to delete recipe: {_currentRecipe.DisplayName}");
+            GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
             return;
         }
         var newItemScene = GD.Load<PackedScene>("res://Entities/GenericItem.tscn");
         var newItem = newItemScene.Instantiate<GenericItem>();
-        newItem.ItemResource = _currentRecipe.Outputs[0];
+        newItem.ItemResource = CurrentRecipe.Outputs[0];
         GetNode("/root/Node2D/Isometric").AddChild(newItem);
         InventorySlot.PickupItem(newItem, true);
-        GD.Print($"Completed recipe {_currentRecipe.DisplayName} outputting {newItem.Name}");
+        GD.Print($"Completed recipe {CurrentRecipe.DisplayName} outputting {newItem.Name}");
     }
 
     private void OnInteractMethod(Node2D node, TriggerType trigger)

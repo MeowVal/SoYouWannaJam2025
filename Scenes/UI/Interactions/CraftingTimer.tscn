@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6vm8e11uibt6"]
+
+[ext_resource type="Script" uid="uid://di31hkuwxy0" path="res://Scenes/UI/Interactions/CraftingTimer.cs" id="1_j8syg"]
+
+[node name="CraftingStationInterface" type="Node2D"]
+script = ExtResource("1_j8syg")
+metadata/_custom_type_script = "uid://bywn575awil60"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.5
+offset_right = 88.5
+offset_bottom = 54.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Crafting: "
+
+[node name="RecipeName" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Recipe Name"
+
+[node name="RecipeProgress" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
