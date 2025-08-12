@@ -396,10 +396,6 @@ radius = 32.0
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("2_l3y44")
-DisplayName = null
-MoveSpeed = null
-AccelerationSpeed = null
-DecelerationSpeed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_b3ei2")
@@ -425,7 +421,7 @@ autostart = true
 [node name="InventorySlot" type="Node2D" parent="."]
 position = Vector2(0, -12)
 script = ExtResource("5_o4cwe")
-AllowAll = null
+AllowAll = true
 ItemWhitelist = null
 RecipeWhitelist = null
 metadata/_custom_type_script = "uid://1cpfasjkacse"

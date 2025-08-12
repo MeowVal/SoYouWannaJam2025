@@ -13,7 +13,7 @@ public partial class ItemMap : EditorPlugin
 	public override void _EnterTree()
 	{
 		// Initialization of the plugin goes here.
-		AddCustomType();
+		//AddCustomType();
 		_panelUi = ItemMapControl.Instantiate() as Control;
 		AddControlToDock(EditorPlugin.DockSlot.LeftBl, _panelUi);
 	}

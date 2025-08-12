@@ -8,6 +8,7 @@ public partial class GridOrigin : EditorResourcePicker
 {
     public override void _Ready()
     {
-        
+        base._Ready();
     }
+}
 #endif
