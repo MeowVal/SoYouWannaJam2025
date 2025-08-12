@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://hxf0gtf3x5pb"]
+[gd_scene load_steps=19 format=3 uid="uid://hxf0gtf3x5pb"]
 
 [ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="1_5ya86"]
 [ext_resource type="Script" uid="uid://b4ntrd6icymju" path="res://Code/Npc/Npc.cs" id="1_623a7"]
 [ext_resource type="Texture2D" uid="uid://b5g8dj2bpwsm2" path="res://Assets/Sprites/characters/Shadow/Shadow.png" id="2_623a7"]
 [ext_resource type="Resource" uid="uid://0xv5lxlnyfl7" path="res://Resources/Npcs/Npc01.tres" id="2_jvg37"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/InventorySlot.cs" id="5_mrx7r"]
+[ext_resource type="Script" uid="uid://bbqx7jgoyn746" path="res://Code/Npc/NpcInteractor.cs" id="6_c6mha"]
 
 [sub_resource type="Animation" id="Animation_jvg37"]
 length = 0.001
@@ -157,23 +159,14 @@ _data = {
 radius = 6.0
 height = 12.0
 
-[node name="Npc" type="CharacterBody2D" node_paths=PackedStringArray("_navAgent", "_animationPlayer", "_sprite2D")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_jh2em"]
+radius = 32.0
+
+[node name="Npc" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 19
+collision_mask = 17
 script = ExtResource("1_623a7")
 NpcResource = ExtResource("2_jvg37")
-_lastTexture = null
-State = "idle"
-Direction = Vector2(0, 1)
-_directionName = "Down"
-DoBehaviour = true
-_navAgent = NodePath("NavigationAgent2D")
-_npcResource = ExtResource("2_jvg37")
-_animationPlayer = NodePath("AnimationPlayer")
-_sprite2D = NodePath("Sprite2D")
-_lastTargetPosition = Vector2(0, 0)
-_stopThreshold = 5.0
-_pathUpdateThreshold = 32.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -13)
@@ -204,3 +197,20 @@ avoidance_enabled = true
 avoidance_layers = 3
 debug_enabled = true
 debug_path_custom_color = Color(1, 0.223529, 0.137255, 1)
+
+[node name="InventorySlot" type="Node2D" parent="."]
+position = Vector2(0, -4)
+script = ExtResource("5_mrx7r")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="NpcInteractor" type="Area2D" parent="."]
+monitorable = false
+script = ExtResource("6_c6mha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcInteractor"]
+shape = SubResource("CircleShape2D_jh2em")
+debug_color = Color(0.980392, 0, 0.376471, 0.0705882)
+
+[node name="DistanceCheckTimer" type="Timer" parent="NpcInteractor"]
+wait_time = 0.1
+autostart = true

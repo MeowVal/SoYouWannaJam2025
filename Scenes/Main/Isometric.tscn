@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dejbiswo8rnoi"]
+[gd_scene load_steps=12 format=4 uid="uid://dejbiswo8rnoi"]
 
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="1_m7oyx"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
@@ -12,12 +12,6 @@
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="7_lv6gr"]
 [ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Entities/NPC/Npc.tscn" id="9_xa8a6"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_vqmdy"]
-vertices = PackedVector2Array(1207.85, 703.992, 127.992, 1245.4, -1081.83, 639.992, 0, 97.5938)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(0, 92, 1219, 704, 128, 1251, -1093, 640)])
-agent_radius = 32.0
-
 [node name="Node2D" type="Node2D"]
 
 [node name="Isometric" type="Node2D" parent="."]
@@ -25,7 +19,6 @@ scale = Vector2(4, 4)
 
 [node name="Character" parent="Isometric" instance=ExtResource("1_m7oyx")]
 position = Vector2(0, 145)
-DisplayName = "PlayerName"
 
 [node name="BuildingMap" type="TileMapLayer" parent="Isometric"]
 y_sort_enabled = true
@@ -38,15 +31,9 @@ script = ExtResource("3_xa8a6")
 [node name="Collison" type="TileMapLayer" parent="Isometric/BuildingMap" groups=["Obstacles"]]
 y_sort_enabled = true
 position = Vector2(-0.25, 0)
-tile_map_data = PackedByteArray("AAALAAgAAQABAAEAAAAKAAcAAQABAAEAAAAKAAgAAQABAAEAAAALAAcAAQABAAEAAAANAAoAAAAJAAUAAAANAAgAAAAJAAUAAAALAAUAAAAJAAUAAAAHAAYAAAAJAAUAAAAGAAoAAAAJAAUAAAALAAwAAAAJAAUAAAAPAA0AAAAJAAUAAAA=")
+tile_map_data = PackedByteArray("AAALAAgAAQABAAEAAAAKAAcAAQABAAEAAAAKAAgAAQABAAEAAAALAAcAAQABAAEAAAANAAoAAAAJAAUAAAANAAgAAAAJAAUAAAALAAUAAAAJAAUAAAAHAAYAAAAJAAUAAAAGAAoAAAAJAAUAAAALAAwAAAAJAAUAAAAPAA0AAAAJAAUAAAANAAsAAAAJAAUAAAANAAwAAAAJAAUAAAANAAkAAAAJAAUAAAANAA0AAAAJAAUAAAANAA4AAAAJAAUAAAANAA8AAAAJAAUAAAANAAcAAAAJAAUAAAANAAYAAAAJAAUAAAANAAUAAAAJAAUAAAA=")
 tile_set = ExtResource("1_yppru")
 x_draw_order_reversed = true
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Isometric"]
-visible = false
-scale = Vector2(0.25, 0.25)
-navigation_polygon = SubResource("NavigationPolygon_vqmdy")
-navigation_layers = 3
 
 [node name="TestTarget" type="Sprite2D" parent="Isometric"]
 position = Vector2(456.75, 160.5)
