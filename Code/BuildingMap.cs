@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -5,12 +6,15 @@ namespace SoYouWANNAJam2025.Code;
 
 public partial class BuildingMap : TileMapLayer
 {
-    private List<TileMapLayer> _obstacles = new List<TileMapLayer>();
+    //private List<TileMapLayer> _obstacles = new List<TileMapLayer>();
 
-    public override async void _Ready()
+    public override void _Ready()
     {
-        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        CallDeferred(nameof(NotifyRuntimeTileDataUpdate));
+        
+            //await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            Callable.From(NotifyRuntimeTileDataUpdate).CallDeferred();
+        
+       
     }
     
     public override bool _UseTileDataRuntimeUpdate(Vector2I coords)
@@ -28,14 +32,14 @@ public partial class BuildingMap : TileMapLayer
     
     private bool IsObstructedByObstacle(Vector2I coords)
     {
-        Vector2 globalPos = MapToLocal(coords);
+        var globalPos = MapToLocal(coords);
 
         foreach (Node node in GetTree().GetNodesInGroup("Obstacles"))
         {
             if (node is TileMapLayer obstacleLayer)
             {
-                Vector2I localTileCoords = obstacleLayer.LocalToMap(globalPos);
-                int sourceId = obstacleLayer.GetCellSourceId(localTileCoords);
+                var localTileCoords = obstacleLayer.LocalToMap(globalPos);
+                var sourceId = obstacleLayer.GetCellSourceId(localTileCoords);
                 if (sourceId == -1)
                     continue;
 
@@ -45,7 +49,7 @@ public partial class BuildingMap : TileMapLayer
                 if (source is TileSetAtlasSource atlasSource)
                 {
                     var atlasCoords = obstacleLayer.GetCellAtlasCoords(localTileCoords);
-                    int alternative = obstacleLayer.GetCellAlternativeTile(localTileCoords);
+                    var alternative = obstacleLayer.GetCellAlternativeTile(localTileCoords);
 
                     var tileData = atlasSource.GetTileData(atlasCoords, alternative);
                     if (tileData != null && tileData.GetCollisionPolygonsCount(0) > 0)

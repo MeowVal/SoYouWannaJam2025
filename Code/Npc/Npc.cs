@@ -7,7 +7,7 @@ public partial class Npc : CharacterBody2D
 {
     [Signal]
     public delegate void DoBehaviorEnabledEventHandler(); // Signal for enabling behaviours 
-    [Export] public float MoodDecreaseTimer = 10f; // How often the npc's mode decreases
+    [Export] public Timer MoodTimer; // How often the npc's mode decreases
     [Export] public float MoodDecreaseAmount = 10; // How much the npc's mood decreases by
     [Export] private float _speed = 30f; // How fast the npc moves
     public string State = "idle"; // The animation stat the npc is in
@@ -37,7 +37,8 @@ public partial class Npc : CharacterBody2D
         _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _sprite2D = GetNode<Sprite2D>("Sprite2D");
-        
+        MoodTimer = GetNode<Timer>("MoodTimer");
+        MoodTimer.Timeout += UpdateMood; 
         CallDeferred("SetupNavAgent");
         if (NpcResource != null)
             SetupNpc();
@@ -51,10 +52,16 @@ public partial class Npc : CharacterBody2D
     // Used for Npc the pathfinding 
     public override void _PhysicsProcess(double delta)
     {
+        
         if(Engine.IsEditorHint()) return;
         if (_navAgent == null) return;
-        if (_navAgent.IsNavigationFinished() && Mood ==0) Free();
-        if (_navAgent.IsNavigationFinished()) return;
+        if (_navAgent.IsNavigationFinished() && Mood <=0) Free();
+        if (_navAgent.IsNavigationFinished())
+        {
+            State = "idle";
+            GD.Print("Target reached");
+            return;
+        }
         if (Target == null) return;
         
         // Get pathfinding information
@@ -83,12 +90,13 @@ public partial class Npc : CharacterBody2D
         {
             _VelocityComputed(newVelocity);
         }
+        State = "walk";
         Direction = dir;
         UpdateDirection(GlobalPosition + dir);
         UpdateAnimation();
         MoveAndSlide();
     }
-
+    
     // Sets up the navigation agent for the pathfinder
     private async void SetupNavAgent()
     {
@@ -107,7 +115,7 @@ public partial class Npc : CharacterBody2D
             GD.PrintErr(e);
         }
     }
-
+    
     // The velocity calculated by the navigation agent for avoiding an obstacle
     private void _VelocityComputed(Vector2 safeVelocity)
     {
@@ -131,17 +139,18 @@ public partial class Npc : CharacterBody2D
     }
 
     // Timer to update the mood of the npc 
-    public async void UpdateMood()
+    public void UpdateMood()
     {
-        while ((Mood > 0))
+        
+        Mood -= MoodDecreaseAmount;
+        //GD.Print("Mood: " + Mood);
+        if(Mood <= 0)
         {
-            await ToSignal(GetTree().CreateTimer(MoodDecreaseTimer), "timeout");
-            Mood -= MoodDecreaseAmount;
-            GD.Print("Mood: " + Mood);
+            Target = LeaveAreaNode;
+            if (Target == null) return;
+            _navAgent.TargetPosition = Target.GlobalPosition;
         }
-        Target = LeaveAreaNode;
-        if (Target == null) return;
-        _navAgent.TargetPosition = Target.GlobalPosition;
+        
     }
 
     // Used for determining the animation depending on the direction the npc is moving
@@ -172,9 +181,8 @@ public partial class Npc : CharacterBody2D
     private void SetupNpc()
     {
         if (NpcResource != null)
-        {
             _sprite2D.Texture = _npcResource.Sprite2D;
-        }
+        
     }
     
     // Used to set the npc resource

@@ -63,9 +63,10 @@ FollowingNode = NodePath("../Isometric/Character")
 
 [node name="Hud" parent="Camera2D" instance=ExtResource("4_uaxa7")]
 
-[node name="Npc" parent="." node_paths=PackedStringArray("Target", "LeaveAreaNode") instance=ExtResource("9_xa8a6")]
+[node name="Npc" parent="." node_paths=PackedStringArray("MoodTimer", "Target", "LeaveAreaNode") instance=ExtResource("9_xa8a6")]
 position = Vector2(376, 1005)
 scale = Vector2(4, 4)
+MoodTimer = NodePath("MoodTimer")
 Target = NodePath("../Isometric/CraftingBench")
 LeaveAreaNode = NodePath("../LeaveArea")
 
