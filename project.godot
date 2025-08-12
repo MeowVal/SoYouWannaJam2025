@@ -17,7 +17,7 @@ config/icon="uid://c3hoqvnueuekg"
 
 [autoload]
 
-Global="*res://Code/Global.cs"
+Global="*res://Code/World/Global.cs"
 
 [dotnet]
 

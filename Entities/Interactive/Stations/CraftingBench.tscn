@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dgel6i8xrevwr" path="res://Assets/Sprites/objects/workbench.png" id="2_suvq8"]
 [ext_resource type="Texture2D" uid="uid://cnucm3x4h03tk" path="res://Assets/Sprites/objects/file.png" id="3_2xd2y"]
 [ext_resource type="Resource" uid="uid://d1il8gelcfaqa" path="res://Resources/Recipes/testRecipe.tres" id="3_dkb0l"]
-[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/InventorySlot.cs" id="4_sd5kq"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="4_sd5kq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lakah"]
 radius = 32.0

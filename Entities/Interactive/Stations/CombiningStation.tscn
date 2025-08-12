@@ -5,8 +5,8 @@
 [ext_resource type="Resource" uid="uid://2b0x8pkojmga" path="res://Resources/Recipes/scissorCombineRecipe.tres" id="3_ahl5q"]
 [ext_resource type="Texture2D" uid="uid://bjf8ux05pntni" path="res://Assets/Sprites/objects/full.png" id="4_2kg0e"]
 [ext_resource type="Resource" uid="uid://db73uqma7cv8a" path="res://Resources/Recipes/bucketCombineRecipe.tres" id="4_egy3o"]
-[ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Inventory.cs" id="5_ahl5q"]
-[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/InventorySlot.cs" id="5_die6g"]
+[ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="5_ahl5q"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_die6g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_egy3o"]
 radius = 24.0

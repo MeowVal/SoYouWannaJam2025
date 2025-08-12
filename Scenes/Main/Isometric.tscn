@@ -3,17 +3,17 @@
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Scenes/Main/GameManager.cs" id="1_jey54"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="1_m7oyx"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
-[ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/WorldMap.cs" id="3_xa8a6"]
+[ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="3_xa8a6"]
 [ext_resource type="PackedScene" uid="uid://ccxhqwfuyr60" path="res://Scenes/UI/HUD.tscn" id="4_uaxa7"]
-[ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/Camera.cs" id="4_vqmdy"]
-[ext_resource type="PackedScene" uid="uid://6ycfxb3u38k1" path="res://Entities/CraftingStations/CraftingBench.tscn" id="4_yvvah"]
+[ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="4_vqmdy"]
+[ext_resource type="PackedScene" uid="uid://6ycfxb3u38k1" path="res://Entities/Interactive/Stations/CraftingBench.tscn" id="4_yvvah"]
 [ext_resource type="Texture2D" uid="uid://3ps2vy4q4qah" path="res://Assets/Sprites/characters/dwarf.png" id="5_vqmdy"]
-[ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/GenericItem.tscn" id="5_xa8a6"]
+[ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/Interactive/Items/GenericItem.tscn" id="5_xa8a6"]
 [ext_resource type="Resource" uid="uid://db5qq1a3ir2ty" path="res://Resources/Items/logItem.tres" id="6_11nrr"]
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="7_lv6gr"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/RecipeSystem/BaseRecipe.cs" id="8_j3d0r"]
 [ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Entities/NPC/Npc.tscn" id="9_xa8a6"]
-[ext_resource type="PackedScene" uid="uid://bwho24gjrxuig" path="res://Entities/CraftingStations/CombiningStation.tscn" id="11_j3d0r"]
+[ext_resource type="PackedScene" uid="uid://bwho24gjrxuig" path="res://Entities/Interactive/Stations/CombiningStation.tscn" id="11_j3d0r"]
 
 [sub_resource type="Curve2D" id="Curve2D_jey54"]
 _data = {
@@ -27,9 +27,6 @@ NpcScene = ExtResource("9_xa8a6")
 
 [node name="Isometric" type="Node2D" parent="."]
 scale = Vector2(4, 4)
-
-[node name="Character" parent="Isometric" instance=ExtResource("1_m7oyx")]
-position = Vector2(0, 145)
 
 [node name="WorldMap" type="TileMapLayer" parent="Isometric"]
 y_sort_enabled = true
@@ -77,6 +74,9 @@ ColliderRadius = 10.0
 
 [node name="CombiningStation" parent="Isometric" instance=ExtResource("11_j3d0r")]
 position = Vector2(-91.5, 104)
+
+[node name="Character" parent="Isometric" instance=ExtResource("1_m7oyx")]
+position = Vector2(13, 148.25)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("4_vqmdy")

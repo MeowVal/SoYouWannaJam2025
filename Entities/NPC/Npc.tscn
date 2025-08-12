@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b4ntrd6icymju" path="res://Code/Npc/Npc.cs" id="1_623a7"]
 [ext_resource type="Texture2D" uid="uid://b5g8dj2bpwsm2" path="res://Assets/Sprites/characters/Shadow/Shadow.png" id="2_623a7"]
 [ext_resource type="Resource" uid="uid://0xv5lxlnyfl7" path="res://Resources/Npcs/Npc01.tres" id="2_jvg37"]
-[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/InventorySlot.cs" id="5_mrx7r"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_mrx7r"]
 [ext_resource type="Script" uid="uid://bbqx7jgoyn746" path="res://Code/Npc/NpcInteractor.cs" id="6_c6mha"]
 
 [sub_resource type="Animation" id="Animation_jvg37"]
@@ -160,7 +160,7 @@ radius = 6.0
 height = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jh2em"]
-radius = 32.0
+radius = 15.0333
 
 [node name="Npc" type="CharacterBody2D" node_paths=PackedStringArray("MoodTimer")]
 collision_layer = 2
@@ -206,7 +206,6 @@ script = ExtResource("5_mrx7r")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="NpcInteractor" type="Area2D" parent="."]
-position = Vector2(0, -14)
 monitorable = false
 script = ExtResource("6_c6mha")
 

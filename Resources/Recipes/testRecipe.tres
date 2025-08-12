@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/RecipeSystem/BaseRecipe.cs" id="1_iogdy"]
 [ext_resource type="Texture2D" uid="uid://c0g50a5w4ya0o" path="res://Assets/Sprites/objects/materials/planks_3.png" id="1_ljfbq"]
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Items/BaseItem.cs" id="2_d7s13"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/BaseItem.cs" id="2_d7s13"]
 [ext_resource type="Resource" uid="uid://db5qq1a3ir2ty" path="res://Resources/Items/logItem.tres" id="3_47cbo"]
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="4_deup8"]
 
