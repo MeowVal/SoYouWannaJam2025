@@ -1,5 +1,4 @@
 using Godot;
-using SoYouWANNAJam2025.Code.ModularWeapons;
 using Vector2 = Godot.Vector2;
 
 
@@ -22,7 +21,6 @@ public partial class CharacterControl : CharacterBody2D
 
 	[ExportGroup("Inventory")]
 	private Player.PlayerInteractor _interactor;
-	public ModularWeapon HeldItem;
 
 	private Node2D _camera;
 	private string _target; 
@@ -30,9 +28,6 @@ public partial class CharacterControl : CharacterBody2D
 	public override void _Ready()
 	{
 		_interactor = GetNode<Player.PlayerInteractor>("PlayerInteractor");
-		HeldItem = new ModularWeapon();
-		var resource = GD.Load<BaseWeaponModifier>("res://Resources/WeaponModifiers/TestModifier.tres");
-		HeldItem.Modifiers.Add(resource);
 		_charSprite = GetNode<AnimatedSprite2D>("CharSprite");
 		
 		_camera = GetTree().Root.GetCamera2D(); // Gives controls over Camera properties and get a reference to it.
