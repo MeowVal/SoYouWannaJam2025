@@ -87,6 +87,19 @@ public partial class InventorySlot : Node2D
         return true;
     }
 
+    public bool DestroyItem()
+    {
+        // Ensure item exists at all.
+        if (!HasItem()) return false;
+
+        Item.Reparent(GetTree().GetRoot());
+        Item.IsInteractive = false;
+        Item.QueueFree();
+        GD.Print($"Destroyed {Item.ItemResource.DisplayName}");
+        Item = null;
+        return true;
+    }
+
     public bool HasItem()
     {
         return Item != null;

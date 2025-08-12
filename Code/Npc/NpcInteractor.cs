@@ -71,7 +71,7 @@ public partial class NpcInteractor : Area2D
     {
         if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count)
         {
-            PossibleTargets[CurrentTarget].TriggerInteraction(this);
+            PossibleTargets[CurrentTarget].TriggerInteraction(this, TriggerType.PickupDrop);
         }
         else if (InventorySlot.Item != null)
         {

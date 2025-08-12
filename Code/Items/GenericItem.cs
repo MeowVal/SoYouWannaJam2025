@@ -35,12 +35,12 @@ public partial class GenericItem : Interactible
         Interact += OnInteractMethod;
     }
     
-    private void OnInteractMethod(Node2D node)
+    private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
         if (node is not PlayerInteractor interactor) return;
-        
-        interactor.InventorySlot.PickupItem(this);
-
-        GD.Print("Interacted with: ", ItemResource.DisplayName);
+        if (trigger is TriggerType.PickupDrop)
+        {
+            interactor.InventorySlot.PickupItem(this);
+        }
     }
 }

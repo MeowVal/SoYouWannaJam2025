@@ -3,6 +3,13 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code;
 
+
+public enum TriggerType
+{
+    PickupDrop,
+    UseAction
+}
+
 [GlobalClass][Tool]
 public partial class Interactible : Area2D
 {
@@ -38,7 +45,7 @@ public partial class Interactible : Area2D
         get => _colliderRadius;
     }
     
-    [Signal] public delegate void InteractEventHandler(Node2D node);
+    [Signal] public delegate void InteractEventHandler(Node2D node, TriggerType trigger);
 
     public override void _Ready()
     {
@@ -47,16 +54,11 @@ public partial class Interactible : Area2D
         Interact += OnInteractMethod;
     }
 
-    private void OnInteractMethod(Node2D node)
-    {
-        if (node is not CharacterControl character) return;
+    private void OnInteractMethod(Node2D node, TriggerType trigger) { }
 
-        GD.Print("Interacted with: ", character.Name);
-    }
-
-    public void TriggerInteraction(Node2D node)
+    public void TriggerInteraction(Node2D node, TriggerType trigger)
     {
-        EmitSignal(SignalName.Interact, node);
+        EmitSignal(SignalName.Interact, node, Variant.From(trigger));
     }
 
     public void SetHighlight(bool enabled)

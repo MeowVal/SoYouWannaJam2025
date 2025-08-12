@@ -28,12 +28,18 @@ public partial class CraftingStation : Interactible
         Interact += OnInteractMethod;
         
         if (FindChild("InventorySlot") is InventorySlot slot) InventorySlot=slot;
+        InventorySlot.RecipeWhitelist = Recipes;
+        InventorySlot.CompileWhitelist();
     }
 
     public bool AttemptCraft()
     {
+        if (!InventorySlot.HasItem()) return false;
         foreach (var recipe in Recipes)
         {
+            GD.Print($"Attemping Recipe {recipe.DisplayName}");
+            GD.Print(recipe.Inputs.ToString());
+            GD.Print(InventorySlot.Item.ItemResource.DisplayName);
             if (!recipe.Inputs.Contains(InventorySlot.Item.ItemResource)) continue;
 
             _currentRecipe = recipe;
@@ -70,23 +76,33 @@ public partial class CraftingStation : Interactible
 
     private void _RecipeComplete()
     {
-        InventorySlot.Item.Free();
-        var newItem = new GenericItem();
+        InventorySlot.DestroyItem();
+        var newItemScene = GD.Load<PackedScene>("res://Entities/GenericItem.tscn");
+        var newItem = newItemScene.Instantiate<GenericItem>();
         newItem.ItemResource = _currentRecipe.Outputs[0];
         InventorySlot.PickupItem(newItem);
         GD.Print($"Completed recipe {_currentRecipe.DisplayName} outputting {newItem.Name}");
     }
 
-    private void OnInteractMethod(Node2D node)
+    private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
         if (node is not PlayerInteractor interactor) return;
-        if (InventorySlot.HasItem())
+
+        switch (trigger)
         {
-            interactor.InventorySlot.TransferTo(InventorySlot);
-        }
-        else
-        {
-            InventorySlot.TransferTo(interactor.InventorySlot);
+            case TriggerType.PickupDrop:
+                if (InventorySlot.HasItem())
+                {
+                    InventorySlot.TransferTo(interactor.InventorySlot);
+                }
+                else
+                {
+                    interactor.InventorySlot.TransferTo(InventorySlot);
+                }
+                break;
+            case TriggerType.UseAction:
+                AttemptCraft();
+                break;
         }
     }
 }

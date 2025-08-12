@@ -41,11 +41,43 @@ public partial class CharacterControl : CharacterBody2D
 		_camera.Scale = new Vector2(Global.GameScale, Global.GameScale);
 	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("UseAction"))
+		{
+			_interactor.TriggerInteraction(TriggerType.UseAction);
+		}
+		else if (@event.IsActionPressed("PickupDrop"))
+		{
+			_interactor.TriggerInteraction(TriggerType.PickupDrop);
+		}
+		else if (@event.IsActionPressed("MoveRight"))
+		{
+			_direction = "right";
+			_charSprite.Play("RunNE");
+		}
+		else if (@event.IsActionPressed("MoveLeft"))
+		{
+			_direction = "left";
+			_charSprite.Play("RunSW");
+		}
+		else if (@event.IsActionPressed("MoveUp"))
+		{
+			_direction = "up";
+			_charSprite.Play("RunNW");
+		}
+		else if (@event.IsActionPressed("MoveDown"))
+		{
+			_direction = "down";
+			_charSprite.Play("RunSE");
+		}
+	}
+
 	private void PlayerMovement(double delta)
 	{
 		var moveDir = Vector2.Zero;
-		moveDir.X = Input.GetActionStrength("right") - Input.GetActionStrength("left");
-		moveDir.Y = Input.GetActionStrength("down") - Input.GetActionStrength("up");
+		moveDir.X = Input.GetActionStrength("MoveRight") - Input.GetActionStrength("MoveLeft");
+		moveDir.Y = Input.GetActionStrength("MoveDown") - Input.GetActionStrength("MoveUp");
 		moveDir = moveDir.Normalized();
 
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
@@ -65,36 +97,6 @@ public partial class CharacterControl : CharacterBody2D
 					moveDir = direction;
 				}
 			}
-		}
-
-		if (Input.IsActionJustPressed("interact"))
-		{
-			_interactor.TriggerInteraction();
-		}
-		
-		if (Input.IsActionPressed("left"))
-		{
-			_direction = "left";
-			_charSprite.Play("RunSW");
-			//GD.Print("LEFT");
-		}
-		else if (Input.IsActionPressed("right"))
-		{
-			_direction = "right";
-			_charSprite.Play("RunNE");
-			//GD.Print("right");
-		}
-		else if (Input.IsActionPressed("up"))
-		{
-			_direction = "up";
-			_charSprite.Play("RunNW");
-			//GD.Print("up");
-		}
-		else if (Input.IsActionPressed("down"))
-		{
-			_direction = "down";
-			_charSprite.Play("RunSE");
-			//GD.Print("down");
 		}
 
 		if (moveDir != Vector2.Zero)
@@ -129,29 +131,5 @@ public partial class CharacterControl : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		PlayerMovement(delta); //cleaned up _PhysicsProcess and moved player movement to its own function.
-		
-		//Testing function for camera target change
-		if (Input.IsActionPressed("jump"))
-		{
-			if (_canPress)
-			{
-				_canPress = false;
-				if (_target == "Player")
-				{
-					_target = "Player2";
-					GD.Print(GetParent().GetNode<Node2D>("TestTarget"));
-					_camera.Set("FollowingNode", GetParent().GetNode<Node2D>("TestTarget"));
-				}
-				else
-				{
-					_target = "Player";
-					_camera.Set("FollowingNode", GetParent().GetNode<Node2D>("Character"));
-				}
-			}
-		}
-		else
-		{
-			_canPress = true;
-		}
 	}
 }

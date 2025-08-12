@@ -71,21 +71,33 @@ public partial class PlayerInteractor : Area2D
         OnDistanceCheckTimer();
     }
 
-    public void TriggerInteraction()
+    public void TriggerInteraction(TriggerType trigger)
     {
-        // If there's a valid target, trigger it
-        if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count && CurrentTarget >= 0)
+        switch (trigger)
         {
-            PossibleTargets[CurrentTarget].TriggerInteraction(this);
-            OnDistanceCheckTimer();
-        } else if (InventorySlot.HasItem()) // If we have an item, drop it.
-        {
-            if (InventorySlot.Item.OverlapsArea(this))
-            {
-                PossibleTargets.Add(InventorySlot.Item);
-            }
-            InventorySlot.DropItem(GetParent().GetParent(), GlobalPosition);
-            OnDistanceCheckTimer();
+            case TriggerType.PickupDrop:
+                if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count && CurrentTarget >= 0)
+                {
+                    PossibleTargets[CurrentTarget].TriggerInteraction(this, TriggerType.PickupDrop);
+                    OnDistanceCheckTimer();
+                } else if (InventorySlot.HasItem()) // If we have an item, drop it.
+                {
+                    if (InventorySlot.Item.OverlapsArea(this))
+                    {
+                        PossibleTargets.Add(InventorySlot.Item);
+                    }
+                    InventorySlot.DropItem(GetParent().GetParent(), GlobalPosition);
+                    OnDistanceCheckTimer();
+                }
+                break;
+
+            case TriggerType.UseAction:
+                if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count && CurrentTarget >= 0)
+                {
+                    PossibleTargets[CurrentTarget].TriggerInteraction(this, TriggerType.UseAction);
+                    OnDistanceCheckTimer();
+                }
+                break;
         }
     }
 }
