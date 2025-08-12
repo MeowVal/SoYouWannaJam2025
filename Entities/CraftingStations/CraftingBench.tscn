@@ -33,6 +33,9 @@ texture = ExtResource("3_2xd2y")
 offset = Vector2(0, -7)
 
 [node name="InventorySlot" type="Node2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, -9)
 script = ExtResource("4_sd5kq")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InterfaceLocation" type="Node2D" parent="."]
+position = Vector2(0, -32)

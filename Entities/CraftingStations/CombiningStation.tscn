@@ -43,3 +43,6 @@ metadata/_custom_type_script = "uid://1cpfasjkacse"
 position = Vector2(12, -6)
 script = ExtResource("5_die6g")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InterfaceLocation" type="Node2D" parent="."]
+position = Vector2(31, 0)

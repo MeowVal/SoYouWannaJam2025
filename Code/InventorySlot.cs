@@ -20,7 +20,11 @@ public partial class InventorySlot : Node2D
     [Export] // Filter items by the inputs of the given recipes.
     public Array<BaseRecipe> RecipeWhitelist = [];
 
-    public Array<BaseItem> _whitelist = [];
+    [ExportGroup("Settings")]
+    [Export] // Number of ZIndex layers to add to the occupying item.
+    public int ZIndexBonus = 0;
+
+    public Array<BaseItem> Whitelist = [];
 
     public override void _Ready()
     {
@@ -31,12 +35,12 @@ public partial class InventorySlot : Node2D
     public virtual void CompileWhitelist()
     {
         // Compile the complete list of all items accepted
-        _whitelist = ItemWhitelist;
+        Whitelist = ItemWhitelist;
         foreach (var recipe in RecipeWhitelist)
         {
             foreach (var input in recipe.Inputs)
             {
-                _whitelist.Add(input);
+                Whitelist.Add(input);
             }
         }
     }
@@ -46,6 +50,7 @@ public partial class InventorySlot : Node2D
     {
         if (!HasItem() || !slot.HasSpace()) return false;
 
+        Item.SetZIndexOffset(0);
         // Ensures the item is accepted before doing anything else
         if (slot.PickupItem(Item))
         {
@@ -63,11 +68,12 @@ public partial class InventorySlot : Node2D
     {
         // Ensure item *can* be added to the slot.
         if (!HasSpace()) return false;
-        if (!(_whitelist.Contains(item.ItemResource) || AllowAll || forceAdd)) return false;
+        if (!(Whitelist.Contains(item.ItemResource) || AllowAll || forceAdd)) return false;
 
         // Add item to slot and position in new owning scene.
         Item = item;
         Item.SetHighlight(false);
+        Item.SetZIndexOffset(1);
         Item.Reparent(this);
         Item.GlobalPosition = GlobalPosition.Round();
         Item.IsInteractive = false;
@@ -82,6 +88,7 @@ public partial class InventorySlot : Node2D
         if (!HasItem()) return false;
 
         var localPos = _grid.ToLocal(Item.GlobalPosition);
+        Item.SetZIndexOffset(0);
         Item.Reparent(_grid);
         if (snapToNearestTile)
         {

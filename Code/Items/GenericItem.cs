@@ -32,6 +32,7 @@ public partial class GenericItem : Interactible
     public override void _Ready()
     {
         if (Engine.IsEditorHint()) return;
+        base._Ready();
         Interact += OnInteractMethod;
     }
     
