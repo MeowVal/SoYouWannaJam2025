@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqh3oq2qyafiu"]
 
-[ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/RecipeSystem/CraftingStation.cs" id="1_hr2aa"]
+[ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_hr2aa"]
 [ext_resource type="Texture2D" uid="uid://b5q4nvbxfnotl" path="res://Assets/Sprites/objects/research_table.png" id="3_iwovp"]
 
 [node name="GenericCraftingStation" type="Area2D"]

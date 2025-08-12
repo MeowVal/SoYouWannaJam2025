@@ -1,9 +1,9 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using SoYouWANNAJam2025.Code.Items;
+using SoYouWANNAJam2025.Code.Interactive.Items;
 
-namespace SoYouWANNAJam2025.Code;
+namespace SoYouWANNAJam2025.Code.Interactive.Inventory;
 
 public partial class Inventory : InventorySlot
 {

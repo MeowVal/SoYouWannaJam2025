@@ -1,10 +1,10 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using SoYouWANNAJam2025.Code.Items;
 using SoYouWANNAJam2025.Code.RecipeSystem;
+using SoYouWANNAJam2025.Code.Interactive.Items;
 
-namespace SoYouWANNAJam2025.Code;
+namespace SoYouWANNAJam2025.Code.Interactive.Inventory;
 
 [GlobalClass]
 public partial class InventorySlot : Node2D

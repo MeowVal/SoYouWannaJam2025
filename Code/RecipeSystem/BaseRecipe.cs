@@ -1,6 +1,6 @@
 using Godot;
 using Godot.Collections;
-using SoYouWANNAJam2025.Code.Items;
+using SoYouWANNAJam2025.Code.Interactive.Items;
 
 namespace SoYouWANNAJam2025.Code.RecipeSystem;
 

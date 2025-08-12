@@ -1,5 +1,7 @@
 using Godot;
 using SoYouWANNAJam2025.Code.RecipeSystem;
+using CraftingStation = SoYouWANNAJam2025.Code.Interactive.Stations.CraftingStation;
+using CraftingStationInterface = SoYouWANNAJam2025.Code.Interactive.Stations.CraftingStationInterface;
 
 namespace SoYouWANNAJam2025.Scenes.UI.Interactions;
 

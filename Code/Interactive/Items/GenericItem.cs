@@ -1,14 +1,14 @@
 using Godot;
 
-namespace SoYouWANNAJam2025.Code.Items;
+namespace SoYouWANNAJam2025.Code.Interactive.Items;
 
 [Tool]
 public partial class GenericItem : Interactible
 {
-    private BaseItem _baseItem;
+    private Interactive.Items.BaseItem _baseItem;
     
     [Export]
-    public BaseItem ItemResource
+    public Interactive.Items.BaseItem ItemResource
     {
         set
         { 
@@ -27,7 +27,7 @@ public partial class GenericItem : Interactible
         get => _baseItem;
     }
 
-    private CharacterControl _player;
+    private Player.CharacterControl _player;
 
     public override void _Ready()
     {
@@ -38,7 +38,7 @@ public partial class GenericItem : Interactible
     
     private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
-        if (node is not PlayerInteractor interactor) return;
+        if (node is not Player.PlayerInteractor interactor) return;
         if (trigger is TriggerType.PickupDrop)
         {
             interactor.InventorySlot.PickupItem(this);

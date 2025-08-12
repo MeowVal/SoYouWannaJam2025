@@ -1,9 +1,11 @@
 using Godot;
 using Godot.Collections;
-using SoYouWANNAJam2025.Code.Items;
+using SoYouWANNAJam2025.Code.RecipeSystem;
+using SoYouWANNAJam2025.Code.Interactive.Items;
+
 //using SoYouWANNAJam2025.Scenes.UI.Interactions;
 
-namespace SoYouWANNAJam2025.Code.RecipeSystem;
+namespace SoYouWANNAJam2025.Code.Interactive.Stations;
 
 [Tool]
 public partial class CraftingStation : Interactible
@@ -14,10 +16,10 @@ public partial class CraftingStation : Interactible
     [Export] public Texture2D Icon;
     [Export] public Array<BaseRecipe> Recipes = [];
 
-    public InventorySlot InventorySlot;
+    public Interactive.Inventory.InventorySlot InventorySlot;
     public BaseRecipe CurrentRecipe;
     public Timer RecipeTimer;
-    private CharacterControl _player;
+    private Player.CharacterControl _player;
     private CraftingStationInterface _interactionInterface;
     private Node2D _interfaceLocation;
     
@@ -30,7 +32,7 @@ public partial class CraftingStation : Interactible
         RecipeTimer.Timeout += _OnRecipeTimer;
         Interact += OnInteractMethod;
         
-        if (FindChild("InventorySlot") is InventorySlot slot) InventorySlot=slot;
+        if (FindChild("InventorySlot") is Interactive.Inventory.InventorySlot slot) InventorySlot=slot;
         InventorySlot.RecipeWhitelist = Recipes;
         InventorySlot.CompileWhitelist();
     }
@@ -105,7 +107,7 @@ public partial class CraftingStation : Interactible
 
     private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
-        if (node is not PlayerInteractor interactor) return;
+        if (node is not Player.PlayerInteractor interactor) return;
 
         switch (trigger)
         {

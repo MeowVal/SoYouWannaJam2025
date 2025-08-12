@@ -1,6 +1,6 @@
 using Godot;
 
-namespace SoYouWANNAJam2025.Code;
+namespace SoYouWANNAJam2025.Code.World;
 
 public partial class Camera : Camera2D
 {

@@ -1,7 +1,8 @@
 using Godot;
+
 //using SoYouWANNAJam2025.Code.Camera;
 
-namespace SoYouWANNAJam2025.Code;
+namespace SoYouWANNAJam2025.Code.World;
 
 public partial class Global : Node2D
 {

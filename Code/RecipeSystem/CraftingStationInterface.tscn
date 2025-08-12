@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cm4mui7tcnif1"]
-
-[ext_resource type="Script" uid="uid://bywn575awil60" path="res://Code/RecipeSystem/CraftingStationInterface.cs" id="1_ci3sv"]
-
-[node name="CraftingStationInterface" type="Node2D"]
-script = ExtResource("1_ci3sv")

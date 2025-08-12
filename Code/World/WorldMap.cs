@@ -1,8 +1,6 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
-namespace SoYouWANNAJam2025.Code;
+namespace SoYouWANNAJam2025.Code.World;
 
 public partial class WorldMap : TileMapLayer
 {

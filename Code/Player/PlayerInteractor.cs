@@ -1,8 +1,8 @@
 using Godot;
 using Godot.Collections;
-using SoYouWANNAJam2025.Code.Items;
+using SoYouWANNAJam2025.Code.Interactive.Items;
 
-namespace SoYouWANNAJam2025.Code;
+namespace SoYouWANNAJam2025.Code.Player;
 
 public partial class PlayerInteractor : Area2D
 {
@@ -11,10 +11,10 @@ public partial class PlayerInteractor : Area2D
     private Timer _distanceCheckTimer;
     private CharacterControl _player;
 
-    public InventorySlot InventorySlot = null;
+    public Interactive.Inventory.InventorySlot InventorySlot = null;
     public override void _Ready()
     {
-        if (GetParent().FindChild("InventorySlot") is InventorySlot slot) InventorySlot=slot;
+        if (GetParent().FindChild("InventorySlot") is Interactive.Inventory.InventorySlot slot) InventorySlot=slot;
         
         _distanceCheckTimer = GetNode<Timer>("./DistanceCheckTimer");
         _distanceCheckTimer.Timeout += OnDistanceCheckTimer;

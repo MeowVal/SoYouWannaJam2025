@@ -1,11 +1,9 @@
-using System.Numerics;
 using Godot;
-using Godot.Collections;
 using SoYouWANNAJam2025.Code.ModularWeapons;
 using Vector2 = Godot.Vector2;
 
 
-namespace SoYouWANNAJam2025.Code;
+namespace SoYouWANNAJam2025.Code.Player;
 
 public partial class CharacterControl : CharacterBody2D
 {
@@ -23,7 +21,7 @@ public partial class CharacterControl : CharacterBody2D
 	private int _moveThreshold = 3;
 
 	[ExportGroup("Inventory")]
-	private PlayerInteractor _interactor;
+	private Player.PlayerInteractor _interactor;
 	public ModularWeapon HeldItem;
 
 	private Node2D _camera;
@@ -31,14 +29,14 @@ public partial class CharacterControl : CharacterBody2D
 	
 	public override void _Ready()
 	{
-		_interactor = GetNode<PlayerInteractor>("PlayerInteractor");
+		_interactor = GetNode<Player.PlayerInteractor>("PlayerInteractor");
 		HeldItem = new ModularWeapon();
 		var resource = GD.Load<BaseWeaponModifier>("res://Resources/WeaponModifiers/TestModifier.tres");
 		HeldItem.Modifiers.Add(resource);
 		_charSprite = GetNode<AnimatedSprite2D>("CharSprite");
 		
 		_camera = GetTree().Root.GetCamera2D(); // Gives controls over Camera properties and get a reference to it.
-		_camera.Scale = new Vector2(Global.GameScale, Global.GameScale);
+		_camera.Scale = new Vector2(World.Global.GameScale, World.Global.GameScale);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -107,12 +105,12 @@ public partial class CharacterControl : CharacterBody2D
 		if (moveDir != Vector2.Zero)
 		{
 			//moveDir = moveDir.Rotated(Mathf.DegToRad(30));
-			Velocity = Velocity.MoveToward(moveDir * (MoveSpeed * Global.GameScale), (float)(AccelerationSpeed * Global.GameScale));
+			Velocity = Velocity.MoveToward(moveDir * (MoveSpeed * World.Global.GameScale), (float)(AccelerationSpeed * World.Global.GameScale));
 			//GD.Print(Velocity);
 		}
 		else
 		{
-			Velocity = Velocity.MoveToward(Vector2.Zero, (float)(DecelerationSpeed * Global.GameScale));
+			Velocity = Velocity.MoveToward(Vector2.Zero, (float)(DecelerationSpeed * World.Global.GameScale));
 			switch (_direction)
 			{
 				case "right":

@@ -1,7 +1,6 @@
 using Godot;
-using Godot.Collections;
 
-namespace SoYouWANNAJam2025.Code.Items;
+namespace SoYouWANNAJam2025.Code.Interactive.Items;
 
 [GlobalClass][Tool]
 public partial class BaseItem: Resource
