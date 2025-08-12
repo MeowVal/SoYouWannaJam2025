@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwho24gjrxuig"]
+
+[ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/RecipeSystem/CraftingStation.cs" id="1_yrom6"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/RecipeSystem/BaseRecipe.cs" id="2_ahl5q"]
+[ext_resource type="Resource" uid="uid://2b0x8pkojmga" path="res://Resources/Recipes/scissorCombineRecipe.tres" id="3_ahl5q"]
+[ext_resource type="Texture2D" uid="uid://bjf8ux05pntni" path="res://Assets/Sprites/objects/full.png" id="4_2kg0e"]
+[ext_resource type="Resource" uid="uid://db73uqma7cv8a" path="res://Resources/Recipes/bucketCombineRecipe.tres" id="4_egy3o"]
+[ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Inventory.cs" id="5_ahl5q"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/InventorySlot.cs" id="5_die6g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_egy3o"]
+radius = 24.0
+
+[node name="CombiningStation" type="Area2D"]
+script = ExtResource("1_yrom6")
+Recipes = Array[ExtResource("2_ahl5q")]([ExtResource("3_ahl5q"), ExtResource("4_egy3o")])
+ColliderRadius = 24.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_egy3o")
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
+
+[node name="RecipeTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StationSprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_2kg0e")
+
+[node name="InventorySlot" type="Node2D" parent="."]
+script = ExtResource("5_ahl5q")
+
+[node name="Slot1" type="Node2D" parent="InventorySlot"]
+position = Vector2(-12, -6)
+script = ExtResource("5_die6g")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="Slot2" type="Node2D" parent="InventorySlot"]
+position = Vector2(0, -6)
+script = ExtResource("5_die6g")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="Slot3" type="Node2D" parent="InventorySlot"]
+position = Vector2(12, -6)
+script = ExtResource("5_die6g")
+metadata/_custom_type_script = "uid://1cpfasjkacse"

@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="7_lv6gr"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/RecipeSystem/BaseRecipe.cs" id="8_j3d0r"]
 [ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Entities/NPC/Npc.tscn" id="9_xa8a6"]
+[ext_resource type="PackedScene" uid="uid://bwho24gjrxuig" path="res://Entities/CraftingStations/CombiningStation.tscn" id="11_j3d0r"]
 
 [sub_resource type="Curve2D" id="Curve2D_jey54"]
 _data = {
@@ -76,12 +77,21 @@ _colliderRadius = 10.0
 ItemResource = ExtResource("7_lv6gr")
 _baseItem = ExtResource("7_lv6gr")
 
+[node name="GenericItem4" parent="Isometric" instance=ExtResource("5_xa8a6")]
+position = Vector2(-121.25, 140.25)
+ItemResource = ExtResource("7_lv6gr")
+ColliderRadius = 10.0
+
+[node name="CombiningStation" parent="Isometric" instance=ExtResource("11_j3d0r")]
+position = Vector2(-91.5, 104)
+
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("4_vqmdy")
 FollowingNode = NodePath("../Isometric/Character")
 SmoothingSpeed = null
 
 [node name="Hud" parent="Camera2D" instance=ExtResource("4_uaxa7")]
+metadata/_edit_use_anchors_ = true
 
 [node name="Npc" parent="." node_paths=PackedStringArray("MoodTimer", "Target") instance=ExtResource("9_xa8a6")]
 position = Vector2(376, 1005)

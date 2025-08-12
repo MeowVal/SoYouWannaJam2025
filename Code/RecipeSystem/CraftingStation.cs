@@ -39,8 +39,7 @@ public partial class CraftingStation : Interactible
         {
             GD.Print($"Attemping Recipe {recipe.DisplayName}");
             GD.Print(recipe.Inputs.ToString());
-            GD.Print(InventorySlot.Item.ItemResource.DisplayName);
-            if (!recipe.Inputs.Contains(InventorySlot.Item.ItemResource)) continue;
+            if (!InventorySlot.ContainItem(recipe.Inputs, true)) continue;
 
             _currentRecipe = recipe;
             GD.Print($"Starting WorkType {_currentRecipe.WorkType}.");
@@ -76,7 +75,11 @@ public partial class CraftingStation : Interactible
 
     private void _RecipeComplete()
     {
-        InventorySlot.DestroyItem();
+        if (!InventorySlot.DestroyItem(_currentRecipe.Inputs))
+        {
+            GD.Print($"Failed to delete recipe: {_currentRecipe.DisplayName}");
+            return;
+        }
         var newItemScene = GD.Load<PackedScene>("res://Entities/GenericItem.tscn");
         var newItem = newItemScene.Instantiate<GenericItem>();
         newItem.ItemResource = _currentRecipe.Outputs[0];
@@ -92,11 +95,11 @@ public partial class CraftingStation : Interactible
         switch (trigger)
         {
             case TriggerType.PickupDrop:
-                if (InventorySlot.HasItem())
+                if (InventorySlot.HasItem() && interactor.InventorySlot.HasSpace())
                 {
                     InventorySlot.TransferTo(interactor.InventorySlot);
                 }
-                else
+                else if (InventorySlot.HasSpace() && interactor.InventorySlot.HasItem())
                 {
                     interactor.InventorySlot.TransferTo(InventorySlot);
                 }
