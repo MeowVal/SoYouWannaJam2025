@@ -421,5 +421,4 @@ autostart = true
 [node name="InventorySlot" type="Node2D" parent="."]
 position = Vector2(0, -12)
 script = ExtResource("5_o4cwe")
-AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
