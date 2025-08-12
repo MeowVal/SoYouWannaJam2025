@@ -44,7 +44,7 @@ public partial class Npc : CharacterBody2D
         if (NpcResource != null)
             SetupNpc();
         if(Engine.IsEditorHint()) return;
-        UpdateMood();
+        MoodTimer.Start();
         // connects to the signal from the navigation agent 
         Callable callable = new Callable(this, "_VelocityComputed");
         _navAgent.Connect("velocity_computed", callable);
@@ -61,10 +61,6 @@ public partial class Npc : CharacterBody2D
         {
             State = "idle";
             //GD.Print("Target reached");
-            if (!StartMoodTimer) return;
-            Mood = 100;
-            MoodTimer.Start();
-
             return;
         }
         if (Target == null) return;
@@ -81,10 +77,19 @@ public partial class Npc : CharacterBody2D
         // Calculate the new direction
         var dir = currentAgentPosition.DirectionTo(nextPathPosition).Normalized();
         var newVelocity = dir * _speed;
-        
-    
+
+
         if (currentAgentPosition.DistanceTo(nextPathPosition) <= _stopThreshold)
-            newVelocity = Vector2.Zero;  // Stop the NPC if close enough
+        {
+            newVelocity = Vector2.Zero; // Stop the NPC if close enough
+            if (!StartMoodTimer) return;
+            if (!_navAgent.IsNavigationFinished()) return;
+            Mood = 100;
+            MoodTimer.Start();
+            GD.Print("Target reached");
+            StartMoodTimer = false;
+        }
+             
         
         // Set the correct velocity
         if (_navAgent.AvoidanceEnabled)
