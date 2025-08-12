@@ -6,7 +6,7 @@ namespace SoYouWANNAJam2025.Scenes.Main;
 public partial class GameManager : Node2D
 {
 	public Resource[] PossibleTargets;
-	public NpcResource[] NpcResources;
+	public Godot.Collections.Array<NpcResource> NpcResources = [];
 	[Export]
 	public PackedScene NpcScene { get; set; }
 
@@ -31,7 +31,15 @@ public partial class GameManager : Node2D
 				}
 				else
 				{
-					GD.Print($"Found file: {fileName}");
+					var resource = ResourceLoader.Load<NpcResource>("res://Resources/Npcs/"+fileName);
+					if (resource != null)
+					{
+						NpcResources.Add(resource);
+					}
+					else 
+					{
+						GD.Print("Resource not found at path: "+"res://Resources/Npcs/"+fileName);
+					}
 				}
 				fileName = dir.GetNext();
 			}
@@ -44,8 +52,10 @@ public partial class GameManager : Node2D
 
 	private void OnNpcTimerTimeout()
 	{
+		
 		Npc npc = NpcScene.Instantiate<Npc>();
-		npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Length - 1)];
+		GD.Print(GD.RandRange(0,NpcResources.Count ));
+		npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
 		
 		var npcSpawnLocation = GetNode<PathFollow2D>("NpcPath/NpcSpawnLocations");
 		npcSpawnLocation.ProgressRatio = GD.Randf();

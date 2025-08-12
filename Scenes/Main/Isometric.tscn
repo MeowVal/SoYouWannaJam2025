@@ -81,7 +81,6 @@ position = Vector2(-91.5, 104)
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("4_vqmdy")
 FollowingNode = NodePath("../Isometric/Character")
-SmoothingSpeed = null
 
 [node name="Hud" parent="Camera2D" instance=ExtResource("4_uaxa7")]
 metadata/_edit_use_anchors_ = true
