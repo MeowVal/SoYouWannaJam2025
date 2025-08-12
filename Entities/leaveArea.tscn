@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkawl4uk3bb67"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rxno0"]
+radius = 18.0
+
+[node name="LeaveArea" type="Area2D"]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rxno0")

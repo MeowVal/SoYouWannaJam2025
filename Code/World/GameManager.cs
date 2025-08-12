@@ -54,7 +54,6 @@ public partial class GameManager : Node2D
 	{
 		
 		Npc.Npc npc = NpcScene.Instantiate<Npc.Npc>();
-		GD.Print(GD.RandRange(0,NpcResources.Count ));
 		npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
 		
 		var npcSpawnLocation = GetNode<PathFollow2D>("NpcPath/NpcSpawnLocations");

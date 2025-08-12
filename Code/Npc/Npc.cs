@@ -37,8 +37,8 @@ public partial class Npc : CharacterBody2D
     {
         // gets the different nodes in the tree that is a child of the npc 
         _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        _sprite2D = GetNode<Sprite2D>("Sprite2D");
+        _animationPlayer = GetNode<AnimationPlayer>("NpcInteractor/AnimationPlayer");
+        _sprite2D = GetNode<Sprite2D>("NpcInteractor/Sprite2D");
         MoodTimer = GetNode<Timer>("MoodTimer");
         if (NpcResource != null)
             SetupNpc();
@@ -61,11 +61,10 @@ public partial class Npc : CharacterBody2D
         // So that the editor does not run the code below it. 
         if(Engine.IsEditorHint()) return;
         if (_navAgent == null) return;
-        if (_navAgent.IsNavigationFinished() && Mood <=0) QueueFree();
+        //if (_navAgent.IsNavigationFinished() && Mood <=0) QueueFree();
         if (_navAgent.IsNavigationFinished())
         {
             State = "idle";
-            //GD.Print("Target reached");
             return;
         }
         if (Target == null) return;
@@ -87,12 +86,7 @@ public partial class Npc : CharacterBody2D
         if (currentAgentPosition.DistanceTo(nextPathPosition) <= _stopThreshold)
         {
             newVelocity = Vector2.Zero; // Stop the NPC if close enough
-            if (!StartMoodTimer) return;
-            if (!_navAgent.IsNavigationFinished()) return;
-            Mood = 100;
-            MoodTimer.Start();
-            GD.Print("Target reached");
-            StartMoodTimer = false;
+            
         }
              
         
@@ -161,13 +155,16 @@ public partial class Npc : CharacterBody2D
             
         Mood -= MoodDecreaseAmount;
         //GD.Print("Mood: " + Mood);
+        //GD.Print(Mood <= 0);
         if(Mood <= 0)
         {
+            //GD.Print("Leaving");
             Target = LeaveAreaNode;
             if (Target == null) return;
             _navAgent.TargetPosition = Target.GlobalPosition;
             StartMoodTimer =  false;
             MoodTimer.Stop();
+            
         }
         
     }

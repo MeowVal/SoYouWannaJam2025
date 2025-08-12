@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.RecipeSystem;
 using SoYouWANNAJam2025.Code.Interactive.Items;
+using SoYouWANNAJam2025.Code.Interactive.Stations;
 
 namespace SoYouWANNAJam2025.Code.Npc;
 
@@ -24,51 +25,32 @@ public partial class NpcInteractor : Interactible
     {
         if (Engine.IsEditorHint()) return;
         base._Ready();
-        if (GetParent().FindChild("InventorySlot") is Interactive.Inventory.InventorySlot slot) InventorySlot=slot;
+        if (FindChild("InventorySlot") is Interactive.Inventory.InventorySlot slot) InventorySlot=slot;
+        
         InventorySlot.RecipeWhitelist = Recipes;
         InventorySlot.CompileWhitelist();
-        
-        //_distanceCheckTimer = GetNode<Timer>("./DistanceCheckTimer");
-        //_distanceCheckTimer.Timeout += OnDistanceCheckTimer;
         _npc = GetParent<Npc>();
         Interact += OnInteractMethod;
-        /*BodyEntered += OnInteractableEntered;
-        BodyExited += OnInteractableExited;
+        BodyEntered += OnInteractableEntered;
         AreaEntered += OnInteractableEntered;
-        AreaExited += OnInteractableExited;*/
+        
     }
-
-    private void OnDistanceCheckTimer()
+    private void OnInteractableEntered(Node2D unknownTarget)
     {
-        // Init Temp Variables
-        int nearestTarget = -1;
-        float nearestDistance = float.MaxValue;
-
-        // Check Loop
-        for (var i = 0; i < PossibleTargets.Count; i++)
+        if (unknownTarget is not CraftingStation target)
         {
-            // Ignore target if its an item and we already have one
-            if (InventorySlot.HasItem() && PossibleTargets[i] is GenericItem) continue;
-
-            // Get distance between target and us
-            var distance = PossibleTargets[i].GlobalPosition.DistanceTo(_npc.GlobalPosition);
-
-            // Save nearest target distance and its index
-            if (distance < nearestDistance)
+            if (unknownTarget.Name == "LeaveArea")
             {
-                nearestDistance = distance;
-                nearestTarget = i;
+                _npc.QueueFree();
             }
+            return;
         }
+        _npc.Mood = 100;
+        _npc.MoodTimer.Start();
+        target.TriggerInteraction(this,TriggerType.PickupDrop);
+        //GD.Print("Crafting table reached");
 
-        // Save index and apply highlight to all targets
-        CurrentTarget = nearestTarget;
-        for (var i = 0; i < PossibleTargets.Count; i++)
-        {
-            PossibleTargets[i].SetHighlight(i == CurrentTarget);
-        }
     }
-    
     private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
         if (node is not Player.PlayerInteractor interactor) return;
@@ -95,49 +77,5 @@ public partial class NpcInteractor : Interactible
     {
         
     }
-    private void OnInteractableEntered(Node2D unknownTarget)
-    {
-        if (unknownTarget is not Interactible target) return;
-        PossibleTargets.Add(target);
-        OnDistanceCheckTimer();
-    }
-
-    private void OnInteractableExited(Node2D unknownTarget)
-    {
-        if (unknownTarget is not Interactible target) return;
-        PossibleTargets.Remove(target);
-        target.SetHighlight(false);
-        OnDistanceCheckTimer();
-    }
-
-    /*
-    public void TriggerInteraction(TriggerType trigger)
-    {
-        switch (trigger)
-        {
-            case TriggerType.PickupDrop:
-                if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count && CurrentTarget >= 0)
-                {
-                    PossibleTargets[CurrentTarget].TriggerInteraction(this, TriggerType.PickupDrop);
-                    OnDistanceCheckTimer();
-                } else if (InventorySlot.HasItem()) // If we have an item, drop it.
-                {
-                    if (InventorySlot.Item.OverlapsArea(this))
-                    {
-                        PossibleTargets.Add(InventorySlot.Item);
-                    }
-                    InventorySlot.DropItem();
-                    OnDistanceCheckTimer();
-                }
-                break;
-
-            case TriggerType.UseAction:
-                if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count && CurrentTarget >= 0)
-                {
-                    PossibleTargets[CurrentTarget].TriggerInteraction(this, TriggerType.UseAction);
-                    OnDistanceCheckTimer();
-                }
-                break;
-        }
-    }*/
+  
 }
