@@ -20,7 +20,7 @@ public partial class CraftingStation : Interactible
     public Interactive.Inventory.InventorySlot InventorySlot;
     public BaseRecipe CurrentRecipe;
     public Timer RecipeTimer;
-    private Player.CharacterControl _player;
+    //private Player.CharacterControl _player;
     private CraftingStationInterface _interactionInterface;
     private Node2D _interfaceLocation;
     
@@ -92,7 +92,7 @@ public partial class CraftingStation : Interactible
 
     private void _RecipeComplete()
     {
-        _interactionInterface?.QueueFree();
+        _interactionInterface!.QueueFree();
         if (!InventorySlot.DestroyItem(CurrentRecipe.Inputs))
         {
             GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
@@ -108,23 +108,43 @@ public partial class CraftingStation : Interactible
 
     private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
-        if (node is not Player.PlayerInteractor interactor) return;
-
-        switch (trigger)
+        if (node is Player.PlayerInteractor interactor)
         {
-            case TriggerType.PickupDrop:
-                if (InventorySlot.HasItem() && interactor.InventorySlot.HasSpace())
-                {
-                    InventorySlot.TransferTo(interactor.InventorySlot);
-                }
-                else if (InventorySlot.HasSpace() && interactor.InventorySlot.HasItem())
-                {
-                    interactor.InventorySlot.TransferTo(InventorySlot);
-                }
-                break;
-            case TriggerType.UseAction:
-                AttemptCraft();
-                break;
+            switch (trigger)
+            {
+                case TriggerType.PickupDrop:
+                    if (InventorySlot.HasItem() && interactor.InventorySlot.HasSpace())
+                    {
+                        InventorySlot.TransferTo(interactor.InventorySlot);
+                    }
+                    else if (InventorySlot.HasSpace() && interactor.InventorySlot.HasItem())
+                    {
+                        interactor.InventorySlot.TransferTo(InventorySlot);
+                    }
+                    break;
+                case TriggerType.UseAction:
+                    AttemptCraft();
+                    break;
+            } 
+        } else if (node is Npc.NpcInteractor npcInteractor)
+        {
+            switch (trigger)
+            {
+                case TriggerType.PickupDrop:
+                    if (InventorySlot.HasItem() && npcInteractor.InventorySlot.HasSpace())
+                    {
+                        InventorySlot.TransferTo(npcInteractor.InventorySlot);
+                    }
+                    else if (InventorySlot.HasSpace() && npcInteractor.InventorySlot.HasItem())
+                    {
+                        npcInteractor.InventorySlot.TransferTo(InventorySlot);
+                    }
+
+                    break;
+                case TriggerType.UseAction:
+                    AttemptCraft();
+                    break;
+            }
         }
     }
 }
