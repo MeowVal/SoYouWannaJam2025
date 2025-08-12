@@ -57,11 +57,11 @@ public partial class InventorySlot : Node2D
     }
 
     // Add item to the slot, returns true if successful.
-    public bool PickupItem(GenericItem item)
+    public bool PickupItem(GenericItem item, bool forceAdd = false)
     {
         // Ensure item *can* be added to the slot.
         if (HasItem()) return false;
-        if (!_whitelist.Contains(item.ItemResource) && !AllowAll) return false;
+        if (!(_whitelist.Contains(item.ItemResource) || AllowAll || forceAdd)) return false;
 
         // Add item to slot and position in new owning scene.
         Item = item;

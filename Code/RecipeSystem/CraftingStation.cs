@@ -81,7 +81,7 @@ public partial class CraftingStation : Interactible
         var newItem = newItemScene.Instantiate<GenericItem>();
         newItem.ItemResource = _currentRecipe.Outputs[0];
         GetNode("/root/Node2D/Isometric").AddChild(newItem);
-        InventorySlot.PickupItem(newItem);
+        InventorySlot.PickupItem(newItem, true);
         GD.Print($"Completed recipe {_currentRecipe.DisplayName} outputting {newItem.Name}");
     }
 
