@@ -108,7 +108,7 @@ public partial class CharacterControl : CharacterBody2D
 		{
 			//moveDir = moveDir.Rotated(Mathf.DegToRad(30));
 			Velocity = Velocity.MoveToward(moveDir * (MoveSpeed * Global.GameScale), (float)(AccelerationSpeed * Global.GameScale));
-			GD.Print(Velocity);
+			//GD.Print(Velocity);
 		}
 		else
 		{

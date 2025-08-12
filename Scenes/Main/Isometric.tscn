@@ -1,6 +1,6 @@
-[gd_scene load_steps=15 format=4 uid="uid://dejbiswo8rnoi"]
+[gd_scene load_steps=16 format=4 uid="uid://dejbiswo8rnoi"]
 
-[ext_resource type="Script" path="res://Scenes/Main/GameManager.cs" id="1_jey54"]
+[ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Scenes/Main/GameManager.cs" id="1_jey54"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="1_m7oyx"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/WorldMap.cs" id="3_xa8a6"]
@@ -52,30 +52,23 @@ texture = ExtResource("5_vqmdy")
 
 [node name="CraftingBench" parent="Isometric" instance=ExtResource("4_yvvah")]
 position = Vector2(65.75, 143.75)
-ColliderRadius = 16.0
-_colliderRadius = 16.0
 Recipes = Array[ExtResource("8_j3d0r")]([])
+ColliderRadius = 16.0
 
 [node name="GenericItem" parent="Isometric" instance=ExtResource("5_xa8a6")]
 position = Vector2(-141, 123.5)
-ColliderRadius = 10.0
-_colliderRadius = 10.0
 ItemResource = ExtResource("6_11nrr")
-_baseItem = ExtResource("6_11nrr")
+ColliderRadius = 10.0
 
 [node name="GenericItem2" parent="Isometric" instance=ExtResource("5_xa8a6")]
 position = Vector2(-168.75, 141.5)
-ColliderRadius = 10.0
-_colliderRadius = 10.0
 ItemResource = ExtResource("6_11nrr")
-_baseItem = ExtResource("6_11nrr")
+ColliderRadius = 10.0
 
 [node name="GenericItem3" parent="Isometric" instance=ExtResource("5_xa8a6")]
 position = Vector2(-139.25, 157.5)
-ColliderRadius = 10.0
-_colliderRadius = 10.0
 ItemResource = ExtResource("7_lv6gr")
-_baseItem = ExtResource("7_lv6gr")
+ColliderRadius = 10.0
 
 [node name="GenericItem4" parent="Isometric" instance=ExtResource("5_xa8a6")]
 position = Vector2(-121.25, 140.25)
@@ -93,13 +86,11 @@ SmoothingSpeed = null
 [node name="Hud" parent="Camera2D" instance=ExtResource("4_uaxa7")]
 metadata/_edit_use_anchors_ = true
 
-[node name="Npc" parent="." node_paths=PackedStringArray("MoodTimer", "Target") instance=ExtResource("9_xa8a6")]
+[node name="Npc" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("9_xa8a6")]
 position = Vector2(376, 1005)
 scale = Vector2(4, 4)
 collision_mask = 19
-MoodTimer = NodePath("MoodTimer")
 Target = NodePath("../Isometric/CraftingBench")
-StartMoodTimer = true
 
 [node name="LeaveArea" type="Node2D" parent="."]
 position = Vector2(576, 1024)

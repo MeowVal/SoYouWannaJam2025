@@ -18,6 +18,7 @@ public partial class Npc : CharacterBody2D
     [Export] public float Mood = 100; // The mood of the npc 
     private NavigationAgent2D _navAgent; // navigation agent for pathfinding
     private NpcResource _npcResource ; // Local variable to store the npc resource
+    [Export] public float Health = 100;
     [Export]
     public NpcResource NpcResource // The npc resource
     {
@@ -39,13 +40,17 @@ public partial class Npc : CharacterBody2D
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _sprite2D = GetNode<Sprite2D>("Sprite2D");
         MoodTimer = GetNode<Timer>("MoodTimer");
-        MoodTimer.Timeout += UpdateMood; 
-        CallDeferred("SetupNavAgent");
         if (NpcResource != null)
             SetupNpc();
+        // So that the editor does not run the code below it. 
         if(Engine.IsEditorHint()) return;
+        // Connects to the MoodTimer 
+        MoodTimer.Timeout += UpdateMood; 
+        // Sets up the navigation agent after the first physics frame 
+        CallDeferred("SetupNavAgent");
+        // Starts the MoodTimer
         MoodTimer.Start();
-        // connects to the signal from the navigation agent 
+        // Connects to the signal from the navigation agent 
         Callable callable = new Callable(this, "_VelocityComputed");
         _navAgent.Connect("velocity_computed", callable);
     }
@@ -53,7 +58,7 @@ public partial class Npc : CharacterBody2D
     // Used for Npc the pathfinding 
     public override void _PhysicsProcess(double delta)
     {
-        
+        // So that the editor does not run the code below it. 
         if(Engine.IsEditorHint()) return;
         if (_navAgent == null) return;
         if (_navAgent.IsNavigationFinished() && Mood <=0) QueueFree();
@@ -137,6 +142,7 @@ public partial class Npc : CharacterBody2D
     public void UpdateAnimation()
     {
         if(_animationPlayer == null) return;
+        // The names if the animations is a combo of State and _directionName like the state idle and the _directionName Left 
         _animationPlayer.Play( State + _directionName );
     }
 

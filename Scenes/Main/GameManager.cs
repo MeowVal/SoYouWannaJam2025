@@ -5,12 +5,47 @@ namespace SoYouWANNAJam2025.Scenes.Main;
 
 public partial class GameManager : Node2D
 {
+	public Resource[] PossibleTargets;
+	public NpcResource[] NpcResources;
 	[Export]
 	public PackedScene NpcScene { get; set; }
+
+	public float gold = 0; 
+	public override void _Ready()
+	{
+		//NpcResources[0] = ResourceLoader.LoadThreadedRequest<NpcResource>("res://Resources/Npcs/Npc01.tres");
+		DirContents("res://Resources/Npcs/");
+	}
+	public void DirContents(string path)
+	{
+		using var dir = DirAccess.Open(path);
+		if (dir != null)
+		{
+			dir.ListDirBegin();
+			string fileName = dir.GetNext();
+			while (fileName != "")
+			{
+				if (dir.CurrentIsDir())
+				{
+					GD.Print($"Found directory: {fileName}");
+				}
+				else
+				{
+					GD.Print($"Found file: {fileName}");
+				}
+				fileName = dir.GetNext();
+			}
+		}
+		else
+		{
+			GD.Print("An error occurred when trying to access the path.");
+		}
+	}
 
 	private void OnNpcTimerTimeout()
 	{
 		Npc npc = NpcScene.Instantiate<Npc>();
+		npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Length - 1)];
 		
 		var npcSpawnLocation = GetNode<PathFollow2D>("NpcPath/NpcSpawnLocations");
 		npcSpawnLocation.ProgressRatio = GD.Randf();
@@ -22,9 +57,7 @@ public partial class GameManager : Node2D
 	}
 	
 	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+	
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)

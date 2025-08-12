@@ -10,6 +10,7 @@ script = ExtResource("1_xing1")
 metadata/_custom_type_script = "uid://de26gdg7krlfk"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xptbv")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="ItemSprite" type="Sprite2D" parent="."]

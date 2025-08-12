@@ -203,9 +203,6 @@ debug_path_custom_color = Color(1, 0.223529, 0.137255, 1)
 [node name="InventorySlot" type="Node2D" parent="."]
 position = Vector2(0, -4)
 script = ExtResource("5_mrx7r")
-AllowAll = null
-ItemWhitelist = null
-RecipeWhitelist = null
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="NpcInteractor" type="Area2D" parent="."]

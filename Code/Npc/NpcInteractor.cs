@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using SoYouWANNAJam2025.Code.Items;
 
 namespace SoYouWANNAJam2025.Code.Npc;
 
@@ -27,18 +28,20 @@ public partial class NpcInteractor : Area2D
 
     private void OnDistanceCheckTimer()
     {
-        if (PossibleTargets.Count == 1)
-        {
-            PossibleTargets[0].SetHighlight(true);
-            return;
-        }
-
-        int nearestTarget = 0;
+        // Init Temp Variables
+        int nearestTarget = -1;
         float nearestDistance = float.MaxValue;
 
+        // Check Loop
         for (var i = 0; i < PossibleTargets.Count; i++)
         {
+            // Ignore target if its an item and we already have one
+            if (InventorySlot.HasItem() && PossibleTargets[i] is GenericItem) continue;
+
+            // Get distance between target and us
             var distance = PossibleTargets[i].GlobalPosition.DistanceTo(_npc.GlobalPosition);
+
+            // Save nearest target distance and its index
             if (distance < nearestDistance)
             {
                 nearestDistance = distance;
@@ -46,6 +49,7 @@ public partial class NpcInteractor : Area2D
             }
         }
 
+        // Save index and apply highlight to all targets
         CurrentTarget = nearestTarget;
         for (var i = 0; i < PossibleTargets.Count; i++)
         {
@@ -67,15 +71,33 @@ public partial class NpcInteractor : Area2D
         OnDistanceCheckTimer();
     }
 
-    public void TriggerInteraction()
+    public void TriggerInteraction(TriggerType trigger)
     {
-        if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count)
+        switch (trigger)
         {
-            PossibleTargets[CurrentTarget].TriggerInteraction(this, TriggerType.PickupDrop);
-        }
-        else if (InventorySlot.Item != null)
-        {
-            InventorySlot.DropItem();
+            case TriggerType.PickupDrop:
+                if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count && CurrentTarget >= 0)
+                {
+                    PossibleTargets[CurrentTarget].TriggerInteraction(this, TriggerType.PickupDrop);
+                    OnDistanceCheckTimer();
+                } else if (InventorySlot.HasItem()) // If we have an item, drop it.
+                {
+                    if (InventorySlot.Item.OverlapsArea(this))
+                    {
+                        PossibleTargets.Add(InventorySlot.Item);
+                    }
+                    InventorySlot.DropItem();
+                    OnDistanceCheckTimer();
+                }
+                break;
+
+            case TriggerType.UseAction:
+                if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count && CurrentTarget >= 0)
+                {
+                    PossibleTargets[CurrentTarget].TriggerInteraction(this, TriggerType.UseAction);
+                    OnDistanceCheckTimer();
+                }
+                break;
         }
     }
 }

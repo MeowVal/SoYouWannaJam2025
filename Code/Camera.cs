@@ -30,7 +30,7 @@ public partial class Camera : Camera2D
             GetNode<Control>("Hud").Position = -0.5f * _oldResolution;
         }
 
-        GD.Print(GlobalPosition, "|", FollowingNode.GlobalPosition, "|", (SmoothingSpeed*Global.GameScale)*delta);
+        //GD.Print(GlobalPosition, "|", FollowingNode.GlobalPosition, "|", (SmoothingSpeed*Global.GameScale)*delta);
         GlobalPosition = GlobalPosition.Lerp(FollowingNode.GlobalPosition, (float)(SmoothingSpeed*delta));
     }
 }

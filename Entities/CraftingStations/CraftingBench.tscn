@@ -35,7 +35,4 @@ offset = Vector2(0, -7)
 [node name="InventorySlot" type="Node2D" parent="."]
 position = Vector2(0, -4)
 script = ExtResource("4_sd5kq")
-AllowAll = null
-ItemWhitelist = null
-RecipeWhitelist = null
 metadata/_custom_type_script = "uid://1cpfasjkacse"
