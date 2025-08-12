@@ -75,7 +75,7 @@ public partial class NpcInteractor : Area2D
         }
         else if (InventorySlot.Item != null)
         {
-            InventorySlot.DropItem(GetParent().GetParent(), GlobalPosition);
+            InventorySlot.DropItem();
         }
     }
 }

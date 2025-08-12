@@ -10,6 +10,7 @@ namespace SoYouWANNAJam2025.Code;
 public partial class InventorySlot : Node2D
 {
     public GenericItem Item;
+    private TileMapLayer _grid;
 
     [ExportGroup("Whitelist")]
     [Export] // Ignore whitelist entirely.
@@ -23,6 +24,7 @@ public partial class InventorySlot : Node2D
 
     public override void _Ready()
     {
+        _grid = GetTree().GetRoot().GetNode<TileMapLayer>("Node2D/Isometric/WorldMap");
         CompileWhitelist();
     }
 
@@ -73,15 +75,23 @@ public partial class InventorySlot : Node2D
         return true;
     }
 
-    // Removes item from the slot, returns true if successful.
-    public virtual bool DropItem(Node parentNode, Vector2 globalPosition)
+    // Removes item from the slot, returns true if successful. Pass false to force  it to drop where ever it is.
+    public virtual bool DropItem(bool snapToNearestTile = true)
     {
         // Ensure item *can* be removed from the slot.
         if (!HasItem()) return false;
 
-        // Remove the item and place it in the world.
-        Item.Reparent(parentNode);
-        Item.GlobalPosition = globalPosition.Round();
+        var localPos = _grid.ToLocal(Item.GlobalPosition);
+        Item.Reparent(_grid);
+        if (snapToNearestTile)
+        {
+            Item.Position = _grid.MapToLocal(_grid.LocalToMap(localPos));
+        }
+        else
+        {
+            Item.Position = localPos;
+        }
+
         Item.IsInteractive = true;
         GD.Print($"Dropped {Item.ItemResource.DisplayName}");
         Item = null;
