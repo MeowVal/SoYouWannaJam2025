@@ -36,6 +36,7 @@ public partial class NpcBehaviourWander : NpcBehaviour
     {
         try
         {
+            if(Engine.IsEditorHint()) return;
             while (true)
             {
                 if(Npc.DoBehaviour == false) return;
@@ -70,6 +71,7 @@ public partial class NpcBehaviourWander : NpcBehaviour
     {
         try
         {
+            if(Engine.IsEditorHint()) return;
             while (true)
             {
                 // Calculates the distance to the center

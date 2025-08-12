@@ -111,6 +111,7 @@ public partial class Npc : CharacterBody2D
     // The velocity calculated by the navigation agent for avoiding an obstacle
     private void _VelocityComputed(Vector2 safeVelocity)
     {
+        if(Engine.IsEditorHint()) return;
         Velocity = safeVelocity;
     }
     
