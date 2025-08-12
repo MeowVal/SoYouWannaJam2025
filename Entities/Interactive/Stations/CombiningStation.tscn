@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="5_ahl5q"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_die6g"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_egy3o"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5p8jk"]
 radius = 24.0
 
 [node name="CombiningStation" type="Area2D"]
@@ -17,7 +17,7 @@ Recipes = Array[ExtResource("2_ahl5q")]([ExtResource("3_ahl5q"), ExtResource("4_
 ColliderRadius = 24.0
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_egy3o")
+shape = SubResource("CircleShape2D_5p8jk")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="RecipeTimer" type="Timer" parent="."]

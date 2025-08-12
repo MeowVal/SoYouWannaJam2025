@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.RecipeSystem;
@@ -91,13 +92,13 @@ public partial class CraftingStation : Interactible
 
     private void _RecipeComplete()
     {
-        _interactionInterface.QueueFree();
+        _interactionInterface?.QueueFree();
         if (!InventorySlot.DestroyItem(CurrentRecipe.Inputs))
         {
             GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
             return;
         }
-        var newItemScene = GD.Load<PackedScene>("res://Entities/GenericItem.tscn");
+        var newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
         var newItem = newItemScene.Instantiate<GenericItem>();
         newItem.ItemResource = CurrentRecipe.Outputs[0];
         GetNode("/root/Node2D/Isometric").AddChild(newItem);

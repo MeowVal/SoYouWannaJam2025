@@ -1,29 +1,41 @@
 using Godot;
 using Godot.Collections;
+using SoYouWANNAJam2025.Code.RecipeSystem;
 using SoYouWANNAJam2025.Code.Interactive.Items;
 
 namespace SoYouWANNAJam2025.Code.Npc;
 
-public partial class NpcInteractor : Area2D
+public partial class NpcInteractor : Interactible
 {
     public Array<Interactible> PossibleTargets = [];
     public int CurrentTarget = 0;
     private Timer _distanceCheckTimer;
     private Npc _npc;
 
-    public Interactive.Inventory.InventorySlot InventorySlot = null;
+    //public Interactive.Inventory.InventorySlot InventorySlot = null;
+    public Interactive.Inventory.InventorySlot InventorySlot;
+    public BaseRecipe CurrentRecipe;
+    //public Timer RecipeTimer;
+    private Player.CharacterControl _player;
+    //private CraftingStationInterface _interactionInterface;
+    private Node2D _interfaceLocation;
+    [Export] public Array<BaseRecipe> Recipes = [];
     public override void _Ready()
     {
+        if (Engine.IsEditorHint()) return;
+        base._Ready();
         if (GetParent().FindChild("InventorySlot") is Interactive.Inventory.InventorySlot slot) InventorySlot=slot;
+        InventorySlot.RecipeWhitelist = Recipes;
+        InventorySlot.CompileWhitelist();
         
-        _distanceCheckTimer = GetNode<Timer>("./DistanceCheckTimer");
-        _distanceCheckTimer.Timeout += OnDistanceCheckTimer;
+        //_distanceCheckTimer = GetNode<Timer>("./DistanceCheckTimer");
+        //_distanceCheckTimer.Timeout += OnDistanceCheckTimer;
         _npc = GetParent<Npc>();
-
-        BodyEntered += OnInteractableEntered;
+        Interact += OnInteractMethod;
+        /*BodyEntered += OnInteractableEntered;
         BodyExited += OnInteractableExited;
         AreaEntered += OnInteractableEntered;
-        AreaExited += OnInteractableExited;
+        AreaExited += OnInteractableExited;*/
     }
 
     private void OnDistanceCheckTimer()
@@ -56,6 +68,33 @@ public partial class NpcInteractor : Area2D
             PossibleTargets[i].SetHighlight(i == CurrentTarget);
         }
     }
+    
+    private void OnInteractMethod(Node2D node, TriggerType trigger)
+    {
+        if (node is not Player.PlayerInteractor interactor) return;
+
+        switch (trigger)
+        {
+            case TriggerType.PickupDrop:
+                if (InventorySlot.HasItem() && interactor.InventorySlot.HasSpace())
+                {
+                    InventorySlot.TransferTo(interactor.InventorySlot);
+                }
+                else if (InventorySlot.HasSpace() && interactor.InventorySlot.HasItem())
+                {
+                    interactor.InventorySlot.TransferTo(InventorySlot);
+                }
+                break;
+            case TriggerType.UseAction:
+                AttemptGiveRequest();
+                break;
+        }
+    }
+
+    private void AttemptGiveRequest()
+    {
+        
+    }
     private void OnInteractableEntered(Node2D unknownTarget)
     {
         if (unknownTarget is not Interactible target) return;
@@ -71,6 +110,7 @@ public partial class NpcInteractor : Area2D
         OnDistanceCheckTimer();
     }
 
+    /*
     public void TriggerInteraction(TriggerType trigger)
     {
         switch (trigger)
@@ -99,5 +139,5 @@ public partial class NpcInteractor : Area2D
                 }
                 break;
         }
-    }
+    }*/
 }
