@@ -1,7 +1,7 @@
 using Godot;
 
 namespace SoYouWANNAJam2025.Code.Npc;
-
+[Tool]
 public partial class NpcBehaviour : Node2D
 {
     protected  Npc Npc;
@@ -9,6 +9,7 @@ public partial class NpcBehaviour : Node2D
 
     public override void _Ready()
     {
+        if(Engine.IsEditorHint()) return;
         if (GetParent() is Npc npc)
         {
             Npc = npc;
@@ -19,6 +20,6 @@ public partial class NpcBehaviour : Node2D
 
     public virtual async void Start()
     {
-        // TODO: Implement behavior
+        if(Engine.IsEditorHint()) return;
     }
 }

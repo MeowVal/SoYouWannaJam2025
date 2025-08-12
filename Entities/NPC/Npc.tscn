@@ -162,10 +162,11 @@ height = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jh2em"]
 radius = 32.0
 
-[node name="Npc" type="CharacterBody2D"]
+[node name="Npc" type="CharacterBody2D" node_paths=PackedStringArray("MoodTimer")]
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_623a7")
+MoodTimer = NodePath("MoodTimer")
 NpcResource = ExtResource("2_jvg37")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -191,9 +192,11 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 32.0
-target_desired_distance = 32.0
+target_desired_distance = 64.0
+path_max_distance = 128.0
 path_postprocessing = 1
 avoidance_enabled = true
+radius = 32.0
 avoidance_layers = 3
 debug_enabled = true
 debug_path_custom_color = Color(1, 0.223529, 0.137255, 1)
@@ -213,4 +216,8 @@ debug_color = Color(0.980392, 0, 0.376471, 0.0705882)
 
 [node name="DistanceCheckTimer" type="Timer" parent="NpcInteractor"]
 wait_time = 0.1
+autostart = true
+
+[node name="MoodTimer" type="Timer" parent="."]
+wait_time = 10.0
 autostart = true
