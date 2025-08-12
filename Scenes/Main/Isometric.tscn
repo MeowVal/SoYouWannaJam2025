@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=4 uid="uid://dejbiswo8rnoi"]
 
-[ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Scenes/Main/GameManager.cs" id="1_jey54"]
+[ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_jey54"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="1_m7oyx"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="3_xa8a6"]

@@ -1,7 +1,7 @@
 using Godot;
 using SoYouWANNAJam2025.Code.Npc;
 
-namespace SoYouWANNAJam2025.Scenes.Main;
+namespace SoYouWANNAJam2025.Code.World;
 
 public partial class GameManager : Node2D
 {
@@ -53,7 +53,7 @@ public partial class GameManager : Node2D
 	private void OnNpcTimerTimeout()
 	{
 		
-		Npc npc = NpcScene.Instantiate<Npc>();
+		Npc.Npc npc = NpcScene.Instantiate<Npc.Npc>();
 		GD.Print(GD.RandRange(0,NpcResources.Count ));
 		npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
 		
