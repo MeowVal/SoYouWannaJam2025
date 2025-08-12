@@ -25,93 +25,62 @@ public partial class CraftingStation : Interactible
         base._Ready();
         _recipeTimer = GetNode<Timer>("RecipeTimer");
         _recipeTimer.Timeout += _OnRecipeTimer;
-        BodyEntered += OnCraftingStationEntered;
-        BodyExited += OnCraftingStationExited;
-        AreaEntered += OnCraftingStationEntered;
-        AreaExited += OnCraftingStationExited;
         Interact += OnInteractMethod;
         
         if (FindChild("InventorySlot") is InventorySlot slot) InventorySlot=slot;
     }
 
-    private void OnCraftingStationEntered(Node2D body)
+    public bool AttemptCraft()
     {
-        if (body is not CharacterControl character) return;
-        _player = character;
-        if (_player.HeldItem is null) return;
-
         foreach (var recipe in Recipes)
         {
-            GD.Print("Attempting to start recipe: " + recipe.DisplayName);
-            if( _player.HeldItem.CompletedRecipes.Contains(recipe)) continue;
+            if (!recipe.Inputs.Contains(InventorySlot.Item.ItemResource)) continue;
 
-            var hasInputs = false;
-            foreach (var wepMod in recipe.Inputs)
-            {
-                if (_player.HeldItem.Modifiers.Contains(wepMod))
-                {
-                    hasInputs = true;
-                    continue;
-                }
-                else
-                {
-                    hasInputs = false;
-                    break;
-                }
-            }
-            if (!hasInputs) continue;
-            GD.Print("Weapon has required inputs");
             _currentRecipe = recipe;
+            GD.Print($"Starting WorkType {_currentRecipe.WorkType}.");
             switch (_currentRecipe.WorkType)
             {
                 case WorkType.Instant:
-                    GD.Print("Starting WorkType Instant.");
                     _RecipeComplete();
-                    break;
+                    return true;
                 case WorkType.SpamButton:
-                    GD.Print("idk i didnt add this yet...");
-                    break;
+                    return true;
                 case WorkType.Timer:
-                    GD.Print("Starting WorkType Timer.");
                     _recipeTimer.Start(recipe.TimeToComplete);
-                    break;
+                    return true;
                 case WorkType.ButtonHold:
-                    GD.Print("idk i didnt add this yet...");
-                    break;
+                    return true;
             }
-            GD.Print("Recipe started.");
-            break;
         }
+        return false;
     }
 
     private void OnCraftingStationExited(Node2D body)
     {
         if (_recipeTimer.IsStopped()) return;
         _recipeTimer.Stop();
-        GD.Print("Recipe ended before complete");
+        GD.Print("Recipe ended before completion");
     }
 
     private void _OnRecipeTimer()
     {
-        GD.Print("Timer Complete");
+        GD.Print("Recipe Timer Completed");
         _RecipeComplete();
     }
 
     private void _RecipeComplete()
     {
-        if (_player.HeldItem is null) return;
-        foreach (var wepMod in _currentRecipe.Outputs)
-        {
-            _player.HeldItem.Modifiers.Add(wepMod);
-        }
-        _player.HeldItem.CompletedRecipes.Add(_currentRecipe);
-        GD.Print("Completed recipe: " + _currentRecipe.DisplayName);
+        InventorySlot.Item.Free();
+        var newItem = new GenericItem();
+        newItem.ItemResource = _currentRecipe.Outputs[0];
+        InventorySlot.PickupItem(newItem);
+        GD.Print($"Completed recipe {_currentRecipe.DisplayName} outputting {newItem.Name}");
     }
 
     private void OnInteractMethod(Node2D node)
     {
         if (node is not PlayerInteractor interactor) return;
-        if (InventorySlot.Item == null)
+        if (InventorySlot.HasItem())
         {
             interactor.InventorySlot.TransferTo(InventorySlot);
         }

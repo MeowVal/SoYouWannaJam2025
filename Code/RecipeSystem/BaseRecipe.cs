@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using SoYouWANNAJam2025.Code.Items;
 
 namespace SoYouWANNAJam2025.Code.RecipeSystem;
 
@@ -22,6 +23,6 @@ public partial class BaseRecipe : Resource
     [ExportGroup("Recipe Data")]
     [Export] public WorkType WorkType = WorkType.Instant;
     [Export] public float TimeToComplete = 1.5f;
-    [Export] public Array<ModularWeapons.BaseWeaponModifier> Inputs = [];
-    [Export] public Array<ModularWeapons.BaseWeaponModifier> Outputs = [];
+    [Export] public Array<BaseItem> Inputs = [];
+    [Export] public Array<BaseItem> Outputs = [];
 }

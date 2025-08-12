@@ -28,18 +28,20 @@ public partial class PlayerInteractor : Area2D
 
     private void OnDistanceCheckTimer()
     {
-        if (PossibleTargets.Count == 1)
-        {
-            PossibleTargets[0].SetHighlight(true);
-            return;
-        }
-
-        int nearestTarget = 0;
+        // Init Temp Variables
+        int nearestTarget = -1;
         float nearestDistance = float.MaxValue;
 
+        // Check Loop
         for (var i = 0; i < PossibleTargets.Count; i++)
         {
+            // Ignore target if its an item and we already have one
+            if (InventorySlot.HasItem() && PossibleTargets[i] is GenericItem) continue;
+
+            // Get distance between target and us
             var distance = PossibleTargets[i].GlobalPosition.DistanceTo(_player.GlobalPosition);
+
+            // Save nearest target distance and its index
             if (distance < nearestDistance)
             {
                 nearestDistance = distance;
@@ -47,6 +49,7 @@ public partial class PlayerInteractor : Area2D
             }
         }
 
+        // Save index and apply highlight to all targets
         CurrentTarget = nearestTarget;
         for (var i = 0; i < PossibleTargets.Count; i++)
         {
@@ -70,13 +73,19 @@ public partial class PlayerInteractor : Area2D
 
     public void TriggerInteraction()
     {
-        if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count)
+        // If there's a valid target, trigger it
+        if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count && CurrentTarget >= 0)
         {
             PossibleTargets[CurrentTarget].TriggerInteraction(this);
-        }
-        else if (InventorySlot.Item != null)
+            OnDistanceCheckTimer();
+        } else if (InventorySlot.HasItem()) // If we have an item, drop it.
         {
+            if (InventorySlot.Item.OverlapsArea(this))
+            {
+                PossibleTargets.Add(InventorySlot.Item);
+            }
             InventorySlot.DropItem(GetParent().GetParent(), GlobalPosition);
+            OnDistanceCheckTimer();
         }
     }
 }
