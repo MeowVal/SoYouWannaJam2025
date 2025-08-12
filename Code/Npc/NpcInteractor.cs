@@ -8,7 +8,7 @@ public partial class NpcInteractor : Area2D
     public Array<Interactible> PossibleTargets = [];
     public int CurrentTarget = 0;
     private Timer _distanceCheckTimer;
-    private CharacterControl _player;
+    private Npc _npc;
 
     public InventorySlot InventorySlot = null;
     public override void _Ready()
@@ -17,7 +17,7 @@ public partial class NpcInteractor : Area2D
         
         _distanceCheckTimer = GetNode<Timer>("./DistanceCheckTimer");
         _distanceCheckTimer.Timeout += OnDistanceCheckTimer;
-        _player = GetParent<CharacterControl>();
+        _npc = GetParent<Npc>();
 
         BodyEntered += OnInteractableEntered;
         BodyExited += OnInteractableExited;
@@ -38,7 +38,7 @@ public partial class NpcInteractor : Area2D
 
         for (var i = 0; i < PossibleTargets.Count; i++)
         {
-            var distance = PossibleTargets[i].GlobalPosition.DistanceTo(_player.GlobalPosition);
+            var distance = PossibleTargets[i].GlobalPosition.DistanceTo(_npc.GlobalPosition);
             if (distance < nearestDistance)
             {
                 nearestDistance = distance;
