@@ -75,7 +75,7 @@ public partial class NpcInteractor : Interactible
 
     private void AttemptGiveRequest()
     {
-        
+        GD.Print("Attempting give request... to be implemented");
     }
   
 }
