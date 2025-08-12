@@ -82,12 +82,12 @@ public partial class InventorySlot : Node2D
     }
 
     // Removes item from the slot, returns true if successful. Pass false to force  it to drop where ever it is.
-    public virtual bool DropItem(bool snapToNearestTile = true)
+    public virtual bool DropItem(Vector2 position, bool snapToNearestTile = true)
     {
         // Ensure item *can* be removed from the slot.
         if (!HasItem()) return false;
 
-        var localPos = _grid.ToLocal(Item.GlobalPosition);
+        var localPos = _grid.ToLocal(position);
         Item.SetZIndexOffset(0);
         Item.Reparent(_grid);
         if (snapToNearestTile)

@@ -406,12 +406,10 @@ animation = &"idleNE"
 offset = Vector2(0, -8)
 
 [node name="PlayerInteractor" type="Area2D" parent="."]
-position = Vector2(0, -10)
 monitorable = false
 script = ExtResource("4_yv7du")
 
 [node name="InteractionArea" type="CollisionShape2D" parent="PlayerInteractor"]
-position = Vector2(0, 10)
 shape = SubResource("CircleShape2D_c6rmn")
 debug_color = Color(0.980392, 0, 0.376471, 0.0705882)
 
@@ -420,7 +418,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="InventorySlot" type="Node2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(0, -20)
 script = ExtResource("5_o4cwe")
 AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"

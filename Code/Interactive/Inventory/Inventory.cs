@@ -70,10 +70,10 @@ public partial class Inventory : InventorySlot
     }
 
     // Removes item from the slot, returns true if successful.
-    public override bool DropItem(bool snapToNearestTile = true)
+    public override bool DropItem(Vector2 position, bool snapToNearestTile = true)
     {
         if (!HasItem()) return false;
-        if (!Slots[_lastSlot].DropItem(snapToNearestTile)) return false;
+        if (!Slots[_lastSlot].DropItem(position, snapToNearestTile)) return false;
         CalculateCount();
         _lastSlot = FindSlot(empty:false, reversed: true);
         return true;

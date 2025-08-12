@@ -86,7 +86,7 @@ public partial class PlayerInteractor : Area2D
                     {
                         PossibleTargets.Add(InventorySlot.Item);
                     }
-                    InventorySlot.DropItem();
+                    InventorySlot.DropItem(GlobalPosition);
                     OnDistanceCheckTimer();
                 }
                 break;
