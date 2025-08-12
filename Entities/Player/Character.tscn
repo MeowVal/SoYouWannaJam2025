@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/InventorySlot.cs" id="5_o4cwe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b3ei2"]
-radius = 5.0
+radius = 12.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qcvlp"]
 atlas = ExtResource("2_yv7du")
@@ -390,14 +390,14 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c6rmn"]
-radius = 32.0
+radius = 20.0
 
 [node name="Character" type="CharacterBody2D"]
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("2_l3y44")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_b3ei2")
 
 [node name="CharSprite" type="AnimatedSprite2D" parent="."]
@@ -410,7 +410,8 @@ position = Vector2(0, -10)
 monitorable = false
 script = ExtResource("4_yv7du")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInteractor"]
+[node name="InteractionArea" type="CollisionShape2D" parent="PlayerInteractor"]
+position = Vector2(0, 10)
 shape = SubResource("CircleShape2D_c6rmn")
 debug_color = Color(0.980392, 0, 0.376471, 0.0705882)
 
@@ -422,6 +423,4 @@ autostart = true
 position = Vector2(0, -12)
 script = ExtResource("5_o4cwe")
 AllowAll = true
-ItemWhitelist = null
-RecipeWhitelist = null
 metadata/_custom_type_script = "uid://1cpfasjkacse"
