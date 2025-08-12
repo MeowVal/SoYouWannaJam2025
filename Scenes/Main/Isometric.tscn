@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=4 uid="uid://dejbiswo8rnoi"]
+[gd_scene load_steps=14 format=4 uid="uid://dejbiswo8rnoi"]
 
+[ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Scenes/Main/GameManager.cs" id="1_jey54"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="1_m7oyx"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_yppru"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/BuildingMap.cs" id="3_xa8a6"]
@@ -12,7 +13,15 @@
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="7_lv6gr"]
 [ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Entities/NPC/Npc.tscn" id="9_xa8a6"]
 
+[sub_resource type="Curve2D" id="Curve2D_jey54"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 128, 1208, 0, 0, 0, 0, 1158, 698, 0, 0, 0, 0, 0, 126, 0, 0, 0, 0, -1027, 640, 0, 0, 0, 0, 128, 1208)
+}
+point_count = 5
+
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_jey54")
+NpcScene = ExtResource("9_xa8a6")
 
 [node name="Isometric" type="Node2D" parent="."]
 scale = Vector2(4, 4)
@@ -63,12 +72,24 @@ FollowingNode = NodePath("../Isometric/Character")
 
 [node name="Hud" parent="Camera2D" instance=ExtResource("4_uaxa7")]
 
-[node name="Npc" parent="." node_paths=PackedStringArray("MoodTimer", "Target", "LeaveAreaNode") instance=ExtResource("9_xa8a6")]
+[node name="Npc" parent="." node_paths=PackedStringArray("Target", "LeaveAreaNode") instance=ExtResource("9_xa8a6")]
 position = Vector2(376, 1005)
 scale = Vector2(4, 4)
-MoodTimer = NodePath("MoodTimer")
 Target = NodePath("../Isometric/CraftingBench")
 LeaveAreaNode = NodePath("../LeaveArea")
 
 [node name="LeaveArea" type="Node2D" parent="."]
 position = Vector2(576, 1024)
+
+[node name="NpcPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_jey54")
+
+[node name="NpcSpawnLocations" type="PathFollow2D" parent="NpcPath"]
+position = Vector2(128, 1208)
+rotation = -0.459757
+
+[node name="NpcTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="NpcTimer" to="." method="OnNpcTimerTimeout"]

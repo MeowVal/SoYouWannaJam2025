@@ -30,7 +30,8 @@ public partial class Npc : CharacterBody2D
     private Vector2 _lastTargetPosition = Vector2.Zero;  // Store last target position
     private float _stopThreshold = 5.0f;  // The threshold distance at which the NPC will stop or no longer recalculate the path
     private float _pathUpdateThreshold = 32.0f;  // The distance at which to update the path
-    [Export] public Node2D LeaveAreaNode; // The node for where the npc should go to when it leaves when it's not satisfied  
+    [Export] public Node2D LeaveAreaNode; // The node for where the npc should go to when it leaves when it's not satisfied 
+    public bool StartMoodTimer = true;
     public override void _Ready()
     {
         // gets the different nodes in the tree that is a child of the npc 
@@ -55,11 +56,15 @@ public partial class Npc : CharacterBody2D
         
         if(Engine.IsEditorHint()) return;
         if (_navAgent == null) return;
-        if (_navAgent.IsNavigationFinished() && Mood <=0) Free();
+        if (_navAgent.IsNavigationFinished() && Mood <=0) QueueFree();
         if (_navAgent.IsNavigationFinished())
         {
             State = "idle";
-            GD.Print("Target reached");
+            //GD.Print("Target reached");
+            if (!StartMoodTimer) return;
+            Mood = 100;
+            MoodTimer.Start();
+
             return;
         }
         if (Target == null) return;
@@ -142,6 +147,7 @@ public partial class Npc : CharacterBody2D
     public void UpdateMood()
     {
         
+            
         Mood -= MoodDecreaseAmount;
         //GD.Print("Mood: " + Mood);
         if(Mood <= 0)
@@ -149,6 +155,8 @@ public partial class Npc : CharacterBody2D
             Target = LeaveAreaNode;
             if (Target == null) return;
             _navAgent.TargetPosition = Target.GlobalPosition;
+            StartMoodTimer =  false;
+            MoodTimer.Stop();
         }
         
     }

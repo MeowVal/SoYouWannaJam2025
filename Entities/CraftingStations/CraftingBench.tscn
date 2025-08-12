@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://d1il8gelcfaqa" path="res://Resources/Recipes/testRecipe.tres" id="3_dkb0l"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/InventorySlot.cs" id="4_sd5kq"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_r0jh1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_lakah"]
 radius = 32.0
 
 [node name="CraftingBench" type="Area2D"]
@@ -16,7 +16,7 @@ Recipes = Array[ExtResource("2_lakah")]([ExtResource("3_dkb0l")])
 ColliderRadius = 32.0
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_r0jh1")
+shape = SubResource("CircleShape2D_lakah")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="RecipeTimer" type="Timer" parent="."]
