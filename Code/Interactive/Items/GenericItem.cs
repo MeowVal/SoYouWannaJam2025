@@ -2,17 +2,16 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code.Interactive.Items;
 
-[Tool]
 public partial class GenericItem : Interactible
 {
-    private Interactive.Items.BaseItem _baseItem;
+    private Interactive.Items.GenericItemTemplate _itemTemplate;
     
     [Export]
-    public Interactive.Items.BaseItem ItemResource
+    public Interactive.Items.GenericItemTemplate ItemResource
     {
         set
         { 
-            _baseItem = value;
+            _itemTemplate = value;
             if (value != null)
             {
                 GetNode<Sprite2D>("ItemSprite").Texture = value.Icon;
@@ -24,7 +23,7 @@ public partial class GenericItem : Interactible
                 ColliderRadius = 16f;
             }
         }
-        get => _baseItem;
+        get => _itemTemplate;
     }
 
     private Player.CharacterControl _player;

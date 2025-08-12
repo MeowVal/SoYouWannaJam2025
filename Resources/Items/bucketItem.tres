@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BaseItem" load_steps=3 format=3 uid="uid://l3hxhv6jfqg1"]
 
 [ext_resource type="Texture2D" uid="uid://dq5nssdtppdda" path="res://Assets/Sprites/objects/bucket.png" id="1_bmss0"]
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/BaseItem.cs" id="2_ob6f1"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_ob6f1"]
 
 [resource]
 script = ExtResource("2_ob6f1")

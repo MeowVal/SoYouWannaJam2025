@@ -79,11 +79,11 @@ public partial class Inventory : InventorySlot
         return true;
     }
     
-    public override bool DestroyItem(Array<BaseItem> items)
+    public override bool DestroyItem(Array<GenericItemTemplate> items)
     {
         if (!HasItem() || items.Count > _count || !ContainItem(items, true)) return false;
         
-        var dupeItems = new Array<BaseItem>(items);
+        var dupeItems = new Array<GenericItemTemplate>(items);
         foreach (var slot in Slots)
         {
             if (slot.HasItem())
@@ -99,12 +99,12 @@ public partial class Inventory : InventorySlot
         return true;
     }
     
-    public override bool ContainItem(Array<BaseItem> items, bool all = false)
+    public override bool ContainItem(Array<GenericItemTemplate> items, bool all = false)
     {
         if (!HasItem() || (all && items.Count > _count)) return false;
         if (!all) return Slots.Any(slot => slot.ContainItem(items));
 
-        var dupeItems = new Array<BaseItem>(items);
+        var dupeItems = new Array<GenericItemTemplate>(items);
         foreach (var slot in Slots)
         {
             if (slot.ContainItem(dupeItems))

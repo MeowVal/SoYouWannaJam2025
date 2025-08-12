@@ -16,7 +16,7 @@ public partial class InventorySlot : Node2D
     [Export] // Ignore whitelist entirely.
     public bool AllowAll = false;
     [Export] // Filter items by a set list.
-    public Array<BaseItem> ItemWhitelist = [];
+    public Array<GenericItemTemplate> ItemWhitelist = [];
     [Export] // Filter items by the inputs of the given recipes.
     public Array<BaseRecipe> RecipeWhitelist = [];
 
@@ -24,7 +24,7 @@ public partial class InventorySlot : Node2D
     [Export] // Number of ZIndex layers to add to the occupying item.
     public int ZIndexBonus = 0;
 
-    public Array<BaseItem> Whitelist = [];
+    public Array<GenericItemTemplate> Whitelist = [];
 
     public override void _Ready()
     {
@@ -105,7 +105,7 @@ public partial class InventorySlot : Node2D
         return true;
     }
 
-    public virtual bool DestroyItem(Array<BaseItem> items)
+    public virtual bool DestroyItem(Array<GenericItemTemplate> items)
     {
         // Ensure item exists at all.
         if (!HasItem() || !ContainItem(items, false)) return false;
@@ -118,7 +118,7 @@ public partial class InventorySlot : Node2D
         return true;
     }
     
-    public virtual bool ContainItem(Array<BaseItem> items, bool all = false)
+    public virtual bool ContainItem(Array<GenericItemTemplate> items, bool all = false)
     {
         if (!HasItem() || (all && items.Count > 1)) return false;
         

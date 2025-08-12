@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl07jfhggwrem"]
+
+[ext_resource type="Script" uid="uid://cpeg7fkskudqw" path="res://Code/Interactive/Items/ModularItem.cs" id="1_wcxsw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r1dja"]
+radius = 16.0
+
+[node name="ModularItem" type="Area2D"]
+script = ExtResource("1_wcxsw")
+metadata/_custom_type_script = "uid://bdtxqnbwl6pt2"
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r1dja")
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
+
+[node name="ItemSprite" type="Sprite2D" parent="."]

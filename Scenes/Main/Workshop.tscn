@@ -1,14 +1,17 @@
-[gd_scene load_steps=13 format=4 uid="uid://u6ilul0rfym5"]
+[gd_scene load_steps=16 format=4 uid="uid://u6ilul0rfym5"]
 
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="1_ieyhc"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="2_65kow"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="3_bdwe5"]
 [ext_resource type="Texture2D" uid="uid://3ps2vy4q4qah" path="res://Assets/Sprites/characters/dwarf.png" id="4_14b3v"]
-[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/RecipeSystem/BaseRecipe.cs" id="4_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://6ycfxb3u38k1" path="res://Entities/Interactive/Stations/CraftingBench.tscn" id="5_tu5mh"]
 [ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/Interactive/Items/GenericItem.tscn" id="6_ea567"]
 [ext_resource type="Resource" uid="uid://db5qq1a3ir2ty" path="res://Resources/Items/logItem.tres" id="7_l644c"]
+[ext_resource type="Resource" uid="uid://bi8naxk6m2a6p" path="res://Resources/Items/Modular/ChiselBlade.tres" id="7_tu5mh"]
+[ext_resource type="PackedScene" uid="uid://cl07jfhggwrem" path="res://Entities/Interactive/Items/ModularItem.tscn" id="8_65kow"]
+[ext_resource type="Resource" uid="uid://be1240sws448k" path="res://Resources/Items/Modular/ChiselHilt.tres" id="8_ea567"]
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="8_o4nn5"]
+[ext_resource type="Resource" uid="uid://umymk5us3qbh" path="res://Resources/Items/Modular/Chisel.tres" id="9_bdwe5"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="9_vwcaw"]
 [ext_resource type="PackedScene" uid="uid://ccxhqwfuyr60" path="res://Scenes/UI/HUD.tscn" id="10_8x3ni"]
 [ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Entities/NPC/Npc.tscn" id="11_jxsk3"]
@@ -28,7 +31,6 @@ script = ExtResource("3_bdwe5")
 [node name="CraftingBench" parent="Isometric/WorldMap" instance=ExtResource("5_tu5mh")]
 y_sort_enabled = true
 position = Vector2(112, 152)
-Recipes = Array[ExtResource("4_bdwe5")]([])
 
 [node name="Npc" parent="Isometric/WorldMap" node_paths=PackedStringArray("Target") instance=ExtResource("11_jxsk3")]
 position = Vector2(140.5, 245.5)
@@ -38,42 +40,42 @@ Target = NodePath("../CraftingBench")
 [node name="GenericItem" parent="Isometric/WorldMap" instance=ExtResource("6_ea567")]
 position = Vector2(128.75, 397)
 ItemResource = ExtResource("7_l644c")
-ColliderRadius = 10.0
+
+[node name="GenericItem9" parent="Isometric/WorldMap" instance=ExtResource("6_ea567")]
+position = Vector2(15.25, 201.25)
+ItemResource = ExtResource("7_tu5mh")
+
+[node name="GenericItem10" parent="Isometric/WorldMap" instance=ExtResource("6_ea567")]
+position = Vector2(37.75, 189.75)
+ItemResource = ExtResource("8_ea567")
 
 [node name="GenericItem2" parent="Isometric/WorldMap" instance=ExtResource("6_ea567")]
 position = Vector2(90, 260.5)
 ItemResource = ExtResource("7_l644c")
-ColliderRadius = 10.0
 
 [node name="GenericItem6" parent="Isometric/WorldMap" instance=ExtResource("6_ea567")]
 position = Vector2(64.75, 396.25)
 ItemResource = ExtResource("7_l644c")
-ColliderRadius = 10.0
 
 [node name="GenericItem7" parent="Isometric/WorldMap" instance=ExtResource("6_ea567")]
 position = Vector2(15.5, 373.5)
 ItemResource = ExtResource("7_l644c")
-ColliderRadius = 10.0
 
 [node name="GenericItem8" parent="Isometric/WorldMap" instance=ExtResource("6_ea567")]
 position = Vector2(16.5, 420.25)
 ItemResource = ExtResource("7_l644c")
-ColliderRadius = 10.0
 
 [node name="GenericItem3" parent="Isometric/WorldMap" instance=ExtResource("6_ea567")]
 position = Vector2(-60.25, 221.25)
 ItemResource = ExtResource("8_o4nn5")
-ColliderRadius = 10.0
 
 [node name="GenericItem4" parent="Isometric/WorldMap" instance=ExtResource("6_ea567")]
 position = Vector2(-26.75, 205)
 ItemResource = ExtResource("8_o4nn5")
-ColliderRadius = 10.0
 
 [node name="GenericItem5" parent="Isometric/WorldMap" instance=ExtResource("6_ea567")]
 position = Vector2(-43.5, 213.5)
 ItemResource = ExtResource("8_o4nn5")
-ColliderRadius = 10.0
 
 [node name="Vegetations" type="TileMapLayer" parent="Isometric/WorldMap"]
 y_sort_enabled = true
@@ -104,6 +106,11 @@ scale = Vector2(0.25, 0.25)
 [node name="Character" parent="Isometric/WorldMap" instance=ExtResource("1_ieyhc")]
 position = Vector2(80.75, 232.75)
 DisplayName = "Test"
+
+[node name="ModularItem" parent="Isometric/WorldMap" instance=ExtResource("8_65kow")]
+position = Vector2(-22.75, 234.25)
+ItemResource = ExtResource("9_bdwe5")
+ColliderRadius = 10.0
 
 [node name="BackgroundTile" type="TileMapLayer" parent="Isometric"]
 z_index = -4096

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bdtxqnbwl6pt2" path="res://Code/Interactive/Items/GenericItem.cs" id="1_xing1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xptbv"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6he5u"]
 radius = 16.0
 
 [node name="GenericItem" type="Area2D"]
@@ -10,7 +10,7 @@ script = ExtResource("1_xing1")
 metadata/_custom_type_script = "uid://de26gdg7krlfk"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_xptbv")
+shape = SubResource("CircleShape2D_6he5u")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="ItemSprite" type="Sprite2D" parent="."]

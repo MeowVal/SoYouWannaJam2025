@@ -23,6 +23,6 @@ public partial class BaseRecipe : Resource
     [ExportGroup("Recipe Data")]
     [Export] public WorkType WorkType = WorkType.Instant;
     [Export] public float TimeToComplete = 1.5f;
-    [Export] public Array<BaseItem> Inputs = [];
-    [Export] public Array<BaseItem> Outputs = [];
+    [Export] public Array<GenericItemTemplate> Inputs = [];
+    [Export] public Array<GenericItemTemplate> Outputs = [];
 }
