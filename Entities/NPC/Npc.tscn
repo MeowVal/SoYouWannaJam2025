@@ -170,15 +170,14 @@ MoodTimer = NodePath("MoodTimer")
 NpcResource = ExtResource("2_jvg37")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -13)
 texture = ExtResource("1_5ya86")
+offset = Vector2(0, -14)
 hframes = 2
 vframes = 2
 
 [node name="ShadowSprite" type="Sprite2D" parent="Sprite2D"]
 modulate = Color(0, 0, 0, 0.784314)
 show_behind_parent = true
-position = Vector2(0, 14)
 texture = ExtResource("2_623a7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -204,9 +203,13 @@ debug_path_custom_color = Color(1, 0.223529, 0.137255, 1)
 [node name="InventorySlot" type="Node2D" parent="."]
 position = Vector2(0, -4)
 script = ExtResource("5_mrx7r")
+AllowAll = null
+ItemWhitelist = null
+RecipeWhitelist = null
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="NpcInteractor" type="Area2D" parent="."]
+position = Vector2(0, -14)
 monitorable = false
 script = ExtResource("6_c6mha")
 

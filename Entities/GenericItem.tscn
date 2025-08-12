@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cegbc5yym6dn2"]
 
 [ext_resource type="Script" uid="uid://bdtxqnbwl6pt2" path="res://Code/Items/GenericItem.cs" id="1_xing1"]
-[ext_resource type="Texture2D" uid="uid://dq5nssdtppdda" path="res://Assets/Sprites/objects/bucket.png" id="2_nyjko"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xptbv"]
+radius = 16.0
 
 [node name="GenericItem" type="Area2D"]
 script = ExtResource("1_xing1")
@@ -11,4 +13,3 @@ metadata/_custom_type_script = "uid://de26gdg7krlfk"
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="ItemSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_nyjko")

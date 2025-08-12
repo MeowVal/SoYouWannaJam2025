@@ -43,6 +43,11 @@ public partial class CharacterControl : CharacterBody2D
 
 	public override void _Input(InputEvent @event)
 	{
+		// if (@event is InputEventMouse mouseEvent)
+		// {
+		// 	GD.Print(mouseEvent);
+		// }
+		
 		if (@event.IsActionPressed("UseAction"))
 		{
 			_interactor.TriggerInteraction(TriggerType.UseAction);
@@ -79,7 +84,7 @@ public partial class CharacterControl : CharacterBody2D
 		moveDir.X = Input.GetActionStrength("MoveRight") - Input.GetActionStrength("MoveLeft");
 		moveDir.Y = Input.GetActionStrength("MoveDown") - Input.GetActionStrength("MoveUp");
 		moveDir = moveDir.Normalized();
-
+		
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
 			_targetPos = GetGlobalMousePosition();
@@ -102,8 +107,8 @@ public partial class CharacterControl : CharacterBody2D
 		if (moveDir != Vector2.Zero)
 		{
 			//moveDir = moveDir.Rotated(Mathf.DegToRad(30));
-			Velocity = Velocity.MoveToward(moveDir * (MoveSpeed * Global.GameScale),
-				(float)(AccelerationSpeed * Global.GameScale));
+			Velocity = Velocity.MoveToward(moveDir * (MoveSpeed * Global.GameScale), (float)(AccelerationSpeed * Global.GameScale));
+			GD.Print(Velocity);
 		}
 		else
 		{

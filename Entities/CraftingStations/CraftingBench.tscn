@@ -23,13 +23,19 @@ debug_color = Color(0.674557, 0.304912, 1, 0.42)
 one_shot = true
 
 [node name="StationSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture = ExtResource("2_suvq8")
+offset = Vector2(0, -7)
 
 [node name="tool" type="Sprite2D" parent="."]
 position = Vector2(12, -4)
 texture = ExtResource("3_2xd2y")
+offset = Vector2(0, -7)
 
 [node name="InventorySlot" type="Node2D" parent="."]
 position = Vector2(0, -4)
 script = ExtResource("4_sd5kq")
+AllowAll = null
+ItemWhitelist = null
+RecipeWhitelist = null
 metadata/_custom_type_script = "uid://1cpfasjkacse"

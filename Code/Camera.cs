@@ -29,7 +29,8 @@ public partial class Camera : Camera2D
             _oldResolution = GetWindow().Size;
             GetNode<Control>("Hud").Position = -0.5f * _oldResolution;
         }
-        
-        GlobalPosition = GlobalPosition.Lerp(FollowingNode.GlobalPosition, (float)(SmoothingSpeed*Global.GameScale*delta));
+
+        GD.Print(GlobalPosition, "|", FollowingNode.GlobalPosition, "|", (SmoothingSpeed*Global.GameScale)*delta);
+        GlobalPosition = GlobalPosition.Lerp(FollowingNode.GlobalPosition, (float)(SmoothingSpeed*delta));
     }
 }

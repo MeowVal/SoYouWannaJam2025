@@ -392,21 +392,25 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_c6rmn"]
 radius = 32.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-z_index = 2
+[node name="Character" type="CharacterBody2D"]
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("2_l3y44")
+DisplayName = null
+MoveSpeed = null
+AccelerationSpeed = null
+DecelerationSpeed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
 shape = SubResource("CircleShape2D_b3ei2")
 
 [node name="CharSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qcvlp")
-animation = &"RunNE"
+animation = &"idleNE"
+offset = Vector2(0, -8)
 
 [node name="PlayerInteractor" type="Area2D" parent="."]
+position = Vector2(0, -10)
 monitorable = false
 script = ExtResource("4_yv7du")
 
@@ -421,4 +425,7 @@ autostart = true
 [node name="InventorySlot" type="Node2D" parent="."]
 position = Vector2(0, -12)
 script = ExtResource("5_o4cwe")
+AllowAll = null
+ItemWhitelist = null
+RecipeWhitelist = null
 metadata/_custom_type_script = "uid://1cpfasjkacse"

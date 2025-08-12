@@ -1,10 +1,10 @@
+using Godot;
 using System;
 using System.Collections.Generic;
-using Godot;
 
 namespace SoYouWANNAJam2025.Code;
 
-public partial class BuildingMap : TileMapLayer
+public partial class WorldMap : TileMapLayer
 {
     //private List<TileMapLayer> _obstacles = new List<TileMapLayer>();
 
@@ -16,6 +16,7 @@ public partial class BuildingMap : TileMapLayer
         
        
     }
+
     
     public override bool _UseTileDataRuntimeUpdate(Vector2I coords)
     {
