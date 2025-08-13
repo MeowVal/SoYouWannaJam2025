@@ -4,13 +4,21 @@ using SoYouWANNAJam2025.Code.Interactive.Items;
 
 namespace SoYouWANNAJam2025.Code.RecipeSystem;
 
-public enum WorkType
+public enum EWorkType
 {
     SpamButton,
     Timer,
     Instant,
     ButtonHold
 }
+
+public enum ERecipeType
+{
+    Standard,
+    ModularPartSwap,
+    ModularStatChange
+}
+
 
 [GlobalClass]
 public partial class BaseRecipe : Resource
@@ -21,8 +29,9 @@ public partial class BaseRecipe : Resource
     [Export] public Texture2D Icon;
 
     [ExportGroup("Recipe Data")]
-    [Export] public WorkType WorkType = WorkType.Instant;
+    [Export] public EWorkType WorkType = EWorkType.Instant;
     [Export] public float TimeToComplete = 1.5f;
-    [Export] public Array<GenericItemTemplate> Inputs = [];
-    [Export] public Array<GenericItemTemplate> Outputs = [];
+    [Export] public ERecipeType RecipeType = ERecipeType.Standard;
+    [Export] public Array<GenericItemTemplate> ItemInputs = [];
+    [Export] public Array<GenericItemTemplate> ItemOutputs = [];
 }

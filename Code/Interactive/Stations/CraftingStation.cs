@@ -17,7 +17,7 @@ public partial class CraftingStation : Interactible
     [Export] public Texture2D Icon;
     [Export] public Array<BaseRecipe> Recipes = [];
 
-    public Interactive.Inventory.InventorySlot InventorySlot;
+    public Interactive.Inventory.Inventory Inventory;
     public BaseRecipe CurrentRecipe;
     public Timer RecipeTimer;
     //private Player.CharacterControl _player;
@@ -33,34 +33,34 @@ public partial class CraftingStation : Interactible
         RecipeTimer.Timeout += _OnRecipeTimer;
         Interact += OnInteractMethod;
         
-        if (FindChild("InventorySlot") is Interactive.Inventory.InventorySlot slot) InventorySlot=slot;
-        InventorySlot.RecipeWhitelist = Recipes;
-        InventorySlot.CompileWhitelist();
+        if (FindChild("Inventory") is Interactive.Inventory.Inventory inv) Inventory=inv;
+        Inventory.RecipeWhitelist = Recipes;
+        Inventory.CompileWhitelist();
     }
 
     public bool AttemptCraft()
     {
-        if (!InventorySlot.HasItem()) return false;
+        if (!Inventory.HasItem()) return false;
         foreach (var recipe in Recipes)
         {
             GD.Print($"Attemping Recipe {recipe.DisplayName}");
-            GD.Print(recipe.Inputs.ToString());
-            if (!InventorySlot.ContainItem(recipe.Inputs, true)) continue;
 
+            if (!Inventory.ContainItem(recipe.ItemInputs, true)) continue;
             CurrentRecipe = recipe;
+
             GD.Print($"Starting WorkType {CurrentRecipe.WorkType}.");
             switch (CurrentRecipe.WorkType)
             {
-                case WorkType.Instant:
+                case EWorkType.Instant:
                     _RecipeComplete();
                     return true;
-                case WorkType.SpamButton:
+                case EWorkType.SpamButton:
                     return true;
-                case WorkType.Timer:
+                case EWorkType.Timer:
                     RecipeTimer.Start(recipe.TimeToComplete);
                     CreateInteractionUi("res://Scenes/UI/Interactions/CraftingTimer.tscn");
                     return true;
-                case WorkType.ButtonHold:
+                case EWorkType.ButtonHold:
                     return true;
             }
         }
@@ -92,18 +92,42 @@ public partial class CraftingStation : Interactible
 
     private void _RecipeComplete()
     {
-        _interactionInterface!.QueueFree();
-        if (!InventorySlot.DestroyItem(CurrentRecipe.Inputs))
+        if (_interactionInterface != null) _interactionInterface!.QueueFree();
+
+        switch (CurrentRecipe.RecipeType)
         {
-            GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
-            return;
+            case ERecipeType.Standard:
+                // Destroy input items from inventory
+                if (!Inventory.DestroyItem(CurrentRecipe.ItemInputs))
+                {
+                    GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
+                    return;
+                }
+
+                GD.Print($"Completed recipe {CurrentRecipe.DisplayName} with {CurrentRecipe.ItemOutputs.Count} outputs:");
+                foreach (var item in CurrentRecipe.ItemOutputs)
+                {
+                    // Create output items
+                    var newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
+                    var newItem = newItemScene.Instantiate<GenericItem>();
+                    newItem.ItemResource = item;
+                    GetNode("/root/Node2D/Isometric").AddChild(newItem);
+                    // Add outputs to inventory
+                    Inventory.PickupItem(newItem, true);
+                    GD.Print($"- {newItem.ItemResource.DisplayName}");
+                }
+                return;
+
+            case ERecipeType.ModularPartSwap:
+
+
+
+                return;
+
+            case ERecipeType.ModularStatChange:
+                return;
         }
-        var newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
-        var newItem = newItemScene.Instantiate<GenericItem>();
-        newItem.ItemResource = CurrentRecipe.Outputs[0];
-        GetNode("/root/Node2D/Isometric").AddChild(newItem);
-        InventorySlot.PickupItem(newItem, true);
-        GD.Print($"Completed recipe {CurrentRecipe.DisplayName} outputting {newItem.Name}");
+
     }
 
     private void OnInteractMethod(Node2D node, TriggerType trigger)
@@ -113,13 +137,13 @@ public partial class CraftingStation : Interactible
             switch (trigger)
             {
                 case TriggerType.PickupDrop:
-                    if (InventorySlot.HasItem() && interactor.InventorySlot.HasSpace())
+                    if (Inventory.HasItem() && interactor.InventorySlot.HasSpace())
                     {
-                        InventorySlot.TransferTo(interactor.InventorySlot);
+                        Inventory.TransferTo(interactor.InventorySlot);
                     }
-                    else if (InventorySlot.HasSpace() && interactor.InventorySlot.HasItem())
+                    else if (Inventory.HasSpace() && interactor.InventorySlot.HasItem())
                     {
-                        interactor.InventorySlot.TransferTo(InventorySlot);
+                        interactor.InventorySlot.TransferTo(Inventory);
                     }
                     break;
                 case TriggerType.UseAction:
@@ -131,13 +155,13 @@ public partial class CraftingStation : Interactible
             switch (trigger)
             {
                 case TriggerType.PickupDrop:
-                    if (InventorySlot.HasItem() && npcInteractor.InventorySlot.HasSpace())
+                    if (Inventory.HasItem() && npcInteractor.InventorySlot.HasSpace())
                     {
-                        InventorySlot.TransferTo(npcInteractor.InventorySlot);
+                        Inventory.TransferTo(npcInteractor.InventorySlot);
                     }
-                    else if (InventorySlot.HasSpace() && npcInteractor.InventorySlot.HasItem())
+                    else if (Inventory.HasSpace() && npcInteractor.InventorySlot.HasItem())
                     {
-                        npcInteractor.InventorySlot.TransferTo(InventorySlot);
+                        npcInteractor.InventorySlot.TransferTo(Inventory);
                     }
 
                     break;

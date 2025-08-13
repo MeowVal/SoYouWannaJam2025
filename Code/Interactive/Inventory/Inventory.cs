@@ -5,6 +5,7 @@ using SoYouWANNAJam2025.Code.Interactive.Items;
 
 namespace SoYouWANNAJam2025.Code.Interactive.Inventory;
 
+[GlobalClass]
 public partial class Inventory : InventorySlot
 {
     public Array<InventorySlot> Slots;
@@ -96,6 +97,7 @@ public partial class Inventory : InventorySlot
         CalculateCount();
         _lastSlot = FindSlot(reversed: true);
 
+        _lastSlot = FindSlot(empty:true, reversed: true);
         return true;
     }
     

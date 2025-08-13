@@ -38,7 +38,7 @@ public partial class InventorySlot : Node2D
         Whitelist = ItemWhitelist;
         foreach (var recipe in RecipeWhitelist)
         {
-            foreach (var input in recipe.Inputs)
+            foreach (var input in recipe.ItemInputs)
             {
                 Whitelist.Add(input);
             }
