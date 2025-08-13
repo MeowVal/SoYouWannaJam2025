@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=4 uid="uid://u6ilul0rfym5"]
+[gd_scene load_steps=19 format=4 uid="uid://u6ilul0rfym5"]
 
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="2_65kow"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="3_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="3_hbuku"]
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/lighting.tscn" id="3_tu5mh"]
+[ext_resource type="Shader" uid="uid://bdmjj0lrw6xfs" path="res://Resources/Shaders/HeightMap.gdshader" id="4_l644c"]
 [ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/Interactive/Items/GenericItem.tscn" id="5_ieyhc"]
+[ext_resource type="Texture2D" uid="uid://8j4lqu8us3ml" path="res://Assets/spritesheetTempAsset.png" id="5_o4nn5"]
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="6_65kow"]
 [ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Entities/Interactive/Stations/GenericCraftingStation.tscn" id="7_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://cl07jfhggwrem" path="res://Entities/Interactive/Items/ModularItem.tscn" id="8_14b3v"]
@@ -15,6 +17,10 @@
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="9_vwcaw"]
 [ext_resource type="PackedScene" uid="uid://ccxhqwfuyr60" path="res://Scenes/UI/HUD.tscn" id="10_8x3ni"]
 [ext_resource type="Resource" uid="uid://kpiwa4s7s61y" path="res://Resources/Recipes/testPartReplacement.tres" id="10_14b3v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwcaw"]
+shader = ExtResource("4_l644c")
+shader_parameter/heightmap = ExtResource("5_o4nn5")
 
 [node name="Node2D" type="Node2D"]
 
@@ -30,6 +36,10 @@ x_draw_order_reversed = true
 script = ExtResource("3_bdwe5")
 
 [node name="Lighting" parent="Isometric/WorldMap" instance=ExtResource("3_tu5mh")]
+material = SubResource("ShaderMaterial_vwcaw")
+
+[node name="ShadowCaster2" parent="Isometric/WorldMap/Lighting" index="2"]
+visible = false
 
 [node name="Vegetations" type="TileMapLayer" parent="Isometric/WorldMap"]
 y_sort_enabled = true
@@ -95,3 +105,5 @@ script = ExtResource("9_vwcaw")
 FollowingNode = NodePath("../Isometric/WorldMap/Entities/Character")
 
 [node name="Hud" parent="Camera2D" instance=ExtResource("10_8x3ni")]
+
+[editable path="Isometric/WorldMap/Lighting"]
