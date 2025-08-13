@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2owtq0jxh0n6"]
+[gd_scene load_steps=6 format=3 uid="uid://b2owtq0jxh0n6"]
 
 [ext_resource type="Script" uid="uid://dpx7jbjhg4ox0" path="res://Code/Interactive/Items/DayCycleLantern.cs" id="1_6s3kx"]
 [ext_resource type="PackedScene" uid="uid://c5fknakn4m4yp" path="res://Entities/Interactive/interactible.tscn" id="1_udb3f"]
 [ext_resource type="Texture2D" uid="uid://dji6b8c2twuil" path="res://Assets/Sprites/objects/Explorer's_Lantern.png" id="2_6s3kx"]
+
+[sub_resource type="Gradient" id="Gradient_31rvx"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6s3kx"]
+gradient = SubResource("Gradient_31rvx")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.475, 0.475)
+fill_to = Vector2(0.141026, 0.115385)
 
 [node name="DayCycleLantern" type="Node2D"]
 script = ExtResource("1_6s3kx")
@@ -15,6 +26,13 @@ scale = Vector2(0.3125, 0.3125)
 texture = ExtResource("2_6s3kx")
 offset = Vector2(0, -12)
 
+[node name="PointLight2D2" type="PointLight2D" parent="Interactible/Sprite2D"]
+texture = SubResource("GradientTexture2D_6s3kx")
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
+one_shot = true
+
+[node name="MorningTimer" type="Timer" parent="."]
+wait_time = 30.0
 one_shot = true

@@ -1,4 +1,5 @@
 using Godot;
+using SoYouWANNAJam2025.Code.World;
 using Vector2 = Godot.Vector2;
 
 
@@ -19,6 +20,8 @@ public partial class CharacterControl : CharacterBody2D
 	private Vector2 _targetPos;
 	private int _moveThreshold = 3;
 
+	public bool Frozen = false;
+
 	[ExportGroup("Inventory")]
 	private Player.PlayerInteractor _interactor;
 
@@ -32,6 +35,7 @@ public partial class CharacterControl : CharacterBody2D
 		
 		_camera = GetTree().Root.GetCamera2D(); // Gives controls over Camera properties and get a reference to it.
 		_camera.Scale = new Vector2(World.Global.GameScale, World.Global.GameScale);
+		Global.Player = GetNode<CharacterControl>(".");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -49,22 +53,22 @@ public partial class CharacterControl : CharacterBody2D
 		{
 			_interactor.TriggerInteraction(TriggerType.PickupDrop);
 		}
-		else if (@event.IsActionPressed("MoveRight"))
+		else if (@event.IsActionPressed("MoveRight") && !Frozen)
 		{
 			_direction = "right";
 			_charSprite.Play("RunNE");
 		}
-		else if (@event.IsActionPressed("MoveLeft"))
+		else if (@event.IsActionPressed("MoveLeft") && !Frozen)
 		{
 			_direction = "left";
 			_charSprite.Play("RunSW");
 		}
-		else if (@event.IsActionPressed("MoveUp"))
+		else if (@event.IsActionPressed("MoveUp") && !Frozen)
 		{
 			_direction = "up";
 			_charSprite.Play("RunNW");
 		}
-		else if (@event.IsActionPressed("MoveDown"))
+		else if (@event.IsActionPressed("MoveDown") && !Frozen)
 		{
 			_direction = "down";
 			_charSprite.Play("RunSE");
@@ -77,6 +81,8 @@ public partial class CharacterControl : CharacterBody2D
 		moveDir.X = Input.GetActionStrength("MoveRight") - Input.GetActionStrength("MoveLeft");
 		moveDir.Y = Input.GetActionStrength("MoveDown") - Input.GetActionStrength("MoveUp");
 		moveDir = moveDir.Normalized();
+		
+		if (Frozen) moveDir = Vector2.Zero;
 		
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{

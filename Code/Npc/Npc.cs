@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using SoYouWANNAJam2025.Code.Interactive.Inventory;
 
 namespace SoYouWANNAJam2025.Code.Npc;
 [Tool]
@@ -28,6 +29,7 @@ public partial class Npc : CharacterBody2D
 
     private AnimationPlayer _animationPlayer; // The animation player for playing the animations on the npc
     private Sprite2D _sprite2D; // The sprite of the npc
+    private InventorySlot _inventorySlot;
     private Vector2 _lastTargetPosition = Vector2.Zero;  // Store last target position
     private float _stopThreshold = 5.0f;  // The threshold distance at which the NPC will stop or no longer recalculate the path
     private float _pathUpdateThreshold = 32.0f;  // The distance at which to update the path
@@ -39,6 +41,7 @@ public partial class Npc : CharacterBody2D
         _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         _animationPlayer = GetNode<AnimationPlayer>("NpcInteractor/AnimationPlayer");
         _sprite2D = GetNode<Sprite2D>("NpcInteractor/Sprite2D");
+        _inventorySlot = GetNode<InventorySlot>("NpcInteractor/InventorySlot");
         MoodTimer = GetNode<Timer>("MoodTimer");
         if (NpcResource != null)
             SetupNpc();
@@ -104,6 +107,8 @@ public partial class Npc : CharacterBody2D
         UpdateDirection(GlobalPosition + dir);
         UpdateAnimation();
         MoveAndSlide();
+        _sprite2D.GlobalPosition = GlobalPosition.Round();
+        _inventorySlot.GlobalPosition = GlobalPosition.Round();
     }
     
     // Sets up the navigation agent for the pathfinder

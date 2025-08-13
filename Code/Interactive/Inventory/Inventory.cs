@@ -50,6 +50,7 @@ public partial class Inventory : InventorySlot
     // Moves item from one slot directly to another, returns true if successful.
     public override bool TransferTo(InventorySlot slot)
     {
+        GD.Print("INVENTORY transfer to");
         if (!HasItem() || !slot.HasSpace()) return false;
         
         if (!Slots[_lastSlot].TransferTo(slot)) return false;
@@ -62,6 +63,7 @@ public partial class Inventory : InventorySlot
     // Add item to the slot, returns true if successful.
     public override bool PickupItem(GenericItem item, bool forceAdd = false)
     {
+        GD.Print("INVENTORY Pickup item");
         if (!HasSpace()) return false;
         var index = FindSlot();
         if (index == -1 || !Slots[index].PickupItem(item, forceAdd)) return false;
@@ -95,9 +97,7 @@ public partial class Inventory : InventorySlot
             
         }
         CalculateCount();
-        _lastSlot = FindSlot(reversed: true);
-
-        _lastSlot = FindSlot(empty:true, reversed: true);
+        _lastSlot = FindSlot(empty:false, reversed: true);
         return true;
     }
     

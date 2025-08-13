@@ -34,10 +34,12 @@ position = Vector2(0, -26)
 script = ExtResource("3_0xd6t")
 metadata/_custom_type_script = "uid://usn4a73qqvca"
 
-[node name="InventorySlot" type="Node2D" parent="Inventory"]
+[node name="InventorySlot1" type="Node2D" parent="Inventory"]
+position = Vector2(-9, -4)
 script = ExtResource("4_41vq5")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="InventorySlot2" type="Node2D" parent="Inventory"]
+position = Vector2(9, -4)
 script = ExtResource("4_41vq5")
 metadata/_custom_type_script = "uid://1cpfasjkacse"

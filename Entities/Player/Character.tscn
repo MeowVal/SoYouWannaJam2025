@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://c4hvjp22ok276"]
+[gd_scene load_steps=60 format=3 uid="uid://c4hvjp22ok276"]
 
 [ext_resource type="Texture2D" uid="uid://vsq7nymelad8" path="res://Assets/Sprites/characters/wolf-idle.png" id="2_b3ei2"]
 [ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/Player/CharacterControl.cs" id="2_l3y44"]
@@ -395,6 +395,17 @@ radius = 20.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_31rvx"]
 polygon = PackedVector2Array(0, 8, 8, 8, 16, 0, 16, -8, 8, -16, 0, -16, -8, -16, -16, -8, -16, 0, -8, 8)
 
+[sub_resource type="Gradient" id="Gradient_31rvx"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bkf2h"]
+gradient = SubResource("Gradient_31rvx")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.475, 0.475)
+fill_to = Vector2(0.141026, 0.115385)
+
 [node name="Character" type="CharacterBody2D"]
 y_sort_enabled = true
 motion_mode = 1
@@ -429,3 +440,6 @@ metadata/_custom_type_script = "uid://1cpfasjkacse"
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(0, 8)
 occluder = SubResource("OccluderPolygon2D_31rvx")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_bkf2h")

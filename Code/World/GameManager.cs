@@ -86,7 +86,7 @@ public partial class GameManager : Node2D
 		npcSpawnLocation.ProgressRatio = GD.Randf();
 		npc.Position = npcSpawnLocation.Position;
 		npc.Scale = Vector2.One * 4;
-		npc.Target = GetNode<Area2D>("Isometric/CraftingBench");
+		npc.Target = GetNode<Area2D>("Isometric/GenericCraftingStation");
 		npc.LeaveAreaNode = GetNode<Node2D>("LeaveArea");
 		AddChild(npc);
 	}
