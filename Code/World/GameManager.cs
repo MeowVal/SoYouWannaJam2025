@@ -138,5 +138,24 @@ public partial class GameManager : Node2D
 
 			container.AddChild(lightOccluder);
 		}
+		var root = new Node2D();
+		var packedScene = new PackedScene();
+		var result = packedScene.Pack(root);
+		if (result != Error.Ok)
+		{
+			GD.PrintErr("Failed to pack scene: ", result);
+		}
+
+		// Save the scene file
+		var savePath = "res://GeneratedOccluders.tscn";
+		var err = ResourceSaver.Save(packedScene, savePath);
+		if (err != Error.Ok)
+		{
+			GD.PrintErr("Failed to save scene: ", err);
+		}
+		else
+		{
+			GD.Print("Occluder scene saved at ", savePath);
+		}
 	}
 }
