@@ -4,4 +4,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>SoYouWANNAJam2025</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Entities\Interactive\Items\" />
+  </ItemGroup>
 </Project>
