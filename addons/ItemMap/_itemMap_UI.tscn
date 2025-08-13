@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://bvbthpl7rqt4j"]
 
-[node name="Item Map Control" type="VBoxContainer"]
+[node name="Entity Manager" type="VBoxContainer"]
+mouse_filter = 0
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 2
+auto_width = true
+auto_height = true
