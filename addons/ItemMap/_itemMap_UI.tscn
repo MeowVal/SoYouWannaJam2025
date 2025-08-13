@@ -7,3 +7,7 @@ mouse_filter = 0
 layout_mode = 2
 auto_width = true
 auto_height = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Refresh List"

@@ -49,6 +49,7 @@ public partial class ItemMap : EditorPlugin
 		SceneClosed += OnSceneClosedChanged;
 		
 		_panelUi.GetNode<ItemList>("ItemList").ItemClicked += OnItemClicked;
+		_panelUi.GetNode<Button>("Button").ButtonUp += PopulateItemList;
 	}
 
 	private void OnItemClicked(long index, Vector2 position, long id)
@@ -68,12 +69,12 @@ public partial class ItemMap : EditorPlugin
 		if (sceneNode != null)
 		{
 			//Weird timing error, need to fix. Not fatal.
-			var node = EditorInterface.Singleton.GetEditedSceneRoot().GetNode<TileMapLayer>(WorldMap);
-			if (node != null)
-			{
-				GD.Print(node);
-				_worldMap = node;
-			}
+				var node = EditorInterface.Singleton.GetEditedSceneRoot().GetNodeOrNull<TileMapLayer>(WorldMap); 
+				if (node != null)
+				{
+					GD.Print(node);
+					_worldMap = node;
+				}
 		}
 		else
 		{
@@ -131,12 +132,14 @@ public partial class ItemMap : EditorPlugin
 	private void PopulateItemList()
 	{
 		var fileList = GetDirectories(Entities);
+		var ui = _panelUi.GetNode<ItemList>("ItemList");
+		ui.Clear();
 		foreach (var file in fileList)
 		{
 			if (file.ToString().Contains(".tscn"))
 				{
 					//GD.Print(file.ToString());
-					_panelUi.GetNode<ItemList>("ItemList").AddItem(file.ToString());
+					ui.AddItem(file.ToString());
 				}
 		}
 	}

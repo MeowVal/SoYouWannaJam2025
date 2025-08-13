@@ -12,6 +12,9 @@ public partial class GameManager : Node2D
 	public PackedScene NpcScene { get; set; }
 
 	public float gold = 0; 
+	
+	[Export] public DayCycleLantern _cycleLantern;
+	
 	public override void _Ready()
 	{
 		var tileMap =(TileMapLayer)FindChild("WorldMap");
@@ -22,7 +25,23 @@ public partial class GameManager : Node2D
 		if(tileMap != null&& container != null)
 			GenerateTileOccluders(tileMap, container);
 		DirContents("res://Resources/Npcs/");
+
+		GD.Print(_cycleLantern);
+		_cycleLantern.CycleLantern += LanternChanged;
 	}
+	
+	private void LanternChanged(bool onCycleLantern)
+	{
+		if (onCycleLantern)
+		{
+			GD.Print("IT'S DAY TIME !");
+		}
+		else
+		{
+			GD.Print("AWW IT'S NIGHT TIME !");
+		}
+	}
+	
 	public void DirContents(string path)
 	{
 		using var dir = DirAccess.Open(path);
