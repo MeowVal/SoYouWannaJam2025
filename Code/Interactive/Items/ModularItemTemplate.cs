@@ -9,7 +9,7 @@ public partial class ModularItemTemplate : GenericItemTemplate
 {
     [ExportGroup("Setup")]
     [Export] // The different modular parts you can attach to this item.
-    public Godot.Collections.Dictionary<EPartType, ModularPartTemplate> Parts { get; set; }
+    public Godot.Collections.Dictionary<EPartType, ModularPartTemplate> DefaultParts { get; set; }
     //public Array<EPartType> PartSlots;
     [Export] // The action an NPC can use this for.
     public EUseType UseType;

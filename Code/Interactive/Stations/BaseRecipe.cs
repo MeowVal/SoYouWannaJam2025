@@ -34,4 +34,5 @@ public partial class BaseRecipe : Resource
     [Export] public ERecipeType RecipeType = ERecipeType.Standard;
     [Export] public Array<GenericItemTemplate> ItemInputs = [];
     [Export] public Array<GenericItemTemplate> ItemOutputs = [];
+    [Export] public ModularPartTemplate PartOutput;
 }

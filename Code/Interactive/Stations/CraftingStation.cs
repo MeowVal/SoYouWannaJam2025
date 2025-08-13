@@ -3,6 +3,7 @@ using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.RecipeSystem;
 using SoYouWANNAJam2025.Code.Interactive.Items;
+using SoYouWANNAJam2025.Entities.Interactive.Items;
 
 //using SoYouWANNAJam2025.Scenes.UI.Interactions;
 
@@ -120,8 +121,32 @@ public partial class CraftingStation : Interactible
 
             case ERecipeType.ModularPartSwap:
 
+                // Filter the weapon from the other inputs
+                Array<GenericItemTemplate> deleteList = [];
+                ModularItem targetItem = null;
+                foreach (var slot in Inventory.Slots)
+                {
+                    if (slot.Item is ModularItem modularItem)
+                    {
+                        targetItem = modularItem;
+                    }
+                    else
+                    {
+                        deleteList.Add(slot.Item.ItemResource);
+                    }
+                }
+                if (targetItem == null) return;
 
+                // Destroy input items from inventory, except for weapon
+                if (!Inventory.DestroyItem(deleteList))
+                {
+                    GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
+                    return;
+                }
 
+                // Add part to weapon
+                GD.Print($"Completed recipe {CurrentRecipe.DisplayName}, adding ${CurrentRecipe.PartOutput} to ");
+                targetItem.AddPart(CurrentRecipe.PartOutput);
                 return;
 
             case ERecipeType.ModularStatChange:
