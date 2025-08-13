@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Godot;
 using Godot.Collections;
-using SoYouWANNAJam2025.Code.RecipeSystem;
+using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Entities.Interactive.Items;
 
@@ -21,6 +21,7 @@ public partial class CraftingStation : Interactible
     public Interactive.Inventory.Inventory Inventory;
     public BaseRecipe CurrentRecipe;
     public Timer RecipeTimer;
+    public bool IsCrafting = false;
     //private Player.CharacterControl _player;
     private CraftingStationInterface _interactionInterface;
     private Node2D _interfaceLocation;
@@ -49,12 +50,17 @@ public partial class CraftingStation : Interactible
 
             if (!Inventory.ContainItem(recipe.ItemInputs, true)) continue;
             CurrentRecipe = recipe;
+            IsCrafting = true;
 
             GD.Print($"Starting WorkType {CurrentRecipe.WorkType}.");
             switch (CurrentRecipe.WorkType)
             {
                 case EWorkType.Instant:
-                    _RecipeComplete();
+                    CompleteRecipe();
+                    return true;
+                case EWorkType.Inputs:
+                    RecipeTimer.Start(recipe.TimeToComplete);
+                    CreateInteractionUi("res://Scenes/UI/Interactions/CraftingInputs.tscn");
                     return true;
                 case EWorkType.SpamButton:
                     return true;
@@ -89,13 +95,14 @@ public partial class CraftingStation : Interactible
     private void _OnRecipeTimer()
     {
         GD.Print("Recipe Timer Completed");
-        _RecipeComplete();
+        CompleteRecipe();
     }
 
-    private void _RecipeComplete()
+    public void CompleteRecipe()
     {
         if (_interactionInterface != null) _interactionInterface!.QueueFree();
-
+        RecipeTimer.Stop();
+        IsCrafting = false;
         switch (CurrentRecipe.RecipeType)
         {
             case ERecipeType.Standard:
@@ -113,7 +120,7 @@ public partial class CraftingStation : Interactible
                     var newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
                     var newItem = newItemScene.Instantiate<GenericItem>();
                     newItem.ItemResource = item;
-                    GetNode("/root/Node2D/Isometric").AddChild(newItem);
+                    GetNode("/root/GameManager/Isometric").AddChild(newItem);
                     // Add outputs to inventory
                     Inventory.PickupItem(newItem, true);
                     GD.Print($"- {newItem.ItemResource.DisplayName}");
@@ -153,11 +160,11 @@ public partial class CraftingStation : Interactible
             case ERecipeType.ModularStatChange:
                 return;
         }
-
     }
 
     private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
+        if (IsCrafting) return;
         if (node is Player.PlayerInteractor interactor)
         {
             switch (trigger)

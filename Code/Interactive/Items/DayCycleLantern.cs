@@ -26,6 +26,8 @@ public partial class DayCycleLantern : Node2D
         _animator.Play("DayNightCycle");//Init Animation
         _animator.Stop();
         
+        //_animator.Seek(0.5, true);
+        
         _timer.SetWaitTime(CycleTime);
     }
 

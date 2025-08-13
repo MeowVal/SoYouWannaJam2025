@@ -2,11 +2,12 @@ using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Interactive.Items;
 
-namespace SoYouWANNAJam2025.Code.RecipeSystem;
+namespace SoYouWANNAJam2025.Code.Interactive.Stations;
 
 public enum EWorkType
 {
     SpamButton,
+    Inputs,
     Timer,
     Instant,
     ButtonHold

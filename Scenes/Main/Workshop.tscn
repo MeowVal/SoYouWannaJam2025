@@ -1,11 +1,12 @@
-[gd_scene load_steps=18 format=4 uid="uid://u6ilul0rfym5"]
+[gd_scene load_steps=22 format=4 uid="uid://u6ilul0rfym5"]
 
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_knoqw"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="2_65kow"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="3_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="3_hbuku"]
-[ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/lighting.tscn" id="3_tu5mh"]
-[ext_resource type="PackedScene" uid="uid://b2owtq0jxh0n6" path="res://Entities/Interactive/Items/DayCycleLantern.tscn" id="4_hbuku"]
+[ext_resource type="PackedScene" path="res://Entities/lighting.tscn" id="3_tu5mh"]
+[ext_resource type="PackedScene" path="res://Entities/Interactive/Items/DayCycleLantern.tscn" id="4_hbuku"]
+[ext_resource type="PackedScene" uid="uid://bwho24gjrxuig" path="res://Entities/Interactive/Stations/CombiningStation.tscn" id="4_ieyhc"]
 [ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/Interactive/Items/GenericItem.tscn" id="5_ieyhc"]
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="6_65kow"]
 [ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Entities/Interactive/Stations/GenericCraftingStation.tscn" id="7_bdwe5"]
@@ -17,6 +18,18 @@
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="9_vwcaw"]
 [ext_resource type="PackedScene" uid="uid://ccxhqwfuyr60" path="res://Scenes/UI/HUD.tscn" id="10_8x3ni"]
 [ext_resource type="Resource" uid="uid://kpiwa4s7s61y" path="res://Resources/Recipes/testPartReplacement.tres" id="10_14b3v"]
+[ext_resource type="Resource" uid="uid://uwreoey1lqgr" path="res://Resources/Recipes/testInputs.tres" id="12_ea567"]
+
+[sub_resource type="Gradient" id="Gradient_31rvx"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vwcaw"]
+gradient = SubResource("Gradient_31rvx")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.475, 0.475)
+fill_to = Vector2(0.141026, 0.115385)
 
 [node name="GameManager" type="Node2D" node_paths=PackedStringArray("_cycleLantern")]
 script = ExtResource("1_knoqw")
@@ -55,7 +68,6 @@ position = Vector2(128, 224)
 [node name="DayCycleLantern" parent="Isometric/WorldMap/Entities" node_paths=PackedStringArray("Lighting") instance=ExtResource("4_hbuku")]
 position = Vector2(80, 232)
 Lighting = NodePath("../../Lighting")
-CycleTime = 1200.0
 
 [node name="Collison" type="TileMapLayer" parent="Isometric/WorldMap" groups=["Obstacles"]]
 y_sort_enabled = true
@@ -81,12 +93,19 @@ ItemResource = ExtResource("6_65kow")
 
 [node name="GenericCraftingStation" parent="Isometric/WorldMap" instance=ExtResource("7_bdwe5")]
 position = Vector2(109.75, 165.25)
-Recipes = Array[ExtResource("8_bdwe5")]([ExtResource("9_14b3v"), ExtResource("10_14b3v")])
+Recipes = Array[ExtResource("8_bdwe5")]([ExtResource("9_14b3v"), ExtResource("10_14b3v"), ExtResource("12_ea567")])
 
 [node name="ModularItem" parent="Isometric/WorldMap" instance=ExtResource("8_14b3v")]
 position = Vector2(49.25, 262.5)
 ItemResource = ExtResource("9_tu5mh")
-ColliderRadius = 10.0
+ColliderRadius = 6.0
+
+[node name="CombiningStation" parent="Isometric/WorldMap" instance=ExtResource("4_ieyhc")]
+position = Vector2(178.25, 196.25)
+
+[node name="PointLight2D" type="PointLight2D" parent="Isometric/WorldMap"]
+position = Vector2(113, 186.5)
+texture = SubResource("GradientTexture2D_vwcaw")
 
 [node name="BackgroundTile" type="TileMapLayer" parent="Isometric"]
 z_index = -4096

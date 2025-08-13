@@ -1,8 +1,9 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using SoYouWANNAJam2025.Code.RecipeSystem;
+using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Items;
+using BaseRecipe = SoYouWANNAJam2025.Code.Interactive.Stations.BaseRecipe;
 
 namespace SoYouWANNAJam2025.Code.Interactive.Inventory;
 
@@ -28,7 +29,7 @@ public partial class InventorySlot : Node2D
 
     public override void _Ready()
     {
-        _grid = GetTree().GetRoot().GetNode<TileMapLayer>("Node2D/Isometric/WorldMap");
+        _grid = GetTree().GetRoot().GetNode<TileMapLayer>("GameManager/Isometric/WorldMap");
         CompileWhitelist();
     }
 
