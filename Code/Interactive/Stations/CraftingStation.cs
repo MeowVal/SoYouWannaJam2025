@@ -42,6 +42,7 @@ public partial class CraftingStation : Interactible
     public bool AttemptCraft()
     {
         if (!Inventory.HasItem()) return false;
+        if (!RecipeTimer.IsStopped()) return false;
         foreach (var recipe in Recipes)
         {
             GD.Print($"Attemping Recipe {recipe.DisplayName}");
