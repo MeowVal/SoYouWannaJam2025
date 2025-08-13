@@ -38,9 +38,8 @@ public partial class DayCycleLantern : Node2D
         _morningTimer.SetWaitTime(DawnTime);
     }
 
-    private async void OnInteractMethod(Node2D node, TriggerType trigger)
+    private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
-        GD.Print("test");
         if (trigger is TriggerType.UseAction && _timer.IsStopped())
         {
             GD.Print("Started DayNightCycle");
@@ -48,6 +47,7 @@ public partial class DayCycleLantern : Node2D
             {
                 _morningTimer.Start();
                 _timer.Start();
+                GD.Print(1 / DawnTime * (float)DawnFrame, " || ", 1 / DawnTime, " || ", DawnFrame);
                 _animator.PlaySection("DayNightCycle", 0, DawnFrame, -1, 1 / DawnTime * (float)DawnFrame);
             }
             else
@@ -61,8 +61,9 @@ public partial class DayCycleLantern : Node2D
 
     private void OnMorningTimeout()
     {
+        GD.Print(1 / CycleTime * (float)DawnFrame, " || ", 1 / CycleTime, " || ", DawnFrame);
         _animator.Pause();
-        _animator.PlaySection("DayNightCycle",0,1,-1,1/CycleTime*(float)DawnFrame);
+        _animator.PlaySection("DayNightCycle",DawnFrame-(DawnFrame/2),1,-1,(1-(float)DawnFrame)/CycleTime);
         EmitSignal(SignalName.CycleLantern, true);
     }
     
@@ -71,5 +72,13 @@ public partial class DayCycleLantern : Node2D
         GD.Print("DayNightCycle Timed Out");
         EmitSignal(SignalName.CycleLantern, false);
         _animator.Stop();
+    }
+
+    public override void _Process(double delta)
+    {
+        if (!_timer.IsStopped())
+        {
+            GD.Print(_animator.CurrentAnimationPosition);
+        }
     }
 }
