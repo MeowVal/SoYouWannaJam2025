@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://u6ilul0rfym5"]
+[gd_scene load_steps=16 format=4 uid="uid://u6ilul0rfym5"]
 
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="2_65kow"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="3_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="3_hbuku"]
+[ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/lighting.tscn" id="3_tu5mh"]
 [ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/Interactive/Items/GenericItem.tscn" id="5_ieyhc"]
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="6_65kow"]
 [ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Entities/Interactive/Stations/GenericCraftingStation.tscn" id="7_bdwe5"]
@@ -27,6 +28,8 @@ tile_map_data = PackedByteArray("AAAVAA8AAQAAAAAAAAAVABAAAQAAAAAAAAASABAAAQAAAAA
 tile_set = ExtResource("2_65kow")
 x_draw_order_reversed = true
 script = ExtResource("3_bdwe5")
+
+[node name="Lighting" parent="Isometric/WorldMap" instance=ExtResource("3_tu5mh")]
 
 [node name="Vegetations" type="TileMapLayer" parent="Isometric/WorldMap"]
 y_sort_enabled = true
