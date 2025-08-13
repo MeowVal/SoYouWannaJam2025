@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2owtq0jxh0n6"]
+[gd_scene load_steps=5 format=3 uid="uid://b2owtq0jxh0n6"]
 
 [ext_resource type="Script" uid="uid://dpx7jbjhg4ox0" path="res://Code/Interactive/Items/DayCycleLantern.cs" id="1_6s3kx"]
 [ext_resource type="PackedScene" uid="uid://c5fknakn4m4yp" path="res://Entities/Interactive/interactible.tscn" id="1_udb3f"]
 [ext_resource type="Texture2D" uid="uid://dji6b8c2twuil" path="res://Assets/Sprites/objects/Explorer's_Lantern.png" id="2_6s3kx"]
+[ext_resource type="Texture2D" uid="uid://b5g8dj2bpwsm2" path="res://Assets/Sprites/characters/Shadow/Shadow.png" id="4_jmsnv"]
 
 [node name="DayCycleLantern" type="Node2D"]
 script = ExtResource("1_6s3kx")
@@ -14,6 +15,14 @@ ColliderRadius = 3.0
 scale = Vector2(0.3125, 0.3125)
 texture = ExtResource("2_6s3kx")
 offset = Vector2(0, -12)
+
+[node name="PointLight2D" type="PointLight2D" parent="Interactible/Sprite2D"]
+position = Vector2(9.53674e-07, -3.2)
+scale = Vector2(1, 1.125)
+energy = 1.49
+blend_mode = 2
+texture = ExtResource("4_jmsnv")
+texture_scale = 4.85
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
