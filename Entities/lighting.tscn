@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn7d21rek2i16"]
+[gd_scene load_steps=8 format=3 uid="uid://bn7d21rek2i16"]
 
 [ext_resource type="Shader" uid="uid://csfutv5akp6wn" path="res://Resources/Shaders/LightRays.gdshader" id="1_w0clr"]
 [ext_resource type="Shader" uid="uid://cw8gvojcw7vhn" path="res://Resources/Shaders/Shadows.gdshader" id="2_j6v2i"]
-[ext_resource type="Shader" uid="uid://c55w0mojkabgv" path="res://Resources/Shaders/Screen.gdshader" id="2_xu0ob"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7sysf"]
 shader = ExtResource("1_w0clr")
@@ -18,11 +17,6 @@ shader_parameter/ray_1_density = 20.0
 shader_parameter/ray_2_density = 80.0
 shader_parameter/ray_1_intensity = 0.5
 shader_parameter/ray_2_intensity = 0.5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1t86e"]
-shader = ExtResource("2_xu0ob")
-shader_parameter/xyangle = 0.0
-shader_parameter/zangle = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e8nqc"]
 shader = ExtResource("2_j6v2i")
@@ -173,16 +167,6 @@ offset_left = -2555.75
 offset_top = -1069.5
 offset_right = 43.25
 offset_bottom = 274.5
-scale = Vector2(2.08094, 2.05174)
-color = Color(1, 1, 1, 0)
-metadata/_edit_use_anchors_ = true
-
-[node name="ShadowCaster2" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_1t86e")
-offset_left = -7868.91
-offset_top = -3267.43
-offset_right = -5269.91
-offset_bottom = -1923.43
 scale = Vector2(2.08094, 2.05174)
 color = Color(1, 1, 1, 0)
 metadata/_edit_use_anchors_ = true
