@@ -44,33 +44,12 @@ public partial class CraftingStation : Interactible
     {
         if (!Inventory.HasItem()) return false;
         if (!RecipeTimer.IsStopped()) return false;
+        // Try each recipe until one triggers successfully
         foreach (var recipe in Recipes)
         {
             GD.Print($"Attemping Recipe {recipe.DisplayName}");
-
-            if (!Inventory.ContainItem(recipe.ItemInputs, true)) continue;
-            CurrentRecipe = recipe;
-            IsCrafting = true;
-
-            GD.Print($"Starting WorkType {CurrentRecipe.WorkType}.");
-            switch (CurrentRecipe.WorkType)
-            {
-                case EWorkType.Instant:
-                    CompleteRecipe();
-                    return true;
-                case EWorkType.Inputs:
-                    RecipeTimer.Start(recipe.TimeToComplete);
-                    CreateInteractionUi("res://Scenes/UI/Interactions/CraftingInputs.tscn");
-                    return true;
-                case EWorkType.SpamButton:
-                    return true;
-                case EWorkType.Timer:
-                    RecipeTimer.Start(recipe.TimeToComplete);
-                    CreateInteractionUi("res://Scenes/UI/Interactions/CraftingTimer.tscn");
-                    return true;
-                case EWorkType.ButtonHold:
-                    return true;
-            }
+            if (!RecipeBegin(recipe)) continue;
+            return true;
         }
         return false;
     }
@@ -84,24 +63,51 @@ public partial class CraftingStation : Interactible
         _interactionInterface.GlobalPosition = _interfaceLocation.GlobalPosition;
     }
 
-    private void OnCraftingStationExited(Node2D body)
+    // Begin the process of making a specific recipe
+    public bool RecipeBegin(BaseRecipe recipe)
     {
-        if (RecipeTimer.IsStopped()) return;
-        RecipeTimer.Stop();
+        if (!Inventory.ContainItem(recipe.ItemInputs, true)) return false;
+        CurrentRecipe = recipe;
+        IsCrafting = true;
+
+        GD.Print($"Starting WorkType {CurrentRecipe.WorkType}.");
+        switch (CurrentRecipe.WorkType)
+        {
+            case EWorkType.Instant:
+                RecipeComplete();
+                return true;
+            case EWorkType.Inputs:
+                RecipeTimer.Start(recipe.TimeToComplete);
+                CreateInteractionUi("res://Scenes/UI/Interactions/CraftingInputs.tscn");
+                return true;
+            case EWorkType.SpamButton:
+                return true;
+            case EWorkType.Timer:
+                RecipeTimer.Start(recipe.TimeToComplete);
+                CreateInteractionUi("res://Scenes/UI/Interactions/CraftingTimer.tscn");
+                return true;
+            case EWorkType.ButtonHold:
+                return true;
+        }
+        return false;
+    }
+
+    // Cancel the current recipe's process
+    public bool RecipeAbort()
+    {
+        if (!RecipeTimer.IsStopped()) RecipeTimer.Stop();
+        if (_interactionInterface == null) return false;
         _interactionInterface.QueueFree();
+        IsCrafting = false;
         GD.Print("Recipe ended before completion");
+        return true;
     }
 
-    private void _OnRecipeTimer()
-    {
-        GD.Print("Recipe Timer Completed");
-        CompleteRecipe();
-    }
-
-    public void CompleteRecipe()
+    // End the recipe and produce the results
+    public bool RecipeComplete()
     {
         if (_interactionInterface != null) _interactionInterface!.QueueFree();
-        RecipeTimer.Stop();
+        if (!RecipeTimer.IsStopped()) RecipeTimer.Stop();
         IsCrafting = false;
         switch (CurrentRecipe.RecipeType)
         {
@@ -110,7 +116,7 @@ public partial class CraftingStation : Interactible
                 if (!Inventory.DestroyItem(CurrentRecipe.ItemInputs))
                 {
                     GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
-                    return;
+                    return false;
                 }
 
                 GD.Print($"Completed recipe {CurrentRecipe.DisplayName} with {CurrentRecipe.ItemOutputs.Count} outputs:");
@@ -125,7 +131,7 @@ public partial class CraftingStation : Interactible
                     Inventory.PickupItem(newItem, true);
                     GD.Print($"- {newItem.ItemResource.DisplayName}");
                 }
-                return;
+                return true;
 
             case ERecipeType.ModularPartSwap:
 
@@ -143,23 +149,31 @@ public partial class CraftingStation : Interactible
                         deleteList.Add(slot.Item.ItemResource);
                     }
                 }
-                if (targetItem == null) return;
+                if (targetItem == null) return false;
 
                 // Destroy input items from inventory, except for weapon
                 if (!Inventory.DestroyItem(deleteList))
                 {
                     GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
-                    return;
+                    return false;
                 }
 
                 // Add part to weapon
                 GD.Print($"Completed recipe {CurrentRecipe.DisplayName}.");
                 targetItem.AddPart(CurrentRecipe.PartOutput);
-                return;
+                return true;
 
             case ERecipeType.ModularStatChange:
-                return;
+                return true;
         }
+        return false;
+    }
+
+
+    private void _OnRecipeTimer()
+    {
+        GD.Print("Recipe Timer Completed");
+        RecipeComplete();
     }
 
     private void OnInteractMethod(Node2D node, TriggerType trigger)

@@ -101,7 +101,7 @@ public partial class CraftingInputs : CraftingStationInterface
                 GD.Print("WIN!");
                 Global.Player.Frozen = false;
                 Station.RecipeTimer.Stop();
-                Station.CompleteRecipe();
+                Station.RecipeComplete();
             }
         }
         else
