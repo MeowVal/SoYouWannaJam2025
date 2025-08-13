@@ -35,7 +35,7 @@ public enum EUseType
 public partial class ModularItem : GenericItem
 {
     // Defines what slots this item will have to use
-    private Dictionary<EPartType, ModularPartTemplate> _parts;
+    private Dictionary<EPartType, ModularPartTemplate> _parts = [];
     public Npc OwningNpc = null;
 
     public override void _Ready()
@@ -43,11 +43,13 @@ public partial class ModularItem : GenericItem
         base._Ready();
         // Get resource defaults and duplicate (instantiate) them into the item itself.
         if (ItemResource is not ModularItemTemplate template) return;
+        GD.Print($"Constructing ModularItem {ItemResource.DisplayName}.");
         foreach (var pair in template.DefaultParts)
         {
-
-            var newItem = (ModularPartTemplate) pair.Value.Duplicate();
+            var oldItem = pair.Value;
+            var newItem = oldItem.Duplicate(true) as ModularPartTemplate;
             _parts.Add(pair.Key, newItem);
+            GD.Print($"Added {newItem!.DisplayName} to slot {pair.Key}.");
         }
     }
 
@@ -60,6 +62,7 @@ public partial class ModularItem : GenericItem
     {
         if (!_parts.ContainsKey(part.PartType)) return false;
         _parts[part.PartType] = part;
+        GD.Print($"Added {part.DisplayName} to {ItemResource.DisplayName}.");
         return true;
     }
 }

@@ -7,10 +7,10 @@
 
 [resource]
 script = ExtResource("1_dahs6")
-Parts = Dictionary[int, Object]({
+DefaultParts = {
 0: ExtResource("2_iek33"),
 1: ExtResource("3_0hwjy")
-})
+}
 UseType = 0
 BaseDamage = 10.0
 FireMultiplier = 0.0

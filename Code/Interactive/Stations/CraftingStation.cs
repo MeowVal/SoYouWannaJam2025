@@ -145,7 +145,7 @@ public partial class CraftingStation : Interactible
                 }
 
                 // Add part to weapon
-                GD.Print($"Completed recipe {CurrentRecipe.DisplayName}, adding ${CurrentRecipe.PartOutput} to ");
+                GD.Print($"Completed recipe {CurrentRecipe.DisplayName}.");
                 targetItem.AddPart(CurrentRecipe.PartOutput);
                 return;
 

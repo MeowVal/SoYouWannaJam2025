@@ -1,12 +1,19 @@
-[gd_scene load_steps=8 format=4 uid="uid://u6ilul0rfym5"]
+[gd_scene load_steps=15 format=4 uid="uid://u6ilul0rfym5"]
 
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="2_65kow"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="3_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="3_hbuku"]
-[ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/Player/CharacterControl.cs" id="4_knoqw"]
+[ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/Interactive/Items/GenericItem.tscn" id="5_ieyhc"]
+[ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="6_65kow"]
+[ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Entities/Interactive/Stations/GenericCraftingStation.tscn" id="7_bdwe5"]
+[ext_resource type="PackedScene" uid="uid://cl07jfhggwrem" path="res://Entities/Interactive/Items/ModularItem.tscn" id="8_14b3v"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="8_bdwe5"]
+[ext_resource type="Resource" uid="uid://d1il8gelcfaqa" path="res://Resources/Recipes/testRecipe.tres" id="9_14b3v"]
 [ext_resource type="PackedScene" uid="uid://bkawl4uk3bb67" path="res://Entities/leaveArea.tscn" id="9_65kow"]
+[ext_resource type="Resource" uid="uid://umymk5us3qbh" path="res://Resources/Items/Modular/Chisel.tres" id="9_tu5mh"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="9_vwcaw"]
 [ext_resource type="PackedScene" uid="uid://ccxhqwfuyr60" path="res://Scenes/UI/HUD.tscn" id="10_8x3ni"]
+[ext_resource type="Resource" uid="uid://kpiwa4s7s61y" path="res://Resources/Recipes/testPartReplacement.tres" id="10_14b3v"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -35,11 +42,8 @@ tile_set = ExtResource("2_65kow")
 x_draw_order_reversed = true
 collision_visibility_mode = 1
 
-[node name="Character" type="CharacterBody2D" parent="Isometric/WorldMap/Entities" instance=ExtResource("3_hbuku")]
-y_sort_enabled = true
+[node name="Character" parent="Isometric/WorldMap/Entities" instance=ExtResource("3_hbuku")]
 position = Vector2(128, 224)
-motion_mode = 1
-script = ExtResource("4_knoqw")
 
 [node name="Collison" type="TileMapLayer" parent="Isometric/WorldMap" groups=["Obstacles"]]
 visible = false
@@ -52,6 +56,27 @@ collision_visibility_mode = 1
 
 [node name="LeaveArea" parent="Isometric/WorldMap" instance=ExtResource("9_65kow")]
 position = Vector2(245, 413.5)
+
+[node name="GenericItem" parent="Isometric/WorldMap" instance=ExtResource("5_ieyhc")]
+position = Vector2(38, 200.75)
+ItemResource = ExtResource("6_65kow")
+
+[node name="GenericItem2" parent="Isometric/WorldMap" instance=ExtResource("5_ieyhc")]
+position = Vector2(10.5, 205)
+ItemResource = ExtResource("6_65kow")
+
+[node name="GenericItem3" parent="Isometric/WorldMap" instance=ExtResource("5_ieyhc")]
+position = Vector2(-16.75, 219.25)
+ItemResource = ExtResource("6_65kow")
+
+[node name="GenericCraftingStation" parent="Isometric/WorldMap" instance=ExtResource("7_bdwe5")]
+position = Vector2(109.75, 165.25)
+Recipes = Array[ExtResource("8_bdwe5")]([ExtResource("9_14b3v"), ExtResource("10_14b3v")])
+
+[node name="ModularItem" parent="Isometric/WorldMap" instance=ExtResource("8_14b3v")]
+position = Vector2(49.25, 262.5)
+ItemResource = ExtResource("9_tu5mh")
+ColliderRadius = 10.0
 
 [node name="BackgroundTile" type="TileMapLayer" parent="Isometric"]
 z_index = -4096
