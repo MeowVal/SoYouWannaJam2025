@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c4hvjp22ok276"]
+[gd_scene load_steps=58 format=3 uid="uid://c4hvjp22ok276"]
 
 [ext_resource type="Texture2D" uid="uid://vsq7nymelad8" path="res://Assets/Sprites/characters/wolf-idle.png" id="2_b3ei2"]
 [ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/Player/CharacterControl.cs" id="2_l3y44"]
@@ -392,6 +392,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_c6rmn"]
 radius = 20.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_31rvx"]
+polygon = PackedVector2Array(0, 8, 8, 8, 16, 0, 16, -8, 8, -16, 0, -16, -8, -16, -16, -8, -16, 0, -8, 8)
+
 [node name="Character" type="CharacterBody2D"]
 y_sort_enabled = true
 motion_mode = 1
@@ -422,3 +425,7 @@ position = Vector2(0, -20)
 script = ExtResource("5_o4cwe")
 AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(0, 8)
+occluder = SubResource("OccluderPolygon2D_31rvx")

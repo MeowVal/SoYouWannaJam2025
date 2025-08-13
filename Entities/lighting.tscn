@@ -1,0 +1,190 @@
+[gd_scene load_steps=8 format=3 uid="uid://bn7d21rek2i16"]
+
+[ext_resource type="Shader" uid="uid://csfutv5akp6wn" path="res://Resources/Shaders/LightRays.gdshader" id="1_w0clr"]
+[ext_resource type="Shader" uid="uid://cw8gvojcw7vhn" path="res://Resources/Shaders/Shadows.gdshader" id="2_j6v2i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7sysf"]
+shader = ExtResource("1_w0clr")
+shader_parameter/color = Color(0.462745, 0.713726, 0.741176, 0.458824)
+shader_parameter/angle = 0.5
+shader_parameter/position = 0.5
+shader_parameter/starting_point = 5.0
+shader_parameter/movement_speed = 1.0
+shader_parameter/ray_separation = 1.0
+shader_parameter/ray_spread_horizontal = -1.0
+shader_parameter/ray_spread_vertical = 1.0
+shader_parameter/ray_1_density = 20.0
+shader_parameter/ray_2_density = 80.0
+shader_parameter/ray_1_intensity = 0.5
+shader_parameter/ray_2_intensity = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e8nqc"]
+shader = ExtResource("2_j6v2i")
+shader_parameter/shadow_color = Color(0.117647, 0.117647, 0.117647, 0.117647)
+shader_parameter/shadow_angle = 0.0
+shader_parameter/shadow_length = 16.0
+
+[sub_resource type="Animation" id="Animation_ieyhc"]
+resource_name = "DayNightCycle"
+length = 24.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.04, 12, 18, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.109804, 0.105882, 0.537255, 0.662745), Color(0.466667, 0.254902, 0.247059, 0.662745), Color(1, 1, 1, 1), Color(0.6, 0.427451, 0.235294, 0.858824), Color(0.109804, 0.105882, 0.537255, 0.662745)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ShadowCaster:material:shader_parameter/shadow_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6, 12, 18, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.117647, 0.117647, 0.117647, 0.117647), Color(0.0627451, 0.0627451, 0.0627451, 0.666667), Color(0.152941, 0.152941, 0.152941, 0.505882), Color(0.0627451, 0.0627451, 0.0627451, 0.666667), Color(0.117647, 0.117647, 0.117647, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../ShadowCaster:material:shader_parameter/shadow_angle")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 6, 12, 18, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 72.0, 122.0, 270.0, 360.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../ShadowCaster:material:shader_parameter/shadow_length")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 6, 12, 18, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [16.0, 120.0, 16.0, 120.0, 15.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../LightRays:material:shader_parameter/color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 6, 12, 18, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.462745, 0.713726, 0.741176, 0.458824), Color(0.862745, 0.866667, 0.713726, 0.678431), Color(0.858824, 0.854902, 0.811765, 0.458824), Color(0.615686, 0.619608, 0.396078, 0.458824), Color(0.639216, 0.643137, 0.435294, 0.431373)]
+}
+
+[sub_resource type="Animation" id="Animation_65kow"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ShadowCaster:material:shader_parameter/shadow_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.108, 0.108, 0.108, 0.9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../ShadowCaster:material:shader_parameter/shadow_angle")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [263.5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../ShadowCaster:material:shader_parameter/shadow_length")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [163.5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../LightRays:material:shader_parameter/color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.639216, 0.643137, 0.435294, 0.431373)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bdwe5"]
+_data = {
+&"DayNightCycle": SubResource("Animation_ieyhc"),
+&"RESET": SubResource("Animation_65kow")
+}
+
+[node name="Lighting" type="Node2D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.109804, 0.105882, 0.537255, 0.662745)
+
+[node name="LightRays" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_7sysf")
+offset_left = -2555.75
+offset_top = -1069.5
+offset_right = 43.25
+offset_bottom = 274.5
+scale = Vector2(2.08094, 2.05174)
+color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="ShadowCaster" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_e8nqc")
+offset_left = -2553.25
+offset_top = -1071.25
+offset_right = 45.75
+offset_bottom = 272.75
+scale = Vector2(2.08094, 2.05174)
+color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CanvasModulate")
+libraries = {
+&"": SubResource("AnimationLibrary_bdwe5")
+}

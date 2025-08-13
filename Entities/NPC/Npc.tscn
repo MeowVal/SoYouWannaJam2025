@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://hxf0gtf3x5pb"]
+[gd_scene load_steps=20 format=3 uid="uid://hxf0gtf3x5pb"]
 
 [ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="1_5ya86"]
 [ext_resource type="Script" uid="uid://b4ntrd6icymju" path="res://Code/Npc/Npc.cs" id="1_623a7"]
@@ -162,6 +162,9 @@ radius = 6.0
 radius = 6.0
 height = 12.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mrx7r"]
+polygon = PackedVector2Array(2, 4, 6, 3, 8, 1, 8, 0, 7, -2, 5, -4, 2, -5, -2, -5, -5, -4, -7, -2, -8, 0, -8, 1, -6, 3, -2, 4)
+
 [node name="Npc" type="CharacterBody2D" node_paths=PackedStringArray("MoodTimer")]
 collision_layer = 2
 collision_mask = 17
@@ -223,3 +226,6 @@ debug_path_custom_color = Color(1, 0.223529, 0.137255, 1)
 [node name="MoodTimer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_mrx7r")
