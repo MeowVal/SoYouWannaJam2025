@@ -2,6 +2,7 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code.Interactive.Items;
 
+[Tool] [GlobalClass]
 public partial class GenericItem : Interactible
 {
     private Interactive.Items.GenericItemTemplate _itemTemplate;
