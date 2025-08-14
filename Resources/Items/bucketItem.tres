@@ -7,6 +7,6 @@
 script = ExtResource("2_ob6f1")
 DisplayName = "Bucket"
 Description = "You need to actually set this lol."
-Sprite = ExtResource("1_bmss0")
-SpriteColour = Color(1, 1, 1, 1)
+Textures = Array[Texture2D]([ExtResource("1_bmss0")])
+Colours = Array[Color]([Color(1, 1, 1, 1)])
 Size = 10.0

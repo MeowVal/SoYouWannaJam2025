@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://cx62c06xp6g8i"]
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=4 format=3 uid="uid://cx62c06xp6g8i"]
 
-[ext_resource type="Texture2D" uid="uid://b3tkeqec3wbmf" path="res://Assets/Sprites/Materials/GoldOre.png" id="1_8o1w0"]
+[ext_resource type="Texture2D" uid="uid://mj84jedppkmv" path="res://Assets/Sprites/Materials/Ore_Mineral.png" id="1_tp5p1"]
+[ext_resource type="Texture2D" uid="uid://cxde1rygdy05i" path="res://Assets/Sprites/Materials/Ore_Base.png" id="2_60dff"]
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_tp5p1"]
 
 [resource]
 script = ExtResource("2_tp5p1")
 DisplayName = "Gold Ore"
 Description = "You need to actually set this lol."
-Sprite = ExtResource("1_8o1w0")
-SpriteColour = Color(1, 1, 1, 1)
+Textures = Array[Texture2D]([ExtResource("2_60dff"), ExtResource("1_tp5p1")])
+Colours = Array[Color]([Color(1, 1, 1, 1), Color(1, 0.796078, 0.239216, 1)])
 Size = 10.0

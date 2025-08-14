@@ -5,7 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2l5do"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6he5u"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_u0lr3"]
 radius = 16.0
 
 [node name="GenericItem" type="Area2D"]
@@ -14,8 +14,8 @@ metadata/_custom_type_script = "uid://de26gdg7krlfk"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 material = SubResource("ShaderMaterial_2l5do")
-shape = SubResource("CircleShape2D_6he5u")
+shape = SubResource("CircleShape2D_u0lr3")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
-[node name="ItemSprite" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_2l5do")

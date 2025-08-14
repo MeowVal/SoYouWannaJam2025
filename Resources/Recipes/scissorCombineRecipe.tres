@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=6 format=3 uid="uid://2b0x8pkojmga"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://2b0x8pkojmga"]
 
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="1_a3hvx"]
 [ext_resource type="Texture2D" uid="uid://dgb28bbh31x6c" path="res://Assets/Sprites/objects/scissors.png" id="1_gsi20"]
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="2_4sn4e"]
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_me4l1"]
 [ext_resource type="Resource" uid="uid://be2yk4xsefue0" path="res://Resources/Items/scissorItem.tres" id="3_me4l1"]
 
 [resource]
@@ -12,8 +11,8 @@ DisplayName = "Scissor combine"
 Description = "Combine 2 iron into a scissor"
 Icon = ExtResource("1_gsi20")
 RecipeType = 0
-ItemInputs = Array[ExtResource("2_me4l1")]([ExtResource("2_4sn4e"), ExtResource("2_4sn4e")])
-ItemOutputs = Array[ExtResource("2_me4l1")]([ExtResource("3_me4l1")])
+ItemInputs = [ExtResource("2_4sn4e"), ExtResource("2_4sn4e")]
+ItemOutputs = [ExtResource("3_me4l1")]
 WorkType = 3
 TimeToComplete = 1.5
 SequenceLength = 6

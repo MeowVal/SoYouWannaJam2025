@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Godot;
 
 namespace SoYouWANNAJam2025.Code.Interactive.Items;
@@ -5,27 +7,25 @@ namespace SoYouWANNAJam2025.Code.Interactive.Items;
 [Tool] [GlobalClass]
 public partial class GenericItem : Interactible
 {
-    private Interactive.Items.GenericItemTemplate _itemTemplate;
+    private GenericItemTemplate _itemTemplate;
+    public Sprite2D Sprite;
     
     [Export]
-    public Interactive.Items.GenericItemTemplate ItemResource
+    public virtual GenericItemTemplate ItemResource
     {
         set
-        { 
+        {
             _itemTemplate = value;
-            var sprite = GetNode<Sprite2D>("ItemSprite");
-            if (value != null)
+            if (_itemTemplate == null)
             {
-                sprite.Texture = value.Sprite;
-                sprite.Modulate = value.SpriteColour;
-                ColliderRadius = value.Size;
+                //GD.Print("DEFAULT TEMPLATE");
+                Sprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Unknown.png");
+                Sprite.Modulate = Colors.White;
+                return;
             }
-            else
-            {
-                sprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Unknown.png");
-                sprite.Modulate = Colors.White;
-                ColliderRadius = 16f;
-            }
+            ColliderRadius = value.Size;
+            if (Sprite == null) Sprite = GetNode<Sprite2D>("Sprite2D");
+            DrawSprite();
         }
         get => _itemTemplate;
     }
@@ -34,11 +34,13 @@ public partial class GenericItem : Interactible
 
     public override void _Ready()
     {
+        Sprite = GetNode<Sprite2D>("Sprite2D");
         if (Engine.IsEditorHint()) return;
         base._Ready();
         Interact += OnInteractMethod;
+        DrawSprite();
     }
-    
+
     private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
         if (node is not Player.PlayerInteractor interactor) return;
@@ -46,5 +48,11 @@ public partial class GenericItem : Interactible
         {
             interactor.InventorySlot.PickupItem(this);
         }
+    }
+
+    public virtual void DrawSprite()
+    {
+        GD.Print("ITEM DRAW");
+        Sprite.Texture = ImageTexture.CreateFromImage(_itemTemplate.GetItemImage());
     }
 }

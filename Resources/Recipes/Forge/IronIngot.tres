@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=6 format=3 uid="uid://bhmmqxxc646jd"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://bhmmqxxc646jd"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_fjfae"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_tgwdb"]
 [ext_resource type="Resource" uid="uid://mg6flu0e6ji5" path="res://Resources/Items/Resources/IronOre.tres" id="3_08dpi"]
 [ext_resource type="Resource" uid="uid://tvgxu2woqsxh" path="res://Resources/Items/Resources/IronIngot.tres" id="4_edycm"]
@@ -14,8 +13,8 @@ DisplayName = "Iron Ingot"
 Description = "You need to actually set this lol."
 Icon = SubResource("Resource_vpn7k")
 RecipeType = 0
-ItemInputs = Array[ExtResource("1_fjfae")]([ExtResource("3_08dpi")])
-ItemOutputs = Array[ExtResource("1_fjfae")]([ExtResource("4_edycm")])
+ItemInputs = [ExtResource("3_08dpi")]
+ItemOutputs = [ExtResource("4_edycm")]
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6

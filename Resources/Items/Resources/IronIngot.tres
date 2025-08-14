@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://tvgxu2woqsxh"]
 
-[ext_resource type="Texture2D" uid="uid://cbfatnrnxbr13" path="res://Assets/Sprites/Materials/IronIngot.png" id="1_kw2gc"]
+[ext_resource type="Texture2D" uid="uid://c021cjrk11bku" path="res://Assets/Sprites/Materials/Ingot_Base.png" id="1_jm7h6"]
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_mylhx"]
 
 [resource]
 script = ExtResource("2_mylhx")
 DisplayName = "Iron Ingot"
 Description = "You need to actually set this lol."
-Sprite = ExtResource("1_kw2gc")
-SpriteColour = Color(1, 1, 1, 1)
+Textures = Array[Texture2D]([ExtResource("1_jm7h6")])
+Colours = Array[Color]([Color(0.831373, 0.890196, 1, 1)])
 Size = 10.0

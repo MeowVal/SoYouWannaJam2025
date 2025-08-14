@@ -7,6 +7,6 @@
 script = ExtResource("2_vkinx")
 DisplayName = "Scissor"
 Description = "You need to actually set this lol."
-Sprite = ExtResource("1_p05fj")
-SpriteColour = Color(1, 1, 1, 1)
+Textures = Array[Texture2D]([ExtResource("1_p05fj")])
+Colours = Array[Color]([Color(1, 1, 1, 1)])
 Size = 10.0
