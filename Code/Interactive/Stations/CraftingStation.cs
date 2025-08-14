@@ -20,7 +20,6 @@ public partial class CraftingStation : Interactible
 
     public Interactive.Inventory.Inventory Inventory;
     public BaseRecipe CurrentRecipe;
-    public Timer RecipeTimer;
     public bool IsCrafting = false;
     //private Player.CharacterControl _player;
     private CraftingStationInterface _interactionInterface;
@@ -31,8 +30,6 @@ public partial class CraftingStation : Interactible
         if (Engine.IsEditorHint()) return;
         base._Ready();
         _interfaceLocation = GetNode<Node2D>("InterfaceLocation");
-        RecipeTimer = GetNode<Timer>("RecipeTimer");
-        RecipeTimer.Timeout += _OnRecipeTimer;
         Interact += OnInteractMethod;
         
         if (FindChild("Inventory") is Interactive.Inventory.Inventory inv) Inventory=inv;
@@ -42,8 +39,7 @@ public partial class CraftingStation : Interactible
 
     public bool AttemptCraft()
     {
-        if (!Inventory.HasItem()) return false;
-        if (!RecipeTimer.IsStopped()) return false;
+        if (!Inventory.HasItem() || IsCrafting) return false;
         // Try each recipe until one triggers successfully
         foreach (var recipe in Recipes)
         {
@@ -77,13 +73,12 @@ public partial class CraftingStation : Interactible
                 RecipeComplete();
                 return true;
             case EWorkType.Inputs:
-                RecipeTimer.Start(recipe.TimeToComplete);
                 CreateInteractionUi("res://Scenes/UI/Interactions/CraftingInputs.tscn");
                 return true;
             case EWorkType.SpamButton:
+                CreateInteractionUi("res://Scenes/UI/Interactions/CraftingButtonSpam.tscn");
                 return true;
             case EWorkType.Timer:
-                RecipeTimer.Start(recipe.TimeToComplete);
                 CreateInteractionUi("res://Scenes/UI/Interactions/CraftingTimer.tscn");
                 return true;
             case EWorkType.ButtonHold:
@@ -95,7 +90,6 @@ public partial class CraftingStation : Interactible
     // Cancel the current recipe's process
     public bool RecipeAbort()
     {
-        if (!RecipeTimer.IsStopped()) RecipeTimer.Stop();
         if (_interactionInterface == null) return false;
         _interactionInterface.QueueFree();
         IsCrafting = false;
@@ -107,7 +101,6 @@ public partial class CraftingStation : Interactible
     public bool RecipeComplete()
     {
         if (_interactionInterface != null) _interactionInterface!.QueueFree();
-        if (!RecipeTimer.IsStopped()) RecipeTimer.Stop();
         IsCrafting = false;
         switch (CurrentRecipe.RecipeType)
         {
@@ -167,13 +160,6 @@ public partial class CraftingStation : Interactible
                 return true;
         }
         return false;
-    }
-
-
-    private void _OnRecipeTimer()
-    {
-        GD.Print("Recipe Timer Completed");
-        RecipeComplete();
     }
 
     private void OnInteractMethod(Node2D node, TriggerType trigger)

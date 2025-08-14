@@ -33,3 +33,6 @@ alignment = 1
 [node name="RecipeProgress" type="ProgressBar" parent="VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
+
+[node name="RecipeTimer" type="Timer" parent="."]
+one_shot = true

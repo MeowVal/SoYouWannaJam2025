@@ -20,9 +20,6 @@ ColliderRadius = 20.0
 shape = SubResource("CircleShape2D_5p8jk")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
-[node name="RecipeTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="StationSprite" type="Sprite2D" parent="."]
 texture = ExtResource("4_2kg0e")
 

@@ -39,4 +39,5 @@ public partial class BaseRecipe : Resource
     [Export] public EWorkType WorkType = EWorkType.Instant;
     [Export] public float TimeToComplete = 1.5f;
     [Export] public int SequenceLength = 6;
+    [Export] public int SpamPerSecond = 5;
 }

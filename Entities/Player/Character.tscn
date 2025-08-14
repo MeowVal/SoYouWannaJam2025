@@ -461,4 +461,5 @@ occluder = SubResource("OccluderPolygon2D_31rvx")
 material = SubResource("ShaderMaterial_bkf2h")
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.847059)
+visible = false
 texture = SubResource("GradientTexture2D_bkf2h")

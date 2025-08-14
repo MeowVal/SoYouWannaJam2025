@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=6 format=3 uid="uid://bv5xegexuhyr3"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_6btov"]
+[ext_resource type="Resource" uid="uid://cx62c06xp6g8i" path="res://Resources/Items/Resources/GoldOre.tres" id="3_7aw5f"]
+[ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="4_6btov"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="5_yx7b2"]
+
+[sub_resource type="Resource" id="Resource_h7w7o"]
+metadata/__load_path__ = "res://Assets/Sprites/Materials/GoldIngot.png"
+
+[resource]
+script = ExtResource("5_yx7b2")
+DisplayName = "Gold Ingot"
+Description = "You need to actually set this lol."
+Icon = SubResource("Resource_h7w7o")
+RecipeType = 0
+ItemInputs = Array[ExtResource("2_6btov")]([ExtResource("3_7aw5f")])
+ItemOutputs = Array[ExtResource("2_6btov")]([ExtResource("4_6btov")])
+WorkType = 2
+TimeToComplete = 3.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

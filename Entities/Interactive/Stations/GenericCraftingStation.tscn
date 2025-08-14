@@ -18,9 +18,6 @@ Recipes = Array[ExtResource("2_g8xed")]([ExtResource("3_amglm")])
 shape = SubResource("CircleShape2D_g8xed")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
-[node name="RecipeTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="StationSprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_iwovp")
 

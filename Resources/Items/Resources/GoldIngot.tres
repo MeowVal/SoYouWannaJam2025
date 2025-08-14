@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://di3ljq21fm45k"]
+
+[ext_resource type="Texture2D" uid="uid://pyft3ywnt8tk" path="res://Assets/Sprites/Materials/GoldIngot.png" id="1_56kdt"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_qdow1"]
+
+[resource]
+script = ExtResource("2_qdow1")
+DisplayName = "Gold Ingot"
+Description = "You need to actually set this lol."
+Sprite = ExtResource("1_56kdt")
+SpriteColour = Color(1, 1, 1, 1)
+Size = 10.0

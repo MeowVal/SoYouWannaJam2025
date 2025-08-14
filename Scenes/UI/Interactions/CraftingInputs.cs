@@ -9,15 +9,17 @@ namespace SoYouWANNAJam2025.Scenes.UI.Interactions;
 
 public partial class CraftingInputs : CraftingStationInterface
 {
-    public int Lenght = 6;
-    
     private ProgressBar _bar;
     private Label _label;
     private HBoxContainer _container;
 
     private int _index = 0;
     private int[] _sequence = [];
+    private int _lenght = 6;
     private Array<Label> _labels = [];
+    
+    private bool[] _lastDirection = [false, false, false, false];
+    private Timer _recipeTimer;
 
     
     public override void _EnterTree()
@@ -37,15 +39,20 @@ public partial class CraftingInputs : CraftingStationInterface
         _bar = GetNode<ProgressBar>("VBoxContainer/RecipeProgress");
         _label = GetNode<Label>("VBoxContainer/HBoxContainer/RecipeName");
         _container = GetNode<HBoxContainer>("VBoxContainer/ArrowContainer");
+        _recipeTimer = GetNode<Timer>("RecipeTimer");
+        _recipeTimer.Timeout += _OnRecipeTimer;
+        _recipeTimer.Start(Station.CurrentRecipe.TimeToComplete);
         _label.Text = Station.CurrentRecipe.DisplayName;
+
+        _lenght = Station.CurrentRecipe.SequenceLength;
         
-        _sequence = new int[Lenght];
+        _sequence = new int[_lenght];
         
         var rng = new RandomNumberGenerator();
         string[] arrows = ["🠅","🠇","🠄","🠆"];
         
 
-        for (var i = 0; i < Lenght; i++)
+        for (var i = 0; i < _lenght; i++)
         {
             var newLabel = new Label();
             
@@ -68,14 +75,19 @@ public partial class CraftingInputs : CraftingStationInterface
 
     public override void _Process(double delta)
     {
-        Update();
+        Update(delta);
     }
 
-    public override void Update()
+    public override void Update(double delta)
     {
-        base.Update();
+        base.Update(delta);
         if (Station == null) return;
-        _bar.Value = 1 - (Station.RecipeTimer.TimeLeft / Station.RecipeTimer.WaitTime);
+        _bar.Value = 1 - (_recipeTimer.TimeLeft / _recipeTimer.WaitTime);
+    }
+    
+    private void _OnRecipeTimer()
+    {
+        Station.RecipeAbort();
     }
 
     public override void _Input(InputEvent @event)
@@ -83,28 +95,30 @@ public partial class CraftingInputs : CraftingStationInterface
         base._Input(@event);
         
         var up = Input.IsActionJustPressed("MinigameUp");
+        //if (up && Input.GetActionStrength("up") < 0.5) up = false;
         var down = Input.IsActionJustPressed("MinigameDown");
+        //if (down && Input.GetActionStrength("down") < 0.5) down = false;
         var left = Input.IsActionJustPressed("MinigameLeft");
+        //if (left && Input.GetActionStrength("left") < 0.5) left = false;
         var right = Input.IsActionJustPressed("MinigameRight");
+        //if (right && Input.GetActionStrength("right") < 0.5) right = false;
         
         if (!up && !down && !left && !right) return;
         
         bool[] direction = [up, down, left, right];
-        foreach (var b in direction)
-        {
-            GD.Print($"Direction: {b}");
-        }
+        if (_lastDirection == direction) return;
+        _lastDirection = direction;
 
         if (direction[_sequence[_index]])
         {
             GD.Print($"{_index} Success");
             _index++;
 
-            if (_index >= Lenght)
+            if (_index >= _lenght)
             {
                 GD.Print("WIN!");
                 Global.Player.Frozen = false;
-                Station.RecipeTimer.Stop();
+                _recipeTimer.Stop();
                 Station.RecipeComplete();
             }
         }
@@ -114,7 +128,7 @@ public partial class CraftingInputs : CraftingStationInterface
             _index = 0;
         }
         
-        for (var i = 0; i < Lenght; i++)
+        for (var i = 0; i < _lenght; i++)
         {
             _labels[i].Modulate = i < _index ? new Color(0, 1, 0, 1): new Color(1, 0, 0, 1);
         }

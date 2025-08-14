@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=6 format=3 uid="uid://d2p8krc88hiwy"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_2xsok"]
+[ext_resource type="Resource" uid="uid://cpx5y0g6s8hd5" path="res://Resources/Items/Resources/MythrilOre.tres" id="3_h088k"]
+[ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="4_2xsok"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="5_b1cwm"]
+
+[sub_resource type="Resource" id="Resource_tt0f5"]
+metadata/__load_path__ = "res://Assets/Sprites/Materials/MythrilIngot.png"
+
+[resource]
+script = ExtResource("5_b1cwm")
+DisplayName = "Mytril Ingot"
+Description = "You need to actually set this lol."
+Icon = SubResource("Resource_tt0f5")
+RecipeType = 0
+ItemInputs = Array[ExtResource("2_2xsok")]([ExtResource("3_h088k")])
+ItemOutputs = Array[ExtResource("2_2xsok")]([ExtResource("4_2xsok")])
+WorkType = 2
+TimeToComplete = 3.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

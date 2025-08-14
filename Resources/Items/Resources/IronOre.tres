@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://mg6flu0e6ji5"]
+
+[ext_resource type="Texture2D" uid="uid://d2qbu2tu3vxyo" path="res://Assets/Sprites/Materials/IronOre.png" id="1_4ubwf"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_ys5oh"]
+
+[resource]
+script = ExtResource("2_ys5oh")
+DisplayName = "Iron Ore"
+Description = "You need to actually set this lol."
+Sprite = ExtResource("1_4ubwf")
+SpriteColour = Color(1, 1, 1, 1)
+Size = 10.0

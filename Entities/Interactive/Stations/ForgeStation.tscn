@@ -1,0 +1,40 @@
+[gd_scene load_steps=10 format=3 uid="uid://cgbg8jjt6swx6"]
+
+[ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_cg3bl"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_1ijhs"]
+[ext_resource type="Resource" uid="uid://bhmmqxxc646jd" path="res://Resources/Recipes/Forge/IronIngot.tres" id="3_l3fy7"]
+[ext_resource type="Resource" uid="uid://bv5xegexuhyr3" path="res://Resources/Recipes/Forge/GoldIngot.tres" id="4_1ijhs"]
+[ext_resource type="Texture2D" uid="uid://cah72btdjpxbb" path="res://Assets/Sprites/objects/furnace_base.png" id="5_cg3bl"]
+[ext_resource type="Resource" uid="uid://d2p8krc88hiwy" path="res://Resources/Recipes/Forge/Mytrilngot.tres" id="5_g4254"]
+[ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_skwst"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="7_wai8b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5p8jk"]
+radius = 20.0
+
+[node name="ForgeStation" type="Area2D"]
+script = ExtResource("1_cg3bl")
+DisplayName = "Forge Station"
+Recipes = Array[ExtResource("2_1ijhs")]([ExtResource("3_l3fy7"), ExtResource("4_1ijhs"), ExtResource("5_g4254")])
+ColliderRadius = 20.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5p8jk")
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
+
+[node name="StationSprite" type="Sprite2D" parent="."]
+texture = ExtResource("5_cg3bl")
+hframes = 2
+vframes = 2
+
+[node name="InterfaceLocation" type="Node2D" parent="."]
+position = Vector2(0, -26)
+
+[node name="Inventory" type="Node2D" parent="."]
+script = ExtResource("6_skwst")
+metadata/_custom_type_script = "uid://usn4a73qqvca"
+
+[node name="InventorySlot1" type="Node2D" parent="Inventory"]
+position = Vector2(0, -9)
+script = ExtResource("7_wai8b")
+metadata/_custom_type_script = "uid://1cpfasjkacse"

@@ -32,7 +32,7 @@ public partial class DayCycleLantern : Node2D
         _animator.Play("DayNightCycle");//Init Animation
         _animator.Stop();
         
-        //_animator.Seek(0.5, true);
+        _animator.Seek(0.5, true);
         
         _timer.SetWaitTime(CycleTime);
         _morningTimer.SetWaitTime(DawnTime);
@@ -76,9 +76,9 @@ public partial class DayCycleLantern : Node2D
 
     public override void _Process(double delta)
     {
-        if (!_timer.IsStopped())
+        /*if (!_timer.IsStopped())
         {
             GD.Print(_animator.CurrentAnimationPosition);
-        }
+        }*/
     }
 }

@@ -12,7 +12,7 @@ public partial class CraftingStationInterface : Node2D
         Station = station;
     }
 
-    public virtual void Update()
+    public virtual void Update(double delta)
     {
 
     }
