@@ -13,6 +13,8 @@ public partial class NpcInteractor : Interactible
     public int CurrentTarget = 0;
     private Timer _distanceCheckTimer;
     private Npc _npc;
+    [Signal]
+    public delegate void NpcLeftEventHandler(Npc npc);
 
     //public Interactive.Inventory.InventorySlot InventorySlot = null;
     public Interactive.Inventory.InventorySlot InventorySlot;
@@ -42,6 +44,7 @@ public partial class NpcInteractor : Interactible
         {
             if (unknownTarget.Name == "LeaveArea")
             {
+                EmitSignal(SignalName.NpcLeft, _npc);
                 _npc.QueueFree();
             }
             return;

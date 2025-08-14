@@ -16,27 +16,42 @@ public partial class GameManager : Node2D
 	public float gold = 0; 
 	
 	[Export] public DayCycleLantern _cycleLantern;
+	private Godot.Collections.Array<Npc.Npc> _npcs;
+	[Export] public int NpcMaxCount = 20;
+	private Node2D _npcSpawnLocation;
+	private Node2D _frontDesk;
+	private Area2D _leaveAreaNode;
 	
 	public override void _Ready()
 	{
-		var tileMap =(TileMapLayer)FindChild("WorldMap");
-		var container = (Node2D)FindChild("OccluderContainer");
-		var shadowCaster = (Polygon2D)FindChild("ShadowCasterPoly");
-		var shaderMat = (ShaderMaterial)shadowCaster.Material;
+		//var tileMap =(TileMapLayer)FindChild("WorldMap");
+		//var container = (Node2D)FindChild("OccluderContainer");
+		//var shadowCaster = (Polygon2D)FindChild("ShadowCasterPoly");
+		//var shaderMat = (ShaderMaterial)shadowCaster.Material;
 		//NpcResources[0] = ResourceLoader.LoadThreadedRequest<NpcResource>("res://Resources/Npcs/Npc01.tres");
-		Vector2 mapOffset = tileMap.GlobalPosition;
+		//Vector2 mapOffset = tileMap.GlobalPosition;
 		/*if(tileMap != null&& container != null)
 			GenerateTileOccluders(tileMap, container);*/
 		//GD.Print(shaderMat);
-		shaderMat.SetShaderParameter("tile_size", TileSize);
-		shaderMat.SetShaderParameter("map_offset", mapOffset);
+		//shaderMat.SetShaderParameter("tile_size", TileSize);
+		//shaderMat.SetShaderParameter("map_offset", mapOffset);
 		DirContents("res://Resources/Npcs/");
+		_npcSpawnLocation = (Node2D)FindChild("NpcArrivalArea");
+		_frontDesk  = (Node2D)FindChild("FrontDesk");
+		_leaveAreaNode = (Area2D)FindChild("LeaveArea");
+		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 
+		npcInteractor.NpcLeft += OnNpcLeft;
 		GD.Print(_cycleLantern);
 		if (_cycleLantern == null) return;
 		_cycleLantern.CycleLantern += LanternChanged;
+		
 	}
-	
+
+	private void OnNpcLeft(Npc.Npc npc)
+	{
+		_npcs.Remove(npc);
+	}
 	private void LanternChanged(bool onCycleLantern)
 	{
 		if (onCycleLantern)
@@ -85,16 +100,14 @@ public partial class GameManager : Node2D
 
 	private void OnNpcTimerTimeout()
 	{
-		
+		if (_npcs.Count >= NpcMaxCount) return;
 		Npc.Npc npc = NpcScene.Instantiate<Npc.Npc>();
 		npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
-		
-		var npcSpawnLocation = GetNode<PathFollow2D>("NpcPath/NpcSpawnLocations");
-		npcSpawnLocation.ProgressRatio = GD.Randf();
-		npc.Position = npcSpawnLocation.Position;
+		npc.Position = _npcSpawnLocation.Position;
 		npc.Scale = Vector2.One * 4;
-		npc.Target = GetNode<Area2D>("Isometric/GenericCraftingStation");
-		npc.LeaveAreaNode = GetNode<Node2D>("LeaveArea");
+		npc.Target = _frontDesk;
+		npc.LeaveAreaNode = _leaveAreaNode;
+		_npcs.Add(npc);
 		AddChild(npc);
 	}
 	
