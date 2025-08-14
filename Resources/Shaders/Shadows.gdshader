@@ -1,4 +1,5 @@
 shader_type canvas_item;
+render_mode unshaded;
 
 uniform vec4 shadow_color : source_color = vec4(0.108,0.108,0.108,0.9);
 uniform float shadow_angle : hint_range(0.0, 360) = 1.0;
