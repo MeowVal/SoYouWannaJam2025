@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://uwreoey1lqgr"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://uwreoey1lqgr"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_5uswu"]
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="2_5uswu"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_7md78"]
 [ext_resource type="Resource" uid="uid://db5qq1a3ir2ty" path="res://Resources/Items/logItem.tres" id="3_5uswu"]
@@ -10,8 +9,8 @@ script = ExtResource("2_7md78")
 DisplayName = "Inputs"
 Description = "You need to actually set this lol."
 RecipeType = 0
-ItemInputs = Array[ExtResource("1_5uswu")]([ExtResource("2_5uswu")])
-ItemOutputs = Array[ExtResource("1_5uswu")]([ExtResource("3_5uswu")])
+ItemInputs = [ExtResource("2_5uswu")]
+ItemOutputs = [ExtResource("3_5uswu")]
 WorkType = 1
 TimeToComplete = 10.0
 SequenceLength = 6

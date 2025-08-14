@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://cpx5y0g6s8hd5"]
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=4 format=3 uid="uid://cpx5y0g6s8hd5"]
 
-[ext_resource type="Texture2D" uid="uid://b60c0xe2o4aux" path="res://Assets/Sprites/Materials/MythrilOre.png" id="1_a3dxu"]
+[ext_resource type="Texture2D" uid="uid://cxde1rygdy05i" path="res://Assets/Sprites/Materials/Ore_Base.png" id="1_yr7r1"]
+[ext_resource type="Texture2D" uid="uid://mj84jedppkmv" path="res://Assets/Sprites/Materials/Ore_Mineral.png" id="2_vb855"]
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_yr7r1"]
 
 [resource]
 script = ExtResource("2_yr7r1")
 DisplayName = "Mythril Ore"
 Description = "You need to actually set this lol."
-Sprite = ExtResource("1_a3dxu")
-SpriteColour = Color(1, 1, 1, 1)
+Textures = Array[Texture2D]([ExtResource("1_yr7r1"), ExtResource("2_vb855")])
+Colours = Array[Color]([Color(1, 1, 1, 1), Color(0.552941, 1, 0.835294, 1)])
 Size = 10.0

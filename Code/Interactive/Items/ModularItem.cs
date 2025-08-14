@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Interactive.Items;
@@ -49,15 +51,30 @@ public partial class ModularItem : GenericItem
     // Defines what slots this item will have to use
     private Dictionary<EPartType, ModularPartTemplate> _parts = [];
     public Npc OwningNpc = null;
+    
+    /*private GenericItemTemplate _itemTemplate;
+    
+    public override GenericItemTemplate ItemResource
+    {
+        set
+        {
+            _itemTemplate = value;
+            if (_itemTemplate == null)
+            {
+                GD.Print("DEFAULT MODULAR ITEM TEMPLATE");
+                Sprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Unknown.png");
+                Sprite.Modulate = Colors.White;
+                return;
+            }
+            ColliderRadius = value.Size;
+            DrawSprites();
+        }
+        get => _itemTemplate;
+    }*/
 
     public override void _Ready()
     {
         base._Ready();
-        foreach (var sprite in Sprites)
-        {
-            sprite.Free();
-        }
-        Sprites.Clear();
         // Get resource defaults and duplicate (instantiate) them into the item itself.
         if (ItemResource is not ModularItemTemplate template) return;
         GD.Print($"Constructing ModularItem {ItemResource.DisplayName}.");
@@ -68,7 +85,8 @@ public partial class ModularItem : GenericItem
             _parts.Add(pair.Key, newItem);
             GD.Print($"Added {newItem!.DisplayName} to slot {pair.Key}.");
         }
-        UpdateModularSprites();
+
+        DrawSprite();
     }
 
     public bool HasPart(EPartType partType)
@@ -81,30 +99,21 @@ public partial class ModularItem : GenericItem
         if (!_parts.ContainsKey(part.PartType)) return false;
         _parts[part.PartType] = part;
         GD.Print($"Added {part.DisplayName} to {ItemResource.DisplayName}.");
-        UpdateModularSprites();
+        DrawSprite();
         return true;
     }
 
-    public void UpdateModularSprites()
+    public override void DrawSprite()
     {
-        // Remove all old sprites
-        foreach (var sprite in Sprites)
-        {
-            sprite.Free();
-        }
-
-        // Add in new ones
+        //GD.Print("MODULAR DRAW");
+        var img = Image.CreateEmpty(32, 32, false, Image.Format.Rgba8);
+        
         foreach (var (partType, part) in _parts)
         {
-            var newSprite = new Sprite2D();
-            newSprite.Texture = part.Sprite;
-            newSprite.Modulate = part.SpriteColour;
-            AddChild(newSprite);
+            //GD.Print($"Part {part.DisplayName}");
+            var partImg = part.GetItemImage();
+            img.BlendRect(partImg, new Rect2I(0,0,32,32), Vector2I.Zero);
         }
-
-        // Recalculate stats for highlight
-        base.UpdateSprites();
+        Sprite.Texture = ImageTexture.CreateFromImage(img);
     }
-
-
 }
