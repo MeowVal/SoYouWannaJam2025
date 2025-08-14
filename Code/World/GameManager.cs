@@ -13,9 +13,9 @@ public partial class GameManager : Node2D
 	[Export]
 	public Vector2 TileSize = new Vector2(32, 16);
 
-	public float gold = 0; 
+	public float Gold = 0; 
 	
-	[Export] public DayCycleLantern _cycleLantern;
+	[Export] public DayCycleLantern CycleLantern;
 	private Godot.Collections.Array<Npc.Npc> _npcs;
 	[Export] public int NpcMaxCount = 20;
 	private Node2D _npcSpawnLocation;
@@ -24,17 +24,6 @@ public partial class GameManager : Node2D
 	
 	public override void _Ready()
 	{
-		//var tileMap =(TileMapLayer)FindChild("WorldMap");
-		//var container = (Node2D)FindChild("OccluderContainer");
-		//var shadowCaster = (Polygon2D)FindChild("ShadowCasterPoly");
-		//var shaderMat = (ShaderMaterial)shadowCaster.Material;
-		//NpcResources[0] = ResourceLoader.LoadThreadedRequest<NpcResource>("res://Resources/Npcs/Npc01.tres");
-		//Vector2 mapOffset = tileMap.GlobalPosition;
-		/*if(tileMap != null&& container != null)
-			GenerateTileOccluders(tileMap, container);*/
-		//GD.Print(shaderMat);
-		//shaderMat.SetShaderParameter("tile_size", TileSize);
-		//shaderMat.SetShaderParameter("map_offset", mapOffset);
 		DirContents("res://Resources/Npcs/");
 		_npcSpawnLocation = (Node2D)FindChild("NpcArrivalArea");
 		_frontDesk  = (Node2D)FindChild("FrontDesk");
@@ -42,9 +31,9 @@ public partial class GameManager : Node2D
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 
 		npcInteractor.NpcLeft += OnNpcLeft;
-		GD.Print(_cycleLantern);
-		if (_cycleLantern == null) return;
-		_cycleLantern.CycleLantern += LanternChanged;
+		GD.Print(CycleLantern);
+		if (CycleLantern == null) return;
+		CycleLantern.CycleLantern += LanternChanged;
 		
 	}
 
@@ -120,62 +109,5 @@ public partial class GameManager : Node2D
 	}
 	
 	
-	/*
-	private void GenerateTileOccluders(TileMapLayer tileMap, Node2D container)
-	{
-		var tileSet = tileMap.TileSet;
-		var usedCells = tileMap.GetUsedCells(); // Layer 0
-
-		var occluderCache = new Dictionary<int, OccluderPolygon2D>();
-
-		foreach (var cell in usedCells)
-		{
-			int tileId = tileMap.GetCellSourceId(cell);
-			if (tileId == -1) continue;
-
-			// Cache occluders per tile type
-			if (!occluderCache.TryGetValue(tileId, out var occluderPolygon))
-			{
-				var texture = tileSet.GetSource(tileId) as TileSetAtlasSource;
-				if (texture == null) continue;
-
-				// Assuming a single tile per source image
-				var image = texture.Texture;
-				if (image == null) continue;
-
-				occluderPolygon = AlphaOccluderGenerator.GenerateOccluder(image);
-				if (occluderPolygon == null) continue;
-
-				occluderCache[tileId] = occluderPolygon;
-			}
-
-			var lightOccluder = new LightOccluder2D();
-			lightOccluder.Occluder = occluderPolygon.Duplicate() as OccluderPolygon2D;
-
-			// Convert tile coords to world position
-			var pos = tileMap.MapToLocal(cell);
-			lightOccluder.Position = pos;
-
-			container.AddChild(lightOccluder);
-		}
-		var root = new Node2D();
-		var packedScene = new PackedScene();
-		var result = packedScene.Pack(root);
-		if (result != Error.Ok)
-		{
-			GD.PrintErr("Failed to pack scene: ", result);
-		}
-
-		// Save the scene file
-		var savePath = "res://GeneratedOccluders.tscn";
-		var err = ResourceSaver.Save(packedScene, savePath);
-		if (err != Error.Ok)
-		{
-			GD.PrintErr("Failed to save scene: ", err);
-		}
-		else
-		{
-			GD.Print("Occluder scene saved at ", savePath);
-		}
-	}*/
+	
 }
