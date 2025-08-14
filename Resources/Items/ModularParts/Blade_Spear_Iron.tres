@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://ds4n06wlxsyvo"]
+
+[ext_resource type="Texture2D" uid="uid://cv8804wljv0hb" path="res://Assets/Sprites/ModularParts/Blade_Spear.png" id="1_5cycn"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_ci7jl"]
+
+[resource]
+script = ExtResource("2_ci7jl")
+PartType = 0
+ModularItemType = 1
+BaseDamage = 0.0
+FireMultiplier = 0.0
+PoisonMultiplier = 0.0
+BaseArmourPenetration = 0.0
+BaseDurability = 0.0
+UnbreakingChance = 0.0
+CritChance = 0.0
+CritMultiplier = 0.0
+CritBonus = 0.0
+DisplayName = "Iron Spear Blade"
+Description = "The blade for a spear, cast of pure Iron."
+Sprite = ExtResource("1_5cycn")
+SpriteColour = Color(0.831373, 0.890196, 1, 1)
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

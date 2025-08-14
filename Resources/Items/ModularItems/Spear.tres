@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ModularItemTemplate" load_steps=4 format=3 uid="uid://w0hkihpkymns"]
+
+[ext_resource type="Resource" uid="uid://ds4n06wlxsyvo" path="res://Resources/Items/ModularParts/Blade_Spear_Iron.tres" id="1_4xr64"]
+[ext_resource type="Resource" uid="uid://crjv5jcoy4r6w" path="res://Resources/Items/ModularParts/Pole_Spear_Wood.tres" id="2_wr5li"]
+[ext_resource type="Script" uid="uid://kfhncm4xxwur" path="res://Code/Interactive/Items/ModularItemTemplate.cs" id="5_5udfs"]
+
+[resource]
+script = ExtResource("5_5udfs")
+DefaultParts = Dictionary[int, Object]({
+0: ExtResource("1_4xr64"),
+4: ExtResource("2_wr5li")
+})
+ModularItemType = 1
+UseType = 4
+BaseDamage = 10.0
+FireMultiplier = 0.0
+PoisonMultiplier = 0.0
+BaseArmourPenetration = 1.0
+BaseDurability = 20.0
+UnbreakingChance = 1.0
+CritChance = 5.0
+CritMultiplier = 2.0
+CritBonus = 5.0
+DisplayName = "Spear"
+Description = "A standard polearm with a pointed blade on the tip."
+Size = 10.0
+metadata/_custom_type_script = "uid://kfhncm4xxwur"

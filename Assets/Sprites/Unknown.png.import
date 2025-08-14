@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnaqs6h3q3q5i"
-path="res://.godot/imported/Grip_Spear.png-f2b3490c6e25aacc60b33d022d57ca1d.ctex"
+uid="uid://dmbxc4ofgw13r"
+path="res://.godot/imported/Unknown.png-eba1392601abb69660f58c5e9c3d53e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/ModularParts/Grip_Spear.png"
-dest_files=["res://.godot/imported/Grip_Spear.png-f2b3490c6e25aacc60b33d022d57ca1d.ctex"]
+source_file="res://Assets/Sprites/Unknown.png"
+dest_files=["res://.godot/imported/Unknown.png-eba1392601abb69660f58c5e9c3d53e2.ctex"]
 
 [params]
 

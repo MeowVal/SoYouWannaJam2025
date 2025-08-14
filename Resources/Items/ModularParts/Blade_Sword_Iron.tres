@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://bscvyej1mrkqt"]
+
+[ext_resource type="Texture2D" uid="uid://b7jd1qoeqotwd" path="res://Assets/Sprites/ModularParts/Blade_Sword.png" id="1_dooca"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_s7jun"]
+
+[resource]
+script = ExtResource("2_s7jun")
+PartType = 0
+ModularItemType = 0
+BaseDamage = 0.0
+FireMultiplier = 0.0
+PoisonMultiplier = 0.0
+BaseArmourPenetration = 0.0
+BaseDurability = 0.0
+UnbreakingChance = 0.0
+CritChance = 0.0
+CritMultiplier = 0.0
+CritBonus = 0.0
+DisplayName = "Iron Sword Blade"
+Description = "The blade for a broadsword, cast of pure Iron."
+Sprite = ExtResource("1_dooca")
+SpriteColour = Color(0.831373, 0.890196, 1, 1)
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

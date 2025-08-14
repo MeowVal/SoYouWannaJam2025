@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BaseItem" load_steps=3 format=3 uid="uid://l3hxhv6jfqg1"]
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://l3hxhv6jfqg1"]
 
 [ext_resource type="Texture2D" uid="uid://dq5nssdtppdda" path="res://Assets/Sprites/objects/bucket.png" id="1_bmss0"]
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_ob6f1"]
@@ -7,5 +7,6 @@
 script = ExtResource("2_ob6f1")
 DisplayName = "Bucket"
 Description = "You need to actually set this lol."
-Icon = ExtResource("1_bmss0")
+Sprite = ExtResource("1_bmss0")
+SpriteColour = Color(1, 1, 1, 1)
 Size = 10.0

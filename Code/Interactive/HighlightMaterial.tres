@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dku7ymbstxof6"]
+
+[ext_resource type="Shader" uid="uid://yqxf3kc8oypo" path="res://Code/Interactive/HighlightShader.gdshader" id="1_ngewr"]
+
+[resource]
+shader = ExtResource("1_ngewr")
+shader_parameter/outline_color = Color(1, 0.733333, 0, 1)
+shader_parameter/blink_color = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/blink_time_scale = 3.0

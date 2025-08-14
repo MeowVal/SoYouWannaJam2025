@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dk0d15vopy23m" path="res://Assets/Sprites/objects/materials/iron_scrap.png" id="1_sgn40"]
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_yyysm"]
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="4_wbp0g"]
-[ext_resource type="Resource" uid="uid://umymk5us3qbh" path="res://Resources/Items/Modular/Chisel.tres" id="4_xi7q4"]
-[ext_resource type="Resource" uid="uid://bi8naxk6m2a6p" path="res://Resources/Items/Modular/ChiselBlade.tres" id="4_yyysm"]
+[ext_resource type="Resource" uid="uid://umymk5us3qbh" path="res://Resources/Items/ModularParts/Chisel.tres" id="4_xi7q4"]
+[ext_resource type="Resource" uid="uid://bi8naxk6m2a6p" path="res://Resources/Items/ModularParts/ChiselBlade.tres" id="4_yyysm"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="5_p6cai"]
 
 [resource]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BaseItem" load_steps=3 format=3 uid="uid://be2yk4xsefue0"]
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://be2yk4xsefue0"]
 
 [ext_resource type="Texture2D" uid="uid://dgb28bbh31x6c" path="res://Assets/Sprites/objects/scissors.png" id="1_p05fj"]
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_vkinx"]
@@ -7,5 +7,6 @@
 script = ExtResource("2_vkinx")
 DisplayName = "Scissor"
 Description = "You need to actually set this lol."
-Icon = ExtResource("1_p05fj")
+Sprite = ExtResource("1_p05fj")
+SpriteColour = Color(1, 1, 1, 1)
 Size = 10.0

@@ -7,5 +7,6 @@
 script = ExtResource("1_vp07c")
 DisplayName = "Log"
 Description = "You need to actually set this lol."
-Icon = ExtResource("1_mvlvs")
+Sprite = ExtResource("1_mvlvs")
+SpriteColour = Color(1, 1, 1, 1)
 Size = 10.0

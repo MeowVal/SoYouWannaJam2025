@@ -8,7 +8,8 @@ namespace SoYouWANNAJam2025.Entities.Interactive.Items;
 public enum EPartType
 {
     Blade,
-    Hilt,
+    Grip,
+    Pummel,
     Crossguard,
     Pole,
     Tip,
@@ -19,6 +20,17 @@ public enum EPartType
     Shoulders,
     Cape,
     Hood
+}
+
+public enum EModularItemType
+{
+    Sword,
+    Spear,
+    Shield,
+    Helmet,
+    Chestplate,
+    Staff,
+    Cloak
 }
 
 public enum EUseType

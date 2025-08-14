@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://dea84xk6o1h6v"]
+
+[ext_resource type="Texture2D" uid="uid://bkfejy7uif8d8" path="res://Assets/Sprites/ModularParts/Crossguard_Sword.png" id="1_6freb"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_0lx62"]
+
+[resource]
+script = ExtResource("2_0lx62")
+PartType = 3
+ModularItemType = 0
+BaseDamage = 0.0
+FireMultiplier = 0.0
+PoisonMultiplier = 0.0
+BaseArmourPenetration = 0.0
+BaseDurability = 0.0
+UnbreakingChance = 0.0
+CritChance = 0.0
+CritMultiplier = 0.0
+CritBonus = 0.0
+DisplayName = "Golden Sword Crossguard"
+Description = "While flashy, this crossguard probably doesnt do a lot to protect your fingers."
+Sprite = ExtResource("1_6freb")
+SpriteColour = Color(1, 0.796078, 0.239216, 1)
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

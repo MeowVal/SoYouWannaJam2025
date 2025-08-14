@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://cnucm3x4h03tk" path="res://Assets/Sprites/objects/file.png" id="1_58y13"]
 [ext_resource type="Script" uid="uid://kfhncm4xxwur" path="res://Code/Interactive/Items/ModularItemTemplate.cs" id="1_dahs6"]
-[ext_resource type="Resource" uid="uid://bi8naxk6m2a6p" path="res://Resources/Items/Modular/ChiselBlade.tres" id="2_iek33"]
-[ext_resource type="Resource" uid="uid://be1240sws448k" path="res://Resources/Items/Modular/ChiselHilt.tres" id="3_0hwjy"]
+[ext_resource type="Resource" uid="uid://bi8naxk6m2a6p" path="res://Resources/Items/ModularParts/ChiselBlade.tres" id="2_iek33"]
+[ext_resource type="Resource" uid="uid://be1240sws448k" path="res://Resources/Items/ModularParts/ChiselHilt.tres" id="3_0hwjy"]
 
 [resource]
 script = ExtResource("1_dahs6")

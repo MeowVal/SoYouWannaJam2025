@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://crjv5jcoy4r6w"]
+
+[ext_resource type="Texture2D" uid="uid://cnaqs6h3q3q5i" path="res://Assets/Sprites/ModularParts/Pole_Spear.png" id="1_xt71y"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_8axlk"]
+
+[resource]
+script = ExtResource("2_8axlk")
+PartType = 4
+ModularItemType = 1
+BaseDamage = 0.0
+FireMultiplier = 0.0
+PoisonMultiplier = 0.0
+BaseArmourPenetration = 0.0
+BaseDurability = 0.0
+UnbreakingChance = 0.0
+CritChance = 0.0
+CritMultiplier = 0.0
+CritBonus = 0.0
+DisplayName = "Wooden Spear Grip"
+Description = "The main pole of a Spear"
+Sprite = ExtResource("1_xt71y")
+SpriteColour = Color(0.678431, 0.392157, 0.168627, 1)
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

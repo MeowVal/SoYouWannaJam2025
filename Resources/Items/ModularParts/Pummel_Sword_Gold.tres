@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://d0kf8ldv8p21p"]
+
+[ext_resource type="Texture2D" uid="uid://b6xni48kkstkr" path="res://Assets/Sprites/ModularParts/Pummel_Sword.png" id="1_ntfu7"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_bwfxq"]
+
+[resource]
+script = ExtResource("2_bwfxq")
+PartType = 2
+ModularItemType = 0
+BaseDamage = 0.0
+FireMultiplier = 0.0
+PoisonMultiplier = 0.0
+BaseArmourPenetration = 0.0
+BaseDurability = 0.0
+UnbreakingChance = 0.0
+CritChance = 0.0
+CritMultiplier = 0.0
+CritBonus = 0.0
+DisplayName = "Golden Sword Pummel"
+Description = "Very fancy and with enough weight to work well as a counterbalance."
+Sprite = ExtResource("1_ntfu7")
+SpriteColour = Color(1, 0.796078, 0.239216, 1)
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

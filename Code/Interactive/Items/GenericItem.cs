@@ -12,14 +12,17 @@ public partial class GenericItem : Interactible
         set
         { 
             _itemTemplate = value;
+            var sprite = GetNode<Sprite2D>("ItemSprite");
             if (value != null)
             {
-                GetNode<Sprite2D>("ItemSprite").Texture = value.Icon;
+                sprite.Texture = value.Sprite;
+                sprite.Modulate = value.SpriteColour;
                 ColliderRadius = value.Size;
             }
             else
             {
-                GetNode<Sprite2D>("ItemSprite").Texture = null;
+                sprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Unknown.png");
+                sprite.Modulate = Colors.White;
                 ColliderRadius = 16f;
             }
         }

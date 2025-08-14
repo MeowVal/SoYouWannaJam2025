@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://mu0qqh4gpue4"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_aj3kp"]
+[ext_resource type="Resource" uid="uid://cjm36mcdecboj" path="res://Resources/Items/ModularItems/Sword.tres" id="2_8q4mc"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_nayrc"]
+[ext_resource type="Resource" uid="uid://bscvyej1mrkqt" path="res://Resources/Items/ModularParts/Blade_Sword_Iron.tres" id="3_cpv4e"]
+
+[resource]
+script = ExtResource("2_nayrc")
+DisplayName = "Replace Sword Blade"
+Description = "Change out the blade of a sword for another."
+WorkType = 2
+TimeToComplete = 10.0
+RecipeType = 1
+ItemInputs = Array[ExtResource("1_aj3kp")]([ExtResource("2_8q4mc"), ExtResource("3_cpv4e")])
+ItemOutputs = Array[ExtResource("1_aj3kp")]([])
+PartOutput = ExtResource("3_cpv4e")
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

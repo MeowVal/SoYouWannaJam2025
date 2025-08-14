@@ -6,8 +6,11 @@ namespace SoYouWANNAJam2025.Code.Interactive.Items;
 [GlobalClass][Tool]
 public partial class ModularPartTemplate : GenericItemTemplate
 {
-    [ExportGroup("Setup")] [Export] // The different modular parts you can attach to this item.
+    [ExportGroup("Setup")]
+    [Export] // The different modular parts you can attach to this item.
     public EPartType PartType;
+    [Export]
+    public EModularItemType ModularItemType;
 
     [ExportCategory("Modular Stats")]
     [ExportGroup("Damage")] [Export] // The root base damage of the weapon
