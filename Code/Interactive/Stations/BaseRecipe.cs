@@ -29,7 +29,7 @@ public partial class BaseRecipe : Resource
     [Export] public string Description = "You need to actually set this lol.";
     [Export] public Texture2D Icon;
 
-    [ExportGroup("Inputs/Outputs")]
+    [ExportGroup("Inputs & Outputs")]
     [Export] public ERecipeType RecipeType = ERecipeType.Standard;
     [Export] public Array<GenericItemTemplate> ItemInputs = [];
     [Export] public Array<GenericItemTemplate> ItemOutputs = [];
