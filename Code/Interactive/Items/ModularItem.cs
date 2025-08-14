@@ -49,10 +49,16 @@ public partial class ModularItem : GenericItem
     // Defines what slots this item will have to use
     private Dictionary<EPartType, ModularPartTemplate> _parts = [];
     public Npc OwningNpc = null;
+    private Array<Sprite2D> _partSprites = [];
 
     public override void _Ready()
     {
         base._Ready();
+        foreach (var sprite in Sprites)
+        {
+            sprite.Free();
+        }
+        Sprites.Clear();
         // Get resource defaults and duplicate (instantiate) them into the item itself.
         if (ItemResource is not ModularItemTemplate template) return;
         GD.Print($"Constructing ModularItem {ItemResource.DisplayName}.");
@@ -63,6 +69,7 @@ public partial class ModularItem : GenericItem
             _parts.Add(pair.Key, newItem);
             GD.Print($"Added {newItem!.DisplayName} to slot {pair.Key}.");
         }
+        UpdateModularSprites();
     }
 
     public bool HasPart(EPartType partType)
@@ -75,6 +82,31 @@ public partial class ModularItem : GenericItem
         if (!_parts.ContainsKey(part.PartType)) return false;
         _parts[part.PartType] = part;
         GD.Print($"Added {part.DisplayName} to {ItemResource.DisplayName}.");
+        UpdateModularSprites();
         return true;
     }
+
+    public void UpdateModularSprites()
+    {
+        // Remove all old sprites
+        foreach (var sprite in _partSprites)
+        {
+            sprite.QueueFree();
+        }
+        _partSprites.Clear();
+
+        // Add in new ones
+        foreach (var (partType, part) in _parts)
+        {
+            var newSprite = new Sprite2D();
+            newSprite.Texture = part.Sprite;
+            newSprite.Modulate = part.SpriteColour;
+            AddChild(newSprite);
+        }
+
+        // Recalculate stats for highlight
+        base.UpdateSprites();
+    }
+
+
 }

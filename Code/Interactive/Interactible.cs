@@ -17,7 +17,6 @@ public partial class Interactible : Area2D
 
     private bool _interactive = true;
     private Array<int> _defaultZIndices = [];
-    private Array<Color> _defaultColours = [];
     public Array<Sprite2D> Sprites = [];
 
     [Export]
@@ -56,6 +55,13 @@ public partial class Interactible : Area2D
         if (Engine.IsEditorHint()) return;
         
         Interact += OnInteractMethod;
+        UpdateSprites();
+    }
+
+    public virtual void UpdateSprites()
+    {
+        Sprites.Clear();
+        _defaultZIndices.Clear();
         var foundSprites = GetChildren()
             .Where(child => child is Sprite2D)
             .Select(child => child)
@@ -64,7 +70,6 @@ public partial class Interactible : Area2D
         {
             Sprites.Add(sprite);
             _defaultZIndices.Add(sprite.ZIndex);
-            _defaultColours.Add(sprite.Modulate);
         }
     }
 
@@ -77,7 +82,6 @@ public partial class Interactible : Area2D
 
     public void SetHighlight(bool enabled)
     {
-        //Modulate = enabled ? new Color(1.5f, 1.5f, 1.5f, 1) : new Color(1, 1, 1, 1);
         for (var i = 0; i < Sprites.Count; i++)
         {
             Sprites[i].Material = enabled ? GD.Load<Material>("res://Code/Interactive/HighlightMaterial.tres") : null;
