@@ -26,8 +26,10 @@ public partial class Camera : Camera2D
     {
         if (GetWindow().Size != _oldResolution)
         {
-            _oldResolution = GetWindow().Size;
-            GetNode<Control>("Hud").Position = -0.5f * _oldResolution;
+            //var hud = GetNode<Control>("Hud");
+            //_oldResolution = GetWindow().Size;
+            //hud.Position = -0.5f * _oldResolution;
+            //hud.Scale = new Vector2(0.25f, 0.25f);
         }
         
         GlobalPosition = GlobalPosition.Lerp(FollowingNode.GlobalPosition, (float)(SmoothingSpeed*delta));

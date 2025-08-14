@@ -32,9 +32,9 @@ public partial class CraftingButtonSpam : CraftingStationInterface
 
     public override void _Ready()
     {
-        _bar = GetNode<ProgressBar>("VBoxContainer/RecipeProgress");
-        _label = GetNode<Label>("VBoxContainer/HBoxContainer/RecipeName");
-        _strengthBar = GetNode<ProgressBar>("VBoxContainer/ProgressBar");
+        _bar = GetNode<ProgressBar>("Control/MarginContainer/VBoxContainer/RecipeProgress");
+        _label = GetNode<Label>("Control/MarginContainer/VBoxContainer/HBoxContainer/RecipeName");
+        _strengthBar = GetNode<ProgressBar>("Control/MarginContainer/VBoxContainer/ProgressBar");
         _recipeTimer = GetNode<Timer>("RecipeTimer");
         _recipeTimer.Timeout += _OnRecipeTimer;
         _recipeTimer.Start(Station.CurrentRecipe.TimeToComplete);

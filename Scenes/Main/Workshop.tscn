@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://0x5n8e8yjofe"]
+[gd_scene load_steps=38 format=4 uid="uid://0x5n8e8yjofe"]
 
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_knoqw"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="2_65kow"]
@@ -14,7 +14,6 @@
 [ext_resource type="Resource" uid="uid://d1il8gelcfaqa" path="res://Resources/Recipes/testRecipe.tres" id="9_14b3v"]
 [ext_resource type="PackedScene" uid="uid://bkawl4uk3bb67" path="res://Entities/leaveArea.tscn" id="9_65kow"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="9_vwcaw"]
-[ext_resource type="PackedScene" uid="uid://ccxhqwfuyr60" path="res://Scenes/UI/HUD.tscn" id="10_8x3ni"]
 [ext_resource type="Resource" uid="uid://kpiwa4s7s61y" path="res://Resources/Recipes/testPartReplacement.tres" id="10_14b3v"]
 [ext_resource type="Resource" uid="uid://ds4n06wlxsyvo" path="res://Resources/Items/ModularParts/Blade_Spear_Iron.tres" id="10_ggs26"]
 [ext_resource type="Resource" uid="uid://bscvyej1mrkqt" path="res://Resources/Items/ModularParts/Blade_Sword_Iron.tres" id="11_o07dx"]
@@ -79,9 +78,9 @@ shadow_color = Color(0, 0, 0, 1)
 height = 1.0
 max_distance = 16384.0
 script = ExtResource("27_nt8bt")
+SunLight = NodePath(".")
 LightGradient = SubResource("Gradient_a2a7c")
 EnergyCurve = SubResource("Curve_nfpvg")
-SunLight = NodePath(".")
 
 [node name="WorldMap" type="TileMapLayer" parent="Isometric"]
 unique_name_in_owner = true
@@ -234,7 +233,5 @@ x_draw_order_reversed = true
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("9_vwcaw")
 FollowingNode = NodePath("../Isometric/WorldMap/Entities/Character")
-
-[node name="Hud" parent="Camera2D" instance=ExtResource("10_8x3ni")]
 
 [editable path="Isometric/WorldMap/Lighting"]
