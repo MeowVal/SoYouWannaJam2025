@@ -1,6 +1,6 @@
 using Godot;
 
-namespace SoYouWANNAJam2025.Code.Npc;
+namespace SoYouWANNAJam2025.Code.Npc.Friendly;
 [Tool]
 [GlobalClass]
 public partial class NpcResource : Resource

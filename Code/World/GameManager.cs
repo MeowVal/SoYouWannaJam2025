@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Npc;
+using NpcInteractor = SoYouWANNAJam2025.Code.Npc.Friendly.NpcInteractor;
+using NpcResource = SoYouWANNAJam2025.Code.Npc.Friendly.NpcResource;
 
 namespace SoYouWANNAJam2025.Code.World;
 
@@ -16,15 +18,16 @@ public partial class GameManager : Node2D
 	public float Gold = 0; 
 	
 	[Export] public DayCycleLantern CycleLantern;
-	private Godot.Collections.Array<Npc.Npc> _npcs;
+	private Godot.Collections.Array<Npc.Friendly.Npc> _npcs;
 	[Export] public int NpcMaxCount = 20;
 	private Node2D _npcSpawnLocation;
 	private Node2D _frontDesk;
 	private Area2D _leaveAreaNode;
+	private string _folderPath = "res://Resources/Npcs/Friendly/";
 	
 	public override void _Ready()
 	{
-		DirContents("res://Resources/Npcs/");
+		DirContents(_folderPath);
 		_npcSpawnLocation = (Node2D)FindChild("NpcArrivalArea");
 		_frontDesk  = (Node2D)FindChild("FrontDesk");
 		_leaveAreaNode = (Area2D)FindChild("LeaveArea");
@@ -37,7 +40,7 @@ public partial class GameManager : Node2D
 		
 	}
 
-	private void OnNpcLeft(Npc.Npc npc)
+	private void OnNpcLeft(Npc.Friendly.Npc npc)
 	{
 		_npcs.Remove(npc);
 	}
@@ -68,14 +71,14 @@ public partial class GameManager : Node2D
 				}
 				else
 				{
-					var resource = ResourceLoader.Load<NpcResource>("res://Resources/Npcs/"+fileName);
+					var resource = ResourceLoader.Load<NpcResource>(_folderPath+fileName);
 					if (resource != null)
 					{
 						NpcResources.Add(resource);
 					}
 					else 
 					{
-						GD.Print("Resource not found at path: "+"res://Resources/Npcs/"+fileName);
+						GD.Print("Resource not found at path: "+_folderPath+fileName);
 					}
 				}
 				fileName = dir.GetNext();
@@ -90,7 +93,7 @@ public partial class GameManager : Node2D
 	private void OnNpcTimerTimeout()
 	{
 		if (_npcs.Count >= NpcMaxCount) return;
-		Npc.Npc npc = NpcScene.Instantiate<Npc.Npc>();
+		Npc.Friendly.Npc npc = NpcScene.Instantiate<Npc.Friendly.Npc>();
 		npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
 		npc.Position = _npcSpawnLocation.Position;
 		npc.Scale = Vector2.One * 4;

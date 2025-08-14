@@ -1,20 +1,18 @@
 using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
-using SoYouWANNAJam2025.Code.Interactive.Items;
-using SoYouWANNAJam2025.Code.Interactive.Stations;
 using BaseRecipe = SoYouWANNAJam2025.Code.Interactive.Stations.BaseRecipe;
 
-namespace SoYouWANNAJam2025.Code.Npc;
+namespace SoYouWANNAJam2025.Code.Npc.Friendly;
 
 public partial class NpcInteractor : Interactible
 {
-    public Array<Interactible> PossibleTargets = [];
-    public int CurrentTarget = 0;
+    //public Array<Interactible> PossibleTargets = [];
+    //public int CurrentTarget = 0;
     private Timer _distanceCheckTimer;
-    private Npc _npc;
+    private Friendly.Npc _npc;
     [Signal]
-    public delegate void NpcLeftEventHandler(Npc npc);
+    public delegate void NpcLeftEventHandler(Friendly.Npc npc);
 
     //public Interactive.Inventory.InventorySlot InventorySlot = null;
     public Interactive.Inventory.InventorySlot InventorySlot;
@@ -32,7 +30,7 @@ public partial class NpcInteractor : Interactible
         
         InventorySlot.RecipeWhitelist = Recipes;
         InventorySlot.CompileWhitelist();
-        _npc = GetParent<Npc>();
+        _npc = GetParent<Friendly.Npc>();
         Interact += OnInteractMethod;
         BodyEntered += OnInteractableEntered;
         AreaEntered += OnInteractableEntered;

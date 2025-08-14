@@ -1,0 +1,231 @@
+[gd_scene load_steps=20 format=3 uid="uid://cgmrv20adm0sb"]
+
+[ext_resource type="Script" uid="uid://b4ntrd6icymju" path="res://Code/Npc/Friendly/Npc.cs" id="1_j5ewa"]
+[ext_resource type="Resource" uid="uid://0xv5lxlnyfl7" path="res://Resources/Npcs/Friendly/Npc01.tres" id="2_ojj3t"]
+[ext_resource type="Script" uid="uid://bbqx7jgoyn746" path="res://Code/Npc/Friendly/NpcInteractor.cs" id="3_3hpt8"]
+[ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="4_rliy4"]
+[ext_resource type="Texture2D" uid="uid://b5g8dj2bpwsm2" path="res://Assets/Sprites/characters/Shadow/Shadow.png" id="5_swplc"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="6_qhrh7"]
+
+[sub_resource type="Animation" id="Animation_jvg37"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NpcInteractor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_y44xp"]
+resource_name = "idleDown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NpcInteractor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_6802k"]
+resource_name = "idleLeft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NpcInteractor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_1e812"]
+resource_name = "idleRight"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NpcInteractor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_2wnqt"]
+resource_name = "idleUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NpcInteractor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_koqtm"]
+resource_name = "walkDown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NpcInteractor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_w50qj"]
+resource_name = "walkLeft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NpcInteractor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_4ubeo"]
+resource_name = "walkRight"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NpcInteractor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_ot8lt"]
+resource_name = "walkUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NpcInteractor/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6802k"]
+_data = {
+&"RESET": SubResource("Animation_jvg37"),
+&"idleDown": SubResource("Animation_y44xp"),
+&"idleLeft": SubResource("Animation_6802k"),
+&"idleRight": SubResource("Animation_1e812"),
+&"idleUp": SubResource("Animation_2wnqt"),
+&"walkDown": SubResource("Animation_koqtm"),
+&"walkLeft": SubResource("Animation_w50qj"),
+&"walkRight": SubResource("Animation_4ubeo"),
+&"walkUp": SubResource("Animation_ot8lt")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jh2em"]
+radius = 6.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bj5yu"]
+radius = 6.0
+height = 12.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mrx7r"]
+polygon = PackedVector2Array(2, 4, 6, 3, 8, 1, 8, 0, 7, -2, 5, -4, 2, -5, -2, -5, -5, -4, -7, -2, -8, 0, -8, 1, -6, 3, -2, 4)
+
+[node name="Npc" type="CharacterBody2D" node_paths=PackedStringArray("MoodTimer")]
+collision_layer = 2
+collision_mask = 17
+script = ExtResource("1_j5ewa")
+MoodTimer = NodePath("MoodTimer")
+_speed = 72.0
+NpcResource = ExtResource("2_ojj3t")
+
+[node name="NpcInteractor" type="Area2D" parent="."]
+script = ExtResource("3_3hpt8")
+
+[node name="Sprite2D" type="Sprite2D" parent="NpcInteractor"]
+texture = ExtResource("4_rliy4")
+offset = Vector2(0, -14)
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="ShadowSprite" type="Sprite2D" parent="NpcInteractor/Sprite2D"]
+modulate = Color(0, 0, 0, 0.784314)
+show_behind_parent = true
+texture = ExtResource("5_swplc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NpcInteractor"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_6802k")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcInteractor"]
+shape = SubResource("CircleShape2D_jh2em")
+debug_color = Color(0.980392, 0, 0.376471, 0.0705882)
+
+[node name="DistanceCheckTimer" type="Timer" parent="NpcInteractor"]
+wait_time = 0.1
+autostart = true
+
+[node name="InventorySlot" type="Node2D" parent="NpcInteractor"]
+position = Vector2(0, -20)
+script = ExtResource("6_qhrh7")
+AllowAll = true
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_bj5yu")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 32.0
+target_desired_distance = 64.0
+path_max_distance = 128.0
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 32.0
+avoidance_layers = 3
+debug_enabled = true
+debug_path_custom_color = Color(1, 0.223529, 0.137255, 1)
+
+[node name="MoodTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_mrx7r")

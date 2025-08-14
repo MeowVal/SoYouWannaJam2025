@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="NpcResource" load_steps=3 format=3 uid="uid://blnu6lgittsq7"]
 
 [ext_resource type="Texture2D" uid="uid://hp8113cpeg56" path="res://Assets/Sprites/characters/human.png" id="1_dacs2"]
-[ext_resource type="Script" uid="uid://cdihu8vnnqsps" path="res://Code/Npc/NpcResource.cs" id="2_3ugkh"]
+[ext_resource type="Script" uid="uid://cdihu8vnnqsps" path="res://Code/Npc/Friendly/NpcResource.cs" id="2_3ugkh"]
 
 [resource]
 script = ExtResource("2_3ugkh")

@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/Interactive/Items/GenericItem.tscn" id="5_xa8a6"]
 [ext_resource type="Resource" uid="uid://db5qq1a3ir2ty" path="res://Resources/Items/logItem.tres" id="6_11nrr"]
 [ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="7_lv6gr"]
-[ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Entities/NPC/Npc.tscn" id="9_xa8a6"]
+[ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Entities/NPC/Friendly/Npc.tscn" id="9_xa8a6"]
 [ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Entities/Interactive/Stations/GenericCraftingStation.tscn" id="11_am2xh"]
 [ext_resource type="PackedScene" uid="uid://bwho24gjrxuig" path="res://Entities/Interactive/Stations/CombiningStation.tscn" id="11_j3d0r"]
 [ext_resource type="PackedScene" uid="uid://bkawl4uk3bb67" path="res://Entities/leaveArea.tscn" id="14_am2xh"]

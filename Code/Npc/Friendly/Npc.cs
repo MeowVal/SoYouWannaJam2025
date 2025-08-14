@@ -2,7 +2,7 @@ using System;
 using Godot;
 using SoYouWANNAJam2025.Code.Interactive.Inventory;
 
-namespace SoYouWANNAJam2025.Code.Npc;
+namespace SoYouWANNAJam2025.Code.Npc.Friendly;
 [Tool]
 public partial class Npc : CharacterBody2D
 {

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="NpcResource" load_steps=3 format=3 uid="uid://0xv5lxlnyfl7"]
 
-[ext_resource type="Script" uid="uid://cdihu8vnnqsps" path="res://Code/Npc/NpcResource.cs" id="1_g15u4"]
+[ext_resource type="Script" uid="uid://cdihu8vnnqsps" path="res://Code/Npc/Friendly/NpcResource.cs" id="1_g15u4"]
 [ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="1_tfa3y"]
 
 [resource]

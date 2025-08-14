@@ -4,6 +4,7 @@ using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Npc;
+using Npc = SoYouWANNAJam2025.Code.Npc.Friendly.Npc;
 
 namespace SoYouWANNAJam2025.Entities.Interactive.Items;
 

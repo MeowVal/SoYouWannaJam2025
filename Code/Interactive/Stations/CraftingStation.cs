@@ -3,6 +3,7 @@ using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Items;
+using SoYouWANNAJam2025.Code.Npc.Friendly;
 using SoYouWANNAJam2025.Entities.Interactive.Items;
 
 //using SoYouWANNAJam2025.Scenes.UI.Interactions;
@@ -183,7 +184,7 @@ public partial class CraftingStation : Interactible
                     AttemptCraft();
                     break;
             } 
-        } else if (node is Npc.NpcInteractor npcInteractor)
+        } else if (node is NpcInteractor npcInteractor)
         {
             switch (trigger)
             {
