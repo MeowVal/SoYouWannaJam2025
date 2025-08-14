@@ -27,12 +27,13 @@ public partial class GameManager : Node2D
 		Vector2 mapOffset = tileMap.GlobalPosition;
 		/*if(tileMap != null&& container != null)
 			GenerateTileOccluders(tileMap, container);*/
-		GD.Print(shaderMat);
+		//GD.Print(shaderMat);
 		shaderMat.SetShaderParameter("tile_size", TileSize);
 		shaderMat.SetShaderParameter("map_offset", mapOffset);
 		DirContents("res://Resources/Npcs/");
 
 		GD.Print(_cycleLantern);
+		if (_cycleLantern == null) return;
 		_cycleLantern.CycleLantern += LanternChanged;
 	}
 	

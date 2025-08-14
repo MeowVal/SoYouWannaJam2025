@@ -203,7 +203,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="InventorySlot" type="Node2D" parent="NpcInteractor"]
-position = Vector2(0, -4)
+position = Vector2(0, -20)
 script = ExtResource("5_mrx7r")
 AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
