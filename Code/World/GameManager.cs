@@ -10,6 +10,8 @@ public partial class GameManager : Node2D
 	public Godot.Collections.Array<NpcResource> NpcResources = [];
 	[Export]
 	public PackedScene NpcScene { get; set; }
+	[Export]
+	public Vector2 TileSize = new Vector2(32, 16);
 
 	public float gold = 0; 
 	
@@ -19,11 +21,15 @@ public partial class GameManager : Node2D
 	{
 		var tileMap =(TileMapLayer)FindChild("WorldMap");
 		var container = (Node2D)FindChild("OccluderContainer");
+		var shadowCaster = (Polygon2D)FindChild("ShadowCasterPoly");
+		var shaderMat = (ShaderMaterial)shadowCaster.Material;
 		//NpcResources[0] = ResourceLoader.LoadThreadedRequest<NpcResource>("res://Resources/Npcs/Npc01.tres");
-		
-		
-		if(tileMap != null&& container != null)
-			GenerateTileOccluders(tileMap, container);
+		Vector2 mapOffset = tileMap.GlobalPosition;
+		/*if(tileMap != null&& container != null)
+			GenerateTileOccluders(tileMap, container);*/
+		GD.Print(shaderMat);
+		shaderMat.SetShaderParameter("tile_size", TileSize);
+		shaderMat.SetShaderParameter("map_offset", mapOffset);
 		DirContents("res://Resources/Npcs/");
 
 		GD.Print(_cycleLantern);
@@ -100,7 +106,7 @@ public partial class GameManager : Node2D
 	}
 	
 	
-
+	/*
 	private void GenerateTileOccluders(TileMapLayer tileMap, Node2D container)
 	{
 		var tileSet = tileMap.TileSet;
@@ -157,5 +163,5 @@ public partial class GameManager : Node2D
 		{
 			GD.Print("Occluder scene saved at ", savePath);
 		}
-	}
+	}*/
 }
