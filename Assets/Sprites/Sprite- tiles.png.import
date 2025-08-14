@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hi48wx5cvsqa"
-path="res://.godot/imported/generated_heightmap.png-522c84ff040c354d7cc0ddeb7e37ac53.ctex"
+uid="uid://cwedi6i73ir7"
+path="res://.godot/imported/Sprite- tiles.png-541d3de9386a6384fba1b692bf1a2b70.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/generated_heightmap.png"
-dest_files=["res://.godot/imported/generated_heightmap.png-522c84ff040c354d7cc0ddeb7e37ac53.ctex"]
+source_file="res://Assets/Sprites/Sprite- tiles.png"
+dest_files=["res://.godot/imported/Sprite- tiles.png-541d3de9386a6384fba1b692bf1a2b70.ctex"]
 
 [params]
 

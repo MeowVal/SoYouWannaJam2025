@@ -41,7 +41,7 @@ public partial class Npc : CharacterBody2D
         _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         _animationPlayer = GetNode<AnimationPlayer>("NpcInteractor/AnimationPlayer");
         _sprite2D = GetNode<Sprite2D>("NpcInteractor/Sprite2D");
-        _inventorySlot = GetNode<InventorySlot>("NpcInteractor/InventorySlot");
+        if (GetNode("NpcInteractor/InventorySlot") is InventorySlot slot) _inventorySlot = slot;
         MoodTimer = GetNode<Timer>("MoodTimer");
         if (NpcResource != null)
             SetupNpc();
