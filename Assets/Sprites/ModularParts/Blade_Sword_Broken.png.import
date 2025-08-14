@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2qbu2tu3vxyo"
-path="res://.godot/imported/IronOre.png-c64ba1bbec3a657304cb72157ddff7bc.ctex"
+uid="uid://bj7gr0vk3momh"
+path="res://.godot/imported/Blade_Sword_Broken.png-59b0217e51fb270255bccdb4f737bd93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Materials/IronOre.png"
-dest_files=["res://.godot/imported/IronOre.png-c64ba1bbec3a657304cb72157ddff7bc.ctex"]
+source_file="res://Assets/Sprites/ModularParts/Blade_Sword_Broken.png"
+dest_files=["res://.godot/imported/Blade_Sword_Broken.png-59b0217e51fb270255bccdb4f737bd93.ctex"]
 
 [params]
 

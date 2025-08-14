@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br6ttbacqi8t2"
-path="res://.godot/imported/MythrilIngot.png-f4c16fe28b7216fd2077ac0275075184.ctex"
+uid="uid://cxde1rygdy05i"
+path="res://.godot/imported/Ore_Base.png-f59faf642355ebd3ab2c9872df2783ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Materials/MythrilIngot.png"
-dest_files=["res://.godot/imported/MythrilIngot.png-f4c16fe28b7216fd2077ac0275075184.ctex"]
+source_file="res://Assets/Sprites/Materials/Ore_Base.png"
+dest_files=["res://.godot/imported/Ore_Base.png-f59faf642355ebd3ab2c9872df2783ba.ctex"]
 
 [params]
 

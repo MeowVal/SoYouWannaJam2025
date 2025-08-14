@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pyft3ywnt8tk"
-path="res://.godot/imported/GoldIngot.png-b2415cdf209b659dd37c17a6b50562bb.ctex"
+uid="uid://bk20lfmh68whd"
+path="res://.godot/imported/Grip_Bow.png-bc0ae41adca8896bfb6b2a62e07224fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Materials/GoldIngot.png"
-dest_files=["res://.godot/imported/GoldIngot.png-b2415cdf209b659dd37c17a6b50562bb.ctex"]
+source_file="res://Assets/Sprites/ModularParts/Grip_Bow.png"
+dest_files=["res://.godot/imported/Grip_Bow.png-bc0ae41adca8896bfb6b2a62e07224fe.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b60c0xe2o4aux"
-path="res://.godot/imported/MythrilOre.png-8189a0f0da401ea465160baba33f1824.ctex"
+uid="uid://cvnswjk4bolms"
+path="res://.godot/imported/String_Bow.png-5b6293a003dbc60865e216b8d8aa4f42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Materials/MythrilOre.png"
-dest_files=["res://.godot/imported/MythrilOre.png-8189a0f0da401ea465160baba33f1824.ctex"]
+source_file="res://Assets/Sprites/ModularParts/String_Bow.png"
+dest_files=["res://.godot/imported/String_Bow.png-5b6293a003dbc60865e216b8d8aa4f42.ctex"]
 
 [params]
 

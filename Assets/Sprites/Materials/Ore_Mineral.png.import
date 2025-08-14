@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbfatnrnxbr13"
-path="res://.godot/imported/IronIngot.png-f8d4ae7ede16baabe9fec6bf3d0261da.ctex"
+uid="uid://mj84jedppkmv"
+path="res://.godot/imported/Ore_Mineral.png-3ff2f552974814bbd95aa8731c32faaf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Materials/IronIngot.png"
-dest_files=["res://.godot/imported/IronIngot.png-f8d4ae7ede16baabe9fec6bf3d0261da.ctex"]
+source_file="res://Assets/Sprites/Materials/Ore_Mineral.png"
+dest_files=["res://.godot/imported/Ore_Mineral.png-3ff2f552974814bbd95aa8731c32faaf.ctex"]
 
 [params]
 
