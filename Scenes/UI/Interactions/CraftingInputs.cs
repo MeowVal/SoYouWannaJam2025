@@ -82,14 +82,18 @@ public partial class CraftingInputs : CraftingStationInterface
     {
         base._Input(@event);
         
-        var up = Input.IsActionJustPressed("up");
-        var down = Input.IsActionJustPressed("down");
-        var left = Input.IsActionJustPressed("left");
-        var right = Input.IsActionJustPressed("right");
+        var up = Input.IsActionJustPressed("MinigameUp");
+        var down = Input.IsActionJustPressed("MinigameDown");
+        var left = Input.IsActionJustPressed("MinigameLeft");
+        var right = Input.IsActionJustPressed("MinigameRight");
         
         if (!up && !down && !left && !right) return;
         
         bool[] direction = [up, down, left, right];
+        foreach (var b in direction)
+        {
+            GD.Print($"Direction: {b}");
+        }
 
         if (direction[_sequence[_index]])
         {
