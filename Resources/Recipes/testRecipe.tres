@@ -17,5 +17,4 @@ ItemOutputs = Array[ExtResource("2_d7s13")]([ExtResource("4_47cbo")])
 WorkType = 1
 TimeToComplete = 5.0
 SequenceLength = 6
-SpamPerSecond = 5
 metadata/_custom_type_script = "uid://dpq804w6fy4nf"

@@ -79,9 +79,9 @@ shadow_color = Color(0, 0, 0, 1)
 height = 1.0
 max_distance = 16384.0
 script = ExtResource("27_nt8bt")
-SunLight = NodePath(".")
 LightGradient = SubResource("Gradient_a2a7c")
 EnergyCurve = SubResource("Curve_nfpvg")
+SunLight = NodePath(".")
 
 [node name="WorldMap" type="TileMapLayer" parent="Isometric"]
 unique_name_in_owner = true

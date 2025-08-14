@@ -49,7 +49,6 @@ public partial class ModularItem : GenericItem
     // Defines what slots this item will have to use
     private Dictionary<EPartType, ModularPartTemplate> _parts = [];
     public Npc OwningNpc = null;
-    private Array<Sprite2D> _partSprites = [];
 
     public override void _Ready()
     {
@@ -89,11 +88,10 @@ public partial class ModularItem : GenericItem
     public void UpdateModularSprites()
     {
         // Remove all old sprites
-        foreach (var sprite in _partSprites)
+        foreach (var sprite in Sprites)
         {
-            sprite.QueueFree();
+            sprite.Free();
         }
-        _partSprites.Clear();
 
         // Add in new ones
         foreach (var (partType, part) in _parts)
