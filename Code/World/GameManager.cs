@@ -35,7 +35,7 @@ public partial class GameManager : Node2D
 	private string _npcResourceFolderPath = "res://Resources/Npcs/Friendly/";
 	private string _hostileNpcResourceFolderPath = "res://Resources/Npcs/Hostile/";
 	private string _modularItemFolderPath = "res://Resources/Items/ModularItems/";
-	private PackedScene _genericItemScene;
+	private PackedScene _modularItemScene;
 	private PathFollow2D _hostileNpcSpawnLocation; 
 	
 	public override void _Ready()
@@ -47,7 +47,7 @@ public partial class GameManager : Node2D
 		_npcSpawnLocation = (Node2D)FindChild("NpcArrivalArea");
 		_frontDesk  = (Node2D)FindChild("FrontDesk");
 		_leaveAreaNode = (Area2D)FindChild("LeaveArea");
-		_genericItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
+		_modularItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/ModularItem.tscn");
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 		_hostileNpcSpawnLocation = (PathFollow2D)FindChild("HostileNpcSpawnLocations");
 		
@@ -181,20 +181,19 @@ public partial class GameManager : Node2D
 	private void OnNpcTimerTimeout()
 	{
 		//GD.Print("NPC count = "+_npcs.Count);
-		var newItem = _genericItemScene.Instantiate<GenericItem>();
-		GetNode("/root/GameManager/Isometric").AddChild(newItem);
+		var newItem = _modularItemScene.Instantiate<GenericItem>();
 		if (ModularItemResources != null)
 		{
 			newItem.ItemResource = ModularItemResources[GD.RandRange(0, NpcResources.Count - 1)];
 		}
-		
+
+		GetNode("/root/GameManager/Isometric").AddChild(newItem);
+
 		Npc.Friendly.Npc npc = NpcScene.Instantiate<Npc.Friendly.Npc>();
 		NpcSpawning(npc);
 		// Add outputs to inventory
 		if (newItem.ItemResource == null) return;
 		npc.NpcInventory.PickupItem(newItem, true);
-		GD.Print($"- {newItem.ItemResource.DisplayName}");
-
 	}
 	private void OnHostileNpcTimerTimeout()
 	{

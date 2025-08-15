@@ -13,10 +13,11 @@ public partial class GenericItem : Interactible
     [Export]
     public virtual GenericItemTemplate ItemResource
     {
+        get => _itemTemplate;
         set
         {
             _itemTemplate = value;
-            if (Sprite == null) Sprite = GetNode<Sprite2D>("Sprite2D");
+            Sprite ??= GetNode<Sprite2D>("Sprite2D");
             if (_itemTemplate == null)
             {
                 //GD.Print("DEFAULT TEMPLATE");
@@ -28,7 +29,7 @@ public partial class GenericItem : Interactible
             
             DrawSprite();
         }
-        get => _itemTemplate;
+        
     }
 
     private Player.CharacterControl _player;
@@ -54,12 +55,7 @@ public partial class GenericItem : Interactible
     public virtual void DrawSprite()
     {
         var image = _itemTemplate.GetItemImage();
-        if (image == null)
-        {
-            GD.Print("ERROR: GetItemImage() returned null.");
-            return;
-        }
-        GD.Print("item image"+image.IsEmpty());
+        if (image == null) return;
         Sprite.Texture = ImageTexture.CreateFromImage(_itemTemplate.GetItemImage());
     }
 }
