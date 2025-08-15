@@ -211,7 +211,7 @@ public partial class GameManager : Node2D
 			if (_hostileNpc.Count >= NpcMaxCount) return;
 			npc.NpcResource = HostileNpcResources[GD.RandRange(0,HostileNpcResources.Count -1)];
 			_hostileNpcSpawnLocation.ProgressRatio = GD.Randf();
-			npc.Position = _hostileNpcSpawnLocation.Position;
+			npc.Position = _hostileNpcSpawnLocation.Position * 4;
 			npc.Scale = Vector2.One * 4;
 			_hostileNpc.Add(npc);
 			AddChild(npc);
@@ -220,7 +220,7 @@ public partial class GameManager : Node2D
 		{
 			if (_npcs.Count >= NpcMaxCount)return;
 			npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
-			npc.Position = _npcSpawnLocation.Position;
+			npc.Position = _npcSpawnLocation.Position * 4 ;
 			npc.Scale = Vector2.One * 4;
 			npc.Target = _frontDesk;
 			npc.LeaveAreaNode = _leaveAreaNode;
