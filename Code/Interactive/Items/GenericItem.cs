@@ -16,6 +16,7 @@ public partial class GenericItem : Interactible
         set
         {
             _itemTemplate = value;
+            if (Sprite == null) Sprite = GetNode<Sprite2D>("Sprite2D");
             if (_itemTemplate == null)
             {
                 //GD.Print("DEFAULT TEMPLATE");
@@ -24,7 +25,7 @@ public partial class GenericItem : Interactible
                 return;
             }
             ColliderRadius = value.Size;
-            if (Sprite == null) Sprite = GetNode<Sprite2D>("Sprite2D");
+            
             DrawSprite();
         }
         get => _itemTemplate;
@@ -52,7 +53,13 @@ public partial class GenericItem : Interactible
 
     public virtual void DrawSprite()
     {
-        GD.Print("ITEM DRAW");
+        var image = _itemTemplate.GetItemImage();
+        if (image == null)
+        {
+            GD.Print("ERROR: GetItemImage() returned null.");
+            return;
+        }
+        GD.Print("item image"+image.IsEmpty());
         Sprite.Texture = ImageTexture.CreateFromImage(_itemTemplate.GetItemImage());
     }
 }

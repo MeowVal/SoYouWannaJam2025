@@ -3,7 +3,7 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code.Npc.Friendly;
 [Tool]
-public partial class NpcBehaviourWander : Friendly.NpcBehaviour
+public partial class NpcBehaviourWander : NpcBehaviour
 {
     private static readonly Vector2[] Directions = [Vector2.Up, Vector2.Right, Vector2.Down, Vector2.Left];
     [Export]

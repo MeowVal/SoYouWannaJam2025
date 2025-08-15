@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=3 uid="uid://cgmrv20adm0sb"]
 
-[ext_resource type="Script" uid="uid://b4ntrd6icymju" path="res://Code/Npc/Friendly/Npc.cs" id="1_j5ewa"]
-[ext_resource type="Resource" uid="uid://0xv5lxlnyfl7" path="res://Resources/Npcs/Friendly/Npc01.tres" id="2_ojj3t"]
+[ext_resource type="Script" uid="uid://das3my7bu0f6s" path="res://Code/Npc/Hostile/HostileNpc.cs" id="1_sme6v"]
 [ext_resource type="Script" uid="uid://bbqx7jgoyn746" path="res://Code/Npc/Friendly/NpcInteractor.cs" id="3_3hpt8"]
 [ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="4_rliy4"]
+[ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="5_0hsmb"]
 [ext_resource type="Texture2D" uid="uid://b5g8dj2bpwsm2" path="res://Assets/Sprites/characters/Shadow/Shadow.png" id="5_swplc"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="6_qhrh7"]
 
@@ -165,13 +165,10 @@ height = 12.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mrx7r"]
 polygon = PackedVector2Array(2, 4, 6, 3, 8, 1, 8, 0, 7, -2, 5, -4, 2, -5, -2, -5, -5, -4, -7, -2, -8, 0, -8, 1, -6, 3, -2, 4)
 
-[node name="Npc" type="CharacterBody2D" node_paths=PackedStringArray("MoodTimer")]
+[node name="HostileNpc" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 17
-script = ExtResource("1_j5ewa")
-MoodTimer = NodePath("MoodTimer")
-_speed = 72.0
-NpcResource = ExtResource("2_ojj3t")
+script = ExtResource("1_sme6v")
 
 [node name="NpcInteractor" type="Area2D" parent="."]
 script = ExtResource("3_3hpt8")
@@ -202,10 +199,23 @@ debug_color = Color(0.980392, 0, 0.376471, 0.0705882)
 wait_time = 0.1
 autostart = true
 
-[node name="InventorySlot" type="Node2D" parent="NpcInteractor"]
-position = Vector2(0, -20)
+[node name="Inventory" type="Node2D" parent="NpcInteractor"]
+script = ExtResource("5_0hsmb")
+metadata/_custom_type_script = "uid://usn4a73qqvca"
+
+[node name="InventorySlot1" type="Node2D" parent="NpcInteractor/Inventory"]
+position = Vector2(-16, -16)
 script = ExtResource("6_qhrh7")
-AllowAll = true
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InventorySlot2" type="Node2D" parent="NpcInteractor/Inventory"]
+position = Vector2(16, -16)
+script = ExtResource("6_qhrh7")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InventorySlot3" type="Node2D" parent="NpcInteractor/Inventory"]
+position = Vector2(0, -16)
+script = ExtResource("6_qhrh7")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -308,6 +308,16 @@ position = Vector2(208, 456)
 [node name="FrontDesk" type="Node2D" parent="Isometric/WorldMap/Entities"]
 position = Vector2(188, 188)
 
+[node name="HostileNpcPath" type="Path2D" parent="Isometric/WorldMap/Entities"]
+curve = SubResource("Curve2D_nt8bt")
+
+[node name="HostileNpcSpawnLocations" type="PathFollow2D" parent="Isometric/WorldMap/Entities/HostileNpcPath"]
+position = Vector2(337, 811)
+rotation = -0.472089
+
+[node name="HostileNpcTimer" type="Timer" parent="Isometric/WorldMap/Entities/HostileNpcPath"]
+autostart = true
+
 [node name="BackgroundTile" type="TileMapLayer" parent="Isometric"]
 z_index = -4096
 y_sort_enabled = true
@@ -341,5 +351,8 @@ x_draw_order_reversed = true
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("9_vwcaw")
 FollowingNode = NodePath("../Isometric/WorldMap/Entities/Character")
+
+[connection signal="timeout" from="NpcTimer" to="." method="OnNpcTimerTimeout"]
+[connection signal="timeout" from="Isometric/WorldMap/Entities/HostileNpcPath/HostileNpcTimer" to="." method="OnHostileNpcTimerTimeout"]
 
 [editable path="Isometric/WorldMap/Lighting"]

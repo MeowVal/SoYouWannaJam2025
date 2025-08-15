@@ -4,7 +4,7 @@ namespace SoYouWANNAJam2025.Code.Npc.Friendly;
 [Tool]
 public partial class NpcBehaviour : Node2D
 {
-    protected  Friendly.Npc Npc;
+    protected  Npc Npc;
 
 
     public override void _Ready()
