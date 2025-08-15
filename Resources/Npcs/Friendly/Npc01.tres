@@ -1,10 +1,19 @@
 [gd_resource type="Resource" script_class="NpcResource" load_steps=3 format=3 uid="uid://0xv5lxlnyfl7"]
 
-[ext_resource type="Script" uid="uid://cdihu8vnnqsps" path="res://Code/Npc/Friendly/NpcResource.cs" id="1_g15u4"]
-[ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="1_tfa3y"]
+[ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="1_i75t1"]
+[ext_resource type="Script" uid="uid://cdihu8vnnqsps" path="res://Code/Npc/Friendly/NpcResource.cs" id="2_yft67"]
 
 [resource]
-script = ExtResource("1_g15u4")
-NpcName = "Soren"
-Sprite2D = ExtResource("1_tfa3y")
+script = ExtResource("2_yft67")
+Sprite2D = ExtResource("1_i75t1")
+MinMaxHealth = Vector2(5, 20)
+MinMaxSpeed = Vector2(30, 45)
+MinMaxStrength = Vector2(5, 10)
+MinMaxDexterity = Vector2(3, 7)
+MinMaxIntelligence = Vector2(1, 2)
+MinMaxWisdom = Vector2(1, 2)
+MinMaxCharisma = Vector2(1, 2)
+MinMaxConstitution = Vector2(9, 30)
+NpcName = "Smoll Slime"
+Class = "Smoll mob"
 metadata/_custom_type_script = "uid://cdihu8vnnqsps"

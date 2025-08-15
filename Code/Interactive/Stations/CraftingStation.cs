@@ -189,13 +189,13 @@ public partial class CraftingStation : Interactible
             switch (trigger)
             {
                 case TriggerType.PickupDrop:
-                    if (Inventory.HasItem() && npcInteractor.InventorySlot.HasSpace())
+                    if (Inventory.HasItem() && npcInteractor.Inventory.HasSpace())
                     {
-                        Inventory.TransferTo(npcInteractor.InventorySlot);
+                        Inventory.TransferTo(npcInteractor.Inventory);
                     }
-                    else if (Inventory.HasSpace() && npcInteractor.InventorySlot.HasItem())
+                    else if (Inventory.HasSpace() && npcInteractor.Inventory.HasItem())
                     {
-                        npcInteractor.InventorySlot.TransferTo(Inventory);
+                        npcInteractor.Inventory.TransferTo(Inventory);
                     }
 
                     break;

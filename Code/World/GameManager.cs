@@ -1,8 +1,9 @@
 using Godot;
 using Godot.Collections;
+using SoYouWANNAJam2025.Code.Interactive.Inventory;
+using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Npc;
-using NpcInteractor = SoYouWANNAJam2025.Code.Npc.Friendly.NpcInteractor;
-using NpcResource = SoYouWANNAJam2025.Code.Npc.Friendly.NpcResource;
+using SoYouWANNAJam2025.Code.Npc.Friendly;
 
 namespace SoYouWANNAJam2025.Code.World;
 
@@ -10,6 +11,7 @@ public partial class GameManager : Node2D
 {
 	public Resource[] PossibleTargets;
 	public Godot.Collections.Array<NpcResource> NpcResources = [];
+	public Godot.Collections.Array<ModularItemTemplate> ModularItemResources = [];
 	[Export]
 	public PackedScene NpcScene { get; set; }
 	[Export]
@@ -18,21 +20,25 @@ public partial class GameManager : Node2D
 	public float Gold = 0; 
 	
 	[Export] public DayCycleLantern CycleLantern;
-	private Godot.Collections.Array<Npc.Friendly.Npc> _npcs;
+	private Godot.Collections.Array<Npc.Friendly.Npc> _npcs = [] ;
 	[Export] public int NpcMaxCount = 20;
 	private Node2D _npcSpawnLocation;
 	private Node2D _frontDesk;
 	private Area2D _leaveAreaNode;
-	private string _folderPath = "res://Resources/Npcs/Friendly/";
+	private string _npcResourceFolderPath = "res://Resources/Npcs/Friendly/";
+	private string _modularItemFolderPath = "res://Resources/Items/ModularItems/";
+	private PackedScene _genericItemScene;
 	
 	public override void _Ready()
 	{
-		DirContents(_folderPath);
+		DirContents(_npcResourceFolderPath);
+		DirContents(_modularItemFolderPath);
+		GD.Print(ModularItemResources);
 		_npcSpawnLocation = (Node2D)FindChild("NpcArrivalArea");
 		_frontDesk  = (Node2D)FindChild("FrontDesk");
 		_leaveAreaNode = (Area2D)FindChild("LeaveArea");
+		_genericItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
-
 		npcInteractor.NpcLeft += OnNpcLeft;
 		GD.Print(CycleLantern);
 		if (CycleLantern == null) return;
@@ -58,40 +64,77 @@ public partial class GameManager : Node2D
 	
 	public void DirContents(string path)
 	{
-		using var dir = DirAccess.Open(path);
-		if (dir != null)
+		if (path == _npcResourceFolderPath)
 		{
-			dir.ListDirBegin();
-			string fileName = dir.GetNext();
-			while (fileName != "")
+			using var dir = DirAccess.Open(path);
+			if (dir != null)
 			{
-				if (dir.CurrentIsDir())
+				dir.ListDirBegin();
+				string fileName = dir.GetNext();
+				while (fileName != "")
 				{
-					GD.Print($"Found directory: {fileName}");
+					if (dir.CurrentIsDir())
+					{
+						GD.Print($"Found directory: {fileName}");
+					}
+					else
+					{
+						var resource = ResourceLoader.Load<NpcResource>(path+fileName);
+						if (resource != null)
+						{
+							NpcResources.Add(resource);
+						}
+						else 
+						{
+							GD.Print("Resource not found at path: "+path+fileName);
+						}
+					}
+					fileName = dir.GetNext();
 				}
-				else
+			}
+			else
+			{
+				GD.Print("An error occurred when trying to access the path.");
+			}
+		} else if (path == _modularItemFolderPath)
+		{
+			using var dir = DirAccess.Open(path);
+			if (dir != null)
+			{
+				dir.ListDirBegin();
+				string fileName = dir.GetNext();
+				while (fileName != "")
 				{
-					var resource = ResourceLoader.Load<NpcResource>(_folderPath+fileName);
-					if (resource != null)
+					if (dir.CurrentIsDir())
 					{
-						NpcResources.Add(resource);
+						GD.Print($"Found directory: {fileName}");
 					}
-					else 
+					else
 					{
-						GD.Print("Resource not found at path: "+_folderPath+fileName);
+						var resource = ResourceLoader.Load<ModularItemTemplate>(path+fileName);
+						if (resource != null)
+						{
+							ModularItemResources.Add(resource);
+						}
+						else 
+						{
+							GD.Print("Resource not found at path: "+path+fileName);
+						}
 					}
+					fileName = dir.GetNext();
 				}
-				fileName = dir.GetNext();
+			}
+			else
+			{
+				GD.Print("An error occurred when trying to access the path.");
 			}
 		}
-		else
-		{
-			GD.Print("An error occurred when trying to access the path.");
-		}
+		
 	}
 
 	private void OnNpcTimerTimeout()
 	{
+		GD.Print("NPC count = "+_npcs.Count);
 		if (_npcs.Count >= NpcMaxCount) return;
 		Npc.Friendly.Npc npc = NpcScene.Instantiate<Npc.Friendly.Npc>();
 		npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
@@ -99,8 +142,21 @@ public partial class GameManager : Node2D
 		npc.Scale = Vector2.One * 4;
 		npc.Target = _frontDesk;
 		npc.LeaveAreaNode = _leaveAreaNode;
+		var newItem = _genericItemScene.Instantiate<GenericItem>();
+		GetNode("/root/GameManager/Isometric").AddChild(newItem);
+		
 		_npcs.Add(npc);
 		AddChild(npc);
+		if (ModularItemResources != null)
+		{
+			newItem.ItemResource = ModularItemResources[GD.RandRange(0, NpcResources.Count - 1)];
+		}
+		
+		// Add outputs to inventory
+		if (newItem.ItemResource == null) return;
+		npc.NpcInventory.PickupItem(newItem, true);
+		GD.Print($"- {newItem.ItemResource.DisplayName}");
+
 	}
 	
 	// Called when the node enters the scene tree for the first time.

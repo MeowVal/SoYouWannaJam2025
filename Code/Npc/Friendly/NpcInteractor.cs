@@ -12,10 +12,11 @@ public partial class NpcInteractor : Interactible
     private Timer _distanceCheckTimer;
     private Friendly.Npc _npc;
     [Signal]
-    public delegate void NpcLeftEventHandler(Friendly.Npc npc);
+    public delegate void NpcLeftEventHandler(Npc npc);
 
     //public Interactive.Inventory.InventorySlot InventorySlot = null;
-    public Interactive.Inventory.InventorySlot InventorySlot;
+    //public Interactive.Inventory.InventorySlot InventorySlot;
+    public Interactive.Inventory.Inventory Inventory;
     public BaseRecipe CurrentRecipe;
     //public Timer RecipeTimer;
     private Player.CharacterControl _player;
@@ -26,11 +27,11 @@ public partial class NpcInteractor : Interactible
     {
         if (Engine.IsEditorHint()) return;
         base._Ready();
-        if (FindChild("InventorySlot") is Interactive.Inventory.InventorySlot slot) InventorySlot=slot;
+        if (FindChild("Inventory") is Interactive.Inventory.Inventory inv) Inventory=inv;
         
-        InventorySlot.RecipeWhitelist = Recipes;
-        InventorySlot.CompileWhitelist();
-        _npc = GetParent<Friendly.Npc>();
+        Inventory.RecipeWhitelist = Recipes;
+        Inventory.CompileWhitelist();
+        _npc = GetParent<Npc>();
         Interact += OnInteractMethod;
         BodyEntered += OnInteractableEntered;
         AreaEntered += OnInteractableEntered;
@@ -60,19 +61,19 @@ public partial class NpcInteractor : Interactible
         switch (trigger)
         {
             case TriggerType.PickupDrop:
-                if (InventorySlot.HasItem() && interactor.InventorySlot.HasSpace())
+                if (Inventory.HasItem() && interactor.InventorySlot.HasSpace())
                 {
-                    InventorySlot.TransferTo(interactor.InventorySlot);
+                    Inventory.TransferTo(interactor.InventorySlot);
                 }
-                else if (InventorySlot.HasSpace() && interactor.InventorySlot.HasItem())
+                else if (Inventory.HasSpace() && interactor.InventorySlot.HasItem())
                 {
-                    interactor.InventorySlot.TransferTo(InventorySlot);
+                    interactor.InventorySlot.TransferTo(Inventory);
                 }
                 break;
             case TriggerType.UseAction:
                 AttemptGiveRequest();
                 break;
-        }
+        } 
     }
 
     private void AttemptGiveRequest()

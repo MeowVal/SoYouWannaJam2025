@@ -29,7 +29,7 @@ public partial class Npc : CharacterBody2D
 
     private AnimationPlayer _animationPlayer; // The animation player for playing the animations on the npc
     private Sprite2D _sprite2D; // The sprite of the npc
-    private InventorySlot _inventorySlot;
+    public Inventory NpcInventory;
     private Vector2 _lastTargetPosition = Vector2.Zero;  // Store last target position
     private float _stopThreshold = 5.0f;  // The threshold distance at which the NPC will stop or no longer recalculate the path
     private float _pathUpdateThreshold = 32.0f;  // The distance at which to update the path
@@ -41,7 +41,7 @@ public partial class Npc : CharacterBody2D
         _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         _animationPlayer = GetNode<AnimationPlayer>("NpcInteractor/AnimationPlayer");
         _sprite2D = GetNode<Sprite2D>("NpcInteractor/Sprite2D");
-        if (GetNode("NpcInteractor/InventorySlot") is InventorySlot slot) _inventorySlot = slot;
+        if (GetNode("NpcInteractor/Inventory") is Inventory slot) NpcInventory = slot;
         MoodTimer = GetNode<Timer>("MoodTimer");
         if (NpcResource != null)
             SetupNpc();
@@ -86,11 +86,11 @@ public partial class Npc : CharacterBody2D
         var newVelocity = dir * _speed;
 
 
-        if (currentAgentPosition.DistanceTo(nextPathPosition) <= _stopThreshold)
+        /*if (currentAgentPosition.DistanceTo(nextPathPosition) <= _stopThreshold)
         {
             newVelocity = Vector2.Zero; // Stop the NPC if close enough
             
-        }
+        }*/
              
         
         // Set the correct velocity
@@ -108,7 +108,7 @@ public partial class Npc : CharacterBody2D
         UpdateAnimation();
         MoveAndSlide();
         _sprite2D.GlobalPosition = GlobalPosition.Round();
-        _inventorySlot.GlobalPosition = GlobalPosition.Round();
+        NpcInventory.GlobalPosition = GlobalPosition.Round();
     }
     
     // Sets up the navigation agent for the pathfinder
