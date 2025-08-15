@@ -17,7 +17,7 @@ public partial class Inventory : InventorySlot
         _count = Slots.Count(slot => slot.HasItem());
     }
 
-    private int FindSlot(bool empty = true, bool reversed = false)
+    private int FindSlot(bool empty, bool reversed)
     {
         for (var i = 0; i < Slots.Count; i++)
         {
@@ -42,20 +42,21 @@ public partial class Inventory : InventorySlot
         base.CompileWhitelist();
         foreach (var slot in Slots)
         {
-            slot.RecipeWhitelist = RecipeWhitelist;
-            slot.CompileWhitelist();
+            slot.Whitelist = Whitelist;
+            slot.AllowAll = AllowAll;
+            slot.AllowModularItem = AllowModularItem;
         }
     }
     
     // Moves item from one slot directly to another, returns true if successful.
-    public override bool TransferTo(InventorySlot slot)
+    public override bool TransferTo(InventorySlot slot, bool forceAdd = false)
     {
         GD.Print("INVENTORY transfer to");
         if (!HasItem() || !slot.HasSpace()) return false;
         
         if (!Slots[_lastSlot].TransferTo(slot)) return false;
         CalculateCount();
-        _lastSlot = FindSlot(empty:false, reversed: true);
+        _lastSlot = FindSlot(false, true);
         GD.Print("Inventory transfer");
         return true;
     }
@@ -65,7 +66,7 @@ public partial class Inventory : InventorySlot
     {
         GD.Print("INVENTORY Pickup item");
         if (!HasSpace()) return false;
-        var index = FindSlot();
+        var index = FindSlot(true, false);
         if (index == -1 || !Slots[index].PickupItem(item, forceAdd)) return false;
         _lastSlot = index;
         CalculateCount();
@@ -78,7 +79,7 @@ public partial class Inventory : InventorySlot
         if (!HasItem()) return false;
         if (!Slots[_lastSlot].DropItem(position, snapToNearestTile)) return false;
         CalculateCount();
-        _lastSlot = FindSlot(empty:false, reversed: true);
+        _lastSlot = FindSlot(false, true);
         return true;
     }
     
@@ -97,7 +98,7 @@ public partial class Inventory : InventorySlot
             
         }
         CalculateCount();
-        _lastSlot = FindSlot(empty:false, reversed: true);
+        _lastSlot = FindSlot(false, true);
         return true;
     }
     

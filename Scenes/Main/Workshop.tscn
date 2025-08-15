@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://0x5n8e8yjofe"]
+[gd_scene load_steps=47 format=4 uid="uid://0x5n8e8yjofe"]
 
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_knoqw"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="2_65kow"]
@@ -6,11 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="3_hbuku"]
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/Lighting/lighting.tscn" id="3_tu5mh"]
 [ext_resource type="PackedScene" uid="uid://b2owtq0jxh0n6" path="res://Entities/Interactive/Items/DayCycleLantern.tscn" id="4_hbuku"]
-[ext_resource type="PackedScene" uid="uid://bwho24gjrxuig" path="res://Entities/Interactive/Stations/CombiningStation.tscn" id="4_ieyhc"]
+[ext_resource type="PackedScene" uid="uid://bwho24gjrxuig" path="res://Entities/Interactive/Stations/InspectionStation.tscn" id="4_ieyhc"]
 [ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/Interactive/Items/GenericItem.tscn" id="5_ieyhc"]
 [ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Entities/Interactive/Stations/GenericCraftingStation.tscn" id="7_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://cl07jfhggwrem" path="res://Entities/Interactive/Items/ModularItem.tscn" id="8_14b3v"]
-[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="8_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://bkawl4uk3bb67" path="res://Entities/leaveArea.tscn" id="9_65kow"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="9_vwcaw"]
 [ext_resource type="Resource" uid="uid://ds4n06wlxsyvo" path="res://Resources/Items/ModularParts/Blade_Spear_Iron.tres" id="10_ggs26"]
@@ -21,13 +20,19 @@
 [ext_resource type="Resource" uid="uid://tbjlomcklo0" path="res://Resources/Items/ModularParts/Grip_Sword_Wood.tres" id="13_nt8bt"]
 [ext_resource type="Resource" uid="uid://crjv5jcoy4r6w" path="res://Resources/Items/ModularParts/Pole_Spear_Wood.tres" id="14_a2a7c"]
 [ext_resource type="Resource" uid="uid://d0kf8ldv8p21p" path="res://Resources/Items/ModularParts/Pummel_Sword_Gold.tres" id="15_nfpvg"]
-[ext_resource type="Resource" uid="uid://w0hkihpkymns" path="res://Resources/Items/ModularItems/Spear.tres" id="16_8x3ni"]
-[ext_resource type="Resource" uid="uid://cjm36mcdecboj" path="res://Resources/Items/ModularItems/Sword.tres" id="17_jxsk3"]
-[ext_resource type="Resource" uid="uid://mu0qqh4gpue4" path="res://Resources/Recipes/TestSwordRecipe.tres" id="21_o07dx"]
+[ext_resource type="Texture2D" uid="uid://cv8804wljv0hb" path="res://Assets/Sprites/ModularParts/Blade_Spear.png" id="16_fwcsh"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="17_bwn0d"]
+[ext_resource type="Texture2D" uid="uid://bkfejy7uif8d8" path="res://Assets/Sprites/ModularParts/Crossguard_Sword.png" id="19_gc8ik"]
+[ext_resource type="Texture2D" uid="uid://dvfpp82s3lqgf" path="res://Assets/Sprites/ModularParts/Grip_Sword.png" id="20_mndwt"]
+[ext_resource type="Texture2D" uid="uid://cnaqs6h3q3q5i" path="res://Assets/Sprites/ModularParts/Pole_Spear.png" id="21_ilfxt"]
+[ext_resource type="Texture2D" uid="uid://b6xni48kkstkr" path="res://Assets/Sprites/ModularParts/Pummel_Sword.png" id="22_du0ap"]
 [ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Entities/NPC/Friendly/Npc.tscn" id="26_i12cv"]
 [ext_resource type="Shader" uid="uid://br6pkqr38jxvw" path="res://Resources/Shaders/LightShadows.gdshader" id="27_a2a7c"]
 [ext_resource type="Script" uid="uid://crdc1yecqik7x" path="res://Code/World/Sun.cs" id="27_nt8bt"]
+[ext_resource type="Texture2D" uid="uid://dmbxc4ofgw13r" path="res://Assets/Sprites/Unknown.png" id="29_acvf2"]
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="30_4od3e"]
+[ext_resource type="Script" uid="uid://kfhncm4xxwur" path="res://Code/Interactive/Items/ModularItemTemplate.cs" id="30_c1wlf"]
+[ext_resource type="Resource" uid="uid://cvob48mb3vhjv" path="res://Resources/Items/ModularParts/Blade_Sword_Iron_Broken.tres" id="31_8x4g5"]
 [ext_resource type="PackedScene" uid="uid://cgbg8jjt6swx6" path="res://Entities/Interactive/Stations/ForgeStation.tscn" id="31_uygh7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nfpvg"]
@@ -44,6 +49,111 @@ metadata/_snap_count = 20
 _data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.2, 0.6), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
 point_count = 5
 
+[sub_resource type="Resource" id="Resource_8ep5l"]
+script = ExtResource("17_bwn0d")
+PartType = 0
+ModularItemType = 1
+DisplayName = "Iron Spear Blade"
+Description = "The blade for a spear, cast of pure Iron."
+Textures = Array[Texture2D]([ExtResource("16_fwcsh")])
+Colours = Array[Color]([Color(0.831373, 0.890196, 1, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"
+
+[sub_resource type="Resource" id="Resource_bwn0d"]
+script = ExtResource("17_bwn0d")
+PartType = 3
+ModularItemType = 0
+DisplayName = "Golden Sword Crossguard"
+Description = "While flashy, this crossguard probably doesnt do a lot to protect your fingers."
+Textures = Array[Texture2D]([ExtResource("19_gc8ik")])
+Colours = Array[Color]([Color(1, 0.796078, 0.239216, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"
+
+[sub_resource type="Resource" id="Resource_2qmt1"]
+script = ExtResource("17_bwn0d")
+PartType = 1
+ModularItemType = 0
+DisplayName = "Wooden Sword Grip"
+Description = "The grip of a broadsword, intricately carved out of a piece of wood."
+Textures = Array[Texture2D]([ExtResource("20_mndwt")])
+Colours = Array[Color]([Color(0.678431, 0.392157, 0.168627, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"
+
+[sub_resource type="Resource" id="Resource_gc8ik"]
+script = ExtResource("17_bwn0d")
+PartType = 4
+ModularItemType = 1
+DisplayName = "Wooden Spear Grip"
+Description = "The main pole of a Spear"
+Textures = Array[Texture2D]([ExtResource("21_ilfxt")])
+Colours = Array[Color]([Color(0.678431, 0.392157, 0.168627, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"
+
+[sub_resource type="Resource" id="Resource_mndwt"]
+script = ExtResource("17_bwn0d")
+PartType = 2
+ModularItemType = 0
+DisplayName = "Golden Sword Pummel"
+Description = "Very fancy and with enough weight to work well as a counterbalance."
+Textures = Array[Texture2D]([ExtResource("22_du0ap")])
+Colours = Array[Color]([Color(1, 0.796078, 0.239216, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"
+
+[sub_resource type="Resource" id="Resource_ilfxt"]
+script = ExtResource("30_c1wlf")
+DefaultParts = Dictionary[int, Object]({
+0: ExtResource("10_ggs26"),
+4: ExtResource("14_a2a7c")
+})
+ModularItemType = 1
+UseType = 4
+BaseDamage = 10.0
+FireMultiplier = 0.0
+PoisonMultiplier = 0.0
+BaseArmourPenetration = 1.0
+BaseDurability = 20.0
+UnbreakingChance = 1.0
+CritChance = 5.0
+CritMultiplier = 2.0
+CritBonus = 5.0
+DisplayName = "Spear"
+Description = "A standard polearm with a pointed blade on the tip."
+Textures = Array[Texture2D]([ExtResource("29_acvf2")])
+Colours = Array[Color]([Color(1, 1, 1, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://kfhncm4xxwur"
+
+[sub_resource type="Resource" id="Resource_du0ap"]
+script = ExtResource("30_c1wlf")
+DefaultParts = Dictionary[int, Object]({
+0: ExtResource("31_8x4g5"),
+1: ExtResource("13_nt8bt"),
+2: ExtResource("15_nfpvg"),
+3: ExtResource("12_i12cv")
+})
+ModularItemType = 0
+UseType = 4
+BaseDamage = 10.0
+FireMultiplier = 0.0
+PoisonMultiplier = 0.0
+BaseArmourPenetration = 1.0
+BaseDurability = 20.0
+UnbreakingChance = 1.0
+CritChance = 5.0
+CritMultiplier = 2.0
+CritBonus = 5.0
+DisplayName = "Sword"
+Description = "A standard broadsword. Cant go wrong with one."
+Textures = Array[Texture2D]([ExtResource("29_acvf2")])
+Colours = Array[Color]([Color(1, 1, 1, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://kfhncm4xxwur"
+
 [sub_resource type="Gradient" id="Gradient_vwcaw"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -58,10 +168,6 @@ fill_to = Vector2(0.141026, 0.115385)
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_knoqw")
 NpcScene = ExtResource("26_i12cv")
-
-[node name="NpcTimer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
 
 [node name="Isometric" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -105,7 +211,6 @@ position = Vector2(128, 224)
 y_sort_enabled = true
 position = Vector2(80, 232)
 Lighting = NodePath("../../Lighting")
-CycleTime = 1200.0
 
 [node name="LeaveArea" parent="Isometric/WorldMap/Entities" instance=ExtResource("9_65kow")]
 y_sort_enabled = true
@@ -132,7 +237,7 @@ ColliderRadius = 10.0
 [node name="GenericItem4" parent="Isometric/WorldMap/Entities" instance=ExtResource("5_ieyhc")]
 y_sort_enabled = true
 position = Vector2(135.75, 266.5)
-ItemResource = ExtResource("10_ggs26")
+ItemResource = SubResource("Resource_8ep5l")
 ColliderRadius = 10.0
 
 [node name="GenericItem5" parent="Isometric/WorldMap/Entities" instance=ExtResource("5_ieyhc")]
@@ -144,54 +249,51 @@ ColliderRadius = 10.0
 [node name="GenericItem6" parent="Isometric/WorldMap/Entities" instance=ExtResource("5_ieyhc")]
 y_sort_enabled = true
 position = Vector2(81, 285)
-ItemResource = ExtResource("12_i12cv")
+ItemResource = SubResource("Resource_bwn0d")
 ColliderRadius = 10.0
 
 [node name="GenericItem7" parent="Isometric/WorldMap/Entities" instance=ExtResource("5_ieyhc")]
 y_sort_enabled = true
 position = Vector2(105, 300.5)
-ItemResource = ExtResource("13_nt8bt")
+ItemResource = SubResource("Resource_2qmt1")
 ColliderRadius = 10.0
 
 [node name="GenericItem8" parent="Isometric/WorldMap/Entities" instance=ExtResource("5_ieyhc")]
 y_sort_enabled = true
 position = Vector2(134.75, 294.75)
-ItemResource = ExtResource("14_a2a7c")
+ItemResource = SubResource("Resource_gc8ik")
 ColliderRadius = 10.0
 
 [node name="GenericItem9" parent="Isometric/WorldMap/Entities" instance=ExtResource("5_ieyhc")]
 y_sort_enabled = true
 position = Vector2(130, 318.25)
-ItemResource = ExtResource("15_nfpvg")
+ItemResource = SubResource("Resource_mndwt")
 ColliderRadius = 10.0
 
 [node name="GenericCraftingStation" parent="Isometric/WorldMap/Entities" instance=ExtResource("7_bdwe5")]
 y_sort_enabled = true
 position = Vector2(147.5, 165.25)
-Recipes = Array[ExtResource("8_bdwe5")]([ExtResource("21_o07dx")])
 
 [node name="ModularItem" parent="Isometric/WorldMap/Entities" instance=ExtResource("8_14b3v")]
 y_sort_enabled = true
 position = Vector2(49.25, 262.5)
-ItemResource = ExtResource("16_8x3ni")
+ItemResource = SubResource("Resource_ilfxt")
 
 [node name="ModularItem2" parent="Isometric/WorldMap/Entities" instance=ExtResource("8_14b3v")]
 y_sort_enabled = true
 position = Vector2(23, 246.5)
-ItemResource = ExtResource("17_jxsk3")
+ItemResource = SubResource("Resource_du0ap")
 
-[node name="CombiningStation" parent="Isometric/WorldMap/Entities" instance=ExtResource("4_ieyhc")]
+[node name="ResearchStation" parent="Isometric/WorldMap/Entities" instance=ExtResource("4_ieyhc")]
 y_sort_enabled = true
-position = Vector2(187.75, 173.25)
+position = Vector2(219.75, 198.5)
 
 [node name="PointLight2D" type="PointLight2D" parent="Isometric/WorldMap/Entities"]
 position = Vector2(113, 186.5)
 texture = SubResource("GradientTexture2D_vwcaw")
 
-[node name="Npc" parent="Isometric/WorldMap/Entities" node_paths=PackedStringArray("Target", "LeaveAreaNode") instance=ExtResource("26_i12cv")]
+[node name="Npc" parent="Isometric/WorldMap/Entities" instance=ExtResource("26_i12cv")]
 position = Vector2(181.5, 240)
-Target = NodePath("../FrontDesk")
-LeaveAreaNode = NodePath("../LeaveArea")
 
 [node name="AnvilStation" parent="Isometric/WorldMap/Entities" instance=ExtResource("30_4od3e")]
 position = Vector2(105.5, 166.25)
@@ -240,7 +342,5 @@ x_draw_order_reversed = true
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("9_vwcaw")
 FollowingNode = NodePath("../Isometric/WorldMap/Entities/Character")
-
-[connection signal="timeout" from="NpcTimer" to="." method="OnNpcTimerTimeout"]
 
 [editable path="Isometric/WorldMap/Lighting"]

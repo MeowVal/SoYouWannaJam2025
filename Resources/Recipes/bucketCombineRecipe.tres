@@ -1,11 +1,8 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=7 format=3 uid="uid://db73uqma7cv8a"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://db73uqma7cv8a"]
 
 [ext_resource type="Texture2D" uid="uid://dq5nssdtppdda" path="res://Assets/Sprites/objects/bucket.png" id="1_ktxie"]
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_7bo1n"]
-[ext_resource type="Resource" uid="uid://dpuw55q3eqwkm" path="res://Resources/Items/ingotItem.tres" id="2_ktxie"]
-[ext_resource type="Resource" uid="uid://db5qq1a3ir2ty" path="res://Resources/Items/logItem.tres" id="3_5s52m"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_5s52m"]
-[ext_resource type="Resource" uid="uid://l3hxhv6jfqg1" path="res://Resources/Items/bucketItem.tres" id="4_ktxie"]
 
 [resource]
 script = ExtResource("4_5s52m")
@@ -13,8 +10,8 @@ DisplayName = "Bucket combine"
 Description = "1x Iron and 1x Wood into 2x Bucket"
 Icon = ExtResource("1_ktxie")
 RecipeType = 0
-ItemInputs = Array[ExtResource("2_7bo1n")]([ExtResource("2_ktxie"), ExtResource("3_5s52m")])
-ItemOutputs = Array[ExtResource("2_7bo1n")]([ExtResource("4_ktxie"), ExtResource("4_ktxie")])
+RecipeInputs = Array[ExtResource("2_7bo1n")]([])
+RecipeOutputs = Array[ExtResource("2_7bo1n")]([])
 WorkType = 2
 TimeToComplete = 1.5
 SequenceLength = 6

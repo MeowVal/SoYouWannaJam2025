@@ -1,12 +1,7 @@
-using System;
-using System.Linq;
 using Godot;
 using Godot.Collections;
-using SoYouWANNAJam2025.Code.Interactive.Items;
-using SoYouWANNAJam2025.Code.Npc;
-using Npc = SoYouWANNAJam2025.Code.Npc.Friendly.Npc;
 
-namespace SoYouWANNAJam2025.Entities.Interactive.Items;
+namespace SoYouWANNAJam2025.Code.Interactive.Items;
 
 public enum EPartType
 {
@@ -50,28 +45,8 @@ public enum EUseType
 public partial class ModularItem : GenericItem
 {
     // Defines what slots this item will have to use
-    private Dictionary<EPartType, ModularPartTemplate> _parts = [];
-    public Npc OwningNpc = null;
-    
-    /*private GenericItemTemplate _itemTemplate;
-    
-    public override GenericItemTemplate ItemResource
-    {
-        set
-        {
-            _itemTemplate = value;
-            if (_itemTemplate == null)
-            {
-                GD.Print("DEFAULT MODULAR ITEM TEMPLATE");
-                Sprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Unknown.png");
-                Sprite.Modulate = Colors.White;
-                return;
-            }
-            ColliderRadius = value.Size;
-            DrawSprites();
-        }
-        get => _itemTemplate;
-    }*/
+    public Dictionary<EPartType, ModularPartTemplate> Parts = [];
+    public Npc.Friendly.Npc OwningNpc = null;
 
     public override void _Ready()
     {
@@ -83,7 +58,7 @@ public partial class ModularItem : GenericItem
         {
             var oldItem = pair.Value;
             var newItem = oldItem.Duplicate(true) as ModularPartTemplate;
-            _parts.Add(pair.Key, newItem);
+            Parts.Add(pair.Key, newItem);
             GD.Print($"Added {newItem!.DisplayName} to slot {pair.Key}.");
         }
 
@@ -92,13 +67,13 @@ public partial class ModularItem : GenericItem
 
     public bool HasPart(EPartType partType)
     {
-        return _parts.ContainsKey(partType);
+        return Parts.ContainsKey(partType);
     }
 
     public bool AddPart(ModularPartTemplate part)
     {
-        if (!_parts.ContainsKey(part.PartType)) return false;
-        _parts[part.PartType] = part;
+        if (!Parts.ContainsKey(part.PartType)) return false;
+        Parts[part.PartType] = part;
         GD.Print($"Added {part.DisplayName} to {ItemResource.DisplayName}.");
         DrawSprite();
         return true;
@@ -109,7 +84,7 @@ public partial class ModularItem : GenericItem
         //GD.Print("MODULAR DRAW");
         var img = Image.CreateEmpty(32, 32, false, Image.Format.Rgba8);
         
-        foreach (var (partType, part) in _parts)
+        foreach (var (partType, part) in Parts)
         {
             //GD.Print($"Part {part.DisplayName}");
             var partImg = part.GetItemImage();

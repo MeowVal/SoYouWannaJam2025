@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwho24gjrxuig"]
+
+[ext_resource type="Script" uid="uid://cgsrx2wyjy1ap" path="res://Code/Interactive/Stations/InspectionStation.cs" id="1_20cqo"]
+[ext_resource type="Texture2D" uid="uid://b5q4nvbxfnotl" path="res://Assets/Sprites/objects/research_table.png" id="2_klfgx"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_die6g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5p8jk"]
+radius = 20.0
+
+[node name="InspectionStation" type="Area2D"]
+script = ExtResource("1_20cqo")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5p8jk")
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
+
+[node name="StationSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_klfgx")
+
+[node name="InterfaceLocation" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="InventorySlot" type="Node2D" parent="."]
+position = Vector2(0, -1)
+script = ExtResource("5_die6g")
+AllowAll = true
+metadata/_custom_type_script = "uid://1cpfasjkacse"

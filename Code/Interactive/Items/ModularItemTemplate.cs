@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using SoYouWANNAJam2025.Entities.Interactive.Items;
 
 namespace SoYouWANNAJam2025.Code.Interactive.Items;
 

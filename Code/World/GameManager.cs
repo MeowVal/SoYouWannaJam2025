@@ -39,6 +39,9 @@ public partial class GameManager : Node2D
 		_leaveAreaNode = (Area2D)FindChild("LeaveArea");
 		_genericItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
+		
+		Global.Grid = GetNode<TileMapLayer>("./Isometric/WorldMap");
+
 		npcInteractor.NpcLeft += OnNpcLeft;
 		GD.Print(CycleLantern);
 		if (CycleLantern == null) return;
