@@ -1,5 +1,6 @@
+using System;
 using Godot;
-using SoYouWANNAJam2025.Entities.Interactive.Items;
+using Godot.Collections;
 
 namespace SoYouWANNAJam2025.Code.Interactive.Items;
 
@@ -9,10 +10,10 @@ public partial class ModularPartTemplate : GenericItemTemplate
     [ExportGroup("Setup")]
     [Export] // The different modular parts you can attach to this item.
     public EPartType PartType;
-    [Export]
+    [Export] // The type of Modular Item this can be attached to.
     public EModularItemType ModularItemType;
 
-    [ExportCategory("Modular Stats")]
+    /*[ExportCategory("Modular Stats")]
     [ExportGroup("Damage")] [Export] // The root base damage of the weapon
     public float BaseDamage = 0;
     [Export] // The amount of the base damage that is converted to fire damage.
@@ -32,5 +33,5 @@ public partial class ModularPartTemplate : GenericItemTemplate
     [Export] // The amount that base damage is multiplied by when crits trigger
     public float CritMultiplier = 0;
     [Export] // The amount of additional base damage that is applied on crits.
-    public float CritBonus = 0;
+    public float CritBonus = 0;*/
 }

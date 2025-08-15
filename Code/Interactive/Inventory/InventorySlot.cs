@@ -3,7 +3,7 @@ using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Items;
-using BaseRecipe = SoYouWANNAJam2025.Code.Interactive.Stations.BaseRecipe;
+using SoYouWANNAJam2025.Code.World;
 
 namespace SoYouWANNAJam2025.Code.Interactive.Inventory;
 
@@ -11,11 +11,12 @@ namespace SoYouWANNAJam2025.Code.Interactive.Inventory;
 public partial class InventorySlot : Node2D
 {
     public GenericItem Item;
-    private TileMapLayer _grid;
 
     [ExportGroup("Whitelist")]
     [Export] // Ignore whitelist entirely.
     public bool AllowAll = false;
+    [Export] // Ignore whitelist for Modular Item.
+    public bool AllowModularItem = false;
     [Export] // Filter items by a set list.
     public Array<GenericItemTemplate> ItemWhitelist = [];
     [Export] // Filter items by the inputs of the given recipes.
@@ -29,7 +30,6 @@ public partial class InventorySlot : Node2D
 
     public override void _Ready()
     {
-        _grid = GetTree().GetRoot().GetNode<TileMapLayer>("GameManager/Isometric/WorldMap");
         CompileWhitelist();
     }
 
@@ -39,7 +39,7 @@ public partial class InventorySlot : Node2D
         Whitelist = ItemWhitelist;
         foreach (var recipe in RecipeWhitelist)
         {
-            foreach (var input in recipe.ItemInputs)
+            foreach (var input in recipe.RecipeInputs)
             {
                 Whitelist.Add(input);
             }
@@ -47,13 +47,13 @@ public partial class InventorySlot : Node2D
     }
 
     // Moves item from one slot directly to another, returns true if successful.
-    public virtual bool TransferTo(InventorySlot slot)
+    public virtual bool TransferTo(InventorySlot slot, bool forceAdd = false)
     {
         if (!HasItem() || !slot.HasSpace()) return false;
 
         Item.SetZIndexOffset(0);
         // Ensures the item is accepted before doing anything else
-        if (slot.PickupItem(Item))
+        if (slot.PickupItem(Item, forceAdd))
         {
             // Accepted -> Remove from this slot.
             GD.Print($"Transferred {Item.ItemResource.DisplayName} away.");
@@ -69,7 +69,9 @@ public partial class InventorySlot : Node2D
     {
         // Ensure item *can* be added to the slot.
         if (!HasSpace()) return false;
-        if (!(Whitelist.Contains(item.ItemResource) || AllowAll || forceAdd)) return false;
+        var whitelisted = Whitelist.Contains(item.ItemResource);
+        var forceModular = AllowModularItem && item is ModularItem;
+        if (!(AllowAll || forceAdd || whitelisted || forceModular)) return false;
 
         // Add item to slot and position in new owning scene.
         Item = item;
@@ -88,12 +90,12 @@ public partial class InventorySlot : Node2D
         // Ensure item *can* be removed from the slot.
         if (!HasItem()) return false;
 
-        var localPos = _grid.ToLocal(position);
+        var localPos = Global.Grid.ToLocal(position);
         Item.SetZIndexOffset(0);
-        Item.Reparent(_grid);
+        Item.Reparent(Global.Grid);
         if (snapToNearestTile)
         {
-            Item.Position = _grid.MapToLocal(_grid.LocalToMap(localPos));
+            Item.Position = Global.Grid.MapToLocal(Global.Grid.LocalToMap(localPos));
         }
         else
         {

@@ -12,13 +12,16 @@ metadata/_custom_type_script = "uid://bywn575awil60"
 one_shot = true
 
 [node name="Control" type="PanelContainer" parent="."]
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = -88.5
-offset_right = 88.5
-offset_bottom = 85.0
+anchor_bottom = 1.0
+offset_left = -112.5
+offset_top = -85.0
+offset_right = 112.5
 grow_horizontal = 2
+grow_vertical = 0
 theme = ExtResource("2_fjq4c")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control"]

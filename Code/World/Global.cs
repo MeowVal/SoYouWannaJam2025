@@ -8,5 +8,7 @@ namespace SoYouWANNAJam2025.Code.World;
 public partial class Global : Node2D
 {
     public const int GameScale = 4;
+    public static float GameTimer;
     public static CharacterControl Player;
+    public static TileMapLayer Grid;
 }

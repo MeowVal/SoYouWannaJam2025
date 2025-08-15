@@ -24,6 +24,10 @@ HUD="*res://Scenes/UI/HUD.tscn"
 
 project/assembly_name="So You WANNA Jam 2025"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ItemMap/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
@@ -34,6 +38,10 @@ folder_colors={
 "res://Scenes/": "purple",
 "res://addons/": "gray"
 }
+
+[global_group]
+
+Lantern=""
 
 [input]
 

@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using SoYouWANNAJam2025.Code;
+using SoYouWANNAJam2025.Code.World;
+using SoYouWANNAJam2025.Scenes.UI;
 
 public partial class DayCycleLantern : Node2D
 {
@@ -8,66 +10,52 @@ public partial class DayCycleLantern : Node2D
     public delegate void CycleLanternEventHandler(bool onCycleLantern);
 
     [Export] public Node2D Lighting;
-    [Export] public float CycleTime = 120f;
-    [Export] public float DawnTime = 5f;
+    [Export] public double CycleTime = 120;
+    [Export] public double DawnTime = 5;
     [Export] public double DawnFrame = 0.2;
 
     private Interactible _interact;
-    private Timer _timer;
-    private Timer _morningTimer;
     private AnimationPlayer _animator;
+    private bool _dawnHandled = false;
 
     public override void _Ready()
     {
-        _timer = this.GetNode<Timer>("Timer");
-        _timer.Timeout += OnTimerTimeout;
-        
-        _morningTimer = this.GetNode<Timer>("MorningTimer");
-        _morningTimer.Timeout += OnMorningTimeout;
-
         _interact = this.GetNode<Interactible>("Interactible");
         _interact.Interact += OnInteractMethod;
 
         _animator = Lighting.GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
         _animator.Play("DayNightCycle");//Init Animation
         _animator.Stop();
-        
-        _animator.Seek(0.5, true);
-        
-        _timer.SetWaitTime(CycleTime);
-        _morningTimer.SetWaitTime(DawnTime);
     }
 
+ 
     private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
-        if (trigger is TriggerType.UseAction && _timer.IsStopped())
+        if (trigger is TriggerType.UseAction && !_animator.IsPlaying())
         {
             GD.Print("Started DayNightCycle");
-            if (DawnFrame != 0)
+            if (DawnFrame > 0.0)
             {
-                _morningTimer.Start();
-                _timer.Start();
-                GD.Print(1 / DawnTime * (float)DawnFrame, " || ", 1 / DawnTime, " || ", DawnFrame);
-                _animator.PlaySection("DayNightCycle", 0, DawnFrame, -1, 1 / DawnTime * (float)DawnFrame);
+                _animator.SetSpeedScale(1 / (float)DawnTime * (1-(float)DawnFrame));
+                _animator.Play();
             }
             else
             {
-                _timer.Start();
-                _animator.PlaySection("DayNightCycle",0,1,-1,1/CycleTime);
+                _animator.SetSpeedScale(1/(float)CycleTime * (1-(float)DawnFrame));
+                _animator.Play();
                 EmitSignal(SignalName.CycleLantern, true);
             }
         }
     }
 
-    private void OnMorningTimeout()
+    private void OnDawnFrame()
     {
-        GD.Print(1 / CycleTime * (float)DawnFrame, " || ", 1 / CycleTime, " || ", DawnFrame);
-        _animator.Pause();
-        _animator.PlaySection("DayNightCycle",DawnFrame-(DawnFrame/2),1,-1,(1-(float)DawnFrame)/CycleTime);
+        _dawnHandled = true;
+        _animator.SetSpeedScale(1/(float)CycleTime * (1-(float)DawnFrame));
         EmitSignal(SignalName.CycleLantern, true);
     }
-    
-    private void OnTimerTimeout()
+
+    private void OnMidnight()
     {
         GD.Print("DayNightCycle Timed Out");
         EmitSignal(SignalName.CycleLantern, false);
@@ -76,9 +64,21 @@ public partial class DayCycleLantern : Node2D
 
     public override void _Process(double delta)
     {
-        /*if (!_timer.IsStopped())
+        if (_animator.IsPlaying())
         {
-            GD.Print(_animator.CurrentAnimationPosition);
-        }*/
+            Global.GameTimer = (float)_animator.CurrentAnimationPosition;
+            
+            if (_animator.CurrentAnimationPosition > DawnFrame && !_dawnHandled)
+            {
+                GD.Print("DawnFrameHandled?");
+                OnDawnFrame();
+            }
+            else if  (_animator.CurrentAnimationPosition > 0.9995)
+            {   
+                GD.Print("MidnightFrameHandled?");
+                OnMidnight();
+            }
+        }
     }
 }
+

@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_skwst"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="7_wai8b"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5p8jk"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ijhs"]
 radius = 20.0
 
 [node name="ForgeStation" type="Area2D"]
@@ -19,7 +19,7 @@ Recipes = Array[ExtResource("2_1ijhs")]([ExtResource("3_l3fy7"), ExtResource("4_
 ColliderRadius = 20.0
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_5p8jk")
+shape = SubResource("CircleShape2D_1ijhs")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="StationSprite" type="Sprite2D" parent="."]
@@ -28,7 +28,7 @@ hframes = 2
 vframes = 2
 
 [node name="InterfaceLocation" type="Node2D" parent="."]
-position = Vector2(0, -26)
+position = Vector2(0, -16)
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("6_skwst")

@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using SoYouWANNAJam2025.Code.Interactive.Inventory;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using BaseRecipe = SoYouWANNAJam2025.Code.Interactive.Stations.BaseRecipe;
 
@@ -16,7 +17,7 @@ public partial class NpcInteractor : Interactible
 
     //public Interactive.Inventory.InventorySlot InventorySlot = null;
     //public Interactive.Inventory.InventorySlot InventorySlot;
-    public Interactive.Inventory.Inventory Inventory;
+    public Inventory Inventory;
     public BaseRecipe CurrentRecipe;
     //public Timer RecipeTimer;
     private Player.CharacterControl _player;

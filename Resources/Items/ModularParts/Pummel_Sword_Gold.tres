@@ -7,15 +7,6 @@
 script = ExtResource("2_bwfxq")
 PartType = 2
 ModularItemType = 0
-BaseDamage = 0.0
-FireMultiplier = 0.0
-PoisonMultiplier = 0.0
-BaseArmourPenetration = 0.0
-BaseDurability = 0.0
-UnbreakingChance = 0.0
-CritChance = 0.0
-CritMultiplier = 0.0
-CritBonus = 0.0
 DisplayName = "Golden Sword Pummel"
 Description = "Very fancy and with enough weight to work well as a counterbalance."
 Textures = Array[Texture2D]([ExtResource("1_ntfu7")])

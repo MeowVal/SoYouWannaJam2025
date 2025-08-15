@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://ic3soev6roi2"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=6 format=3 uid="uid://ic3soev6roi2"]
 
 [ext_resource type="Texture2D" uid="uid://b7jd1qoeqotwd" path="res://Assets/Sprites/ModularParts/Blade_Sword.png" id="1_b7urs"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_b7urs"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_yc0n2"]
 [ext_resource type="Resource" uid="uid://tvgxu2woqsxh" path="res://Resources/Items/Resources/IronIngot.tres" id="3_yc0n2"]
 [ext_resource type="Resource" uid="uid://bscvyej1mrkqt" path="res://Resources/Items/ModularParts/Blade_Sword_Iron.tres" id="4_8dgro"]
 
@@ -11,8 +12,8 @@ DisplayName = "Iron Blade"
 Description = "You need to actually set this lol."
 Icon = ExtResource("1_b7urs")
 RecipeType = 0
-ItemInputs = [ExtResource("3_yc0n2")]
-ItemOutputs = [ExtResource("4_8dgro")]
+RecipeInputs = Array[ExtResource("2_yc0n2")]([ExtResource("3_yc0n2")])
+RecipeOutputs = Array[ExtResource("2_yc0n2")]([ExtResource("4_8dgro")])
 WorkType = 0
 TimeToComplete = 5.0
 SequenceLength = 6

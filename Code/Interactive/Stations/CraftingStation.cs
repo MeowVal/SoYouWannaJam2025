@@ -1,10 +1,12 @@
+using System;
 using System.Diagnostics;
+using System.Linq;
 using Godot;
 using Godot.Collections;
+using SoYouWANNAJam2025.Code.Interactive.Inventory;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Npc.Friendly;
-using SoYouWANNAJam2025.Entities.Interactive.Items;
 
 //using SoYouWANNAJam2025.Scenes.UI.Interactions;
 
@@ -19,7 +21,7 @@ public partial class CraftingStation : Interactible
     [Export] public Texture2D Icon;
     [Export] public Array<BaseRecipe> Recipes = [];
 
-    public Interactive.Inventory.Inventory Inventory;
+    public Inventory.Inventory Inventory;
     public BaseRecipe CurrentRecipe;
     public bool IsCrafting = false;
     //private Player.CharacterControl _player;
@@ -33,7 +35,7 @@ public partial class CraftingStation : Interactible
         _interfaceLocation = GetNode<Node2D>("InterfaceLocation");
         Interact += OnInteractMethod;
         
-        if (FindChild("Inventory") is Interactive.Inventory.Inventory inv) Inventory=inv;
+        if (FindChild("Inventory") is Inventory.Inventory inv) Inventory=inv;
         Inventory.RecipeWhitelist = Recipes;
         Inventory.CompileWhitelist();
     }
@@ -63,7 +65,39 @@ public partial class CraftingStation : Interactible
     // Begin the process of making a specific recipe
     public bool RecipeBegin(BaseRecipe recipe)
     {
-        if (!Inventory.ContainItem(recipe.ItemInputs, true)) return false;
+        if (!Inventory.ContainItem(recipe.RecipeInputs, true)) return false;
+        switch (recipe.RecipeType)
+        {
+            case ERecipeType.Standard:
+                break;
+            case ERecipeType.ModularPartSwap:
+            case ERecipeType.ModularPartAdd:
+                if (recipe.RecipeInputs[0] is not ModularPartTemplate)
+                {
+                    GD.Print($"Recipe {recipe.DisplayName} at {recipe.ResourcePath} doesn't output a ModularPart Template");
+                    return false;
+                }
+
+                var part = recipe.RecipeInputs[0] as ModularPartTemplate;
+                var foundItems = Inventory.Slots
+                    .Where(slot => slot.Item is ModularItem)
+                    .Select(slot => slot.Item)
+                    .Cast<ModularItem>()
+                    .ToArray();
+                if (foundItems.Length != 1 || foundItems[0].Parts.Count == 0) return false;
+                var item =  foundItems[0];
+                switch (recipe.RecipeType)
+                {
+                    case ERecipeType.ModularPartSwap:
+                        if (item.Parts[part.PartType] == null) return false;
+                        break;
+                    case ERecipeType.ModularPartAdd:
+                        if (item.Parts[part.PartType] != null) return false;
+                        break;
+                }
+                break;
+        }
+        
         CurrentRecipe = recipe;
         IsCrafting = true;
 
@@ -106,59 +140,11 @@ public partial class CraftingStation : Interactible
         switch (CurrentRecipe.RecipeType)
         {
             case ERecipeType.Standard:
-                // Destroy input items from inventory
-                if (!Inventory.DestroyItem(CurrentRecipe.ItemInputs))
-                {
-                    GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
-                    return false;
-                }
-
-                GD.Print($"Completed recipe {CurrentRecipe.DisplayName} with {CurrentRecipe.ItemOutputs.Count} outputs:");
-                foreach (var item in CurrentRecipe.ItemOutputs)
-                {
-                    // Create output items
-                    var newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
-                    var newItem = newItemScene.Instantiate<GenericItem>();
-                    newItem.ItemResource = item;
-                    GetNode("/root/GameManager/Isometric").AddChild(newItem);
-                    // Add outputs to inventory
-                    Inventory.PickupItem(newItem, true);
-                    GD.Print($"- {newItem.ItemResource.DisplayName}");
-                }
-                return true;
+                return RecipeCompleteStandard();
 
             case ERecipeType.ModularPartSwap:
-
-                // Filter the weapon from the other inputs
-                Array<GenericItemTemplate> deleteList = [];
-                ModularItem targetItem = null;
-                foreach (var slot in Inventory.Slots)
-                {
-                    if (slot.Item is ModularItem modularItem)
-                    {
-                        targetItem = modularItem;
-                    }
-                    else
-                    {
-                        deleteList.Add(slot.Item.ItemResource);
-                    }
-                }
-                if (targetItem == null) return false;
-
-                // Destroy input items from inventory, except for weapon
-                if (!Inventory.DestroyItem(deleteList))
-                {
-                    GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
-                    return false;
-                }
-
-                // Add part to weapon
-                GD.Print($"Completed recipe {CurrentRecipe.DisplayName}.");
-                targetItem.AddPart(CurrentRecipe.PartOutput);
-                return true;
-
-            case ERecipeType.ModularStatChange:
-                return true;
+            case ERecipeType.ModularPartAdd:
+                return RecipeCompleteModular();
         }
         return false;
     }
@@ -177,6 +163,8 @@ public partial class CraftingStation : Interactible
                     }
                     else if (Inventory.HasSpace() && interactor.InventorySlot.HasItem())
                     {
+                        /*var forceAdd = (interactor.InventorySlot.Item is ModularItem);
+                        interactor.InventorySlot.TransferTo(Inventory, forceAdd);*/
                         interactor.InventorySlot.TransferTo(Inventory);
                     }
                     break;
@@ -204,5 +192,65 @@ public partial class CraftingStation : Interactible
                     break;
             }
         }
+    }
+
+    private bool RecipeCompleteStandard()
+    {
+        // Destroy input items from inventory
+        if (!Inventory.DestroyItem(CurrentRecipe.RecipeInputs))
+        {
+            GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
+            return false;
+        }
+
+        GD.Print($"Completed recipe {CurrentRecipe.DisplayName} with {CurrentRecipe.RecipeOutputs.Count} outputs:");
+        foreach (var item in CurrentRecipe.RecipeOutputs)
+        {
+            // Create output items
+            var newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
+            var newItem = newItemScene.Instantiate<GenericItem>();
+            newItem.ItemResource = item;
+            GetNode("/root/GameManager/Isometric").AddChild(newItem);
+            // Add outputs to inventory
+            Inventory.PickupItem(newItem, true);
+            GD.Print($"- {newItem.ItemResource.DisplayName}");
+        }
+        return true;
+    }
+
+    private bool RecipeCompleteModular()
+    {
+        // Filter the weapon from the other inputs
+        Array<GenericItemTemplate> deleteList = [];
+        ModularItem targetItem = null;
+        foreach (var slot in Inventory.Slots)
+        {
+            if (slot.Item is ModularItem modularItem)
+            {
+                targetItem = modularItem;
+            }
+            else
+            {
+                deleteList.Add(slot.Item.ItemResource);
+            }
+        }
+        if (targetItem == null) return false;
+
+        // Destroy input items from inventory, except for weapon
+        if (!Inventory.DestroyItem(deleteList))
+        {
+            GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
+            return false;
+        }
+
+        // Add part to weapon
+        GD.Print($"Completed recipe {CurrentRecipe.DisplayName}.");
+        if (CurrentRecipe.RecipeInputs[0] is ModularPartTemplate output)
+        {
+            targetItem.AddPart(output);
+        }
+        
+        
+        return true;
     }
 }

@@ -17,7 +17,7 @@ public enum ERecipeType
 {
     Standard,
     ModularPartSwap,
-    ModularStatChange
+    ModularPartAdd,
 }
 
 
@@ -31,9 +31,8 @@ public partial class BaseRecipe : Resource
 
     [ExportGroup("Inputs & Outputs")]
     [Export] public ERecipeType RecipeType = ERecipeType.Standard;
-    [Export] public Array<GenericItemTemplate> ItemInputs = [];
-    [Export] public Array<GenericItemTemplate> ItemOutputs = [];
-    [Export] public ModularPartTemplate PartOutput;
+    [Export] public Array<GenericItemTemplate> RecipeInputs = [];
+    [Export] public Array<GenericItemTemplate> RecipeOutputs = [];
 
     [ExportGroup("Minigame")]
     [Export] public EWorkType WorkType = EWorkType.Instant;

@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Collections;
+using SoYouWANNAJam2025.Code.Interactive.Inventory;
 using SoYouWANNAJam2025.Code.Interactive.Items;
+using SoYouWANNAJam2025.Code.Npc;
 using SoYouWANNAJam2025.Code.Npc.Friendly;
 using SoYouWANNAJam2025.Code.Npc.Hostile;
 
@@ -48,6 +50,9 @@ public partial class GameManager : Node2D
 		_genericItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 		_hostileNpcSpawnLocation = (PathFollow2D)FindChild("HostileNpcSpawnLocations");
+		
+		Global.Grid = GetNode<TileMapLayer>("./Isometric/WorldMap");
+
 		npcInteractor.NpcLeft += OnNpcLeft;
 		GD.Print(CycleLantern);
 		if (CycleLantern == null) return;

@@ -15,7 +15,7 @@ fill = 1
 fill_from = Vector2(0.475, 0.475)
 fill_to = Vector2(0.141026, 0.115385)
 
-[node name="DayCycleLantern" type="Node2D"]
+[node name="DayCycleLantern" type="Node2D" groups=["Lantern"]]
 script = ExtResource("1_6s3kx")
 
 [node name="Interactible" parent="." instance=ExtResource("1_udb3f")]
@@ -28,11 +28,3 @@ offset = Vector2(0, -12)
 
 [node name="PointLight2D2" type="PointLight2D" parent="Interactible/Sprite2D"]
 texture = SubResource("GradientTexture2D_6s3kx")
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
-one_shot = true
-
-[node name="MorningTimer" type="Timer" parent="."]
-wait_time = 30.0
-one_shot = true

@@ -7,15 +7,6 @@
 script = ExtResource("2_whm86")
 PartType = 1
 ModularItemType = 0
-BaseDamage = 0.0
-FireMultiplier = 0.0
-PoisonMultiplier = 0.0
-BaseArmourPenetration = 0.0
-BaseDurability = 0.0
-UnbreakingChance = 0.0
-CritChance = 0.0
-CritMultiplier = 0.0
-CritBonus = 0.0
 DisplayName = "Wooden Sword Grip"
 Description = "The grip of a broadsword, intricately carved out of a piece of wood."
 Textures = Array[Texture2D]([ExtResource("1_yuj3t")])
