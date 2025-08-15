@@ -1,15 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://cyrhwfj2cgl1v"]
+[gd_scene load_steps=6 format=4 uid="uid://cyrhwfj2cgl1v"]
 
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/Lighting/lighting.tscn" id="1_1ur4q"]
-[ext_resource type="TileSet" uid="uid://li71crtnaqqk" path="res://Assets/Sprites/environment/TileMap.tres" id="1_o66vd"]
+[ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_o66vd"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="2_pk6v5"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="3_d01xk"]
 [ext_resource type="PackedScene" uid="uid://cgbg8jjt6swx6" path="res://Entities/Interactive/Stations/ForgeStation.tscn" id="4_jqfss"]
-[ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="5_gh1fi"]
-[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="6_noywq"]
-[ext_resource type="Resource" uid="uid://bhmmqxxc646jd" path="res://Resources/Recipes/Forge/IronIngot.tres" id="7_3id8a"]
-[ext_resource type="Resource" uid="uid://bv5xegexuhyr3" path="res://Resources/Recipes/Forge/GoldIngot.tres" id="8_urjvg"]
-[ext_resource type="Resource" uid="uid://d2p8krc88hiwy" path="res://Resources/Recipes/Forge/Mytrilngot.tres" id="9_t8qcr"]
 
 [node name="GameManager" type="Node2D"]
 
@@ -59,12 +54,8 @@ x_draw_order_reversed = true
 y_sort_enabled = false
 position = Vector2(144, 14.25)
 
-[node name="ForgeStation" type="Area2D" parent="GameWorld/Entities" instance=ExtResource("4_jqfss")]
+[node name="ForgeStation" parent="GameWorld/Entities" instance=ExtResource("4_jqfss")]
 position = Vector2(384, -48)
-script = ExtResource("5_gh1fi")
-DisplayName = "Forge Station"
-Recipes = Array[ExtResource("6_noywq")]([ExtResource("7_3id8a"), ExtResource("8_urjvg"), ExtResource("9_t8qcr")])
-ColliderRadius = 20.0
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("3_d01xk")

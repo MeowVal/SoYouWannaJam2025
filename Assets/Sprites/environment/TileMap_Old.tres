@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=60 format=3 uid="uid://dmsuo0ock7xnp"]
+[gd_resource type="TileSet" load_steps=60 format=3 uid="uid://bwbl1dc80kj88"]
 
 [ext_resource type="Texture2D" uid="uid://8j4lqu8us3ml" path="res://Assets/spritesheetTempAsset.png" id="1_8sf5w"]
 [ext_resource type="Texture2D" uid="uid://dskkos0laqlxm" path="res://Assets/Sprites/environment/isometric-sandbox-sheet.png" id="2_8sf5w"]

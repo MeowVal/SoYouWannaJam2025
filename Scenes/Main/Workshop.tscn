@@ -1,13 +1,14 @@
-[gd_scene load_steps=47 format=4 uid="uid://0x5n8e8yjofe"]
+[gd_scene load_steps=44 format=4 uid="uid://0x5n8e8yjofe"]
 
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_knoqw"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="3_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="3_hbuku"]
+[ext_resource type="PackedScene" uid="uid://cgmrv20adm0sb" path="res://Entities/NPC/Hostile/HostileNpc.tscn" id="3_nt2as"]
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/Lighting/lighting.tscn" id="3_tu5mh"]
 [ext_resource type="PackedScene" uid="uid://b2owtq0jxh0n6" path="res://Entities/Interactive/Items/DayCycleLantern.tscn" id="4_hbuku"]
 [ext_resource type="PackedScene" uid="uid://bwho24gjrxuig" path="res://Entities/Interactive/Stations/InspectionStation.tscn" id="4_ieyhc"]
 [ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/Interactive/Items/GenericItem.tscn" id="5_ieyhc"]
-[ext_resource type="TileSet" uid="uid://dmsuo0ock7xnp" path="res://Assets/Sprites/environment/TileMap_Old.tres" id="5_uygh7"]
+[ext_resource type="TileSet" uid="uid://bwbl1dc80kj88" path="res://Assets/Sprites/environment/TileMap_Old.tres" id="5_uygh7"]
 [ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Entities/Interactive/Stations/GenericCraftingStation.tscn" id="7_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://cl07jfhggwrem" path="res://Entities/Interactive/Items/ModularItem.tscn" id="8_14b3v"]
 [ext_resource type="PackedScene" uid="uid://bkawl4uk3bb67" path="res://Entities/leaveArea.tscn" id="9_65kow"]
@@ -27,27 +28,11 @@
 [ext_resource type="Texture2D" uid="uid://cnaqs6h3q3q5i" path="res://Assets/Sprites/ModularParts/Pole_Spear.png" id="21_ilfxt"]
 [ext_resource type="Texture2D" uid="uid://b6xni48kkstkr" path="res://Assets/Sprites/ModularParts/Pummel_Sword.png" id="22_du0ap"]
 [ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Entities/NPC/Friendly/Npc.tscn" id="26_i12cv"]
-[ext_resource type="Shader" uid="uid://br6pkqr38jxvw" path="res://Resources/Shaders/LightShadows.gdshader" id="27_a2a7c"]
-[ext_resource type="Script" uid="uid://crdc1yecqik7x" path="res://Code/World/Sun.cs" id="27_nt8bt"]
 [ext_resource type="Texture2D" uid="uid://dmbxc4ofgw13r" path="res://Assets/Sprites/Unknown.png" id="29_acvf2"]
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="30_4od3e"]
 [ext_resource type="Script" uid="uid://kfhncm4xxwur" path="res://Code/Interactive/Items/ModularItemTemplate.cs" id="30_c1wlf"]
 [ext_resource type="Resource" uid="uid://cvob48mb3vhjv" path="res://Resources/Items/ModularParts/Blade_Sword_Iron_Broken.tres" id="31_8x4g5"]
 [ext_resource type="PackedScene" uid="uid://cgbg8jjt6swx6" path="res://Entities/Interactive/Stations/ForgeStation.tscn" id="31_uygh7"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nfpvg"]
-shader = ExtResource("27_a2a7c")
-shader_parameter/shadow_limit = 0.5
-
-[sub_resource type="Gradient" id="Gradient_a2a7c"]
-offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
-colors = PackedColorArray(0.109804, 0.105882, 0.537255, 1, 0.466667, 0.254902, 0.247059, 1, 1, 1, 1, 1, 0.6, 0.427451, 0.235294, 1, 1, 1, 1, 1)
-metadata/_snap_enabled = true
-metadata/_snap_count = 20
-
-[sub_resource type="Curve" id="Curve_nfpvg"]
-_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.2, 0.6), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
-point_count = 5
 
 [sub_resource type="Resource" id="Resource_8ep5l"]
 script = ExtResource("17_bwn0d")
@@ -165,28 +150,24 @@ fill = 1
 fill_from = Vector2(0.475, 0.475)
 fill_to = Vector2(0.141026, 0.115385)
 
+[sub_resource type="Curve2D" id="Curve2D_uygh7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 339.75, 807.75, 0, 0, 0, 0, 475, 736, 0, 0, 0, 0, 491.25, 645, 0, 0, 0, 0, 507.25, 508.5, 0, 0, 0, 0, 499.5, 392.25, 0, 0, 0, 0, 460.5, 213, 0, 0, 0, 0, 369.25, 69.5, 0, 0, 0, 0, 275, -52.25, 0, 0, 0, 0, 195.25, -63, 0, 0, 0, 0, 69, -33.75, 0, 0, 0, 0, -637.5, 319.5, 0, 0, 0, 0, 339.75, 807.75)
+}
+point_count = 12
+
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_knoqw")
 NpcScene = ExtResource("26_i12cv")
+HostileNpcScene = ExtResource("3_nt2as")
+
+[node name="NpcTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
 
 [node name="Isometric" type="Node2D" parent="."]
 y_sort_enabled = true
 scale = Vector2(4, 4)
-
-[node name="Sun" type="DirectionalLight2D" parent="Isometric" node_paths=PackedStringArray("SunLight")]
-visible = false
-material = SubResource("ShaderMaterial_nfpvg")
-position = Vector2(-5000, 0)
-scale = Vector2(20, 20)
-color = Color(0, 0, 0, 1)
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 1)
-height = 1.0
-max_distance = 16384.0
-script = ExtResource("27_nt8bt")
-SunLight = NodePath(".")
-LightGradient = SubResource("Gradient_a2a7c")
-EnergyCurve = SubResource("Curve_nfpvg")
 
 [node name="WorldMap" type="TileMapLayer" parent="Isometric"]
 unique_name_in_owner = true
@@ -308,6 +289,16 @@ position = Vector2(208, 456)
 [node name="FrontDesk" type="Node2D" parent="Isometric/WorldMap/Entities"]
 position = Vector2(188, 188)
 
+[node name="HostileNpcPath" type="Path2D" parent="Isometric/WorldMap/Entities"]
+curve = SubResource("Curve2D_uygh7")
+
+[node name="HostileNpcSpawnLocations" type="PathFollow2D" parent="Isometric/WorldMap/Entities/HostileNpcPath"]
+position = Vector2(339.75, 807.75)
+rotation = -0.487748
+
+[node name="HostileNpcTimer" type="Timer" parent="Isometric/WorldMap/Entities/HostileNpcPath"]
+autostart = true
+
 [node name="BackgroundTile" type="TileMapLayer" parent="Isometric"]
 z_index = -4096
 y_sort_enabled = true
@@ -341,5 +332,8 @@ x_draw_order_reversed = true
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("9_vwcaw")
 FollowingNode = NodePath("../Isometric/WorldMap/Entities/Character")
+
+[connection signal="timeout" from="NpcTimer" to="." method="OnNpcTimerTimeout"]
+[connection signal="timeout" from="Isometric/WorldMap/Entities/HostileNpcPath/HostileNpcTimer" to="." method="OnHostileNpcTimerTimeout"]
 
 [editable path="Isometric/WorldMap/Lighting"]
