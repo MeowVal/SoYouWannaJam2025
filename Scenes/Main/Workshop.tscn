@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=4 uid="uid://0x5n8e8yjofe"]
+[gd_scene load_steps=37 format=4 uid="uid://0x5n8e8yjofe"]
 
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_knoqw"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="2_65kow"]
+[ext_resource type="PackedScene" uid="uid://cgmrv20adm0sb" path="res://Entities/NPC/Hostile/HostileNpc.tscn" id="3_a2a7c"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="3_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="3_hbuku"]
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/Lighting/lighting.tscn" id="3_tu5mh"]
@@ -55,12 +56,19 @@ fill = 1
 fill_from = Vector2(0.475, 0.475)
 fill_to = Vector2(0.141026, 0.115385)
 
+[sub_resource type="Curve2D" id="Curve2D_nt8bt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 337, 811, 0, 0, 0, 0, 466.75, 744.75, 0, 0, 0, 0, 477.75, 722, 0, 0, 0, 0, 496.5, 503.25, 0, 0, 0, 0, 493.75, 374.5, 0, 0, 0, 0, 478.25, 258.5, 0, 0, 0, 0, 419, 140.5, 0, 0, 0, 0, 318.75, 0.25, 0, 0, 0, 0, 247.75, -65.75, 0, 0, 0, 0, 147.75, -55.75, 0, 0, 0, 0, 49.25, -24, 0, 0, 0, 0, -636.5, 317.5, 0, 0, 0, 0, 337, 811)
+}
+point_count = 13
+
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_knoqw")
 NpcScene = ExtResource("26_i12cv")
+HostileNpcScene = ExtResource("3_a2a7c")
 
 [node name="NpcTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 20.0
 autostart = true
 
 [node name="Isometric" type="Node2D" parent="."]
@@ -204,6 +212,16 @@ position = Vector2(208, 456)
 [node name="FrontDesk" type="Node2D" parent="Isometric/WorldMap/Entities"]
 position = Vector2(188, 188)
 
+[node name="HostileNpcPath" type="Path2D" parent="Isometric/WorldMap/Entities"]
+curve = SubResource("Curve2D_nt8bt")
+
+[node name="HostileNpcSpawnLocations" type="PathFollow2D" parent="Isometric/WorldMap/Entities/HostileNpcPath"]
+position = Vector2(337, 811)
+rotation = -0.472089
+
+[node name="HostileNpcTimer" type="Timer" parent="Isometric/WorldMap/Entities/HostileNpcPath"]
+autostart = true
+
 [node name="BackgroundTile" type="TileMapLayer" parent="Isometric"]
 z_index = -4096
 y_sort_enabled = true
@@ -241,5 +259,6 @@ script = ExtResource("9_vwcaw")
 FollowingNode = NodePath("../Isometric/WorldMap/Entities/Character")
 
 [connection signal="timeout" from="NpcTimer" to="." method="OnNpcTimerTimeout"]
+[connection signal="timeout" from="Isometric/WorldMap/Entities/HostileNpcPath/HostileNpcTimer" to="." method="OnHostileNpcTimerTimeout"]
 
 [editable path="Isometric/WorldMap/Lighting"]
