@@ -105,6 +105,7 @@ position = Vector2(128, 224)
 y_sort_enabled = true
 position = Vector2(80, 232)
 Lighting = NodePath("../../Lighting")
+CycleTime = 1200.0
 
 [node name="LeaveArea" parent="Isometric/WorldMap/Entities" instance=ExtResource("9_65kow")]
 y_sort_enabled = true
