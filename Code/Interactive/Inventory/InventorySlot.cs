@@ -3,6 +3,7 @@ using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Items;
+using SoYouWANNAJam2025.Entities.Interactive.Items;
 using BaseRecipe = SoYouWANNAJam2025.Code.Interactive.Stations.BaseRecipe;
 
 namespace SoYouWANNAJam2025.Code.Interactive.Inventory;
@@ -25,7 +26,7 @@ public partial class InventorySlot : Node2D
     [Export] // Number of ZIndex layers to add to the occupying item.
     public int ZIndexBonus = 0;
 
-    public Array<GenericItemTemplate> Whitelist = [];
+    public Array<Rid> Whitelist = [];
 
     public override void _Ready()
     {
@@ -35,13 +36,18 @@ public partial class InventorySlot : Node2D
 
     public virtual void CompileWhitelist()
     {
+        Whitelist = [];
+        foreach (var item in ItemWhitelist)
+        {
+            Whitelist.Add(item.GetRid());
+        }
         // Compile the complete list of all items accepted
-        Whitelist = ItemWhitelist;
+
         foreach (var recipe in RecipeWhitelist)
         {
             foreach (var input in recipe.ItemInputs)
             {
-                Whitelist.Add(input);
+                Whitelist.Add(input.GetRid());
             }
         }
     }
@@ -69,7 +75,16 @@ public partial class InventorySlot : Node2D
     {
         // Ensure item *can* be added to the slot.
         if (!HasSpace()) return false;
-        if (!(Whitelist.Contains(item.ItemResource) || AllowAll || forceAdd)) return false;
+
+        if (!(Whitelist.Contains(item.ItemResource.GetRid()) || AllowAll || forceAdd))
+        {
+            // Check if is modular item, if so compare with recipe list for that item.
+            if (item.ItemResource is not ModularItemTemplate part) return false;
+            foreach (var recipe in RecipeWhitelist)
+            {
+                if (recipe.PartStateChangeItemType != part.ModularItemType) return false;
+            }
+        };
 
         // Add item to slot and position in new owning scene.
         Item = item;
@@ -119,11 +134,18 @@ public partial class InventorySlot : Node2D
         return true;
     }
     
-    public virtual bool ContainItem(Array<GenericItemTemplate> items, bool all = false)
+    public virtual bool ContainItem(Array<GenericItemTemplate> items, bool all = false, bool anyOfType = true)
     {
         if (!HasItem() || (all && items.Count > 1)) return false;
-        
-        return items.Any(item => item == Item.ItemResource);
+        if (anyOfType)
+        {
+            return items.Any(item => item.GetRid() == Item.ItemResource.GetRid());
+        }
+        else
+        {
+            return items.Any(item => item == Item.ItemResource);
+        }
+
     }
 
     public virtual bool HasItem()

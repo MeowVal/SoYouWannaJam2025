@@ -35,6 +35,13 @@ public enum EModularItemType
     Cloak
 }
 
+public enum EPartState
+{
+    New,
+    Worn,
+    Broken
+}
+
 public enum EUseType
 {
     Chopping,
@@ -51,26 +58,6 @@ public partial class ModularItem : GenericItem
     // Defines what slots this item will have to use
     private Dictionary<EPartType, ModularPartTemplate> _parts = [];
     public Npc OwningNpc = null;
-    
-    /*private GenericItemTemplate _itemTemplate;
-    
-    public override GenericItemTemplate ItemResource
-    {
-        set
-        {
-            _itemTemplate = value;
-            if (_itemTemplate == null)
-            {
-                GD.Print("DEFAULT MODULAR ITEM TEMPLATE");
-                Sprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Unknown.png");
-                Sprite.Modulate = Colors.White;
-                return;
-            }
-            ColliderRadius = value.Size;
-            DrawSprites();
-        }
-        get => _itemTemplate;
-    }*/
 
     public override void _Ready()
     {
@@ -99,6 +86,15 @@ public partial class ModularItem : GenericItem
         if (!_parts.ContainsKey(part.PartType)) return false;
         _parts[part.PartType] = part;
         GD.Print($"Added {part.DisplayName} to {ItemResource.DisplayName}.");
+        DrawSprite();
+        return true;
+    }
+
+    public bool SetPartState(EPartType target, EPartState value)
+    {
+        if (!_parts.ContainsKey(target)) return false;
+        _parts[target].PartState = value;
+        GD.Print($"Set Part {target.ToString()} to {value.ToString()}.");
         DrawSprite();
         return true;
     }

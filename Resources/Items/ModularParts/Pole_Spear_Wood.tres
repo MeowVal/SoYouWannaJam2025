@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://crjv5jcoy4r6w"]
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://crjv5jcoy4r6w"]
 
+[ext_resource type="Texture2D" uid="uid://dmbxc4ofgw13r" path="res://Assets/Sprites/Unknown.png" id="1_8axlk"]
 [ext_resource type="Texture2D" uid="uid://cnaqs6h3q3q5i" path="res://Assets/Sprites/ModularParts/Pole_Spear.png" id="1_xt71y"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_8axlk"]
 
@@ -7,6 +8,8 @@
 script = ExtResource("2_8axlk")
 PartType = 4
 ModularItemType = 1
+BrokenTextures = Array[Texture2D]([ExtResource("1_8axlk")])
+PartState = 0
 BaseDamage = 0.0
 FireMultiplier = 0.0
 PoisonMultiplier = 0.0

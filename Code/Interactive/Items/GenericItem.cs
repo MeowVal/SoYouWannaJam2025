@@ -15,7 +15,7 @@ public partial class GenericItem : Interactible
     {
         set
         {
-            _itemTemplate = value;
+            _itemTemplate = (GenericItemTemplate)value.Duplicate();
             if (_itemTemplate == null)
             {
                 //GD.Print("DEFAULT TEMPLATE");

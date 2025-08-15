@@ -101,15 +101,15 @@ public partial class Inventory : InventorySlot
         return true;
     }
     
-    public override bool ContainItem(Array<GenericItemTemplate> items, bool all = false)
+    public override bool ContainItem(Array<GenericItemTemplate> items, bool all = false, bool anyOfType = true)
     {
         if (!HasItem() || (all && items.Count > _count)) return false;
-        if (!all) return Slots.Any(slot => slot.ContainItem(items));
+        if (!all) return Slots.Any(slot => slot.ContainItem(items, all, anyOfType));
 
         var dupeItems = new Array<GenericItemTemplate>(items);
         foreach (var slot in Slots)
         {
-            if (slot.ContainItem(dupeItems))
+            if (slot.ContainItem(dupeItems, all, anyOfType))
             {
                 dupeItems.Remove(slot.Item.ItemResource);
             }

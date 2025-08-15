@@ -105,59 +105,13 @@ public partial class CraftingStation : Interactible
         switch (CurrentRecipe.RecipeType)
         {
             case ERecipeType.Standard:
-                // Destroy input items from inventory
-                if (!Inventory.DestroyItem(CurrentRecipe.ItemInputs))
-                {
-                    GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
-                    return false;
-                }
-
-                GD.Print($"Completed recipe {CurrentRecipe.DisplayName} with {CurrentRecipe.ItemOutputs.Count} outputs:");
-                foreach (var item in CurrentRecipe.ItemOutputs)
-                {
-                    // Create output items
-                    var newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
-                    var newItem = newItemScene.Instantiate<GenericItem>();
-                    newItem.ItemResource = item;
-                    GetNode("/root/GameManager/Isometric").AddChild(newItem);
-                    // Add outputs to inventory
-                    Inventory.PickupItem(newItem, true);
-                    GD.Print($"- {newItem.ItemResource.DisplayName}");
-                }
-                return true;
+                return RecipeCompleteStandard();
 
             case ERecipeType.ModularPartSwap:
+                return RecipeCompleteModularPartSwap();
 
-                // Filter the weapon from the other inputs
-                Array<GenericItemTemplate> deleteList = [];
-                ModularItem targetItem = null;
-                foreach (var slot in Inventory.Slots)
-                {
-                    if (slot.Item is ModularItem modularItem)
-                    {
-                        targetItem = modularItem;
-                    }
-                    else
-                    {
-                        deleteList.Add(slot.Item.ItemResource);
-                    }
-                }
-                if (targetItem == null) return false;
-
-                // Destroy input items from inventory, except for weapon
-                if (!Inventory.DestroyItem(deleteList))
-                {
-                    GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
-                    return false;
-                }
-
-                // Add part to weapon
-                GD.Print($"Completed recipe {CurrentRecipe.DisplayName}.");
-                targetItem.AddPart(CurrentRecipe.PartOutput);
-                return true;
-
-            case ERecipeType.ModularStatChange:
-                return true;
+            case ERecipeType.ModularPartStateChange:
+                return RecipeCompleteModularPartStateChange();
         }
         return false;
     }
@@ -203,5 +157,91 @@ public partial class CraftingStation : Interactible
                     break;
             }
         }
+    }
+
+    private bool RecipeCompleteStandard()
+    {
+        // Destroy input items from inventory
+        if (!Inventory.DestroyItem(CurrentRecipe.StandardItemInputs))
+        {
+            GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
+            return false;
+        }
+
+        GD.Print($"Completed recipe {CurrentRecipe.DisplayName} with {CurrentRecipe.StandardOutputs.Count} outputs:");
+        foreach (var item in CurrentRecipe.StandardOutputs)
+        {
+            // Create output items
+            var newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
+            var newItem = newItemScene.Instantiate<GenericItem>();
+            newItem.ItemResource = item;
+            GetNode("/root/GameManager/Isometric").AddChild(newItem);
+            // Add outputs to inventory
+            Inventory.PickupItem(newItem, true);
+            GD.Print($"- {newItem.ItemResource.DisplayName}");
+        }
+        return true;
+    }
+
+    private bool RecipeCompleteModularPartSwap()
+    {
+        // Filter the weapon from the other inputs
+        Array<GenericItemTemplate> deleteList = [];
+        ModularItem targetItem = null;
+        foreach (var slot in Inventory.Slots)
+        {
+            if (slot.Item is ModularItem modularItem)
+            {
+                targetItem = modularItem;
+            }
+            else
+            {
+                deleteList.Add(slot.Item.ItemResource);
+            }
+        }
+        if (targetItem == null) return false;
+
+        // Destroy input items from inventory, except for weapon
+        if (!Inventory.DestroyItem(deleteList))
+        {
+            GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
+            return false;
+        }
+
+        // Add part to weapon
+        GD.Print($"Completed recipe {CurrentRecipe.DisplayName}.");
+        targetItem.AddPart(CurrentRecipe.PartSwapOutput);
+        return true;
+    }
+
+    private bool RecipeCompleteModularPartStateChange()
+    {
+        // Filter the weapon from the other inputs
+        Array<GenericItemTemplate> deleteList = [];
+        ModularItem targetItem = null;
+        foreach (var slot in Inventory.Slots)
+        {
+            if (slot.Item is ModularItem modularItem)
+            {
+                targetItem = modularItem;
+            }
+            else
+            {
+                deleteList.Add(slot.Item.ItemResource);
+            }
+        }
+        if (targetItem == null) return false;
+
+        // Destroy input items from inventory, except for weapon
+        if (!Inventory.DestroyItem(deleteList))
+        {
+            GD.Print($"Failed to delete recipe: {CurrentRecipe.DisplayName}");
+            return false;
+        }
+
+        // Set target part's state to new.
+        GD.Print($"Completed recipe {CurrentRecipe.DisplayName}.");
+        targetItem.SetPartState(CurrentRecipe.PartStateChangeTarget, CurrentRecipe.PartStateChangeValue);
+        return true;
     }
 }

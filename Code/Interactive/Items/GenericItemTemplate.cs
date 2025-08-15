@@ -11,14 +11,19 @@ public partial class GenericItemTemplate: Resource
     [Export] public Array<Texture2D> Textures = [GD.Load<Texture2D>("res://Assets/Sprites/Unknown.png")];
     [Export] public Array<Color> Colours = [Colors.White];
     [Export] public float Size = 10;
-    
-    public Image GetItemImage()
+
+    public virtual Image GetItemImage()
+    {
+        return CreateItemImage(Textures, Colours);
+    }
+
+    protected Image CreateItemImage(Array<Texture2D> textures, Array<Color> colours)
     {
         var img = Image.CreateEmpty(32, 32, false, Image.Format.Rgba8);
-        for (var i = 0; i < Textures.Count; i++)
+        for (var i = 0; i < textures.Count; i++)
         {
-            var modulateColor = i < Colours.Count ? Colours[i] :  Colors.White;
-            var spriteImg = Textures[i].GetImage();
+            var modulateColor = i < colours.Count ? colours[i] :  Colors.White;
+            var spriteImg = textures[i].GetImage();
 
             for (var x = 0; x < 32; x++)
             {

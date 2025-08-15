@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://d0kf8ldv8p21p"]
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://d0kf8ldv8p21p"]
 
+[ext_resource type="Texture2D" uid="uid://dmbxc4ofgw13r" path="res://Assets/Sprites/Unknown.png" id="1_bwfxq"]
 [ext_resource type="Texture2D" uid="uid://b6xni48kkstkr" path="res://Assets/Sprites/ModularParts/Pummel_Sword.png" id="1_ntfu7"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_bwfxq"]
 
@@ -7,6 +8,8 @@
 script = ExtResource("2_bwfxq")
 PartType = 2
 ModularItemType = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_bwfxq")])
+PartState = 0
 BaseDamage = 0.0
 FireMultiplier = 0.0
 PoisonMultiplier = 0.0

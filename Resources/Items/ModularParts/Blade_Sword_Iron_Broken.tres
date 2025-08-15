@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://cvob48mb3vhjv"]
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://cvob48mb3vhjv"]
 
 [ext_resource type="Texture2D" uid="uid://bj7gr0vk3momh" path="res://Assets/Sprites/ModularParts/Blade_Sword_Broken.png" id="1_hfk0d"]
+[ext_resource type="Texture2D" uid="uid://dmbxc4ofgw13r" path="res://Assets/Sprites/Unknown.png" id="1_ikq35"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_ikq35"]
 
 [resource]
 script = ExtResource("2_ikq35")
 PartType = 0
 ModularItemType = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_ikq35")])
+PartState = 0
 BaseDamage = 0.0
 FireMultiplier = 0.0
 PoisonMultiplier = 0.0

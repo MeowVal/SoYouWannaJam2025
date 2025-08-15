@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://cgodai2grhqmd"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_fkbnj"]
+[ext_resource type="Resource" uid="uid://tvgxu2woqsxh" path="res://Resources/Items/Resources/IronIngot.tres" id="2_2p2p3"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_hnpfw"]
+
+[resource]
+script = ExtResource("2_hnpfw")
+DisplayName = "Repair Sword"
+Description = "Repairing the chipped and broken sword blade"
+RecipeType = 2
+StandardItemInputs = Array[ExtResource("1_fkbnj")]([])
+StandardOutputs = Array[ExtResource("1_fkbnj")]([])
+PartSwapItemInputs = Array[ExtResource("1_fkbnj")]([])
+PartStateChangeItemType = 0
+PartStateChangeItemInputs = Array[ExtResource("1_fkbnj")]([ExtResource("2_2p2p3")])
+PartStateChangeTarget = 0
+PartStateChangeValue = 0
+WorkType = 0
+TimeToComplete = 4.0
+SequenceLength = 6
+SpamPerSecond = 7
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"
