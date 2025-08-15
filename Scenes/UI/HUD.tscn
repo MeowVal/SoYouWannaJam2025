@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://chlnug22al4rf" path="res://Scenes/UI/HudManager.cs" id="1_4bm6u"]
 [ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="1_qc5w2"]
-[ext_resource type="Texture2D" uid="uid://dcl6i2n7nhifq" path="res://Assets/Sprites/UI/Background1.png" id="2_xaom8"]
 [ext_resource type="Texture2D" uid="uid://dmbxc4ofgw13r" path="res://Assets/Sprites/Unknown.png" id="3_xaom8"]
+[ext_resource type="Texture2D" uid="uid://bc1u5ejsy8igo" path="res://Assets/Sprites/UI/TopLeftHud.png" id="4_ykvyr"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_4bm6u")
@@ -11,112 +11,56 @@ script = ExtResource("1_4bm6u")
 [node name="Container" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 450.0
-offset_bottom = 100.0
+offset_right = 342.0
+offset_bottom = 156.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("1_qc5w2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Container"]
+[node name="TextureRect2" type="TextureRect" parent="Container"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 28.0
+anchors_preset = -1
+anchor_right = 1.775
+anchor_bottom = 1.846
+offset_right = -0.0500488
+offset_bottom = 0.0239868
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
+texture = ExtResource("4_ykvyr")
 
-[node name="Control" type="Control" parent="Container/HBoxContainer"]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Container/HBoxContainer/Control"]
+[node name="Control" type="Control" parent="Container/TextureRect2"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_xaom8")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="TextureRect" type="TextureRect" parent="Container/HBoxContainer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_xaom8")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Container/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Container/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Control" type="Control" parent="Container/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
+anchor_left = 0.382
+anchor_top = 0.577
+anchor_right = 0.544
+anchor_bottom = 0.704
 size_flags_horizontal = 3
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Container/HBoxContainer/VBoxContainer/HBoxContainer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_xaom8")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="TimeOfDay" type="Label" parent="Container/HBoxContainer/VBoxContainer/HBoxContainer/Control"]
+[node name="TimeOfDay" type="Label" parent="Container/TextureRect2/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -21.0
-offset_bottom = 21.0
+offset_top = -8.5
+offset_right = -1.52588e-05
+offset_bottom = 8.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 26
 text = "10:35"
 horizontal_alignment = 1
 
-[node name="Control2" type="Control" parent="Container/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
+[node name="Control2" type="Control" parent="Container/TextureRect2"]
+layout_mode = 1
+anchor_left = 0.386
+anchor_top = 0.278
+anchor_right = 0.865
+anchor_bottom = 0.547
 size_flags_horizontal = 3
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Container/HBoxContainer/VBoxContainer/HBoxContainer/Control2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_xaom8")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="Date" type="Label" parent="Container/HBoxContainer/VBoxContainer/HBoxContainer/Control2"]
+[node name="Date" type="Label" parent="Container/TextureRect2/Control2"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 14
@@ -128,45 +72,15 @@ offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 50
 text = "Day 1"
 horizontal_alignment = 1
 
-[node name="Control3" type="Control" parent="Container/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Container/HBoxContainer/VBoxContainer/Control3"]
+[node name="TextureRect" type="TextureRect" parent="Container/TextureRect2"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_xaom8")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Container/HBoxContainer/VBoxContainer/Control3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Container/HBoxContainer/VBoxContainer/Control3/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "123"
-
-[node name="Label2" type="Label" parent="Container/HBoxContainer/VBoxContainer/Control3/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Adventurers"
+anchors_preset = -1
+anchor_left = 0.095
+anchor_top = 0.201
+anchor_right = 0.352
+anchor_bottom = 0.759
+texture = ExtResource("3_xaom8")

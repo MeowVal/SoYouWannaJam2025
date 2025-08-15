@@ -13,7 +13,7 @@ public partial class ItemMap : EditorPlugin
 	private Control _panelUi;
 	private static readonly PackedScene ItemMapControl = Load<PackedScene>("res://addons/ItemMap/_itemMap_UI.tscn");
 
-	private static readonly NodePath WorldMap = "%WorldMap/Entities";
+	private static readonly NodePath WorldMap = "%Entities";
 	private static readonly NodePath Entities = "res://Entities";
 	private TileMapLayer _worldMap;
 	private SubViewport _editor = EditorInterface.Singleton.GetEditorViewport2D();
@@ -69,7 +69,7 @@ public partial class ItemMap : EditorPlugin
 		if (sceneNode != null)
 		{
 			//Weird timing error, need to fix. Not fatal.
-				var node = EditorInterface.Singleton.GetEditedSceneRoot().GetNodeOrNull<TileMapLayer>(WorldMap); 
+				var node = EditorInterface.Singleton.GetEditedSceneRoot().GetNodeOrNull<TileMapLayer>(WorldMap);
 				if (node != null)
 				{
 					GD.Print(node);
@@ -172,7 +172,7 @@ public partial class ItemMap : EditorPlugin
 				//GD.Print(unpackObj);
 				if (_worldMap == null) return;
 				var pos = _worldMap.MapToLocal(_worldMap.LocalToMap(_worldMap.ToLocal(_editor.GetMousePosition())));
-				
+				GD.Print(pos);
 				var ogName = unpackObj.Name;
 				
 				unpackObj.Position = pos;

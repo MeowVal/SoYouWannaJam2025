@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_1ijhs"]
 [ext_resource type="Resource" uid="uid://bhmmqxxc646jd" path="res://Resources/Recipes/Forge/IronIngot.tres" id="3_l3fy7"]
 [ext_resource type="Resource" uid="uid://bv5xegexuhyr3" path="res://Resources/Recipes/Forge/GoldIngot.tres" id="4_1ijhs"]
-[ext_resource type="Texture2D" uid="uid://cah72btdjpxbb" path="res://Assets/Sprites/objects/furnace_base.png" id="5_cg3bl"]
 [ext_resource type="Resource" uid="uid://d2p8krc88hiwy" path="res://Resources/Recipes/Forge/Mytrilngot.tres" id="5_g4254"]
+[ext_resource type="Texture2D" uid="uid://di4ia2pb6wg5b" path="res://Assets/Sprites/environment/Building/Forge.png" id="6_1ijhs"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_skwst"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="7_wai8b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ijhs"]
-radius = 20.0
+radius = 32.0
 
 [node name="ForgeStation" type="Area2D"]
 script = ExtResource("1_cg3bl")
@@ -18,14 +18,12 @@ DisplayName = "Forge Station"
 Recipes = Array[ExtResource("2_1ijhs")]([ExtResource("3_l3fy7"), ExtResource("4_1ijhs"), ExtResource("5_g4254")])
 ColliderRadius = 20.0
 
+[node name="StationSprite" type="Sprite2D" parent="."]
+texture = ExtResource("6_1ijhs")
+
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1ijhs")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
-
-[node name="StationSprite" type="Sprite2D" parent="."]
-texture = ExtResource("5_cg3bl")
-hframes = 2
-vframes = 2
 
 [node name="InterfaceLocation" type="Node2D" parent="."]
 position = Vector2(0, -16)

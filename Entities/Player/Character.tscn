@@ -423,6 +423,7 @@ shape = SubResource("CircleShape2D_b3ei2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_bkf2h")
+offset = Vector2(0, -15)
 hframes = 8
 vframes = 8
 frame = 4

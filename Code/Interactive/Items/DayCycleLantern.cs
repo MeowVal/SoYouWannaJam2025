@@ -60,6 +60,7 @@ public partial class DayCycleLantern : Node2D
         GD.Print("DayNightCycle Timed Out");
         EmitSignal(SignalName.CycleLantern, false);
         _animator.Stop();
+        _dawnHandled = false;
     }
 
     public override void _Process(double delta)
