@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://dunpcqibch85s"]
+
+[ext_resource type="Texture2D" uid="uid://ddqhktyn8qttb" path="res://Assets/Sprites/ModularParts/Tip_Staff_Horned.png" id="1_xuru0"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_tuwur"]
+
+[resource]
+script = ExtResource("2_tuwur")
+PartType = 5
+ModularItemType = 5
+PartState = 0
+DisplayName = "Staff Gold Horned Tip"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_xuru0")])
+Colours = Array[Color]([Color(1, 0.796078, 0.239216, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

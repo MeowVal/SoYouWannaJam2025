@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://dq03e6yf4jnj3"]
+
+[ext_resource type="Texture2D" uid="uid://c8ajx045ysots" path="res://Assets/Sprites/ModularParts/Blade_Spear.png" id="1_h3xvr"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_twvtx"]
+
+[resource]
+script = ExtResource("2_twvtx")
+PartType = 0
+ModularItemType = 1
+PartState = 0
+DisplayName = "Spear Wooden Blade"
+Description = "The blade for a spear, cast of pure Iron."
+Textures = Array[Texture2D]([ExtResource("1_h3xvr")])
+Colours = Array[Color]([Color(0.678431, 0.392157, 0.168627, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

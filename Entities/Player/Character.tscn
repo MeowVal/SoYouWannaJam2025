@@ -50,6 +50,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="InventorySlot" type="Node2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -15)
 script = ExtResource("5_o4cwe")
 AllowAll = true

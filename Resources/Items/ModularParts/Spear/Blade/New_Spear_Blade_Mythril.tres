@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://b5iinegf8a26g"]
+
+[ext_resource type="Texture2D" uid="uid://c8ajx045ysots" path="res://Assets/Sprites/ModularParts/Blade_Spear.png" id="1_usrw2"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_gcjv7"]
+
+[resource]
+script = ExtResource("2_gcjv7")
+PartType = 0
+ModularItemType = 1
+PartState = 0
+DisplayName = "Spear Mythril Blade"
+Description = "The blade for a spear, cast of pure Iron."
+Textures = Array[Texture2D]([ExtResource("1_usrw2")])
+Colours = Array[Color]([Color(0.552941, 1, 0.835294, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

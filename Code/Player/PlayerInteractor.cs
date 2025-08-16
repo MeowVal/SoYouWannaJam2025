@@ -78,7 +78,9 @@ public partial class PlayerInteractor : Area2D
             case TriggerType.PickupDrop:
                 if (PossibleTargets.Count > 0 && CurrentTarget < PossibleTargets.Count && CurrentTarget >= 0)
                 {
+                    //if (InventorySlot.Item != null) InventorySlot.Item.ZIndex = 0;
                     PossibleTargets[CurrentTarget].TriggerInteraction(this, TriggerType.PickupDrop);
+                    //if (InventorySlot.Item != null) InventorySlot.Item.ZIndex = 10;
                     OnDistanceCheckTimer();
                 } else if (InventorySlot.HasItem()) // If we have an item, drop it.
                 {

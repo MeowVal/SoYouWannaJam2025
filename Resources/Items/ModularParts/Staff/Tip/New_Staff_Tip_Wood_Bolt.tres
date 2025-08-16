@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://h1lrmbkreq4l"]
+
+[ext_resource type="Texture2D" uid="uid://qfi67tp2tjof" path="res://Assets/Sprites/ModularParts/Tip_Staff_Bolt.png" id="1_rapnb"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_nkmph"]
+
+[resource]
+script = ExtResource("2_nkmph")
+PartType = 5
+ModularItemType = 5
+PartState = 0
+DisplayName = "Staff Wooden Bolt Tip"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_rapnb")])
+Colours = Array[Color]([Color(0.678431, 0.392157, 0.168627, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

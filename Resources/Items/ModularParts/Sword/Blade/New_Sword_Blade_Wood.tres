@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://xjmd4gb0agtk"]
+
+[ext_resource type="Texture2D" uid="uid://bnc4s6trjboii" path="res://Assets/Sprites/ModularParts/Blade_Sword.png" id="1_mimkf"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_ai0qx"]
+
+[resource]
+script = ExtResource("2_ai0qx")
+PartType = 0
+ModularItemType = 0
+PartState = 0
+DisplayName = "Sword Wooden Blade"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_mimkf")])
+Colours = Array[Color]([Color(0.678431, 0.392157, 0.168627, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"
