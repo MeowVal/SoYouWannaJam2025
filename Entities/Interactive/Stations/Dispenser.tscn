@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://u52yg5uejgs6"]
+
+[ext_resource type="Script" uid="uid://byryx7sjfdyc1" path="res://Code/Interactive/Stations/Dispenser.cs" id="1_oq4e5"]
+[ext_resource type="Texture2D" uid="uid://dvisxk4oclfdq" path="res://Assets/Sprites/objects/barrel.png" id="2_oq4e5"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="3_j86b2"]
+[ext_resource type="Texture2D" uid="uid://dmbxc4ofgw13r" path="res://Assets/Sprites/Unknown.png" id="4_j86b2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oq4e5"]
+radius = 16.0
+
+[node name="Dispenser" type="Area2D"]
+script = ExtResource("1_oq4e5")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oq4e5")
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
+
+[node name="StationSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_oq4e5")
+
+[node name="InventorySlot" type="Node2D" parent="."]
+position = Vector2(0, -1)
+script = ExtResource("3_j86b2")
+AllowAll = true
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_j86b2")

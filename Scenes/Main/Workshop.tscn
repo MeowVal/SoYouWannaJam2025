@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://0x5n8e8yjofe"]
+[gd_scene load_steps=45 format=4 uid="uid://0x5n8e8yjofe"]
 
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_knoqw"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="3_bdwe5"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://kfhncm4xxwur" path="res://Code/Interactive/Items/ModularItemTemplate.cs" id="30_c1wlf"]
 [ext_resource type="Resource" uid="uid://cvob48mb3vhjv" path="res://Resources/Items/ModularParts/Blade_Sword_Iron_Broken.tres" id="31_8x4g5"]
 [ext_resource type="PackedScene" uid="uid://cgbg8jjt6swx6" path="res://Entities/Interactive/Stations/ForgeStation.tscn" id="31_uygh7"]
+[ext_resource type="PackedScene" uid="uid://u52yg5uejgs6" path="res://Entities/Interactive/Stations/Dispenser.tscn" id="33_uygh7"]
 
 [sub_resource type="Resource" id="Resource_8ep5l"]
 script = ExtResource("17_bwn0d")
@@ -303,6 +304,10 @@ rotation = -0.487748
 
 [node name="HostileNpcTimer" type="Timer" parent="Isometric/WorldMap/Entities/HostileNpcPath"]
 autostart = true
+
+[node name="Dispenser" parent="Isometric/WorldMap/Entities" instance=ExtResource("33_uygh7")]
+position = Vector2(-65.5, 165.5)
+ItemResource = ExtResource("12_nfpvg")
 
 [node name="BackgroundTile" type="TileMapLayer" parent="Isometric"]
 z_index = -4096
