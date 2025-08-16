@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using SoYouWANNAJam2025.Code.Interactive.Inventory;
+using SoYouWANNAJam2025.Code.Npc.Hostile;
 
 namespace SoYouWANNAJam2025.Code.Npc.Friendly;
 [Tool]
@@ -61,6 +62,7 @@ public partial class Npc : CharacterBody2D
     // Used for Npc the pathfinding 
     public override void _PhysicsProcess(double delta)
     {
+        
         // So that the editor does not run the code below it. 
         if(Engine.IsEditorHint()) return;
         if (_navAgent == null) return;
@@ -68,9 +70,10 @@ public partial class Npc : CharacterBody2D
         if (_navAgent.IsNavigationFinished())
         {
             State = "idle";
-            return;
+            if (Target is not HostileNpc) return;
         }
         if (Target == null) return;
+        State = "walk";
         
         // Get pathfinding information
         var currentAgentPosition = GetGlobalPosition();
