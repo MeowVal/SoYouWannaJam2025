@@ -1,5 +1,7 @@
+using System;
+using System.Collections.Generic;
 using Godot;
-using Godot.Collections;
+
 using SoYouWANNAJam2025.Code.Interactive.Inventory;
 using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Npc;
@@ -32,22 +34,51 @@ public partial class GameManager : Node2D
 	private Node2D _npcSpawnLocation;
 	private Node2D _frontDesk;
 	private Area2D _leaveAreaNode;
-	private string _npcResourceFolderPath = "res://Resources/Npcs/Friendly/";
-	private string _hostileNpcResourceFolderPath = "res://Resources/Npcs/Hostile/";
-	private string _modularItemFolderPath = "res://Resources/Items/ModularItems/";
-	private PackedScene _genericItemScene;
-	private PathFollow2D _hostileNpcSpawnLocation; 
+	private const string NpcResourceFolderPath = "res://Resources/Npcs/Friendly/";
+	private const string HostileNpcResourceFolderPath = "res://Resources/Npcs/Hostile/";
+	private const string ModularItemFolderPath = "res://Resources/Items/ModularItems/";
+	private const string ModularPartsFolderPath = "res://Resources/Items/ModularParts/";
+	private PackedScene _modularItemScene;
+	private PathFollow2D _hostileNpcSpawnLocation;
+	
+	public Dictionary<EModularItemType, Dictionary<EPartType, Godot.Collections.Array<ModularPartTemplate>>> ModularParts = new();
 	
 	public override void _Ready()
 	{
-		DirContents(_npcResourceFolderPath);
-		DirContents(_modularItemFolderPath);
-		DirContents(_hostileNpcResourceFolderPath);
+		string[] paths = [NpcResourceFolderPath, HostileNpcResourceFolderPath, ModularItemFolderPath, ModularPartsFolderPath];
+		foreach (var path in paths)
+		{
+			TraverseDirectory(path,
+				file => {
+					var resource = ResourceLoader.Load(file);
+					if (resource == null) return;
+					switch (path)
+					{
+						case NpcResourceFolderPath:
+							if (resource is NpcResource npcResource) NpcResources.Add(npcResource);
+							break;
+						case HostileNpcResourceFolderPath:
+							if (resource is NpcResource hostileNpcResource) HostileNpcResources.Add(hostileNpcResource);
+							break;
+						case ModularItemFolderPath:
+							if (resource is ModularItemTemplate item) ModularItemResources.Add(item);
+							break;
+						case ModularPartsFolderPath:
+							if (resource is not ModularPartTemplate part) break;
+							if (!ModularParts.ContainsKey(part.ModularItemType)) ModularParts[part.ModularItemType] = [];
+							if (!ModularParts[part.ModularItemType].ContainsKey(part.PartType)) ModularParts[part.ModularItemType][part.PartType] = [];
+							ModularParts[part.ModularItemType][part.PartType].Add(part);
+							break;
+					}
+				}
+			);
+		}
+		
 		GD.Print(ModularItemResources);
 		_npcSpawnLocation = (Node2D)FindChild("NpcArrivalArea");
 		_frontDesk  = (Node2D)FindChild("FrontDesk");
 		_leaveAreaNode = (Area2D)FindChild("LeaveArea");
-		_genericItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
+		_modularItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/ModularItem.tscn");
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 		_hostileNpcSpawnLocation = (PathFollow2D)FindChild("HostileNpcSpawnLocations");
 		
@@ -59,6 +90,54 @@ public partial class GameManager : Node2D
 		CycleLantern.CycleLantern += LanternChanged;
 
 		Global.GameDay = 0;
+	}
+
+	public ModularItem NewItem(EModularItemType itemType)
+	{
+		if (_modularItemScene==null || ModularParts[itemType].Count == 0 ) return null;
+		
+		var itemTemplate = new ModularItemTemplate();
+		itemTemplate.DefaultParts = [];
+		
+		switch (itemType)
+		{
+			case EModularItemType.Sword:
+				itemTemplate.DefaultParts[EPartType.Grip] = null;
+				itemTemplate.DefaultParts[EPartType.Pummel] = _getPartTemplate(itemType, EPartType.Pummel);
+				itemTemplate.DefaultParts[EPartType.Grip] = _getPartTemplate(itemType, EPartType.Grip);
+				itemTemplate.DefaultParts[EPartType.Crossguard] =_getPartTemplate(itemType, EPartType.Crossguard);
+				itemTemplate.DefaultParts[EPartType.Blade] = _getPartTemplate(itemType, EPartType.Blade);
+				break;
+			case EModularItemType.Spear:
+				itemTemplate.DefaultParts[EPartType.Pole] = _getPartTemplate(itemType, EPartType.Pole);
+				itemTemplate.DefaultParts[EPartType.Blade] = _getPartTemplate(itemType, EPartType.Blade);
+				break;
+			case EModularItemType.Shield:
+				break;
+			case EModularItemType.Helmet:
+				break;
+			case EModularItemType.Chestplate:
+				break;
+			case EModularItemType.Staff:
+				break;
+			case EModularItemType.Cloak:
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(itemType), itemType, null);
+		}
+		//newItem.DrawSprite();
+		GD.Print("NEW ITEM");
+		var newItem = _modularItemScene.Instantiate<ModularItem>();
+		newItem.ItemResource = itemTemplate;
+		newItem.ModularItemType = itemType;
+		return newItem;
+	}
+
+	private ModularPartTemplate _getPartTemplate(EModularItemType itemType, EPartType partType)
+	{
+		if (ModularParts[itemType].Count == 0 || ModularParts[itemType][partType].Count == 0) return null;
+		
+		return ModularParts[itemType][partType][GD.RandRange(0, ModularParts[itemType][partType].Count - 1)];
 	}
 
 	private void OnNpcLeft(Npc.Friendly.Npc npc)
@@ -77,126 +156,19 @@ public partial class GameManager : Node2D
 			GD.Print("AWW IT'S NIGHT TIME !");
 		}
 	}
-	
-	public void DirContents(string path)
-	{
-		if (path == _npcResourceFolderPath)
-		{
-			using var dir = DirAccess.Open(path);
-			if (dir != null)
-			{
-				dir.ListDirBegin();
-				string fileName = dir.GetNext();
-				while (fileName != "")
-				{
-					if (dir.CurrentIsDir())
-					{
-						GD.Print($"Found directory: {fileName}");
-					}
-					else
-					{
-						var resource = ResourceLoader.Load<NpcResource>(path+fileName);
-						if (resource != null)
-						{
-							NpcResources.Add(resource);
-						}
-						else 
-						{
-							GD.Print("Resource not found at path: "+path+fileName);
-						}
-					}
-					fileName = dir.GetNext();
-				}
-			}
-			else
-			{
-				GD.Print("An error occurred when trying to access the path.");
-			}
-		} else if (path == _modularItemFolderPath)
-		{
-			using var dir = DirAccess.Open(path);
-			if (dir != null)
-			{
-				dir.ListDirBegin();
-				string fileName = dir.GetNext();
-				while (fileName != "")
-				{
-					if (dir.CurrentIsDir())
-					{
-						GD.Print($"Found directory: {fileName}");
-					}
-					else
-					{
-						var resource = ResourceLoader.Load<ModularItemTemplate>(path+fileName);
-						if (resource != null)
-						{
-							ModularItemResources.Add(resource);
-						}
-						else 
-						{
-							GD.Print("Resource not found at path: "+path+fileName);
-						}
-					}
-					fileName = dir.GetNext();
-				}
-			}
-			else
-			{
-				GD.Print("An error occurred when trying to access the path.");
-			}
-		}else if (path == _hostileNpcResourceFolderPath)
-		{
-			using var dir = DirAccess.Open(path);
-			if (dir != null)
-			{
-				dir.ListDirBegin();
-				string fileName = dir.GetNext();
-				while (fileName != "")
-				{
-					if (dir.CurrentIsDir())
-					{
-						GD.Print($"Found directory: {fileName}");
-					}
-					else
-					{
-						var resource = ResourceLoader.Load<NpcResource>(path+fileName);
-						if (resource != null)
-						{
-							HostileNpcResources.Add(resource);
-						}
-						else 
-						{
-							GD.Print("Resource not found at path: "+path+fileName);
-						}
-					}
-					fileName = dir.GetNext();
-				}
-			}
-			else
-			{
-				GD.Print("An error occurred when trying to access the path.");
-			}
-		}
-		
-	}
 
 	private void OnNpcTimerTimeout()
 	{
 		//GD.Print("NPC count = "+_npcs.Count);
-		var newItem = _genericItemScene.Instantiate<GenericItem>();
-		GetNode("/root/GameManager/Isometric").AddChild(newItem);
-		if (ModularItemResources != null)
-		{
-			newItem.ItemResource = ModularItemResources[GD.RandRange(0, NpcResources.Count - 1)];
-		}
-		
 		Npc.Friendly.Npc npc = NpcScene.Instantiate<Npc.Friendly.Npc>();
 		NpcSpawning(npc);
-		// Add outputs to inventory
-		if (newItem.ItemResource == null) return;
-		npc.NpcInventory.PickupItem(newItem, true);
-		GD.Print($"- {newItem.ItemResource.DisplayName}");
 
+		EModularItemType[] itemTypes = [EModularItemType.Sword, EModularItemType.Spear]; 
+		var newItem = NewItem(itemTypes[GD.RandRange(0, itemTypes.Length - 1)]);
+		Global.Grid.AddChild(newItem);
+		if (newItem.ItemResource == null) return;
+		newItem.OwningNpc = npc;
+		npc.NpcInventory.PickupItem(newItem, true);
 	}
 	private void OnHostileNpcTimerTimeout()
 	{
@@ -214,28 +186,33 @@ public partial class GameManager : Node2D
 			if (_hostileNpc.Count >= NpcMaxCount) return;
 			npc.NpcResource = HostileNpcResources[GD.RandRange(0,HostileNpcResources.Count -1)];
 			_hostileNpcSpawnLocation.ProgressRatio = GD.Randf();
-			npc.Position = _hostileNpcSpawnLocation.Position;
+			npc.Position = _hostileNpcSpawnLocation.Position * 4;
 			npc.Scale = Vector2.One * 4;
 			_hostileNpc.Add(npc);
 			AddChild(npc);
+			
 		}
 		else if  (npc is Npc.Friendly.Npc)
 		{
 			if (_npcs.Count >= NpcMaxCount)return;
 			npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
-			npc.Position = _npcSpawnLocation.Position;
+			npc.Position = _npcSpawnLocation.Position * 4 ;
 			npc.Scale = Vector2.One * 4;
 			npc.Target = _frontDesk;
 			npc.LeaveAreaNode = _leaveAreaNode;
 			_npcs.Add(npc);
 			AddChild(npc);
+			var npcInteractor = (NpcInteractor)npc.FindChild("NpcInteractor");
+			npcInteractor.RequestComplete += OnRequestComplete;
 		}
 		
 	}
 
-	
-	
-	// Called when the node enters the scene tree for the first time.
+	private void OnRequestComplete(Npc.Friendly.Npc npc)
+	{
+		var hostileTarget = _hostileNpc[GD.RandRange(0, _hostileNpc.Count - 1)];
+		npc.Target = hostileTarget;
+	}
 	
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -243,6 +220,41 @@ public partial class GameManager : Node2D
 	{
 	}
 	
-	
+	public static void TraverseDirectory(string rootPath, Action<string> fileAction)
+	{
+		var dirStack = new Stack<string>();
+		dirStack.Push(rootPath);
+
+		while (dirStack.Count > 0)
+		{
+			var currentPath = dirStack.Pop();
+
+			using var dir = DirAccess.Open(currentPath);
+			if (dir == null) continue;
+        
+			dir.ListDirBegin();
+			var fileName = dir.GetNext();
+			while (fileName != "")
+			{
+				var fullPath = System.IO.Path.Combine(currentPath, fileName);
+
+				if (dir.CurrentIsDir())
+				{
+					if (fileName != "." && fileName != "..")
+					{
+						dirStack.Push(fullPath);
+					}
+				}
+				else
+				{
+					fileAction?.Invoke(fullPath);
+				}
+
+				fileName = dir.GetNext();
+			}
+			dir.ListDirEnd();
+		}
+        
+	}
 	
 }

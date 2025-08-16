@@ -1,4 +1,6 @@
-[gd_resource type="TileSet" load_steps=18 format=3 uid="uid://do0rvbtxajtoo"]
+
+[gd_resource type="TileSet" load_steps=16 format=3 uid="uid://u8qkhniw6s8u"]
+
 
 [ext_resource type="Texture2D" uid="uid://35681p253s3" path="res://Assets/Sprites/Environment/WoodFrame.png" id="1_i5efm"]
 [ext_resource type="Texture2D" uid="uid://vhpvoumgnu1q" path="res://Assets/Sprites/Environment/WoodTable.png" id="2_u7u2v"]

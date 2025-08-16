@@ -183,7 +183,11 @@ public partial class CraftingStation : Interactible
                     }
                     else if (Inventory.HasSpace() && npcInteractor.Inventory.HasItem())
                     {
-                        npcInteractor.Inventory.TransferTo(Inventory);
+                        foreach (var slot in Inventory.Slots)
+                        {
+                            if (slot.Item is ModularItem) return;
+                            npcInteractor.Inventory.TransferTo(Inventory); 
+                        }
                     }
 
                     break;

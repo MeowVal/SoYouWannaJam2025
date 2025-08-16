@@ -13,10 +13,10 @@ public partial class InspectionStation : Interactible
 
     private Node2D _interactionInterface;
     private Node2D _interfaceLocation;
-    private ProgressBar _researchBar;
-    private Timer _researchTimer;
+    private ProgressBar _progressBar;
+    private Timer _progressTimer;
 
-    private bool _isResearching = false;
+    private bool _isInspecting = false;
     private bool _showUi = true;
     
     public override void _Ready()
@@ -34,19 +34,19 @@ public partial class InspectionStation : Interactible
     {
         base._Process(delta);
         
-        if (_interactionInterface == null || !_isResearching) return;
-        _researchBar.Value = 1 - (_researchTimer.TimeLeft / _researchTimer.WaitTime);
+        if (_interactionInterface == null || !_isInspecting) return;
+        _progressBar.Value = 1 - (_progressTimer.TimeLeft / _progressTimer.WaitTime);
     }
 
     public void ResearchBegin()
     {
-        CreateUiScene("res://Scenes/UI/Interactions/ResearchUITimer.tscn");
-        _isResearching = true;
+        CreateUiScene("res://Scenes/UI/Interactions/InspectionUITimer.tscn");
+        _isInspecting = true;
         
-        _researchBar = _interactionInterface.GetNode<ProgressBar>("Control/MarginContainer/VBoxContainer/ProgressBar");
-        _researchTimer = _interactionInterface.GetNode<Timer>("ResearchTimer");
-        _researchTimer.Timeout += ResearchComplete;
-        _researchTimer.Start(5);
+        _progressBar = _interactionInterface.GetNode<ProgressBar>("Control/MarginContainer/VBoxContainer/ProgressBar");
+        _progressTimer = _interactionInterface.GetNode<Timer>("Timer");
+        _progressTimer.Timeout += ProgressComplete;
+        _progressTimer.Start(5);
         var label = _interactionInterface.GetNode<Label>("Control/MarginContainer/VBoxContainer/ItemName");
         label.Text = Inventory.Item.ItemResource.DisplayName;
     }
@@ -54,20 +54,20 @@ public partial class InspectionStation : Interactible
     public void ResearchAbort()
     {
         if (_interactionInterface != null) _interactionInterface!.QueueFree();
-        _isResearching = false;
+        _isInspecting = false;
         _interactionInterface = null;
-        _researchTimer = null;
-        _researchBar = null;
+        _progressTimer = null;
+        _progressBar = null;
     }
 
-    public void ResearchComplete()
+    public void ProgressComplete()
     {
         if (_interactionInterface != null) _interactionInterface!.QueueFree();
-        _isResearching = false;
-        _researchTimer = null;
-        _researchBar = null;
+        _isInspecting = false;
+        _progressTimer = null;
+        _progressBar = null;
 
-        CreateUiScene("res://Scenes/UI/Interactions/ResearchUI.tscn");
+        CreateUiScene("res://Scenes/UI/Interactions/InspectionUI.tscn");
         if (_interactionInterface == null || !Inventory.HasItem()) return;
         
         _interactionInterface.SetVisible(_showUi);
@@ -139,7 +139,7 @@ public partial class InspectionStation : Interactible
         GD.Print("ENTER");
         if (node is not PlayerInteractor) return;
         _showUi = true;
-        if (!(_isResearching || _interactionInterface == null)) _interactionInterface.Show();
+        if (!(_isInspecting || _interactionInterface == null)) _interactionInterface.Show();
     }
     
     private void OnInteractableExited(Node2D node)
@@ -147,7 +147,7 @@ public partial class InspectionStation : Interactible
         GD.Print("Exit");
         if (node is not PlayerInteractor) return;
         _showUi = false;
-        if (!(_isResearching || _interactionInterface == null)) _interactionInterface.Hide();
+        if (!(_isInspecting || _interactionInterface == null)) _interactionInterface.Hide();
     }
     
 }

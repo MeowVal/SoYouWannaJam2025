@@ -20,6 +20,13 @@ public enum EPartType
     Hood
 }
 
+public enum EPartState
+{
+    New,
+    Used,
+    Broken
+}
+
 public enum EModularItemType
 {
     Sword,
@@ -44,7 +51,8 @@ public enum EUseType
 [Tool] [GlobalClass]
 public partial class ModularItem : GenericItem
 {
-    // Defines what slots this item will have to use
+    [Export]
+    public EModularItemType ModularItemType;
     public Dictionary<EPartType, ModularPartTemplate> Parts = [];
     public Npc.Friendly.Npc OwningNpc = null;
 
@@ -61,7 +69,7 @@ public partial class ModularItem : GenericItem
             Parts.Add(pair.Key, newItem);
             GD.Print($"Added {newItem!.DisplayName} to slot {pair.Key}.");
         }
-
+        GD.Print("MODULAR ITEM CONSTRUCTED.");
         DrawSprite();
     }
 

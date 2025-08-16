@@ -7,6 +7,7 @@
 script = ExtResource("2_ci7jl")
 PartType = 0
 ModularItemType = 1
+PartState = 0
 DisplayName = "Iron Spear Blade"
 Description = "The blade for a spear, cast of pure Iron."
 Textures = Array[Texture2D]([ExtResource("1_5cycn")])

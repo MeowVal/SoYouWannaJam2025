@@ -1,10 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bn7d21rek2i16"]
+[gd_scene load_steps=8 format=3 uid="uid://bn7d21rek2i16"]
 
 [ext_resource type="Shader" uid="uid://csfutv5akp6wn" path="res://Resources/Shaders/LightRays.gdshader" id="1_w0clr"]
-[ext_resource type="Shader" uid="uid://byllmanhkvi37" path="res://Resources/Shaders/ShadowHeightmap.gdshader" id="2_681ev"]
 [ext_resource type="Shader" uid="uid://cw8gvojcw7vhn" path="res://Resources/Shaders/Shadows.gdshader" id="2_j6v2i"]
-[ext_resource type="Texture2D" uid="uid://wliv5mb6jxmc" path="res://Assets/Generated Assets/Output/generated_heightmap.png" id="5_mclv5"]
-[ext_resource type="Texture2D" uid="uid://dgfmt7im27h8f" path="res://Assets/Generated Assets/Output/indoor_mask.png" id="6_1f0t0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7sysf"]
 shader = ExtResource("1_w0clr")
@@ -26,18 +23,6 @@ shader = ExtResource("2_j6v2i")
 shader_parameter/shadow_color = Color(0.108, 0.108, 0.108, 0.9)
 shader_parameter/shadow_angle = 263.5
 shader_parameter/shadow_length = 163.5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qx3ta"]
-shader = ExtResource("2_681ev")
-shader_parameter/height_map = ExtResource("5_mclv5")
-shader_parameter/xy_angle = -2.325
-shader_parameter/z_angle = 0.0
-shader_parameter/max_shadow_steps = 100
-shader_parameter/tex_step = -0.478
-shader_parameter/indoor_mask = ExtResource("6_1f0t0")
-shader_parameter/tile_size = Vector2(32, 16)
-shader_parameter/map_offset = Vector2(35.33, 19.93)
-shader_parameter/map_pixel_size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_ieyhc"]
 resource_name = "DayNightCycle"
@@ -178,30 +163,35 @@ _data = {
 
 [node name="LightRays" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_7sysf")
-offset_left = -2555.75
-offset_top = -1069.5
-offset_right = 43.25
-offset_bottom = 274.5
-scale = Vector2(2.08094, 2.05174)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(1, 1, 1, 0)
 metadata/_edit_use_anchors_ = true
 
 [node name="ShadowCaster" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_e8nqc")
-offset_left = -2553.25
-offset_top = -1071.25
-offset_right = 45.75
-offset_bottom = 272.75
-scale = Vector2(2.08094, 2.05174)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(1, 1, 1, 0)
 metadata/_edit_use_anchors_ = true
-
-[node name="ShadowCasterPoly" type="Polygon2D" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_qx3ta")
-scale = Vector2(1, 0.975)
-color = Color(1, 1, 1, 0)
-polygon = PackedVector2Array(2782.72, 220.228, 304.956, -1051.74, -2525.92, 401.35, -48.1509, 1673.32)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CanvasModulate")

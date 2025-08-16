@@ -1,6 +1,8 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Interactive.Inventory;
+using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using BaseRecipe = SoYouWANNAJam2025.Code.Interactive.Stations.BaseRecipe;
 
@@ -14,7 +16,18 @@ public partial class NpcInteractor : Interactible
     private Friendly.Npc _npc;
     [Signal]
     public delegate void NpcLeftEventHandler(Npc npc);
+    [Signal]
+    public delegate void ModularItemRepairRequestEventHandler(EPartType partType, ModularPartTemplate  part);
+    [Signal]
+    public delegate void ModularItemUpgradeRequestEventHandler(EPartType partType, ModularPartTemplate  part);
+    [Signal]
+    public delegate void RequestGivenEventHandler();
+    [Signal]
+    public delegate void RequestCompleteEventHandler(Npc npc);
 
+    //private Godot.Collections.Array _itemParts = [];
+    private EPartType _modularItemPartKey;
+    private ModularPartTemplate _modularItemPart;
     //public Interactive.Inventory.InventorySlot InventorySlot = null;
     //public Interactive.Inventory.InventorySlot InventorySlot;
     public Inventory Inventory;
@@ -22,6 +35,8 @@ public partial class NpcInteractor : Interactible
     //public Timer RecipeTimer;
     private Player.CharacterControl _player;
     //private CraftingStationInterface _interactionInterface;
+    private bool _requestGiven = false;
+    private bool _requestComplete = false;
     private Node2D _interfaceLocation;
     [Export] public Array<BaseRecipe> Recipes = [];
     public override void _Ready()
@@ -36,8 +51,22 @@ public partial class NpcInteractor : Interactible
         Interact += OnInteractMethod;
         BodyEntered += OnInteractableEntered;
         AreaEntered += OnInteractableEntered;
+        RequestGiven += OnRequestGiven;
+        RequestComplete += OnRequestComplete;
         
     }
+
+    private void OnRequestComplete(Npc npc)
+    {
+        _npc.MoodTimer.Stop();
+    }
+
+    private void OnRequestGiven()
+    {
+        _npc.Mood = 100;
+        _npc.MoodTimer.Start();
+    }
+
     private void OnInteractableEntered(Node2D unknownTarget)
     {
         if (unknownTarget is not CraftingStation target)
@@ -68,6 +97,11 @@ public partial class NpcInteractor : Interactible
                 }
                 else if (Inventory.HasSpace() && interactor.InventorySlot.HasItem())
                 {
+                    if (_requestGiven && interactor.InventorySlot.Item is ModularItem item )
+                    {
+                        if (item.Parts[_modularItemPartKey] != _modularItemPart) EmitSignal(SignalName.RequestComplete);
+                        else return;
+                    }
                     interactor.InventorySlot.TransferTo(Inventory);
                 }
                 break;
@@ -79,6 +113,32 @@ public partial class NpcInteractor : Interactible
 
     private void AttemptGiveRequest()
     {
+        if (_requestGiven) return;
+        foreach (var slot in Inventory.Slots)
+        {
+            if (!slot.HasItem()) continue;
+            if (slot.Item is ModularItem item)
+            {
+                foreach (var (partType, part) in item.Parts)
+                {
+                    if (part.PartState != EPartState.Broken) continue;
+                    EmitSignal(SignalName.ModularItemRepairRequest, (int)partType, part);
+                    EmitSignal(SignalName.RequestGiven);
+                    _modularItemPartKey = partType;
+                    _modularItemPart = part;
+                    return;
+                }
+                var keyList = item.Parts.Keys.ToList();
+                var index = GD.RandRange(0,keyList.Count -1);
+                var partKey = (EPartType)(int)keyList[index];
+                var itemPart = item.Parts[partKey];
+                EmitSignal(SignalName.ModularItemUpgradeRequest, (int)partKey, itemPart);
+                EmitSignal(SignalName.RequestGiven);
+                _modularItemPartKey = partKey;
+                _modularItemPart = itemPart;
+                return;
+            };
+        }
         GD.Print("Attempting give request... to be implemented");
     }
   
