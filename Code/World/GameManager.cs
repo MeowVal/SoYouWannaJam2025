@@ -181,7 +181,7 @@ public partial class GameManager : Node2D
 	private void OnNpcTimerTimeout()
 	{
 		//GD.Print("NPC count = "+_npcs.Count);
-		var newItem = _modularItemScene.Instantiate<GenericItem>();
+		var newItem = _modularItemScene.Instantiate<ModularItem>();
 		if (ModularItemResources != null)
 		{
 			newItem.ItemResource = ModularItemResources[GD.RandRange(0, NpcResources.Count - 1)];
@@ -193,6 +193,7 @@ public partial class GameManager : Node2D
 		NpcSpawning(npc);
 		// Add outputs to inventory
 		if (newItem.ItemResource == null) return;
+		newItem.OwningNpc = npc;
 		npc.NpcInventory.PickupItem(newItem, true);
 	}
 	private void OnHostileNpcTimerTimeout()
