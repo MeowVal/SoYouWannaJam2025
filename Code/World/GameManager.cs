@@ -215,7 +215,6 @@ public partial class GameManager : Node2D
 			npc.Scale = Vector2.One * 4;
 			_hostileNpc.Add(npc);
 			AddChild(npc);
-			
 		}
 		else if  (npc is Npc.Friendly.Npc)
 		{
@@ -227,16 +226,8 @@ public partial class GameManager : Node2D
 			npc.LeaveAreaNode = _leaveAreaNode;
 			_npcs.Add(npc);
 			AddChild(npc);
-			var npcInteractor = (NpcInteractor)npc.FindChild("NpcInteractor");
-			npcInteractor.RequestComplete += OnRequestComplete;
 		}
 		
-	}
-
-	private void OnRequestComplete(Npc.Friendly.Npc npc)
-	{
-		var hostileTarget = _hostileNpc[GD.RandRange(0, _hostileNpc.Count - 1)];
-		npc.Target = hostileTarget;
 	}
 
 	
