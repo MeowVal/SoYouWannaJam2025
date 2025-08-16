@@ -24,16 +24,16 @@ AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="CrateInner" type="Sprite2D" parent="."]
-position = Vector2(0, 9)
+y_sort_enabled = true
 texture = ExtResource("3_0x217")
-offset = Vector2(0, -9)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 9)
 texture = ExtResource("4_j86b2")
-offset = Vector2(0, -17)
+offset = Vector2(0, -6)
 
 [node name="CrateOuter" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
 position = Vector2(-16, 9)
 texture = ExtResource("5_eqxl1")
 offset = Vector2(8, -9)
@@ -41,11 +41,18 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 32)
 
 [node name="CrateOuter2" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(16, 9)
 texture = ExtResource("5_eqxl1")
 offset = Vector2(-8, -9)
 region_enabled = true
 region_rect = Rect2(16, 0, 16, 32)
+
+[node name="OuterSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 16)
+texture = ExtResource("5_eqxl1")
+offset = Vector2(0, -16)
 
 [node name="CollisionBarrier" type="StaticBody2D" parent="."]
 

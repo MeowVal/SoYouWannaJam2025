@@ -13,13 +13,15 @@ public partial class Global : Node2D
     public static int GameDay;
     public static CharacterControl Player;
     public static TileMapLayer Grid;
+    public static GameManager GameManager;
 
     public override void _Ready()
     {
         base._Ready();
         Grid = GetNode<TileMapLayer>("/root/GameManager/GameWorld/Entities");
-        AddUserSignal("DebugConsole");
+        GameManager = GetNode<GameManager>("/root/GameManager");
+        /*AddUserSignal("DebugConsole");
 
-        EmitSignal("DebugConsole", "Dave is an AoE2 Priest");
+        EmitSignal("DebugConsole", "Dave is an AoE2 Priest");*/
     }
 }

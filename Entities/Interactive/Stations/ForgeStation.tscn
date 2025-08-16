@@ -65,6 +65,21 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="Animation" id="Animation_1p836"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
 [sub_resource type="Animation" id="Animation_dqlfn"]
 resource_name = "glow"
 loop_mode = 1
@@ -81,21 +96,6 @@ tracks/0/keys = {
 "values": [1.0, 2.0, 0.8, 1.0]
 }
 
-[sub_resource type="Animation" id="Animation_1p836"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rkhvh"]
 _data = {
 &"RESET": SubResource("Animation_1p836"),
@@ -105,6 +105,7 @@ _data = {
 [node name="ForgeStation" type="Area2D"]
 y_sort_enabled = true
 script = ExtResource("1_cg3bl")
+AutoCraft = true
 Recipes = Array[ExtResource("2_1ijhs")]([ExtResource("3_l3fy7"), ExtResource("4_1ijhs"), ExtResource("5_g4254"), ExtResource("6_lrg27"), ExtResource("7_skwst"), ExtResource("8_wai8b")])
 
 [node name="Top" type="Sprite2D" parent="."]
@@ -155,6 +156,7 @@ scale = Vector2(0.286377, 0.360491)
 polygon = PackedVector2Array(-108.396, 132.624, -331.877, 41.082, -331.877, 16.116, -108.396, 104.884)
 
 [node name="Inventory" type="Node2D" parent="."]
+z_index = 10
 script = ExtResource("6_skwst")
 metadata/_custom_type_script = "uid://usn4a73qqvca"
 

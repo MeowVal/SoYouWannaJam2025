@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://cgodai2grhqmd"]
 
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_hmo3j"]
-[ext_resource type="Resource" uid="uid://bscvyej1mrkqt" path="res://Resources/Items/ModularParts/Blade/Blade_Sword_Iron.tres" id="2_y0y1r"]
+[ext_resource type="Resource" uid="uid://bscvyej1mrkqt" path="res://Resources/Items/ModularParts/Sword/Blade/New_Sword_Blade_Iron.tres" id="2_y0y1r"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="3_11iel"]
 
 [resource]

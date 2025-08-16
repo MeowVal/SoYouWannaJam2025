@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://d3uv5yp8mbndl"]
+
+[ext_resource type="Texture2D" uid="uid://b4jbdku4d2ttt" path="res://Assets/Sprites/ModularParts/Blade_Spear_Voulge.png" id="1_b0vrb"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_bjwfi"]
+
+[resource]
+script = ExtResource("2_bjwfi")
+PartType = 0
+ModularItemType = 1
+PartState = 0
+DisplayName = "Spear Gold Voulge Blade"
+Description = "The blade for a spear, cast of pure Iron."
+Textures = Array[Texture2D]([ExtResource("1_b0vrb")])
+Colours = Array[Color]([Color(1, 0.796078, 0.239216, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

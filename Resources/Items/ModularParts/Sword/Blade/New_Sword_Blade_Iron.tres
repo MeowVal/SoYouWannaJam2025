@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://bscvyej1mrkqt"]
+
+[ext_resource type="Texture2D" uid="uid://bnc4s6trjboii" path="res://Assets/Sprites/ModularParts/Blade_Sword.png" id="1_1y668"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_ic4rc"]
+
+[resource]
+script = ExtResource("2_ic4rc")
+PartType = 0
+ModularItemType = 0
+PartState = 0
+DisplayName = "Sword Iron Blade"
+Description = "The blade for a broadsword, cast of pure Iron."
+Textures = Array[Texture2D]([ExtResource("1_1y668")])
+Colours = Array[Color]([Color(0.831373, 0.890196, 1, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

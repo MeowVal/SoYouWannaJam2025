@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://dgjp81eps42qk"]
+
+[ext_resource type="Texture2D" uid="uid://cvqij82h50bsf" path="res://Assets/Sprites/ModularParts/Trim_Armour.png" id="1_m3hkr"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_23q3p"]
+
+[resource]
+script = ExtResource("2_23q3p")
+PartType = 8
+ModularItemType = 4
+PartState = 0
+DisplayName = "Chestplate Gold Trim"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_m3hkr")])
+Colours = Array[Color]([Color(1, 0.796078, 0.239216, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

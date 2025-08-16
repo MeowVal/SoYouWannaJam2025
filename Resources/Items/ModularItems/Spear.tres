@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ModularItemTemplate" load_steps=5 format=3 uid="uid://w0hkihpkymns"]
 
-[ext_resource type="Resource" uid="uid://ds4n06wlxsyvo" path="res://Resources/Items/ModularParts/Blade_Spear_Iron.tres" id="1_4xr64"]
-[ext_resource type="Resource" uid="uid://crjv5jcoy4r6w" path="res://Resources/Items/ModularParts/Pole_Spear_Wood.tres" id="2_wr5li"]
-[ext_resource type="Texture2D" uid="uid://dmbxc4ofgw13r" path="res://Assets/Sprites/Unknown.png" id="3_wr5li"]
+[ext_resource type="Resource" uid="uid://ds4n06wlxsyvo" path="res://Resources/Items/ModularParts/Spear/Blade/New_Spear_Blade_Iron.tres" id="1_4xr64"]
+[ext_resource type="Resource" uid="uid://crjv5jcoy4r6w" path="res://Resources/Items/ModularParts/Spear/Pole/New_Spear_Pole_Wood.tres" id="2_wr5li"]
+[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="3_wr5li"]
 [ext_resource type="Script" uid="uid://kfhncm4xxwur" path="res://Code/Interactive/Items/ModularItemTemplate.cs" id="5_5udfs"]
 
 [resource]

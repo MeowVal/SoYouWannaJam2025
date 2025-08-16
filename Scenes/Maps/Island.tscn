@@ -1,26 +1,21 @@
-[gd_scene load_steps=15 format=4 uid="uid://cyrhwfj2cgl1v"]
+[gd_scene load_steps=14 format=4 uid="uid://cyrhwfj2cgl1v"]
 
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/Lighting/lighting.tscn" id="1_1ur4q"]
-[ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_o66vd"]
-[ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_urjvg"]
+[ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_m78t2"]
+[ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/Environment/TileMap.tres" id="1_o66vd"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="2_pk6v5"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="3_d01xk"]
 [ext_resource type="PackedScene" uid="uid://cgbg8jjt6swx6" path="res://Entities/Interactive/Stations/ForgeStation.tscn" id="4_jqfss"]
-[ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="4_t8qcr"]
 [ext_resource type="PackedScene" uid="uid://b2owtq0jxh0n6" path="res://Entities/Interactive/Items/DayCycleLantern.tscn" id="5_qrjm0"]
 [ext_resource type="PackedScene" uid="uid://u52yg5uejgs6" path="res://Entities/Interactive/Stations/Dispenser.tscn" id="6_qrjm0"]
 [ext_resource type="Resource" uid="uid://mg6flu0e6ji5" path="res://Resources/Items/Resources/IronOre.tres" id="7_eix3d"]
 [ext_resource type="Resource" uid="uid://cx62c06xp6g8i" path="res://Resources/Items/Resources/GoldOre.tres" id="8_o8xj0"]
 [ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="9_jqfss"]
 [ext_resource type="PackedScene" uid="uid://cdr1tuqn030c4" path="res://Entities/Interactive/StorageCrate.tscn" id="10_noywq"]
-[ext_resource type="PackedScene" uid="uid://byawq00g275sg" path="res://Entities/NPC/Hostile/hostile_npc_path.tscn" id="13_tjnjo"]
+[ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="17_pyxrn"]
 
 [node name="GameManager" type="Node2D"]
-script = ExtResource("1_urjvg")
-
-[node name="NpcTimer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
+script = ExtResource("1_m78t2")
 
 [node name="GameWorld" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -41,7 +36,6 @@ tile_map_data = PackedByteArray("AADc//P/CAAHAAMAAADc//T/CAAHAAMAAADc//X/CAAHAAM
 tile_set = ExtResource("1_o66vd")
 x_draw_order_reversed = true
 collision_visibility_mode = 1
-script = ExtResource("4_t8qcr")
 
 [node name="Wall" type="TileMapLayer" parent="GameWorld"]
 y_sort_enabled = true
@@ -84,33 +78,25 @@ Lighting = NodePath("../../Lighting")
 CycleTime = 300.0
 
 [node name="Dispenser" parent="GameWorld/Entities" instance=ExtResource("6_qrjm0")]
-position = Vector2(1393.5, -79)
+position = Vector2(1392, -80)
 ItemResource = ExtResource("7_eix3d")
 
 [node name="Dispenser2" parent="GameWorld/Entities" instance=ExtResource("6_qrjm0")]
-position = Vector2(1361.5, -63)
+position = Vector2(1360, -64)
 ItemResource = ExtResource("8_o8xj0")
 
 [node name="Dispenser3" parent="GameWorld/Entities" instance=ExtResource("6_qrjm0")]
-position = Vector2(1328.5, -47)
+position = Vector2(1328, -48)
 ItemResource = ExtResource("9_jqfss")
 
-[node name="StorageCrate" parent="GameWorld/Entities" instance=ExtResource("10_noywq")]
-position = Vector2(1392, -48)
+[node name="StorageCounter" parent="GameWorld/Entities" instance=ExtResource("10_noywq")]
+position = Vector2(1424, -64)
 
-[node name="NpcArrivalArea" type="Node2D" parent="GameWorld/Entities"]
-position = Vector2(834.5, 326)
-
-[node name="FrontDesk" type="Node2D" parent="GameWorld/Entities"]
-position = Vector2(1456.25, 105.75)
-
-[node name="HostileNpcPath" parent="GameWorld/Entities" instance=ExtResource("13_tjnjo")]
-position = Vector2(-1079.75, -1134)
+[node name="AnvilStation" parent="GameWorld/Entities" instance=ExtResource("17_pyxrn")]
+position = Vector2(1520, 48)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("3_d01xk")
 FollowingNode = NodePath("../GameWorld/Entities/Character")
-
-[connection signal="timeout" from="NpcTimer" to="." method="OnNpcTimerTimeout"]
 
 [editable path="GameWorld/Lighting"]

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://bs0qg0ly8kkku"]
+
+[ext_resource type="Texture2D" uid="uid://w3e2hu3aueur" path="res://Assets/Sprites/ModularParts/Plating_Armour.png" id="1_lphjj"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_5b0sl"]
+
+[resource]
+script = ExtResource("2_5b0sl")
+PartType = 6
+ModularItemType = 4
+PartState = 0
+DisplayName = "Chestplate Mythril Plate"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_lphjj")])
+Colours = Array[Color]([Color(0.552941, 1, 0.835294, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

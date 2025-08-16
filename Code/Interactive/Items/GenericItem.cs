@@ -36,11 +36,10 @@ public partial class GenericItem : Interactible
 
     public override void _Ready()
     {
-        Sprite = GetNode<Sprite2D>("Sprite2D");
+        DrawSprite();
         if (Engine.IsEditorHint()) return;
         base._Ready();
         Interact += OnInteractMethod;
-        DrawSprite();
     }
 
     private void OnInteractMethod(Node2D node, TriggerType trigger)
@@ -54,8 +53,9 @@ public partial class GenericItem : Interactible
 
     public virtual void DrawSprite()
     {
-        var image = _itemTemplate.GetItemImage();
-        if (image == null) return;
-        Sprite.Texture = ImageTexture.CreateFromImage(_itemTemplate.GetItemImage());
+        if (Sprite == null) Sprite = GetNode<Sprite2D>("Sprite2D");
+        var img = _itemTemplate.GetItemImage();
+        if (img == null || Sprite == null) return;
+        Sprite.Texture = ImageTexture.CreateFromImage(img);
     }
 }
