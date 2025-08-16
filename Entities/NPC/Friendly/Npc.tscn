@@ -1,9 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://hxf0gtf3x5pb"]
+[gd_scene load_steps=20 format=3 uid="uid://hxf0gtf3x5pb"]
 
 [ext_resource type="Script" uid="uid://b4ntrd6icymju" path="res://Code/Npc/Friendly/Npc.cs" id="1_623a7"]
-[ext_resource type="Texture2D" uid="uid://b5g8dj2bpwsm2" path="res://Assets/Sprites/characters/Shadow/Shadow.png" id="2_623a7"]
 [ext_resource type="Resource" uid="uid://chl1fym108awa" path="res://Resources/Npcs/Friendly/Npc01.tres" id="2_jvg37"]
-[ext_resource type="Texture2D" uid="uid://hv2l2ttcyiwa" path="res://Assets/Sprites/characters/Humanoids/HumanGeneric1.png" id="4_2i02p"]
+[ext_resource type="Texture2D" uid="uid://cpnflp3gsnfbf" path="res://Assets/Sprites/Mobs/HumanGeneric1.png" id="4_i3ytn"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_mrx7r"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_2i02p"]
 [ext_resource type="Script" uid="uid://bbqx7jgoyn746" path="res://Code/Npc/Friendly/NpcInteractor.cs" id="6_c6mha"]
@@ -178,15 +177,10 @@ NpcResource = ExtResource("2_jvg37")
 script = ExtResource("6_c6mha")
 
 [node name="Sprite2D" type="Sprite2D" parent="NpcInteractor"]
-texture = ExtResource("4_2i02p")
+texture = ExtResource("4_i3ytn")
 offset = Vector2(0, -14)
 hframes = 2
 frame = 1
-
-[node name="ShadowSprite" type="Sprite2D" parent="NpcInteractor/Sprite2D"]
-modulate = Color(0, 0, 0, 0.784314)
-show_behind_parent = true
-texture = ExtResource("2_623a7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="NpcInteractor"]
 root_node = NodePath("../..")

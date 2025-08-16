@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="NpcResource" load_steps=3 format=3 uid="uid://blnu6lgittsq7"]
 
-[ext_resource type="Texture2D" uid="uid://dew0171ka0m04" path="res://Assets/Sprites/characters/Humanoids/HumanGeneric2.png" id="1_c80kd"]
+[ext_resource type="Texture2D" uid="uid://ckv3yxb3knuq8" path="res://Assets/Sprites/Mobs/HumanGeneric2.png" id="1_c80kd"]
 [ext_resource type="Script" uid="uid://cdihu8vnnqsps" path="res://Code/Npc/Friendly/NpcResource.cs" id="2_3ugkh"]
 
 [resource]
