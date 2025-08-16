@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=4 format=3 uid="uid://cpx5y0g6s8hd5"]
 
-[ext_resource type="Texture2D" uid="uid://cxde1rygdy05i" path="res://Assets/Sprites/Materials/Ore_Base.png" id="1_yr7r1"]
-[ext_resource type="Texture2D" uid="uid://mj84jedppkmv" path="res://Assets/Sprites/Materials/Ore_Mineral.png" id="2_vb855"]
+[ext_resource type="Texture2D" uid="uid://7icyoajibpn7" path="res://Assets/Sprites/Materials/Ore_Base.png" id="1_yr7r1"]
+[ext_resource type="Texture2D" uid="uid://bducivb4yg1ni" path="res://Assets/Sprites/Materials/Ore_Mineral.png" id="2_vb855"]
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_yr7r1"]
 
 [resource]

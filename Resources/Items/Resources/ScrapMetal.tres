@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://bdf10ddikdxmx"]
+
+[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="1_1ybkh"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_krujw"]
+
+[resource]
+script = ExtResource("2_krujw")
+DisplayName = "Scrap Metal"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_1ybkh")])
+Colours = Array[Color]([Color(1, 1, 1, 1)])
+Size = 10.0

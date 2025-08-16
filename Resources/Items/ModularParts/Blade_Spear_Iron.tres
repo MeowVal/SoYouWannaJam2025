@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://ds4n06wlxsyvo"]
 
-[ext_resource type="Texture2D" uid="uid://cv8804wljv0hb" path="res://Assets/Sprites/ModularParts/Blade_Spear.png" id="1_5cycn"]
+[ext_resource type="Texture2D" uid="uid://c8ajx045ysots" path="res://Assets/Sprites/ModularParts/Blade_Spear.png" id="1_5cycn"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_ci7jl"]
 
 [resource]

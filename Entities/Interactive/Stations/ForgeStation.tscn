@@ -1,13 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgbg8jjt6swx6"]
+[gd_scene load_steps=12 format=3 uid="uid://cgbg8jjt6swx6"]
 
 [ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_cg3bl"]
-[ext_resource type="Texture2D" uid="uid://cr24elq4q4eye" path="res://Assets/Sprites/Environment/Forge.png" id="6_1ijhs"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_1ijhs"]
+[ext_resource type="Resource" uid="uid://bhmmqxxc646jd" path="res://Resources/Recipes/Forge/IronIngot.tres" id="3_l3fy7"]
+[ext_resource type="Resource" uid="uid://bv5xegexuhyr3" path="res://Resources/Recipes/Forge/GoldIngot.tres" id="4_1ijhs"]
+[ext_resource type="Resource" uid="uid://d2p8krc88hiwy" path="res://Resources/Recipes/Forge/Mytrilngot.tres" id="5_g4254"]
+[ext_resource type="Texture2D" uid="uid://cr24elq4q4eye" path="res://Assets/Sprites/environment/Forge.png" id="6_1ijhs"]
+[ext_resource type="Resource" uid="uid://t0q0gku2rrrq" path="res://Resources/Recipes/Forge/IronScrap.tres" id="6_lrg27"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_skwst"]
+[ext_resource type="Resource" uid="uid://c2rxv6l1kh7cs" path="res://Resources/Recipes/Forge/GoldScrap.tres" id="7_skwst"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="7_wai8b"]
+[ext_resource type="Resource" uid="uid://c8vgh2cwrnahu" path="res://Resources/Recipes/Forge/MythrilScrap.tres" id="8_wai8b"]
 
 [node name="ForgeStation" type="Area2D"]
 y_sort_enabled = true
 script = ExtResource("1_cg3bl")
+AutoCraft = true
+Recipes = Array[ExtResource("2_1ijhs")]([ExtResource("3_l3fy7"), ExtResource("4_1ijhs"), ExtResource("5_g4254"), ExtResource("6_lrg27"), ExtResource("7_skwst"), ExtResource("8_wai8b")])
 
 [node name="Top" type="Sprite2D" parent="."]
 position = Vector2(39, 18)
@@ -45,7 +54,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 24, 96)
 
 [node name="InterfaceLocation" type="Node2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(0, -8)
 
 [node name="InteractZone" type="CollisionPolygon2D" parent="."]
 physics_interpolation_mode = 1
@@ -61,7 +70,7 @@ script = ExtResource("6_skwst")
 metadata/_custom_type_script = "uid://usn4a73qqvca"
 
 [node name="InventorySlot1" type="Node2D" parent="Inventory"]
-position = Vector2(0, -9)
+position = Vector2(0, 17)
 script = ExtResource("7_wai8b")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 

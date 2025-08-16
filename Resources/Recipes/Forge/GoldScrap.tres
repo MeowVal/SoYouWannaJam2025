@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://c2rxv6l1kh7cs"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_1gmuk"]
+[ext_resource type="Resource" uid="uid://bdf10ddikdxmx" path="res://Resources/Items/Resources/ScrapMetal.tres" id="3_1gmuk"]
+[ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="3_eb0p7"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_umdyu"]
+
+[resource]
+script = ExtResource("4_umdyu")
+DisplayName = "Scrap Metal"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_1gmuk")]([ExtResource("3_eb0p7")])
+RecipeOutputs = Array[ExtResource("1_1gmuk")]([ExtResource("3_1gmuk")])
+WorkType = 2
+TimeToComplete = 3.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

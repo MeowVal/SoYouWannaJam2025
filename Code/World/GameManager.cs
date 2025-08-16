@@ -81,8 +81,6 @@ public partial class GameManager : Node2D
 		_modularItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/ModularItem.tscn");
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 		_hostileNpcSpawnLocation = (PathFollow2D)FindChild("HostileNpcSpawnLocations");
-		
-		Global.Grid = GetNode<TileMapLayer>("./Isometric/WorldMap");
 
 		npcInteractor.NpcLeft += OnNpcLeft;
 		GD.Print(CycleLantern);

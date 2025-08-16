@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://tbjlomcklo0" path="res://Resources/Items/ModularParts/Grip_Sword_Wood.tres" id="2_ixshu"]
 [ext_resource type="Resource" uid="uid://d0kf8ldv8p21p" path="res://Resources/Items/ModularParts/Pummel_Sword_Gold.tres" id="3_4c06g"]
 [ext_resource type="Resource" uid="uid://dea84xk6o1h6v" path="res://Resources/Items/ModularParts/Crossguard_Sword_Gold.tres" id="4_kp3od"]
-[ext_resource type="Texture2D" uid="uid://dmbxc4ofgw13r" path="res://Assets/Sprites/Unknown.png" id="5_ixshu"]
+[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="5_ixshu"]
 
 [resource]
 script = ExtResource("1_v1lhp")

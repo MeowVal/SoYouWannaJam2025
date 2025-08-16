@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://d0kf8ldv8p21p"]
 
-[ext_resource type="Texture2D" uid="uid://b6xni48kkstkr" path="res://Assets/Sprites/ModularParts/Pummel_Sword.png" id="1_ntfu7"]
+[ext_resource type="Texture2D" uid="uid://uxykgo42onio" path="res://Assets/Sprites/ModularParts/Pummel_Sword.png" id="1_ntfu7"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_bwfxq"]
 
 [resource]

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://tbjlomcklo0"]
 
-[ext_resource type="Texture2D" uid="uid://dvfpp82s3lqgf" path="res://Assets/Sprites/ModularParts/Grip_Sword.png" id="1_yuj3t"]
+[ext_resource type="Texture2D" uid="uid://c0joiasgv1eth" path="res://Assets/Sprites/ModularParts/Grip_Sword.png" id="1_yuj3t"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_whm86"]
 
 [resource]

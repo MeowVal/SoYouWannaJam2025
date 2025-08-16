@@ -12,4 +12,10 @@ public partial class Global : Node2D
     public static int GameDay;
     public static CharacterControl Player;
     public static TileMapLayer Grid;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        Grid = GetNode<TileMapLayer>("/root/GameManager/GameWorld/Entities");
+    }
 }

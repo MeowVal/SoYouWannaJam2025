@@ -25,7 +25,8 @@ public partial class DayCycleLantern : Node2D
 
         _animator = Lighting.GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
         _animator.Play("DayNightCycle");//Init Animation
-        _animator.Stop();
+        _animator.Seek(0.5, true);
+        _animator.Stop(true);
     }
 
  
@@ -75,6 +76,7 @@ public partial class DayCycleLantern : Node2D
     {
         if (_animator.IsPlaying())
         {
+            
             if (_animator.CurrentAnimationPosition is < 0.25 or > 0.7)
             {
                 this.GetNode<Sprite2D>("Interactible/Lantern").Frame = 0; //Turn on lantern.

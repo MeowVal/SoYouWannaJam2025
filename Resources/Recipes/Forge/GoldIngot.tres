@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://bv5xegexuhyr3"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=6 format=3 uid="uid://bv5xegexuhyr3"]
 
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_h7w7o"]
+[ext_resource type="Resource" uid="uid://cx62c06xp6g8i" path="res://Resources/Items/Resources/GoldOre.tres" id="2_h7w7o"]
+[ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="3_7aw5f"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="5_yx7b2"]
 
 [sub_resource type="Resource" id="Resource_h7w7o"]
@@ -12,8 +14,8 @@ DisplayName = "Gold Ingot"
 Description = "You need to actually set this lol."
 Icon = SubResource("Resource_h7w7o")
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_h7w7o")]([])
-RecipeOutputs = Array[ExtResource("1_h7w7o")]([])
+RecipeInputs = Array[ExtResource("1_h7w7o")]([ExtResource("2_h7w7o")])
+RecipeOutputs = Array[ExtResource("1_h7w7o")]([ExtResource("3_7aw5f")])
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6

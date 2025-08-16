@@ -7,6 +7,7 @@ using SoYouWANNAJam2025.Code.Interactive.Inventory;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Npc.Friendly;
+using SoYouWANNAJam2025.Code.World;
 
 //using SoYouWANNAJam2025.Scenes.UI.Interactions;
 
@@ -19,6 +20,7 @@ public partial class CraftingStation : Interactible
     [Export] public string DisplayName = "Unknown Crafting Station";
     [Export] public string Description = "You need to actually set this lol.";
     [Export] public Texture2D Icon;
+    [Export] public bool AutoCraft = false;
     [Export] public Array<BaseRecipe> Recipes = [];
 
     public Inventory.Inventory Inventory;
@@ -125,9 +127,11 @@ public partial class CraftingStation : Interactible
     // Cancel the current recipe's process
     public bool RecipeAbort()
     {
+        IsCrafting = false;
         if (_interactionInterface == null) return false;
         _interactionInterface.QueueFree();
-        IsCrafting = false;
+        _interactionInterface = null;
+        
         GD.Print("Recipe ended before completion");
         return true;
     }
@@ -135,23 +139,28 @@ public partial class CraftingStation : Interactible
     // End the recipe and produce the results
     public bool RecipeComplete()
     {
-        if (_interactionInterface != null) _interactionInterface!.QueueFree();
+        if (_interactionInterface != null) _interactionInterface.QueueFree();
+        _interactionInterface = null;
         IsCrafting = false;
+        var val = false;
         switch (CurrentRecipe.RecipeType)
         {
             case ERecipeType.Standard:
-                return RecipeCompleteStandard();
-
+                val = RecipeCompleteStandard();
+                break;
             case ERecipeType.ModularPartSwap:
             case ERecipeType.ModularPartAdd:
-                return RecipeCompleteModular();
+                val = RecipeCompleteModular();
+                break;
         }
-        return false;
+        
+        if (AutoCraft) AttemptCraft();
+        return val;
     }
 
     private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
-        if (IsCrafting) return;
+        if (!AutoCraft && IsCrafting) return;
         if (node is Player.PlayerInteractor interactor)
         {
             switch (trigger)
@@ -160,19 +169,19 @@ public partial class CraftingStation : Interactible
                     if (Inventory.HasItem() && interactor.InventorySlot.HasSpace())
                     {
                         Inventory.TransferTo(interactor.InventorySlot);
+                        if (AutoCraft) RecipeAbort();
                     }
                     else if (Inventory.HasSpace() && interactor.InventorySlot.HasItem())
                     {
-                        /*var forceAdd = (interactor.InventorySlot.Item is ModularItem);
-                        interactor.InventorySlot.TransferTo(Inventory, forceAdd);*/
                         interactor.InventorySlot.TransferTo(Inventory);
+                        if (AutoCraft) AttemptCraft();
                     }
                     break;
                 case TriggerType.UseAction:
-                    AttemptCraft();
+                    if (!AutoCraft) AttemptCraft();
                     break;
             } 
-        } else if (node is NpcInteractor npcInteractor)
+        } else if (!IsCrafting && node is NpcInteractor npcInteractor)
         {
             switch (trigger)
             {
@@ -214,7 +223,7 @@ public partial class CraftingStation : Interactible
             var newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
             var newItem = newItemScene.Instantiate<GenericItem>();
             newItem.ItemResource = item;
-            GetNode("/root/GameManager/Isometric").AddChild(newItem);
+            Global.Grid.AddChild(newItem);
             // Add outputs to inventory
             Inventory.PickupItem(newItem, true);
             GD.Print($"- {newItem.ItemResource.DisplayName}");

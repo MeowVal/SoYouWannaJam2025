@@ -15,7 +15,7 @@ public partial class CharacterControl : CharacterBody2D
 	[Export] public double AccelerationSpeed = 10;
 	[Export] public double DecelerationSpeed = 15;
 	private double _currentSpeed;
-	private AnimatedSprite2D _charSprite;
+	private Sprite2D _charSprite;
 	private string _direction = "down";
 	private Vector2 _targetPos;
 	private int _moveThreshold = 3;
@@ -31,7 +31,7 @@ public partial class CharacterControl : CharacterBody2D
 	public override void _Ready()
 	{
 		_interactor = GetNode<Player.PlayerInteractor>("PlayerInteractor");
-		_charSprite = GetNode<AnimatedSprite2D>("CharSprite");
+		_charSprite = GetNode<Sprite2D>("CharSprite");
 		
 		_camera = GetTree().Root.GetCamera2D(); // Gives controls over Camera properties and get a reference to it.
 		_camera.Scale = new Vector2(World.Global.GameScale, World.Global.GameScale);

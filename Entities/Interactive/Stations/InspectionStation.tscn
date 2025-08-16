@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwho24gjrxuig"]
 
 [ext_resource type="Script" uid="uid://cgsrx2wyjy1ap" path="res://Code/Interactive/Stations/InspectionStation.cs" id="1_20cqo"]
-[ext_resource type="Texture2D" uid="uid://b5q4nvbxfnotl" path="res://Assets/Sprites/objects/research_table.png" id="2_klfgx"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/objects/research_table.png" id="2_klfgx"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_die6g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5p8jk"]
