@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://u52yg5uejgs6"]
 
 [ext_resource type="Script" uid="uid://byryx7sjfdyc1" path="res://Code/Interactive/Stations/Dispenser.cs" id="1_oq4e5"]
-[ext_resource type="Texture2D" uid="uid://hl78vvil2ajh" path="res://Assets/Sprites/environment/WoodLog.png" id="2_oq4e5"]
+[ext_resource type="Texture2D" uid="uid://hl78vvil2ajh" path="res://Assets/Sprites/Environment/WoodLog.png" id="2_oq4e5"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="3_j86b2"]
 [ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="4_j86b2"]
 
@@ -25,4 +25,10 @@ AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
 texture = ExtResource("4_j86b2")
+
+[node name="CollisionBarrier" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
+polygon = PackedVector2Array(-16, 9, 0, 1, 16, 9, 0, 17)

@@ -18,6 +18,5 @@ shape = SubResource("CircleShape2D_u0lr3")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 16)
 texture = ExtResource("3_2l5do")
 offset = Vector2(0, -16)

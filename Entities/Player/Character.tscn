@@ -45,6 +45,7 @@ texture = ExtResource("2_bkf2h")
 offset = Vector2(0, -15)
 hframes = 2
 vframes = 2
+frame = 1
 region_rect = Rect2(0, 0, 32, 32)
 
 [node name="PlayerInteractor" type="Area2D" parent="."]
@@ -72,6 +73,7 @@ occluder = SubResource("OccluderPolygon2D_31rvx")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 material = SubResource("ShaderMaterial_bkf2h")
+energy = 0.35
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.847059)
 texture = SubResource("GradientTexture2D_bkf2h")

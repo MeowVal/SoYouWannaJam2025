@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Godot;
 using SoYouWANNAJam2025.Code.World;
 using Vector2 = Godot.Vector2;
@@ -52,26 +53,47 @@ public partial class CharacterControl : CharacterBody2D
 		else if (@event.IsActionPressed("PickupDrop"))
 		{
 			_interactor.TriggerInteraction(TriggerType.PickupDrop);
+			if (_interactor.InventorySlot.HasItem())
+			{
+				var item = _interactor.InventorySlot.Item;
+				//set item Y value to be visually above the character's head
+				item.GlobalPosition = new Vector2(item.GlobalPosition.X, item.GlobalPosition.Y - 35);
+				_charSprite.Frame = _direction switch
+				{
+					"right" => 3,
+					"left" => 2,
+					_ => _charSprite.Frame
+				};
+			}
+			else
+			{
+				_charSprite.Frame = _direction switch
+				{
+					"right" => 1,
+					"left" => 0,
+					_ => _charSprite.Frame
+				};
+			}
 		}
 		else if (@event.IsActionPressed("MoveRight") && !Frozen)
 		{
 			_direction = "right";
-			//_charSprite.Play("RunNE");
+			_charSprite.Frame = 1;
+			if (_interactor.InventorySlot.HasItem()) _charSprite.Frame = 3;
 		}
 		else if (@event.IsActionPressed("MoveLeft") && !Frozen)
 		{
 			_direction = "left";
-			//_charSprite.Play("RunSW");
+			_charSprite.Frame = 0;
+			if (_interactor.InventorySlot.HasItem()) _charSprite.Frame = 2;
 		}
 		else if (@event.IsActionPressed("MoveUp") && !Frozen)
 		{
-			_direction = "up";
-			//_charSprite.Play("RunNW");
+			//_direction = "up";
 		}
 		else if (@event.IsActionPressed("MoveDown") && !Frozen)
 		{
-			_direction = "down";
-			//_charSprite.Play("RunSE");
+			//_direction = "down";
 		}
 	}
 

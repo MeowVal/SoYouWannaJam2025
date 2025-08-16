@@ -19,12 +19,10 @@ theme = ExtResource("1_qc5w2")
 [node name="TextureRect2" type="TextureRect" parent="Container"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.775
-anchor_bottom = 1.846
-offset_right = -0.0500488
-offset_bottom = 0.0239868
-grow_horizontal = 2
-grow_vertical = 2
+anchor_right = 2.029
+anchor_bottom = 2.115
+offset_right = 0.0819702
+offset_bottom = 0.0599976
 texture = ExtResource("4_ykvyr")
 
 [node name="Control" type="Control" parent="Container/TextureRect2"]
@@ -38,13 +36,11 @@ size_flags_horizontal = 3
 [node name="TimeOfDay" type="Label" parent="Container/TextureRect2/Control"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 14
+anchors_preset = -1
+anchor_left = -0.172
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.932
 anchor_bottom = 0.5
-offset_top = -8.5
-offset_right = -1.52588e-05
-offset_bottom = 8.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -63,12 +59,11 @@ size_flags_horizontal = 3
 [node name="Date" type="Label" parent="Container/TextureRect2/Control2"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 14
+anchors_preset = -1
+anchor_left = -0.054
 anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -21.0
-offset_bottom = 21.0
+anchor_right = 0.926
+anchor_bottom = 0.611
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -79,8 +74,8 @@ horizontal_alignment = 1
 [node name="TextureRect" type="TextureRect" parent="Container/TextureRect2"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.095
-anchor_top = 0.201
-anchor_right = 0.352
-anchor_bottom = 0.759
+anchor_left = 0.073
+anchor_top = 0.206
+anchor_right = 0.335
+anchor_bottom = 0.764
 texture = ExtResource("3_xaom8")
