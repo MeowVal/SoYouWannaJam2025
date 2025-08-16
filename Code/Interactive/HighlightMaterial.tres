@@ -5,5 +5,5 @@
 [resource]
 shader = ExtResource("1_ngewr")
 shader_parameter/outline_color = Color(1, 0.733333, 0, 1)
-shader_parameter/blink_color = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/blink_time_scale = 3.0
+shader_parameter/blink_color = Color(0.0999859, 0.099986, 0.099986, 1)
+shader_parameter/blink_time_scale = 4.0
