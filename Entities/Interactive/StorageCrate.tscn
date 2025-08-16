@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdr1tuqn030c4"]
+
+[ext_resource type="Script" uid="uid://c1y1bwsgw0qq6" path="res://Entities/Interactive/StorageCrate.cs" id="1_dcdb7"]
+[ext_resource type="Texture2D" uid="uid://k8st5trg81aq" path="res://Assets/Sprites/environment/CrateInner.png" id="2_hjgip"]
+[ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="3_f7o7f"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="4_y2d46"]
+[ext_resource type="Texture2D" uid="uid://bj0bl6ie3w3oi" path="res://Assets/Sprites/environment/CrateOuter.png" id="5_cli73"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m7g5a"]
+radius = 16.0
+
+[node name="StorageCrate" type="Area2D"]
+script = ExtResource("1_dcdb7")
+metadata/_custom_type_script = "uid://de26gdg7krlfk"
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m7g5a")
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
+
+[node name="InnerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_hjgip")
+
+[node name="Inventory" type="Node2D" parent="."]
+script = ExtResource("3_f7o7f")
+AllowAll = true
+metadata/_custom_type_script = "uid://usn4a73qqvca"
+
+[node name="InventorySlot" type="Node2D" parent="Inventory"]
+position = Vector2(-2, 14)
+script = ExtResource("4_y2d46")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InventorySlot2" type="Node2D" parent="Inventory"]
+position = Vector2(3, 6)
+script = ExtResource("4_y2d46")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="OuterSprite" type="Sprite2D" parent="."]
+texture = ExtResource("5_cli73")
+
+[node name="CollisionBarrier" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
+polygon = PackedVector2Array(-16, 9, 0, 1, 16, 9, 0, 17)
