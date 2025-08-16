@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6lk5ypn503pn"
-path="res://.godot/imported/StoneFloorsSlate.png-42b9e8ca26e8e6550734c37eee512f91.ctex"
+path="res://.godot/imported/StoneFloorsSlate.png-b3c935c773dd8e5c31d93d6aebe58ea1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Environment/StoneFloorsSlate.png"
-dest_files=["res://.godot/imported/StoneFloorsSlate.png-42b9e8ca26e8e6550734c37eee512f91.ctex"]
+source_file="res://Assets/Sprites/environment/StoneFloorsSlate.png"
+dest_files=["res://.godot/imported/StoneFloorsSlate.png-b3c935c773dd8e5c31d93d6aebe58ea1.ctex"]
 
 [params]
 

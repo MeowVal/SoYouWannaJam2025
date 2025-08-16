@@ -1,13 +1,6 @@
-[gd_resource type="TileSet" load_steps=60 format=3 uid="uid://bwbl1dc80kj88"]
+[gd_resource type="TileSet" load_steps=53 format=3 uid="uid://bwbl1dc80kj88"]
 
 [ext_resource type="Texture2D" uid="uid://8j4lqu8us3ml" path="res://Assets/spritesheetTempAsset.png" id="1_8sf5w"]
-[ext_resource type="Texture2D" uid="uid://dskkos0laqlxm" path="res://Assets/Sprites/environment/isometric-sandbox-sheet.png" id="2_8sf5w"]
-[ext_resource type="Texture2D" uid="uid://cwedi6i73ir7" path="res://Assets/Sprites/Sprite- tiles.png" id="3_tp6ot"]
-[ext_resource type="Texture2D" uid="uid://cvrd3egh3idcj" path="res://Assets/Sprites/environment/Building/StoneFloorsSandstone.png" id="4_fho3c"]
-[ext_resource type="Texture2D" uid="uid://cm2024h0qncwb" path="res://Assets/Sprites/environment/Building/StoneFloorsSlate.png" id="5_s78pl"]
-[ext_resource type="Texture2D" uid="uid://cyle8jg3hynby" path="res://Assets/Sprites/environment/Building/StoneWallsSandstone.png" id="6_f6npj"]
-[ext_resource type="Texture2D" uid="uid://bi6hg5n2qvevh" path="res://Assets/Sprites/environment/Building/StoneWallsSlate.png" id="7_ax7sy"]
-[ext_resource type="Texture2D" uid="uid://bu5a7js3r7tns" path="res://Assets/Sprites/environment/Building/WoodLog.png" id="8_qhc7n"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_8sf5w"]
 vertices = PackedVector2Array(16, 0, 0, 8, -16, 0, 0, -8)
@@ -464,7 +457,6 @@ texture_region_size = Vector2i(32, 32)
 9:9/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a3kl7"]
-texture = ExtResource("2_8sf5w")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, -8)
@@ -558,28 +550,17 @@ texture_region_size = Vector2i(32, 32)
 polygon = PackedVector2Array(8, 12, 8, -4, -8, -12, -16, -8.57143, -16, 7.42857, 0, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mp2fn"]
-texture = ExtResource("3_tp6ot")
 texture_region_size = Vector2i(32, 16)
-0:0/size_in_atlas = Vector2i(1, 2)
 0:0/0 = 0
-1:0/size_in_atlas = Vector2i(1, 2)
 1:0/0 = 0
-2:0/size_in_atlas = Vector2i(1, 2)
 2:0/0 = 0
-3:0/size_in_atlas = Vector2i(1, 2)
 3:0/0 = 0
 3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tp6ot")
-2:2/size_in_atlas = Vector2i(1, 2)
 2:2/0 = 0
-3:2/size_in_atlas = Vector2i(1, 2)
 3:2/0 = 0
-0:4/size_in_atlas = Vector2i(1, 2)
 0:4/0 = 0
-1:4/size_in_atlas = Vector2i(1, 2)
 1:4/0 = 0
-0:6/size_in_atlas = Vector2i(1, 2)
 0:6/0 = 0
-1:6/size_in_atlas = Vector2i(1, 2)
 1:6/0 = 0
 4:0/0 = 0
 5:0/0 = 0
@@ -587,7 +568,6 @@ texture_region_size = Vector2i(32, 16)
 4:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cd3si"]
-texture = ExtResource("4_fho3c")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -595,7 +575,6 @@ texture_region_size = Vector2i(32, 32)
 0:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_onp38"]
-texture = ExtResource("5_s78pl")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -603,7 +582,6 @@ texture_region_size = Vector2i(32, 32)
 0:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mg45w"]
-texture = ExtResource("6_f6npj")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -613,7 +591,6 @@ texture_region_size = Vector2i(32, 32)
 1:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yoskf"]
-texture = ExtResource("7_ax7sy")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -623,7 +600,6 @@ texture_region_size = Vector2i(32, 32)
 1:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_syynt"]
-texture = ExtResource("8_qhc7n")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 

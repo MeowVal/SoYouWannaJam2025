@@ -1,11 +1,9 @@
-[gd_resource type="Resource" script_class="NpcResource" load_steps=3 format=3 uid="uid://0xv5lxlnyfl7"]
+[gd_resource type="Resource" script_class="NpcResource" load_steps=2 format=3 uid="uid://0xv5lxlnyfl7"]
 
-[ext_resource type="Texture2D" uid="uid://vsq7nymelad8" path="res://Assets/Sprites/characters/wolf-idle.png" id="1_jc14v"]
 [ext_resource type="Script" uid="uid://cdihu8vnnqsps" path="res://Code/Npc/Friendly/NpcResource.cs" id="2_oawwd"]
 
 [resource]
 script = ExtResource("2_oawwd")
-Sprite2D = ExtResource("1_jc14v")
 MinMaxHealth = Vector2(5, 20)
 MinMaxSpeed = Vector2(30, 45)
 MinMaxStrength = Vector2(5, 10)
