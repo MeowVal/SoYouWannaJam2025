@@ -7,6 +7,7 @@
 script = ExtResource("2_0lx62")
 PartType = 3
 ModularItemType = 0
+PartState = 0
 DisplayName = "Golden Sword Crossguard"
 Description = "While flashy, this crossguard probably doesnt do a lot to protect your fingers."
 Textures = Array[Texture2D]([ExtResource("1_6freb")])

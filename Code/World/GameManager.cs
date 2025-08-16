@@ -181,10 +181,10 @@ public partial class GameManager : Node2D
 	private void OnNpcTimerTimeout()
 	{
 		//GD.Print("NPC count = "+_npcs.Count);
-		var newItem = _modularItemScene.Instantiate<GenericItem>();
+		var newItem = _modularItemScene.Instantiate<ModularItem>();
 		if (ModularItemResources != null)
 		{
-			newItem.ItemResource = ModularItemResources[GD.RandRange(0, NpcResources.Count - 1)];
+			newItem.ItemResource = ModularItemResources[GD.RandRange(0, ModularItemResources.Count - 1)];
 		}
 
 		GetNode("/root/GameManager/Isometric").AddChild(newItem);
@@ -193,6 +193,7 @@ public partial class GameManager : Node2D
 		NpcSpawning(npc);
 		// Add outputs to inventory
 		if (newItem.ItemResource == null) return;
+		newItem.OwningNpc = npc;
 		npc.NpcInventory.PickupItem(newItem, true);
 	}
 	private void OnHostileNpcTimerTimeout()
@@ -215,6 +216,7 @@ public partial class GameManager : Node2D
 			npc.Scale = Vector2.One * 4;
 			_hostileNpc.Add(npc);
 			AddChild(npc);
+			
 		}
 		else if  (npc is Npc.Friendly.Npc)
 		{
@@ -226,8 +228,16 @@ public partial class GameManager : Node2D
 			npc.LeaveAreaNode = _leaveAreaNode;
 			_npcs.Add(npc);
 			AddChild(npc);
+			var npcInteractor = (NpcInteractor)npc.FindChild("NpcInteractor");
+			npcInteractor.RequestComplete += OnRequestComplete;
 		}
 		
+	}
+
+	private void OnRequestComplete(Npc.Friendly.Npc npc)
+	{
+		var hostileTarget = _hostileNpc[GD.RandRange(0, _hostileNpc.Count - 1)];
+		npc.Target = hostileTarget;
 	}
 
 	

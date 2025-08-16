@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcResource" load_steps=3 format=3 uid="uid://dfkrnbfgt818x"]
+
+[ext_resource type="Texture2D" uid="uid://3wcvoidxsp22" path="res://Assets/Sprites/characters/Humanoids/HumanGeneric3.png" id="1_10ugl"]
+[ext_resource type="Script" uid="uid://cdihu8vnnqsps" path="res://Code/Npc/Friendly/NpcResource.cs" id="2_hy2pn"]
+
+[resource]
+script = ExtResource("2_hy2pn")
+Sprite2D = ExtResource("1_10ugl")
+MinMaxHealth = Vector2(0, 0)
+MinMaxSpeed = Vector2(0, 0)
+MinMaxStrength = Vector2(0, 0)
+MinMaxConstitution = Vector2(0, 0)
+MinMaxDexterity = Vector2(0, 0)
+MinMaxIntelligence = Vector2(0, 0)
+MinMaxWisdom = Vector2(0, 0)
+MinMaxCharisma = Vector2(0, 0)
+NpcName = "Sarah"
+Class = ""
+metadata/_custom_type_script = "uid://cdihu8vnnqsps"

@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cgmrv20adm0sb"]
+[gd_scene load_steps=21 format=3 uid="uid://cgmrv20adm0sb"]
 
 [ext_resource type="Script" uid="uid://das3my7bu0f6s" path="res://Code/Npc/Hostile/HostileNpc.cs" id="1_sme6v"]
+[ext_resource type="Resource" uid="uid://0xv5lxlnyfl7" path="res://Resources/Npcs/Hostile/Slime01.tres" id="2_j1ea8"]
 [ext_resource type="Script" uid="uid://bbqx7jgoyn746" path="res://Code/Npc/Friendly/NpcInteractor.cs" id="3_3hpt8"]
-[ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="4_rliy4"]
+[ext_resource type="Texture2D" uid="uid://vsq7nymelad8" path="res://Assets/Sprites/characters/wolf-idle.png" id="4_kvk1t"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="5_0hsmb"]
 [ext_resource type="Texture2D" uid="uid://b5g8dj2bpwsm2" path="res://Assets/Sprites/characters/Shadow/Shadow.png" id="5_swplc"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="6_qhrh7"]
@@ -169,16 +170,17 @@ polygon = PackedVector2Array(2, 4, 6, 3, 8, 1, 8, 0, 7, -2, 5, -4, 2, -5, -2, -5
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_sme6v")
+NpcResource = ExtResource("2_j1ea8")
 
 [node name="NpcInteractor" type="Area2D" parent="."]
 script = ExtResource("3_3hpt8")
 
 [node name="Sprite2D" type="Sprite2D" parent="NpcInteractor"]
-texture = ExtResource("4_rliy4")
+texture = ExtResource("4_kvk1t")
 offset = Vector2(0, -14)
-hframes = 2
-vframes = 2
-frame = 2
+hframes = 4
+vframes = 4
+frame = 1
 
 [node name="ShadowSprite" type="Sprite2D" parent="NpcInteractor/Sprite2D"]
 modulate = Color(0, 0, 0, 0.784314)

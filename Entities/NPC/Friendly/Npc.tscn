@@ -1,9 +1,9 @@
 [gd_scene load_steps=21 format=3 uid="uid://hxf0gtf3x5pb"]
 
-[ext_resource type="Texture2D" uid="uid://cyl7qru0emyx6" path="res://Assets/Sprites/characters/elf.png" id="1_5ya86"]
 [ext_resource type="Script" uid="uid://b4ntrd6icymju" path="res://Code/Npc/Friendly/Npc.cs" id="1_623a7"]
 [ext_resource type="Texture2D" uid="uid://b5g8dj2bpwsm2" path="res://Assets/Sprites/characters/Shadow/Shadow.png" id="2_623a7"]
-[ext_resource type="Resource" uid="uid://0xv5lxlnyfl7" path="res://Resources/Npcs/Friendly/Npc01.tres" id="2_jvg37"]
+[ext_resource type="Resource" uid="uid://chl1fym108awa" path="res://Resources/Npcs/Friendly/Npc01.tres" id="2_jvg37"]
+[ext_resource type="Texture2D" uid="uid://hv2l2ttcyiwa" path="res://Assets/Sprites/characters/Humanoids/HumanGeneric1.png" id="4_2i02p"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_mrx7r"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_2i02p"]
 [ext_resource type="Script" uid="uid://bbqx7jgoyn746" path="res://Code/Npc/Friendly/NpcInteractor.cs" id="6_c6mha"]
@@ -50,7 +50,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_1e812"]
@@ -65,7 +65,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_2wnqt"]
@@ -110,7 +110,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_4ubeo"]
@@ -122,10 +122,10 @@ tracks/0/path = NodePath("NpcInteractor/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": []
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_ot8lt"]
@@ -178,11 +178,10 @@ NpcResource = ExtResource("2_jvg37")
 script = ExtResource("6_c6mha")
 
 [node name="Sprite2D" type="Sprite2D" parent="NpcInteractor"]
-texture = ExtResource("1_5ya86")
+texture = ExtResource("4_2i02p")
 offset = Vector2(0, -14)
 hframes = 2
-vframes = 2
-frame = 2
+frame = 1
 
 [node name="ShadowSprite" type="Sprite2D" parent="NpcInteractor/Sprite2D"]
 modulate = Color(0, 0, 0, 0.784314)
