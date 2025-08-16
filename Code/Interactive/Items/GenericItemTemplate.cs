@@ -12,14 +12,15 @@ public partial class GenericItemTemplate: Resource
     [Export] public Array<Color> Colours = [Colors.White];
     [Export] public float Size = 10;
     
-    public Image GetItemImage()
+    public virtual Image GetItemImage(Array<Texture2D> textures = null)
     {
+        textures = textures ?? Textures;
         var img = Image.CreateEmpty(32, 32, false, Image.Format.Rgba8);
         for (var i = 0; i < Textures.Count; i++) 
         {
             
             var modulateColor = i < Colours.Count ? Colours[i] :  Colors.White;
-            var spriteImg = Textures[i].GetImage();
+            var spriteImg = textures[i].GetImage();
             for (var x = 0; x < 32; x++)
             {
                 for (var y = 0; y < 32; y++)
