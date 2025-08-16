@@ -14,6 +14,10 @@ public partial class ModularPartTemplate : GenericItemTemplate
     public EModularItemType ModularItemType;
     [Export] // If the part is broken or not.
     public EPartState PartState = EPartState.New;
+    [Export] // A different set of textures to use if the item is broken.
+    public Array<Texture2D> BrokenTextures = [GD.Load<Texture2D>("res://Assets/Sprites/Unknown.png")];
+    [Export] // A different set of textures to use if the item is used, leave null to use new state.
+    public Array<Texture2D> UsedTextures = null;
 
     /*[ExportCategory("Modular Stats")]
     [ExportGroup("Damage")] [Export] // The root base damage of the weapon
@@ -36,4 +40,25 @@ public partial class ModularPartTemplate : GenericItemTemplate
     public float CritMultiplier = 0;
     [Export] // The amount of additional base damage that is applied on crits.
     public float CritBonus = 0;*/
+
+    public override Image GetItemImage(Array<Texture2D> textures = null)
+    {
+        switch (PartState)
+        {
+            default:
+            case EPartState.New:
+                return base.GetItemImage(Textures);
+            case EPartState.Used:
+                if (UsedTextures == null)
+                {
+                    return base.GetItemImage(Textures);
+                }
+                else
+                {
+                    return base.GetItemImage(UsedTextures);
+                }
+            case EPartState.Broken:
+                return base.GetItemImage(BrokenTextures);
+        }
+    }
 }
