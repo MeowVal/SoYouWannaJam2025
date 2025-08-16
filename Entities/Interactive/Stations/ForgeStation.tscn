@@ -1,16 +1,106 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgbg8jjt6swx6"]
+[gd_scene load_steps=25 format=3 uid="uid://cgbg8jjt6swx6"]
 
 [ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_cg3bl"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_1ijhs"]
 [ext_resource type="Resource" uid="uid://bhmmqxxc646jd" path="res://Resources/Recipes/Forge/IronIngot.tres" id="3_l3fy7"]
 [ext_resource type="Resource" uid="uid://bv5xegexuhyr3" path="res://Resources/Recipes/Forge/GoldIngot.tres" id="4_1ijhs"]
 [ext_resource type="Resource" uid="uid://d2p8krc88hiwy" path="res://Resources/Recipes/Forge/Mytrilngot.tres" id="5_g4254"]
-[ext_resource type="Texture2D" uid="uid://cr24elq4q4eye" path="res://Assets/Sprites/Environment/Forge.png" id="6_1ijhs"]
 [ext_resource type="Resource" uid="uid://t0q0gku2rrrq" path="res://Resources/Recipes/Forge/IronScrap.tres" id="6_lrg27"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_skwst"]
 [ext_resource type="Resource" uid="uid://c2rxv6l1kh7cs" path="res://Resources/Recipes/Forge/GoldScrap.tres" id="7_skwst"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="7_wai8b"]
 [ext_resource type="Resource" uid="uid://c8vgh2cwrnahu" path="res://Resources/Recipes/Forge/MythrilScrap.tres" id="8_wai8b"]
+[ext_resource type="Texture2D" uid="uid://bos0scnb0a4n2" path="res://Assets/Sprites/Environment/ForgeTop.png" id="9_wai8b"]
+[ext_resource type="Texture2D" uid="uid://dviu4hqdy0jgi" path="res://Assets/Sprites/Environment/ForgeBase.png" id="10_dqlfn"]
+[ext_resource type="Texture2D" uid="uid://bwfxftgh5kpu5" path="res://Assets/Sprites/Environment/ForgeFire.png" id="13_1p836"]
+[ext_resource type="Texture2D" uid="uid://cnvcuoeghj5g1" path="res://Assets/Sprites/Environment/Light2DTexture.tres" id="14_dqlfn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkhvh"]
+atlas = ExtResource("13_1p836")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btpy3"]
+atlas = ExtResource("13_1p836")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_134kj"]
+atlas = ExtResource("13_1p836")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5bhd"]
+atlas = ExtResource("13_1p836")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1qwp"]
+atlas = ExtResource("13_1p836")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buxu5"]
+atlas = ExtResource("13_1p836")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hr0lf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkhvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btpy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_134kj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5bhd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1qwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buxu5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="Animation" id="Animation_dqlfn"]
+resource_name = "glow"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.333333, 0.633333, 1),
+"transitions": PackedFloat32Array(2, 2, 2, 2),
+"update": 0,
+"values": [1.0, 2.0, 0.8, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_1p836"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rkhvh"]
+_data = {
+&"RESET": SubResource("Animation_1p836"),
+&"glow": SubResource("Animation_dqlfn")
+}
 
 [node name="ForgeStation" type="Area2D"]
 y_sort_enabled = true
@@ -18,36 +108,36 @@ script = ExtResource("1_cg3bl")
 Recipes = Array[ExtResource("2_1ijhs")]([ExtResource("3_l3fy7"), ExtResource("4_1ijhs"), ExtResource("5_g4254"), ExtResource("6_lrg27"), ExtResource("7_skwst"), ExtResource("8_wai8b")])
 
 [node name="Top" type="Sprite2D" parent="."]
-position = Vector2(39, 18)
-texture = ExtResource("6_1ijhs")
-offset = Vector2(-27, -46)
+position = Vector2(1, 34)
+texture = ExtResource("9_wai8b")
+offset = Vector2(7, -59)
 region_enabled = true
-region_rect = Rect2(24, 0, 72, 56)
+region_rect = Rect2(16, 0, 80, 64)
 
 [node name="Lower" type="Sprite2D" parent="."]
 position = Vector2(39, 29)
-texture = ExtResource("6_1ijhs")
+texture = ExtResource("10_dqlfn")
 offset = Vector2(-3, -9)
 region_enabled = true
 region_rect = Rect2(72, 56, 24, 40)
 
 [node name="Lower2" type="Sprite2D" parent="."]
-position = Vector2(0, 32)
-texture = ExtResource("6_1ijhs")
+position = Vector2(0, 24)
+texture = ExtResource("10_dqlfn")
 offset = Vector2(12, -12)
 region_enabled = true
-region_rect = Rect2(48, 56, 24, 40)
+region_rect = Rect2(48, 40, 24, 56)
 
 [node name="Lower3" type="Sprite2D" parent="."]
 position = Vector2(-24, 20)
-texture = ExtResource("6_1ijhs")
-offset = Vector2(12, 0)
+texture = ExtResource("10_dqlfn")
+offset = Vector2(12, -12)
 region_enabled = true
-region_rect = Rect2(24, 56, 24, 40)
+region_rect = Rect2(24, 32, 24, 64)
 
 [node name="Lower4" type="Sprite2D" parent="."]
 position = Vector2(-48, 8)
-texture = ExtResource("6_1ijhs")
+texture = ExtResource("10_dqlfn")
 offset = Vector2(12, -16)
 region_enabled = true
 region_rect = Rect2(0, 0, 24, 96)
@@ -74,7 +164,25 @@ script = ExtResource("7_wai8b")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="CollisionBarrier" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
-polygon = PackedVector2Array(-50, 9, -39, -4, -23, -11, 47, 18, 47, 26, 16, 43)
+polygon = PackedVector2Array(-50, 9, -39, -4, -23, -11, 50, 18, 50, 25, 16, 43)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-11, 26)
+sprite_frames = SubResource("SpriteFrames_hr0lf")
+autoplay = "default"
+frame_progress = 0.185489
+offset = Vector2(13, -18)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-14, 23)
+color = Color(0.960784, 0.827451, 0.407843, 1)
+texture = ExtResource("14_dqlfn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_rkhvh")
+}
+autoplay = "glow"
+speed_scale = 0.3

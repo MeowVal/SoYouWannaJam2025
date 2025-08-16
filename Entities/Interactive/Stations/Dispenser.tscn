@@ -1,22 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://u52yg5uejgs6"]
+[gd_scene load_steps=7 format=3 uid="uid://u52yg5uejgs6"]
 
 [ext_resource type="Script" uid="uid://byryx7sjfdyc1" path="res://Code/Interactive/Stations/Dispenser.cs" id="1_oq4e5"]
-[ext_resource type="Texture2D" uid="uid://hl78vvil2ajh" path="res://Assets/Sprites/Environment/WoodLog.png" id="2_oq4e5"]
+[ext_resource type="Texture2D" uid="uid://k8st5trg81aq" path="res://Assets/Sprites/Environment/CrateInner.png" id="3_0x217"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="3_j86b2"]
 [ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="4_j86b2"]
+[ext_resource type="Texture2D" uid="uid://bj0bl6ie3w3oi" path="res://Assets/Sprites/Environment/CrateOuter.png" id="5_eqxl1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oq4e5"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_j86b2"]
 radius = 16.0
 
 [node name="Dispenser" type="Area2D"]
+y_sort_enabled = true
 script = ExtResource("1_oq4e5")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_oq4e5")
+shape = SubResource("CircleShape2D_j86b2")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
-
-[node name="StationSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_oq4e5")
 
 [node name="InventorySlot" type="Node2D" parent="."]
 position = Vector2(0, -1)
@@ -24,11 +23,31 @@ script = ExtResource("3_j86b2")
 AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
+[node name="CrateInner" type="Sprite2D" parent="."]
+position = Vector2(0, 9)
+texture = ExtResource("3_0x217")
+offset = Vector2(0, -9)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -14)
+position = Vector2(0, 9)
 texture = ExtResource("4_j86b2")
+offset = Vector2(0, -17)
+
+[node name="CrateOuter" type="Sprite2D" parent="."]
+position = Vector2(-16, 9)
+texture = ExtResource("5_eqxl1")
+offset = Vector2(8, -9)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="CrateOuter2" type="Sprite2D" parent="."]
+position = Vector2(16, 9)
+texture = ExtResource("5_eqxl1")
+offset = Vector2(-8, -9)
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 32)
 
 [node name="CollisionBarrier" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
-polygon = PackedVector2Array(-16, 9, 0, 1, 16, 9, 0, 17)
+polygon = PackedVector2Array(-16, 9, 0, -6, 16, 3, 16, 9, 0, 17)

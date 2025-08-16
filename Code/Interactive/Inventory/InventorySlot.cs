@@ -76,7 +76,7 @@ public partial class InventorySlot : Node2D
         // Add item to slot and position in new owning scene.
         Item = item;
         Item.SetHighlight(false);
-        Item.SetZIndexOffset(1);
+        //Item.SetZIndexOffset(1);
         Item.Reparent(this);
         Item.GlobalPosition = GlobalPosition.Round();
         Item.IsInteractive = false;
