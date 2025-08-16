@@ -7,6 +7,7 @@
 script = ExtResource("2_ikq35")
 PartType = 0
 ModularItemType = 0
+PartState = 0
 DisplayName = "Broken Sword Blade"
 Description = "This once mighty blade is now badly in need of replacing."
 Textures = Array[Texture2D]([ExtResource("1_hfk0d")])

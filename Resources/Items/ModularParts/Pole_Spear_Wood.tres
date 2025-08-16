@@ -7,6 +7,7 @@
 script = ExtResource("2_8axlk")
 PartType = 4
 ModularItemType = 1
+PartState = 0
 DisplayName = "Wooden Spear Grip"
 Description = "The main pole of a Spear"
 Textures = Array[Texture2D]([ExtResource("1_xt71y")])

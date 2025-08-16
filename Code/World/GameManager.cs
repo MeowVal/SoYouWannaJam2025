@@ -184,7 +184,7 @@ public partial class GameManager : Node2D
 		var newItem = _modularItemScene.Instantiate<ModularItem>();
 		if (ModularItemResources != null)
 		{
-			newItem.ItemResource = ModularItemResources[GD.RandRange(0, NpcResources.Count - 1)];
+			newItem.ItemResource = ModularItemResources[GD.RandRange(0, ModularItemResources.Count - 1)];
 		}
 
 		GetNode("/root/GameManager/Isometric").AddChild(newItem);

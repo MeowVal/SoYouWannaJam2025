@@ -7,6 +7,7 @@
 script = ExtResource("2_whm86")
 PartType = 1
 ModularItemType = 0
+PartState = 0
 DisplayName = "Wooden Sword Grip"
 Description = "The grip of a broadsword, intricately carved out of a piece of wood."
 Textures = Array[Texture2D]([ExtResource("1_yuj3t")])
