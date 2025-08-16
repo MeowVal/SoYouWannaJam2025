@@ -56,22 +56,22 @@ public partial class CharacterControl : CharacterBody2D
 		else if (@event.IsActionPressed("MoveRight") && !Frozen)
 		{
 			_direction = "right";
-			_charSprite.Play("RunNE");
+			//_charSprite.Play("RunNE");
 		}
 		else if (@event.IsActionPressed("MoveLeft") && !Frozen)
 		{
 			_direction = "left";
-			_charSprite.Play("RunSW");
+			//_charSprite.Play("RunSW");
 		}
 		else if (@event.IsActionPressed("MoveUp") && !Frozen)
 		{
 			_direction = "up";
-			_charSprite.Play("RunNW");
+			//_charSprite.Play("RunNW");
 		}
 		else if (@event.IsActionPressed("MoveDown") && !Frozen)
 		{
 			_direction = "down";
-			_charSprite.Play("RunSE");
+			//_charSprite.Play("RunSE");
 		}
 	}
 
@@ -112,7 +112,7 @@ public partial class CharacterControl : CharacterBody2D
 		else
 		{
 			Velocity = Velocity.MoveToward(Vector2.Zero, (float)(DecelerationSpeed * World.Global.GameScale));
-			switch (_direction)
+			/*switch (_direction)
 			{
 				case "right":
 					_charSprite.Play("idleNE");
@@ -126,7 +126,7 @@ public partial class CharacterControl : CharacterBody2D
 				case "down":
 					_charSprite.Play("idleSE");
 					break;
-			}
+			}*/
 		}
 		MoveAndSlide();
 	}

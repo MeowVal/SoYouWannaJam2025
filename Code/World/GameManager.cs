@@ -88,7 +88,8 @@ public partial class GameManager : Node2D
 		GD.Print(CycleLantern);
 		if (CycleLantern == null) return;
 		CycleLantern.CycleLantern += LanternChanged;
-		
+
+		Global.GameDay = 0;
 	}
 
 	public ModularItem NewItem(EModularItemType itemType)
@@ -148,6 +149,7 @@ public partial class GameManager : Node2D
 		if (onCycleLantern)
 		{
 			GD.Print("IT'S DAY TIME !");
+			
 		}
 		else
 		{

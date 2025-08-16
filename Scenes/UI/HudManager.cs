@@ -11,6 +11,7 @@ public partial class HudManager : CanvasLayer
 
     private static bool _runClock;
     private static float _clock;
+    private static bool _isDayUpdated;
     
     public override void _Ready()
     {
@@ -19,6 +20,7 @@ public partial class HudManager : CanvasLayer
         //GetViewport().AddChild(this);
         //Position = Vector2.Zero;
 
+        this.GetNode<Label>("%Date").Text = "Night: " + Global.GameDay.ToString();
         this.GetNode<Label>("%TimeOfDay").Text = "00:00";
         _runClock = false;
         
@@ -27,6 +29,11 @@ public partial class HudManager : CanvasLayer
     {
         if (Global.GameTimer > 0)
         {
+            if (!_isDayUpdated)
+            {
+                _isDayUpdated = true;
+                this.GetNode<Label>("%Date").Text = "Day:" + Global.GameDay.ToString();
+            }
             // Convert minutes to hours and minutes
             float currentTime = Global.GameTimer * 86400f;
             
@@ -35,6 +42,14 @@ public partial class HudManager : CanvasLayer
             // Example: Print the current time in HH:MM format
             
             this.GetNode<Label>("%TimeOfDay").Text = $"{hours:D2}:{minutes:D2}";
+        }
+        else
+        {
+            if (_isDayUpdated)
+            {
+                _isDayUpdated = false; 
+                this.GetNode<Label>("%Date").Text = "Night:" + Global.GameDay.ToString();
+            } 
         }
     }
 }

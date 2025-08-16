@@ -1,32 +1,60 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgbg8jjt6swx6"]
+[gd_scene load_steps=5 format=3 uid="uid://cgbg8jjt6swx6"]
 
 [ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_cg3bl"]
-[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_1ijhs"]
-[ext_resource type="Resource" uid="uid://bhmmqxxc646jd" path="res://Resources/Recipes/Forge/IronIngot.tres" id="3_l3fy7"]
-[ext_resource type="Resource" uid="uid://bv5xegexuhyr3" path="res://Resources/Recipes/Forge/GoldIngot.tres" id="4_1ijhs"]
-[ext_resource type="Resource" uid="uid://d2p8krc88hiwy" path="res://Resources/Recipes/Forge/Mytrilngot.tres" id="5_g4254"]
-[ext_resource type="Texture2D" uid="uid://di4ia2pb6wg5b" path="res://Assets/Sprites/environment/Building/Forge.png" id="6_1ijhs"]
+[ext_resource type="Texture2D" uid="uid://cr24elq4q4eye" path="res://Assets/Sprites/Environment/Forge.png" id="6_1ijhs"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_skwst"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="7_wai8b"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1ijhs"]
-radius = 32.0
-
 [node name="ForgeStation" type="Area2D"]
+y_sort_enabled = true
 script = ExtResource("1_cg3bl")
-DisplayName = "Forge Station"
-Recipes = Array[ExtResource("2_1ijhs")]([ExtResource("3_l3fy7"), ExtResource("4_1ijhs"), ExtResource("5_g4254")])
-ColliderRadius = 20.0
 
-[node name="StationSprite" type="Sprite2D" parent="."]
+[node name="Top" type="Sprite2D" parent="."]
+position = Vector2(39, 18)
 texture = ExtResource("6_1ijhs")
+offset = Vector2(-27, -46)
+region_enabled = true
+region_rect = Rect2(24, 0, 72, 56)
 
-[node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_1ijhs")
-debug_color = Color(0.674557, 0.304912, 1, 0.42)
+[node name="Lower" type="Sprite2D" parent="."]
+position = Vector2(39, 29)
+texture = ExtResource("6_1ijhs")
+offset = Vector2(-3, -9)
+region_enabled = true
+region_rect = Rect2(72, 56, 24, 40)
+
+[node name="Lower2" type="Sprite2D" parent="."]
+position = Vector2(0, 32)
+texture = ExtResource("6_1ijhs")
+offset = Vector2(12, -12)
+region_enabled = true
+region_rect = Rect2(48, 56, 24, 40)
+
+[node name="Lower3" type="Sprite2D" parent="."]
+position = Vector2(-24, 20)
+texture = ExtResource("6_1ijhs")
+offset = Vector2(12, 0)
+region_enabled = true
+region_rect = Rect2(24, 56, 24, 40)
+
+[node name="Lower4" type="Sprite2D" parent="."]
+position = Vector2(-48, 8)
+texture = ExtResource("6_1ijhs")
+offset = Vector2(12, -16)
+region_enabled = true
+region_rect = Rect2(0, 0, 24, 96)
 
 [node name="InterfaceLocation" type="Node2D" parent="."]
 position = Vector2(0, -16)
+
+[node name="InteractZone" type="CollisionPolygon2D" parent="."]
+physics_interpolation_mode = 1
+visible = false
+modulate = Color(1.44392e-06, 0.703454, 0.650912, 1)
+z_index = 1
+position = Vector2(47, -7)
+scale = Vector2(0.286377, 0.360491)
+polygon = PackedVector2Array(-108.396, 132.624, -331.877, 41.082, -331.877, 16.116, -108.396, 104.884)
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("6_skwst")
@@ -36,3 +64,9 @@ metadata/_custom_type_script = "uid://usn4a73qqvca"
 position = Vector2(0, -9)
 script = ExtResource("7_wai8b")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="CollisionBarrier" type="StaticBody2D" parent="."]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
+polygon = PackedVector2Array(-50, 9, -39, -4, -23, -11, 47, 18, 47, 26, 16, 43)
