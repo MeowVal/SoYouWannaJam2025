@@ -33,6 +33,10 @@ public partial class DayCycleLantern : Node2D
     {
         if (trigger is TriggerType.UseAction && !_animator.IsPlaying())
         {
+            GD.Print(Global.GameDay);
+            Global.GameDay += 1;
+            GD.Print(Global.GameDay);
+            _interact.IsInteractive = false;
             GD.Print("Started DayNightCycle");
             if (DawnFrame > 0.0)
             {
@@ -61,12 +65,27 @@ public partial class DayCycleLantern : Node2D
         EmitSignal(SignalName.CycleLantern, false);
         _animator.Stop();
         _dawnHandled = false;
+        
+        //Turn Interaction back on to trigger next day.
+        _interact.IsInteractive = true;
+        this.GetNode<Sprite2D>("Interactible/Lantern").Frame = 2;
     }
 
     public override void _Process(double delta)
     {
         if (_animator.IsPlaying())
         {
+            if (_animator.CurrentAnimationPosition is < 0.25 or > 0.7)
+            {
+                this.GetNode<Sprite2D>("Interactible/Lantern").Frame = 0; //Turn on lantern.
+                this.GetNode<PointLight2D>("Interactible/Lantern/PointLight2D2").Enabled = true;
+            }
+            else
+            {
+                this.GetNode<Sprite2D>("Interactible/Lantern").Frame = 1;
+                this.GetNode<PointLight2D>("Interactible/Lantern/PointLight2D2").Enabled = false;
+            }
+
             Global.GameTimer = (float)_animator.CurrentAnimationPosition;
             
             if (_animator.CurrentAnimationPosition > DawnFrame && !_dawnHandled)
