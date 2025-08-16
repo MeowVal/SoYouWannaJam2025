@@ -31,7 +31,7 @@ public partial class GameManager : Node2D
 	[Export] public DayCycleLantern CycleLantern;
 	private Godot.Collections.Array<Npc.Friendly.Npc> _npcs = [] ;
 	private Godot.Collections.Array<Npc.Friendly.Npc> _hostileNpc = [] ;
-	[Export] public int NpcMaxCount = 20;
+	[Export] public int MaxNpcCount = 20;
 	private Node2D _npcSpawnLocation;
 	private Node2D _frontDesk;
 	private Area2D _leaveAreaNode;
@@ -41,8 +41,12 @@ public partial class GameManager : Node2D
 	private const string ModularPartsFolderPath = "res://Resources/Items/ModularParts/";
 	private PackedScene _modularItemScene;
 	private PathFollow2D _hostileNpcSpawnLocation;
+	private List<Vector2> _queuePositions = new List<Vector2>();
+	private List<Npc.Friendly.Npc> _npcQueue = new();
+	[Export] public Vector2I QueueDirection = new Vector2I(0, 1); // Behind the target
 	
 	public Dictionary<EModularItemType, Dictionary<EPartType, Godot.Collections.Array<ModularPartTemplate>>> ModularParts = new();
+	private TileMapLayer _tileLayer; 
 	
 	public override void _Ready()
 	{
@@ -87,10 +91,57 @@ public partial class GameManager : Node2D
 		GD.Print(CycleLantern);
 		if (CycleLantern == null) return;
 		CycleLantern.CycleLantern += LanternChanged;
-
 		Global.GameDay = 0;
+		
 	}
 
+	public void RequestToJoin(Npc.Friendly.Npc npc)
+	{
+		if (_npcQueue.Contains(npc) || _npcQueue.Count >= MaxNpcCount)
+			return;
+
+		_npcQueue.Add(npc);
+		AssignQueuePositions();
+	}
+	private List<Vector2> GenerateQueuePositions(Vector2 targetPos, int count)
+	{
+		var list = new List<Vector2>();
+		var startCell = _tileLayer.LocalToMap(targetPos);
+
+		for (int i = 1; i <= count; i++)
+		{
+			Vector2I cell = startCell + QueueDirection * i;
+			Vector2 world = _tileLayer.MapToLocal(cell);
+
+			list.Add(world);
+		}
+
+		return list;
+	}
+
+	private bool IsCellWalkable(Vector2I cell)
+	{
+		// Only returns true if tile is empty or marked as walkable
+		// You can customize this to check tile data or metadata
+		return _tileLayer.GetCellSourceId(cell) == -1;
+	}
+	public void LeaveQueue(Npc.Friendly.Npc npc)
+	{
+		if (!_npcQueue.Contains(npc))
+			return;
+
+		_npcQueue.Remove(npc);
+		AssignQueuePositions();
+	}
+	private void AssignQueuePositions()
+	{
+		var positions = GenerateQueuePositions(_frontDesk.GlobalPosition, _npcQueue.Count);
+
+		for (int i = 0; i < _npcQueue.Count; i++)
+		{
+			_npcQueue[i].AssignQueueSlot(positions[i]);
+		}
+	}
 	public ModularItem NewItem(EModularItemType itemType)
 	{
 		if (_modularItemScene==null || ModularParts[itemType].Count == 0 ) return null;
@@ -168,6 +219,8 @@ public partial class GameManager : Node2D
 			GD.Print("AWW IT'S NIGHT TIME !");
 		}
 	}
+	
+	
 
 	private void OnNpcTimerTimeout()
 	{
@@ -195,7 +248,7 @@ public partial class GameManager : Node2D
 		//GD.Print(npc.GetType() );
 		if (npc is HostileNpc)
 		{
-			if (_hostileNpc.Count >= NpcMaxCount) return;
+			if (_hostileNpc.Count >= MaxNpcCount) return;
 			npc.NpcResource = HostileNpcResources[GD.RandRange(0,HostileNpcResources.Count -1)];
 			_hostileNpcSpawnLocation.ProgressRatio = GD.Randf();
 			npc.Position = _hostileNpcSpawnLocation.Position * 4;
@@ -206,15 +259,16 @@ public partial class GameManager : Node2D
 		}
 		else if  (npc is Npc.Friendly.Npc)
 		{
-			if (_npcs.Count >= NpcMaxCount)return;
+			if (_npcs.Count >= MaxNpcCount)return;
 			npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
 			npc.Position = _npcSpawnLocation.Position * 4 ;
 			npc.Scale = Vector2.One * 4;
-			npc.Target = _frontDesk;
+			//npc.Target = _frontDesk;
 			npc.LeaveAreaNode = _leaveAreaNode;
 			_npcs.Add(npc);
 			AddChild(npc);
 			var npcInteractor = (NpcInteractor)npc.FindChild("NpcInteractor");
+			RequestToJoin(npc);
 			npcInteractor.RequestComplete += OnRequestComplete;
 		}
 		
@@ -223,6 +277,8 @@ public partial class GameManager : Node2D
 	private void OnRequestComplete(Npc.Friendly.Npc npc)
 	{
 		var hostileTarget = _hostileNpc[GD.RandRange(0, _hostileNpc.Count - 1)];
+		LeaveQueue(npc);
+		npc.LeaveQueue();
 		npc.Target = hostileTarget;
 	}
 	
