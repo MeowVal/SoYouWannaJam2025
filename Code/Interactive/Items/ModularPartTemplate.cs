@@ -12,6 +12,8 @@ public partial class ModularPartTemplate : GenericItemTemplate
     public EPartType PartType;
     [Export] // The type of Modular Item this can be attached to.
     public EModularItemType ModularItemType;
+    [Export] // If the part is broken or not.
+    public EPartState PartState = EPartState.New;
 
     /*[ExportCategory("Modular Stats")]
     [ExportGroup("Damage")] [Export] // The root base damage of the weapon

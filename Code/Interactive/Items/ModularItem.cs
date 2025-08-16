@@ -20,6 +20,13 @@ public enum EPartType
     Hood
 }
 
+public enum EPartState
+{
+    New,
+    Used,
+    Broken
+}
+
 public enum EModularItemType
 {
     Sword,
