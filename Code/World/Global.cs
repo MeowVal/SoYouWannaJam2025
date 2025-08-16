@@ -7,6 +7,9 @@ namespace SoYouWANNAJam2025.Code.World;
 
 public partial class Global : Node2D
 {
+    [Signal]
+    public delegate void DebugConsoleEventHandler(string onDebugCommand);
+    
     public const int GameScale = 4;
     public static float GameTimer;
     public static int GameDay;
@@ -17,5 +20,8 @@ public partial class Global : Node2D
     {
         base._Ready();
         Grid = GetNode<TileMapLayer>("/root/GameManager/GameWorld/Entities");
+        AddUserSignal("DebugConsole");
+
+        EmitSignal("DebugConsole", "Dave is an AoE2 Priest");
     }
 }

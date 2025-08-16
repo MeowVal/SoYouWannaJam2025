@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cr24elq4q4eye"
-path="res://.godot/imported/Forge.png-ccbccfc93d526d752fc648e503058f1d.ctex"
+path="res://.godot/imported/Forge.png-180f9f89153b34b14f3aea3cca32e6c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/environment/Forge.png"
-dest_files=["res://.godot/imported/Forge.png-ccbccfc93d526d752fc648e503058f1d.ctex"]
+source_file="res://Assets/Sprites/Environment/Forge.png"
+dest_files=["res://.godot/imported/Forge.png-180f9f89153b34b14f3aea3cca32e6c9.ctex"]
 
 [params]
 

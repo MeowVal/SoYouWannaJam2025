@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bhmmqxxc646jd" path="res://Resources/Recipes/Forge/IronIngot.tres" id="3_l3fy7"]
 [ext_resource type="Resource" uid="uid://bv5xegexuhyr3" path="res://Resources/Recipes/Forge/GoldIngot.tres" id="4_1ijhs"]
 [ext_resource type="Resource" uid="uid://d2p8krc88hiwy" path="res://Resources/Recipes/Forge/Mytrilngot.tres" id="5_g4254"]
-[ext_resource type="Texture2D" uid="uid://cr24elq4q4eye" path="res://Assets/Sprites/environment/Forge.png" id="6_1ijhs"]
+[ext_resource type="Texture2D" uid="uid://cr24elq4q4eye" path="res://Assets/Sprites/Environment/Forge.png" id="6_1ijhs"]
 [ext_resource type="Resource" uid="uid://t0q0gku2rrrq" path="res://Resources/Recipes/Forge/IronScrap.tres" id="6_lrg27"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_skwst"]
 [ext_resource type="Resource" uid="uid://c2rxv6l1kh7cs" path="res://Resources/Recipes/Forge/GoldScrap.tres" id="7_skwst"]
@@ -15,7 +15,6 @@
 [node name="ForgeStation" type="Area2D"]
 y_sort_enabled = true
 script = ExtResource("1_cg3bl")
-AutoCraft = true
 Recipes = Array[ExtResource("2_1ijhs")]([ExtResource("3_l3fy7"), ExtResource("4_1ijhs"), ExtResource("5_g4254"), ExtResource("6_lrg27"), ExtResource("7_skwst"), ExtResource("8_wai8b")])
 
 [node name="Top" type="Sprite2D" parent="."]

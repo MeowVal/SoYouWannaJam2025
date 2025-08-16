@@ -72,7 +72,7 @@ public partial class ItemMap : EditorPlugin
 				var node = EditorInterface.Singleton.GetEditedSceneRoot().GetNodeOrNull<TileMapLayer>(WorldMap);
 				if (node != null)
 				{
-					GD.Print(node);
+					GD.Print(node, "test");
 					_worldMap = node;
 				}
 		}

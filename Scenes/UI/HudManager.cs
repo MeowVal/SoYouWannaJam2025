@@ -23,8 +23,16 @@ public partial class HudManager : CanvasLayer
         this.GetNode<Label>("%Date").Text = "Night: " + Global.GameDay.ToString();
         this.GetNode<Label>("%TimeOfDay").Text = "00:00";
         _runClock = false;
-        
+
+        //Global.DebugConsole += Terminal;
+        Connect("DebugConsole", new Callable(this, nameof(Terminal)));
     }
+
+    private void Terminal(string command)
+    {
+        GD.Print("THIS IS A CONSOLOE STRING: ;", command);
+    }
+    
     public override void _Process(double delta)
     {
         if (Global.GameTimer > 0)

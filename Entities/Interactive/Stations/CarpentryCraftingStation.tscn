@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqh3oq2qyafiu"]
+
+[ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_3ll2t"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_f16vl"]
+[ext_resource type="Resource" uid="uid://cgodai2grhqmd" path="res://Resources/Recipes/TestSwordBladeReplace.tres" id="3_pxemq"]
+[ext_resource type="Texture2D" uid="uid://bvcgmeveopmmp" path="res://Assets/Sprites/Environment/CarpentryTable.png" id="4_nig01"]
+[ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="5_b5pwk"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="6_fqcdd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ll2t"]
+radius = 16.0
+
+[node name="GenericCraftingStation" type="Area2D"]
+script = ExtResource("1_3ll2t")
+Recipes = Array[ExtResource("2_f16vl")]([ExtResource("3_pxemq")])
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3ll2t")
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
+
+[node name="StationSprite" type="Sprite2D" parent="."]
+position = Vector2(3, -6)
+texture = ExtResource("4_nig01")
+offset = Vector2(4, -16)
+region_enabled = true
+region_rect = Rect2(16, 0, 48, 32)
+
+[node name="StationSprite2" type="Sprite2D" parent="."]
+position = Vector2(-33, 1)
+texture = ExtResource("4_nig01")
+offset = Vector2(8, -7)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 64)
+
+[node name="StationSprite3" type="Sprite2D" parent="."]
+position = Vector2(-15, 10)
+texture = ExtResource("4_nig01")
+offset = Vector2(10, 0)
+region_enabled = true
+region_rect = Rect2(16, 32, 24, 32)
+
+[node name="StationSprite4" type="Sprite2D" parent="."]
+position = Vector2(30, 22)
+texture = ExtResource("4_nig01")
+offset = Vector2(-11, -12)
+region_enabled = true
+region_rect = Rect2(40, 32, 24, 32)
+
+[node name="ItemOffset" type="Node2D" parent="."]
+position = Vector2(0, -7)
+
+[node name="InterfaceLocation" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="Inventory" type="Node2D" parent="."]
+script = ExtResource("5_b5pwk")
+AllowModularItem = true
+metadata/_custom_type_script = "uid://usn4a73qqvca"
+
+[node name="InventorySlot1" type="Node2D" parent="Inventory"]
+position = Vector2(-9, -6)
+script = ExtResource("6_fqcdd")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InventorySlot2" type="Node2D" parent="Inventory"]
+position = Vector2(9, -6)
+script = ExtResource("6_fqcdd")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="CollisionBarrier" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
+polygon = PackedVector2Array(-34, 2, -34, -7, -23, -13, 32, 13, 32, 23, 18, 30)

@@ -1,13 +1,13 @@
 [gd_resource type="TileSet" load_steps=18 format=3 uid="uid://u8qkhniw6s8u"]
 
-[ext_resource type="Texture2D" uid="uid://35681p253s3" path="res://Assets/Sprites/environment/WoodFrame.png" id="1_i5efm"]
-[ext_resource type="Texture2D" uid="uid://vhpvoumgnu1q" path="res://Assets/Sprites/environment/WoodTable.png" id="2_u7u2v"]
-[ext_resource type="Texture2D" uid="uid://mfene7pfc233" path="res://Assets/Sprites/environment/StoneFloorsSandstone.png" id="3_dr51h"]
-[ext_resource type="Texture2D" uid="uid://6lk5ypn503pn" path="res://Assets/Sprites/environment/StoneFloorsSlate.png" id="4_jil8u"]
-[ext_resource type="Texture2D" uid="uid://8rk6eyhe1a8" path="res://Assets/Sprites/environment/StoneWallsSandstone.png" id="5_8kenn"]
-[ext_resource type="Texture2D" uid="uid://ct0xt7evt6t5h" path="res://Assets/Sprites/environment/StoneWallsSlate.png" id="6_uorij"]
+[ext_resource type="Texture2D" uid="uid://35681p253s3" path="res://Assets/Sprites/Environment/WoodFrame.png" id="1_i5efm"]
+[ext_resource type="Texture2D" uid="uid://vhpvoumgnu1q" path="res://Assets/Sprites/Environment/WoodTable.png" id="2_u7u2v"]
+[ext_resource type="Texture2D" uid="uid://mfene7pfc233" path="res://Assets/Sprites/Environment/StoneFloorsSandstone.png" id="3_dr51h"]
+[ext_resource type="Texture2D" uid="uid://6lk5ypn503pn" path="res://Assets/Sprites/Environment/StoneFloorsSlate.png" id="4_jil8u"]
+[ext_resource type="Texture2D" uid="uid://8rk6eyhe1a8" path="res://Assets/Sprites/Environment/StoneWallsSandstone.png" id="5_8kenn"]
+[ext_resource type="Texture2D" uid="uid://ct0xt7evt6t5h" path="res://Assets/Sprites/Environment/StoneWallsSlate.png" id="6_uorij"]
 [ext_resource type="Texture2D" uid="uid://8j4lqu8us3ml" path="res://Assets/spritesheetTempAsset.png" id="7_n2m4h"]
-[ext_resource type="Texture2D" uid="uid://hl78vvil2ajh" path="res://Assets/Sprites/environment/WoodLog.png" id="8_le8wu"]
+[ext_resource type="Texture2D" uid="uid://hl78vvil2ajh" path="res://Assets/Sprites/Environment/WoodLog.png" id="8_le8wu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mg45w"]
 texture = ExtResource("1_i5efm")
