@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code.Interactive.Items;
+using SoYouWANNAJam2025.Entities.Interactive;
 
 namespace SoYouWANNAJam2025.Code.Player;
 
@@ -36,7 +37,10 @@ public partial class PlayerInteractor : Area2D
         for (var i = 0; i < PossibleTargets.Count; i++)
         {
             // Ignore target if its an item and we already have one
-            if (InventorySlot.HasItem() && PossibleTargets[i] is GenericItem) continue;
+            if (InventorySlot.HasItem() && PossibleTargets[i] is GenericItem item)
+            {
+                if (!item.ItemResource.AllowUseAction) continue;
+            };
 
             // Get distance between target and us
             var distance = PossibleTargets[i].GlobalPosition.DistanceTo(_player.GlobalPosition);
