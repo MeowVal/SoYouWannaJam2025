@@ -177,6 +177,26 @@ NpcResource = ExtResource("2_jvg37")
 [node name="NpcInteractor" type="Area2D" parent="."]
 script = ExtResource("6_c6mha")
 
+[node name="Inventory" type="Node2D" parent="NpcInteractor"]
+position = Vector2(0, -39)
+script = ExtResource("6_2i02p")
+metadata/_custom_type_script = "uid://usn4a73qqvca"
+
+[node name="InventorySlot1" type="Node2D" parent="NpcInteractor/Inventory"]
+position = Vector2(0, -16)
+script = ExtResource("5_mrx7r")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InventorySlot2" type="Node2D" parent="NpcInteractor/Inventory"]
+position = Vector2(16, -16)
+script = ExtResource("5_mrx7r")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InventorySlot3" type="Node2D" parent="NpcInteractor/Inventory"]
+position = Vector2(27, -16)
+script = ExtResource("5_mrx7r")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
 [node name="Sprite2D" type="Sprite2D" parent="NpcInteractor"]
 texture = ExtResource("4_i3ytn")
 offset = Vector2(0, -14)
@@ -196,25 +216,6 @@ debug_color = Color(0.980392, 0, 0.376471, 0.0705882)
 [node name="DistanceCheckTimer" type="Timer" parent="NpcInteractor"]
 wait_time = 0.1
 autostart = true
-
-[node name="Inventory" type="Node2D" parent="NpcInteractor"]
-script = ExtResource("6_2i02p")
-metadata/_custom_type_script = "uid://usn4a73qqvca"
-
-[node name="InventorySlot1" type="Node2D" parent="NpcInteractor/Inventory"]
-position = Vector2(-16, -16)
-script = ExtResource("5_mrx7r")
-metadata/_custom_type_script = "uid://1cpfasjkacse"
-
-[node name="InventorySlot2" type="Node2D" parent="NpcInteractor/Inventory"]
-position = Vector2(16, -16)
-script = ExtResource("5_mrx7r")
-metadata/_custom_type_script = "uid://1cpfasjkacse"
-
-[node name="InventorySlot3" type="Node2D" parent="NpcInteractor/Inventory"]
-position = Vector2(0, -16)
-script = ExtResource("5_mrx7r")
-metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="CombatTimer" type="Timer" parent="NpcInteractor"]
 wait_time = 10.0
