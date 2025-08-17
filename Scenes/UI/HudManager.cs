@@ -8,7 +8,24 @@ namespace SoYouWANNAJam2025.Scenes.UI;
 public partial class HudManager : CanvasLayer
 {
     private static bool _isDayUpdated;
-    
+    private Global _global;
+    public override void _EnterTree()
+    {
+        _global = GetNode<Global>("/root/Global");
+        _global.CurrentSceneChanged += GlobalOnCurrentSceneChanged;
+        if (_global.CurrentScene == "MainMenu") this.Visible = false;
+    }
+
+    private void GlobalOnCurrentSceneChanged(string sceneName)
+    {
+        this.Visible = sceneName switch
+        {
+            "MainMenu" => false,
+            "Island" => true,
+            //_ => this.Visible
+        };
+    }
+
     public override void _Ready()
     {
         // var canvas = GetParent<CanvasLayer>();

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Godot;
 
@@ -47,7 +48,21 @@ public partial class GameManager : Node2D
 	
 	public Dictionary<EModularItemType, Dictionary<EPartType, Godot.Collections.Array<ModularPartTemplate>>> ModularParts = new();
 	private TileMapLayer _tileLayer;
-	
+
+	public override void _EnterTree()
+	{
+		Global.Grid = GetNode<TileMapLayer>("/root/GameManager/GameWorld/Entities");
+		Global.GameManager = GetNode<GameManager>("/root/GameManager");
+		Global.Camera = GetNode<Camera>("/root/GameManager/Camera");
+	}
+
+	public override void _ExitTree()
+	{
+		Global.Grid = null;
+		Global.GameManager = null;
+		Global.Camera = null;
+	}
+
 	public override void _Ready()
 	{
 		string[] paths = [NpcResourceFolderPath, HostileNpcResourceFolderPath, ModularItemFolderPath, ModularPartsFolderPath];
@@ -250,7 +265,9 @@ public partial class GameManager : Node2D
 		if (onCycleLantern)
 		{
 			GD.Print("IT'S DAY TIME !");
-			
+			//Example of changing the Camera Target.
+			//Global.Camera.SmoothingSpeed = 1;
+			//Global.Camera.FollowingNode = GetNode("GameWorld/Entities/Dispenser14") as Node2D;
 		}
 		else
 		{

@@ -14,14 +14,30 @@ public partial class Global : Node2D
     public static CharacterControl Player;
     public static TileMapLayer Grid;
     public static GameManager GameManager;
+    public static Camera Camera;
+    [Signal]
+    public delegate void CurrentSceneChangedEventHandler(string sceneName);
+    
+    private static string _currentScene = "MainMenu";
+
+    public string CurrentScene
+    {
+        get => _currentScene;
+        set 
+        {
+            if (_currentScene != value)
+            {
+                _currentScene = value;
+                EmitSignal(nameof(CurrentSceneChanged), _currentScene);;
+            }
+        }
+    }
 
     public override void _Ready()
     {
         base._Ready();
-        Grid = GetNode<TileMapLayer>("/root/GameManager/GameWorld/Entities");
-        GameManager = GetNode<GameManager>("/root/GameManager");
-        /*AddUserSignal("DebugConsole");
-
-        EmitSignal("DebugConsole", "Dave is an AoE2 Priest");*/
+       // Grid = GetNode<TileMapLayer>("/root/GameManager/GameWorld/Entities");
+       // GameManager = GetNode<GameManager>("/root/GameManager");
+       // Camera = GetNode<Camera>("/root/GameManager/Camera");
     }
 }

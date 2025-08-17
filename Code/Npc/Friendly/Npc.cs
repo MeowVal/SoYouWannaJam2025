@@ -81,7 +81,8 @@ public partial class Npc : CharacterBody2D
             State = "idle";
             if (Target is not HostileNpc) return;
         }
-        if (Target == null) return;
+        
+        //if (Target == null) return;
         State = "walk";
         
         // Get pathfinding information
