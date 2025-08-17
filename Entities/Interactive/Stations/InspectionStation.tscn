@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwho24gjrxuig"]
 
 [ext_resource type="Script" uid="uid://cgsrx2wyjy1ap" path="res://Code/Interactive/Stations/InspectionStation.cs" id="1_20cqo"]
-[ext_resource type="Texture2D" uid="uid://dc2iku63wb4ku" path="res://Assets/Sprites/Environment/TinkeringTable.png" id="2_klfgx"]
+[ext_resource type="Texture2D" uid="uid://du7aw18o2x44v" path="res://Assets/Sprites/Environment/InspectionTable.png" id="3_klfgx"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_die6g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5p8jk"]
@@ -29,7 +29,7 @@ metadata/_custom_type_script = "uid://1cpfasjkacse"
 [node name="StationSprite2" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(27, 15)
-texture = ExtResource("2_klfgx")
+texture = ExtResource("3_klfgx")
 offset = Vector2(-19, -31)
 region_enabled = true
 region_rect = Rect2(16, 0, 48, 32)
@@ -37,7 +37,7 @@ region_rect = Rect2(16, 0, 48, 32)
 [node name="StationSprite3" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-32, 7)
-texture = ExtResource("2_klfgx")
+texture = ExtResource("3_klfgx")
 offset = Vector2(8, -7)
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 64)
@@ -45,7 +45,7 @@ region_rect = Rect2(0, 0, 16, 64)
 [node name="StationSprite4" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-14, 16)
-texture = ExtResource("2_klfgx")
+texture = ExtResource("3_klfgx")
 offset = Vector2(10, 0)
 region_enabled = true
 region_rect = Rect2(16, 32, 24, 32)
@@ -53,7 +53,7 @@ region_rect = Rect2(16, 32, 24, 32)
 [node name="StationSprite5" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(31, 28)
-texture = ExtResource("2_klfgx")
+texture = ExtResource("3_klfgx")
 offset = Vector2(-11, -12)
 region_enabled = true
 region_rect = Rect2(40, 32, 24, 32)
@@ -63,21 +63,3 @@ position = Vector2(2, 5)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
 polygon = PackedVector2Array(-34, 2, -34, -7, -23, -13, 32, 13, 32, 23, 18, 30)
-
-[node name="Label" type="Label" parent="."]
-z_index = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = 0.999999
-offset_right = 33.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = 0.446804
-pivot_offset = Vector2(40.5, 23)
-text = "Inspection"
-horizontal_alignment = 1
