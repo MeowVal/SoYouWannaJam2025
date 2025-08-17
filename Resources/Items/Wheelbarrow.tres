@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://d22k5r8ngd2cn"]
+
+[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="1_lnjlc"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_jdedr"]
+
+[resource]
+script = ExtResource("2_jdedr")
+DisplayName = "Blacksmith's Barrow"
+Description = "A small wheelbarrow used to carry items. Nobody is sure why you pick it up instead of wheeling it, but it seems to work anyhow."
+Textures = Array[Texture2D]([ExtResource("1_lnjlc")])
+Colours = Array[Color]([Color(1, 1, 1, 1)])
+Size = 16.0
+AllowUseAction = true
+metadata/_custom_type_script = "uid://bvp0bfdpjbbk2"
