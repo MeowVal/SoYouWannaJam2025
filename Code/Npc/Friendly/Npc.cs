@@ -5,6 +5,7 @@ using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Npc.Hostile;
 
 namespace SoYouWANNAJam2025.Code.Npc.Friendly;
+
 [Tool]
 public partial class Npc : CharacterBody2D
 {
@@ -14,7 +15,7 @@ public partial class Npc : CharacterBody2D
     public delegate void LeftQueueEventHandler(Npc npc);
     [Export] public Timer MoodTimer; // How often the npc's mode decreases
     [Export] public float MoodDecreaseAmount = 10; // How much the npc's mood decreases by
-    [Export] private float _speed = 30f; // How fast the npc moves
+    [Export] public float Speed = 60f; // How fast the npc moves
     public string State = "idle"; // The animation stat the npc is in
     public Vector2 Direction = Vector2.Down; // The direction the npc is facing
     private string _directionName= "Down"; // Variable for storing npc direction
@@ -42,6 +43,8 @@ public partial class Npc : CharacterBody2D
     private Vector2? _queueTarget = null;
     private Vector2? _lastAssignedSlot = null;
     private Vector2? _queueSlot = null;
+    public bool RequestComplete = false;
+    public bool RequestGiven = false;
     
     public ModularItemTemplate WantedItemTemplate;
     
@@ -53,8 +56,7 @@ public partial class Npc : CharacterBody2D
         _sprite2D = GetNode<Sprite2D>("NpcInteractor/Sprite2D");
         if (GetNode("NpcInteractor/Inventory") is Inventory slot) NpcInventory = slot;
         MoodTimer = GetNode<Timer>("MoodTimer");
-        if (NpcResource != null)
-            SetupNpc();
+        if (NpcResource != null) SetupNpc();
         // So that the editor does not run the code below it. 
         if(Engine.IsEditorHint()) return;
         // Connects to the MoodTimer 
@@ -62,7 +64,7 @@ public partial class Npc : CharacterBody2D
         // Sets up the navigation agent after the first physics frame 
         CallDeferred("SetupNavAgent");
         // Starts the MoodTimer
-        MoodTimer.Start();
+        //MoodTimer.Start();
         // Connects to the signal from the navigation agent 
         Callable callable = new Callable(this, "_VelocityComputed");
         _navAgent.Connect("velocity_computed", callable);
@@ -79,6 +81,11 @@ public partial class Npc : CharacterBody2D
         if (_navAgent.IsNavigationFinished())
         {
             State = "idle";
+            if (RequestComplete)
+            {
+                QueueFree();
+                GD.Print("Goodbye, my finale message");
+            }
             if (Target is not HostileNpc) return;
         }
         if (Target == null && _queueTarget == null) return;
@@ -98,7 +105,7 @@ public partial class Npc : CharacterBody2D
         }
         // Calculate the new direction
         var dir = currentAgentPosition.DirectionTo(nextPathPosition).Normalized();
-        var newVelocity = dir * _speed;
+        var newVelocity = dir * Speed;
 
 
         /*if (currentAgentPosition.DistanceTo(nextPathPosition) <= _stopThreshold)
@@ -128,6 +135,12 @@ public partial class Npc : CharacterBody2D
 
     public void LeaveQueue()
     {
+        Target = LeaveAreaNode;
+        if (Target == null) return;
+        _navAgent.TargetPosition = Target.GlobalPosition;
+        Speed = Speed * 2;
+        EmitSignal(SignalName.LeftQueue, this);
+        
         _lastAssignedSlot = null;
         _queueSlot = null;
         _queueTarget = null;
@@ -188,20 +201,15 @@ public partial class Npc : CharacterBody2D
     // Timer to update the mood of the npc 
     public void UpdateMood()
     {
-        
-            
         Mood -= MoodDecreaseAmount;
         //GD.Print("Mood: " + Mood);
         //GD.Print(Mood <= 0);
         if(Mood <= 0)
         {
             //GD.Print("Leaving");
-            Target = LeaveAreaNode;
-            if (Target == null) return;
-            _navAgent.TargetPosition = Target.GlobalPosition;
+            
             StartMoodTimer =  false;
             LeaveQueue();
-            EmitSignal(SignalName.LeftQueue, this);
             MoodTimer.Stop();
             
         }
