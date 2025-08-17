@@ -5,6 +5,7 @@ namespace SoYouWANNAJam2025.Code.World;
 public partial class Camera : Camera2D
 {
     private Node2D _followingNode;
+    private Vector2 _globalPosition;
 
     [Export]public Node2D FollowingNode
     {
@@ -20,18 +21,12 @@ public partial class Camera : Camera2D
     public override void _Ready()
     {
         GlobalPosition = FollowingNode.GlobalPosition;
+        _globalPosition =  GlobalPosition;
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (GetWindow().Size != _oldResolution)
-        {
-            //var hud = GetNode<Control>("Hud");
-            //_oldResolution = GetWindow().Size;
-            //hud.Position = -0.5f * _oldResolution;
-            //hud.Scale = new Vector2(0.25f, 0.25f);
-        }
-        
-        GlobalPosition = GlobalPosition.Lerp(FollowingNode.GlobalPosition, (float)(SmoothingSpeed*delta));
+        _globalPosition = _globalPosition.Lerp(FollowingNode.GlobalPosition, (float)(SmoothingSpeed * delta));
+        GlobalPosition = _globalPosition.Round();
     }
 }

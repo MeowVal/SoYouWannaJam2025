@@ -288,7 +288,7 @@ public partial class GameManager : Node2D
 	{
 	}
 	
-	public static void TraverseDirectory(string rootPath, Action<string> fileAction)
+	public void TraverseDirectory(string rootPath, Action<string> fileAction)
 	{
 		var dirStack = new Stack<string>();
 		dirStack.Push(rootPath);
@@ -322,7 +322,26 @@ public partial class GameManager : Node2D
 			}
 			dir.ListDirEnd();
 		}
-        
+	}
+	
+	public (bool,GenericItem) NewItem(GenericItemTemplate itemTemplate)
+	{
+		if (itemTemplate == null) return (false, null);
+		PackedScene newItemScene = null;
+		if (itemTemplate.SceneOverride == null)
+		{
+			newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
+		}
+		else
+		{
+			newItemScene = GD.Load<PackedScene>(itemTemplate.SceneOverride.ResourcePath);
+		}
+		if (newItemScene == null) return (false, null);
+            
+		var newItem = newItemScene.Instantiate<GenericItem>();
+		newItem.ItemResource = itemTemplate;
+		
+		return (true, newItem);
 	}
 	
 }

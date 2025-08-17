@@ -17,7 +17,8 @@ shape = SubResource("CircleShape2D_5p8jk")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="InterfaceLocation" type="Node2D" parent="."]
-position = Vector2(0, -14)
+z_index = 1
+position = Vector2(5, -20)
 
 [node name="Inventory" type="Node2D" parent="."]
 z_index = 1

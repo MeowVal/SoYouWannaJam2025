@@ -61,3 +61,8 @@ max_value = 1.0
 [node name="RecipeProgress" type="ProgressBar" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
+
+[node name="Instruction" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Mash use/pickup"
+horizontal_alignment = 1

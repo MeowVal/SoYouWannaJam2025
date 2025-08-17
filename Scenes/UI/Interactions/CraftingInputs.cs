@@ -114,6 +114,11 @@ public partial class CraftingInputs : CraftingStationInterface
         var right = Input.IsActionJustPressed("MinigameRight");
         //if (right && Input.GetActionStrength("right") < 0.5) right = false;
         
+        if (Input.IsActionJustPressed("ui_cancel") && Station is CraftingStation craftingStation2)
+        {
+            craftingStation2.RecipeAbort();
+        }
+        
         if (!up && !down && !left && !right) return;
         
         bool[] direction = [up, down, left, right];

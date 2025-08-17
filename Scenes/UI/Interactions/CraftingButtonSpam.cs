@@ -39,7 +39,7 @@ public partial class CraftingButtonSpam : CraftingStationInterface
         switch (Station)
         {
             case CraftingStation craftingStation:
-                _recipeTimer.Start(craftingStation.CurrentRecipe.TimeToComplete);
+                //_recipeTimer.Start(craftingStation.CurrentRecipe.TimeToComplete);
                 _label.Text = craftingStation.CurrentRecipe.DisplayName;
                 _pressRequired = (int)(craftingStation.CurrentRecipe.SpamPerSecond * craftingStation.CurrentRecipe.TimeToComplete);
                 break;
@@ -61,14 +61,13 @@ public partial class CraftingButtonSpam : CraftingStationInterface
     {
         base.Update(delta);
         if (Station == null) return;
-        _bar.Value = 1 - (_recipeTimer.TimeLeft / _recipeTimer.WaitTime);
-        
-        _strengthBar.Value = (float)_pressCount / _pressRequired;
-        
-        /*if (_strength <= 0)
+
+        if (_pressCount > 0)
         {
-            Station.RecipeAbort();
-        }*/
+            _bar.Value = 1 - (_recipeTimer.TimeLeft / _recipeTimer.WaitTime);
+            _strengthBar.Value = (float)_pressCount / _pressRequired;   
+        }
+        
         if (_pressCount >= _pressRequired)
         {
             switch (Station)
@@ -83,9 +82,18 @@ public partial class CraftingButtonSpam : CraftingStationInterface
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
-        if (Input.IsActionJustPressed("UseAction"))
+        if (Input.IsActionJustPressed("UseAction") || Input.IsActionJustPressed("PickupDrop"))
         {
+            if (_pressCount == 0 && _recipeTimer.IsStopped() && Station is CraftingStation craftingStation)
+            {
+                _recipeTimer.Start(craftingStation.CurrentRecipe.TimeToComplete);
+            }
             _pressCount++;
+        }
+
+        if (Input.IsActionJustPressed("ui_cancel") && Station is CraftingStation craftingStation2)
+        {
+            craftingStation2.RecipeAbort();
         }
     }
 

@@ -7,7 +7,7 @@ using SoYouWANNAJam2025.Code.Player;
 
 namespace SoYouWANNAJam2025.Entities.Interactive;
 
-public partial class Backpack : GenericItem
+public partial class Wheelbarrow : GenericItem
 {
     public Inventory Inventory;
 

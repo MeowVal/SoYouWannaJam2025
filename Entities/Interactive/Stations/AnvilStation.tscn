@@ -1,25 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://2f5qwcem3nao"]
+[gd_scene load_steps=6 format=3 uid="uid://2f5qwcem3nao"]
 
 [ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_av5sn"]
-[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_42l4t"]
-[ext_resource type="Resource" uid="uid://ic3soev6roi2" path="res://Resources/Recipes/Anvil/IronBlade.tres" id="3_cl1q5"]
 [ext_resource type="Texture2D" uid="uid://cbll641aetbtj" path="res://Assets/Sprites/Environment/Anvil.png" id="4_cl1q5"]
-[ext_resource type="Resource" uid="uid://cu8exs63i5gp4" path="res://Resources/Recipes/Anvil/IronBladeModern.tres" id="4_f6bxd"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="7_nkjxm"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="8_vdi6x"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_f6bxd"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_7gx17"]
 radius = 20.0
 
 [node name="AnvilStation" type="Area2D"]
 script = ExtResource("1_av5sn")
 DisplayName = "Anvil Station"
-Recipes = Array[ExtResource("2_42l4t")]([ExtResource("3_cl1q5"), ExtResource("4_f6bxd")])
+RecipesFolder = "res://Resources/Recipes/Anvil/"
 ColliderRadius = 20.0
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
-shape = SubResource("CircleShape2D_f6bxd")
+shape = SubResource("CircleShape2D_7gx17")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="StationSprite" type="Sprite2D" parent="."]
@@ -29,6 +26,7 @@ offset = Vector2(0, -16)
 region_rect = Rect2(0, 0, 32, 32)
 
 [node name="InterfaceLocation" type="Node2D" parent="."]
+z_index = 1
 position = Vector2(0, -31)
 
 [node name="Inventory" type="Node2D" parent="."]

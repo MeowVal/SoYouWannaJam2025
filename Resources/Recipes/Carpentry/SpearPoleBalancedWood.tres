@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_vf26r"]
 [ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="2_0mfkd"]
-[ext_resource type="Resource" path="res://Resources/Items/ModularParts/Spear/Pole/Spear_Pole_Wood.tres" id="3_7k2hi"]
+[ext_resource type="Resource" uid="uid://crjv5jcoy4r6w" path="res://Resources/Items/ModularParts/Spear/Pole/Spear_Pole_Wood.tres" id="3_7k2hi"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_heyf3"]
 
 [resource]

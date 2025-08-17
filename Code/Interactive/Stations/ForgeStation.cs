@@ -68,7 +68,7 @@ public partial class ForgeStation : CraftingStation
                 }
                 break;
             case TriggerType.UseAction:
-                if (_scrapingRecipe == null || IsCrafting) break;
+                if (_scrapingRecipe == null || IsCrafting || !Inventory.HasItem()) break;
                 if (Inventory.Slots[0].Item.ItemResource == ScrapItem)
                 {
                     _scrapingRecipe.RecipeInputs = [Inventory.Slots[0].Item.ItemResource];

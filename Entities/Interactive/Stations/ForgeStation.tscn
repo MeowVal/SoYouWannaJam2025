@@ -1,11 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://cgbg8jjt6swx6"]
+[gd_scene load_steps=19 format=3 uid="uid://cgbg8jjt6swx6"]
 
 [ext_resource type="Script" uid="uid://b0wqbfkxbfgpt" path="res://Code/Interactive/Stations/ForgeStation.cs" id="1_l3fy7"]
 [ext_resource type="Resource" uid="uid://bdf10ddikdxmx" path="res://Resources/Items/Resources/ScrapMetal.tres" id="2_1ijhs"]
-[ext_resource type="Resource" uid="uid://bhmmqxxc646jd" path="res://Resources/Recipes/Forge/IronIngot.tres" id="3_l3fy7"]
-[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="3_skwst"]
-[ext_resource type="Resource" uid="uid://bv5xegexuhyr3" path="res://Resources/Recipes/Forge/GoldIngot.tres" id="4_1ijhs"]
-[ext_resource type="Resource" uid="uid://d2p8krc88hiwy" path="res://Resources/Recipes/Forge/Mytrilngot.tres" id="5_g4254"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_skwst"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="7_wai8b"]
 [ext_resource type="Texture2D" uid="uid://bos0scnb0a4n2" path="res://Assets/Sprites/Environment/ForgeTop.png" id="9_wai8b"]
@@ -129,7 +125,7 @@ _data = {
 y_sort_enabled = true
 script = ExtResource("1_l3fy7")
 ScrapItem = ExtResource("2_1ijhs")
-Recipes = Array[ExtResource("3_skwst")]([ExtResource("4_1ijhs"), ExtResource("3_l3fy7"), ExtResource("5_g4254")])
+RecipesFolder = "res://Resources/Recipes/Forge/"
 
 [node name="Top" type="Sprite2D" parent="."]
 position = Vector2(1, 34)
@@ -167,6 +163,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 24, 96)
 
 [node name="InterfaceLocation" type="Node2D" parent="."]
+z_index = 1
 position = Vector2(0, -8)
 
 [node name="InteractZone" type="CollisionPolygon2D" parent="."]

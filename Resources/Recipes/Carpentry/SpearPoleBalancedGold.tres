@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="2_eyiba"]
 [ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="3_eyiba"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_2mhs5"]
-[ext_resource type="Resource" path="res://Resources/Items/ModularParts/Spear/Pole/Spear_Pole_Gold_Balanced.tres" id="4_bht6k"]
+[ext_resource type="Resource" uid="uid://bayyv3s6hf304" path="res://Resources/Items/ModularParts/Spear/Pole/Spear_Pole_Gold_Balanced.tres" id="4_bht6k"]
 
 [resource]
 script = ExtResource("4_2mhs5")

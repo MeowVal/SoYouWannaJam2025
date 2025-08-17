@@ -19,6 +19,7 @@ public partial class CraftingStation : Interactible
     [Export] public Texture2D Icon;
     [Export] public bool AutoCraft = false;
     [Export] public Array<BaseRecipe> Recipes = [];
+    [Export] public string RecipesFolder = "";
 
     public Inventory.Inventory Inventory;
     public BaseRecipe CurrentRecipe;
@@ -33,6 +34,14 @@ public partial class CraftingStation : Interactible
         _interfaceLocation = GetNode<Node2D>("InterfaceLocation");
         Interact += OnInteractMethod;
         
+        if (RecipesFolder != "") Global.GameManager.TraverseDirectory(RecipesFolder,
+            file => {
+                var resource = ResourceLoader.Load(file);
+                if (resource is not BaseRecipe recipe) return;
+                Recipes.Add(recipe);
+            }
+        );
+        
         if (FindChild("Inventory") is Inventory.Inventory inv) Inventory=inv;
         Inventory.RecipeWhitelist = Recipes;
         Inventory.CompileWhitelist();
@@ -41,13 +50,6 @@ public partial class CraftingStation : Interactible
     public bool AttemptCraft()
     {
         if (!Inventory.HasItem() || IsCrafting) return false;
-        // Try each recipe until one triggers successfully
-        /*foreach (var recipe in Recipes)
-        {
-            GD.Print($"Attemping Recipe {recipe.DisplayName}");
-            if (!RecipeBegin(recipe)) continue;
-            return true;
-        }*/
         var recipeList = GetAvailableRecipes();
         if (recipeList == null) return false;
         switch (recipeList.Count)
@@ -246,12 +248,10 @@ public partial class CraftingStation : Interactible
         GD.Print($"Completed recipe {CurrentRecipe.DisplayName} with {CurrentRecipe.RecipeOutputs.Count} outputs:");
         foreach (var item in CurrentRecipe.RecipeOutputs)
         {
-            // Create output items
-            var newItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/GenericItem.tscn");
-            var newItem = newItemScene.Instantiate<GenericItem>();
-            newItem.ItemResource = item;
+            var (success, newItem) = Global.GameManager.NewItem(item);
+            if (!success) continue;
+            
             Global.Grid.AddChild(newItem);
-            // Add outputs to inventory
             Inventory.PickupItem(newItem, true);
             GD.Print($"- {newItem.ItemResource.DisplayName}");
         }

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_f18hw"]
 [ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="2_u4d68"]
 [ext_resource type="Resource" uid="uid://tvgxu2woqsxh" path="res://Resources/Items/Resources/IronIngot.tres" id="3_u4d68"]
-[ext_resource type="Resource" path="res://Resources/Items/ModularParts/Spear/Pole/Spear_Pole_Iron_Balanced.tres" id="4_6d0fv"]
+[ext_resource type="Resource" uid="uid://ctk2dcro0k183" path="res://Resources/Items/ModularParts/Spear/Pole/Spear_Pole_Iron_Balanced.tres" id="4_6d0fv"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_kpqi6"]
 
 [resource]

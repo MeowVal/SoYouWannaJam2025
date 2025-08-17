@@ -12,6 +12,7 @@ public partial class GenericItemTemplate: Resource
     [Export] public Array<Color> Colours = [Colors.White];
     [Export] public float Size = 10;
     [Export] public bool AllowUseAction = false;
+    [Export] public PackedScene SceneOverride;
     
     public virtual Image GetItemImage(Array<Texture2D> textures = null)
     {

@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cw7yx6b35ysh0"]
+[gd_scene load_steps=7 format=3 uid="uid://cw7yx6b35ysh0"]
 
-[ext_resource type="Script" uid="uid://dbwddwgt2enxn" path="res://Entities/Interactive/Backpack.cs" id="1_upq10"]
-[ext_resource type="Resource" uid="uid://d22k5r8ngd2cn" path="res://Resources/Items/Wheelbarrow.tres" id="2_17u5e"]
+[ext_resource type="Script" uid="uid://dbwddwgt2enxn" path="res://Entities/Interactive/Wheelbarrow.cs" id="1_upq10"]
 [ext_resource type="Texture2D" uid="uid://bo5bafdnpkpbe" path="res://Assets/Sprites/Environment/Wheelbarrow.png" id="3_2o2l4"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="3_17u5e"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="4_gyh6y"]
@@ -10,9 +9,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_m7g5a"]
 radius = 16.0
 
-[node name="StorageCrate" type="Area2D"]
+[node name="Wheelbarrow" type="Area2D"]
 script = ExtResource("1_upq10")
-ItemResource = ExtResource("2_17u5e")
 metadata/_custom_type_script = "uid://de26gdg7krlfk"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -30,7 +28,7 @@ script = ExtResource("3_17u5e")
 AllowAll = true
 metadata/_custom_type_script = "uid://usn4a73qqvca"
 
-[node name="InventorySlot" type="Node2D" parent="Inventory"]
+[node name="InventorySlot1" type="Node2D" parent="Inventory"]
 position = Vector2(-7, 5)
 script = ExtResource("4_gyh6y")
 metadata/_custom_type_script = "uid://1cpfasjkacse"

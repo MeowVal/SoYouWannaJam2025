@@ -45,8 +45,15 @@ public partial class RecipeSelectionUi : CraftingStationInterface
             
             _hBoxs = _hBoxs.Append(hBox).ToArray();
             hBox.Modulate = new Color(0.5f, 0.5f, 0.5f, 1);
-
-            partTexture.Texture = ImageTexture.CreateFromImage(img);
+            if (recipe.Icon != null)
+            {
+                partTexture.Texture = recipe.Icon;
+            }
+            else
+            {
+                partTexture.Texture = ImageTexture.CreateFromImage(img);
+            }
+            
             partName.Text = recipe.RecipeOutputs[0].DisplayName;
             
             vBox.AddChild(hBox);
@@ -95,6 +102,10 @@ public partial class RecipeSelectionUi : CraftingStationInterface
                     break;
             }
             return;
+        }
+        if (Input.IsActionJustPressed("ui_cancel") && Station is CraftingStation craftingStation2)
+        {
+            craftingStation2.RecipeAbort();
         }
         _pressed = true;
         if ((up && down) || (!up && !down)) return;

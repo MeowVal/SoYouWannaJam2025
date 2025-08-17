@@ -10,3 +10,4 @@ Description = "You need to actually set this lol."
 Textures = Array[Texture2D]([ExtResource("1_1ybkh")])
 Colours = Array[Color]([Color(0.53, 0.485303, 0.4134, 1)])
 Size = 10.0
+AllowUseAction = false

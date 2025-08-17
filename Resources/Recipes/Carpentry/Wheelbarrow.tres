@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=8 format=3 uid="uid://d2trnuc4lqf1g"]
+
+[ext_resource type="Texture2D" uid="uid://bo5bafdnpkpbe" path="res://Assets/Sprites/Environment/Wheelbarrow.png" id="1_5kxjo"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_us5jn"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_gycm5"]
+[ext_resource type="Resource" uid="uid://67h4viu7fh8h" path="res://Resources/Items/Resources/Log.tres" id="2_pub8r"]
+[ext_resource type="Resource" uid="uid://bdf10ddikdxmx" path="res://Resources/Items/Resources/ScrapMetal.tres" id="3_dudie"]
+[ext_resource type="Resource" uid="uid://d22k5r8ngd2cn" path="res://Resources/Items/Wheelbarrow.tres" id="4_5kxjo"]
+[ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="4_dudie"]
+
+[resource]
+script = ExtResource("2_gycm5")
+DisplayName = "Wheelbarrow"
+Description = "You need to actually set this lol."
+Icon = ExtResource("1_5kxjo")
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_us5jn")]([ExtResource("2_pub8r"), ExtResource("4_dudie"), ExtResource("3_dudie")])
+RecipeOutputs = Array[ExtResource("1_us5jn")]([ExtResource("4_5kxjo")])
+WorkType = 1
+TimeToComplete = 10.0
+SequenceLength = 10
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"
