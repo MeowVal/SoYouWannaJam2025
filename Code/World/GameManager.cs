@@ -111,7 +111,7 @@ public partial class GameManager : Node2D
 
 		for (int i = 1; i <= count; i++)
 		{
-			Vector2I cell = startCell + QueueDirection * i;
+			Vector2I cell = startCell + QueueDirection * i*4;
 			Vector2 world = _tileLayer.MapToLocal(cell);
 
 			list.Add(world);
