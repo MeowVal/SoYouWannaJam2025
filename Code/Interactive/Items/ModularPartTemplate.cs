@@ -61,4 +61,11 @@ public partial class ModularPartTemplate : GenericItemTemplate
                 return base.GetItemImage(BrokenTextures);
         }
     }
+
+    public (bool isSamePart, bool isSameState) IsSamePart(ModularPartTemplate otherPart)
+    {
+        if (otherPart == null) return (false, false);
+
+        return (otherPart.DisplayName == DisplayName, otherPart.PartState == PartState);
+    }
 }

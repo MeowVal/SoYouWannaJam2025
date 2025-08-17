@@ -171,7 +171,6 @@ collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_623a7")
 MoodTimer = NodePath("MoodTimer")
-_speed = 72.0
 NpcResource = ExtResource("2_jvg37")
 
 [node name="NpcInteractor" type="Area2D" parent="."]

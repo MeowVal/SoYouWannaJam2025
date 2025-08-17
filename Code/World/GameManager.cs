@@ -35,7 +35,7 @@ public partial class GameManager : Node2D
 	[Export] public int MaxNpcCount = 20;
 	private Node2D _npcSpawnLocation;
 	private Node2D _frontDesk;
-	private Area2D _leaveAreaNode;
+	private Node2D _leaveAreaNode;
 	private const string NpcResourceFolderPath = "res://Resources/Npcs/Friendly/";
 	private const string HostileNpcResourceFolderPath = "res://Resources/Npcs/Hostile/";
 	private const string ModularItemFolderPath = "res://Resources/Items/ModularItems/";
@@ -98,7 +98,7 @@ public partial class GameManager : Node2D
 		//GD.Print(ModularItemResources);
 		_npcSpawnLocation = (Node2D)FindChild("NpcArrivalArea");
 		_frontDesk  = (Node2D)FindChild("FrontDesk");
-		_leaveAreaNode = (Area2D)FindChild("LeaveArea");
+		_leaveAreaNode = (Node2D)FindChild("NpcLeaveArea");
 		_modularItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/ModularItem.tscn");
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 		_hostileNpcSpawnLocation = (PathFollow2D)FindChild("HostileNpcSpawnLocations");
@@ -286,9 +286,9 @@ public partial class GameManager : Node2D
 	{
 		//GD.Print("NPC count = "+_npcs.Count);
 		Npc.Friendly.Npc npc = NpcScene.Instantiate<Npc.Friendly.Npc>();
-		NpcSpawning(npc);
-		//GD.Print("NPCCCCCCCCCCCCCC");
+		if (!NpcSpawning(npc)) return;
 		EModularItemType[] itemTypes = [EModularItemType.Sword, EModularItemType.Spear, EModularItemType.Bow,  EModularItemType.Chestplate, EModularItemType.Staff];
+		//EModularItemType[] itemTypes = [EModularItemType.Bow];
 		ModularItemTemplate wantedTemplate;
 		ModularItemTemplate givenTemplate;
 		
@@ -308,18 +308,16 @@ public partial class GameManager : Node2D
 	}
 	private void OnHostileNpcTimerTimeout()
 	{
-		
 		HostileNpc hostileNpc = HostileNpcScene.Instantiate<HostileNpc>();
 		NpcSpawning(hostileNpc);
-		
 	}
 
-	private void NpcSpawning( dynamic npc)
+	private bool NpcSpawning( dynamic npc)
 	{
 		//GD.Print(npc.GetType() );
 		if (npc is HostileNpc npcHostile)
 		{
-			if (_hostileNpc.Count >= MaxNpcCount) return;
+			if (_hostileNpc.Count >= MaxNpcCount) return false;
 			npcHostile.NpcResource = HostileNpcResources[GD.RandRange(0,HostileNpcResources.Count -1)];
 			_hostileNpcSpawnLocation.ProgressRatio = GD.Randf();
 			npcHostile.Position = _hostileNpcSpawnLocation.Position;
@@ -331,7 +329,7 @@ public partial class GameManager : Node2D
 		}
 		else if  (npc is Npc.Friendly.Npc npcFriendly)
 		{
-			if (_npcs.Count >= MaxNpcCount)return;
+			if (_npcs.Count >= MaxNpcCount)return false;
 			npcFriendly.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
 			npcFriendly.Position = _npcSpawnLocation.Position;
 			npcFriendly.Scale = Vector2.One;
@@ -345,7 +343,7 @@ public partial class GameManager : Node2D
 			npcFriendly.LeftQueue += LeaveQueue;
 			npcInteractor.CombatEnded += OnCombatEnded;
 		}
-		
+		return true;
 	}
 
 	private void OnCombatEnded(Npc.Friendly.Npc npc, HostileNpc hostileNpc)

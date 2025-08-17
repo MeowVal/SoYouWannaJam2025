@@ -103,4 +103,20 @@ public partial class ModularItem : GenericItem
         }
         Sprite.Texture = ImageTexture.CreateFromImage(img);
     }
+    
+    public bool IsCompleted()
+    {
+        if (OwningNpc.WantedItemTemplate == null) return false;
+        var wantedTemplate = OwningNpc.WantedItemTemplate;
+        var isSameItem = true;
+        foreach (var key in Parts.Keys)
+        {
+            if (!wantedTemplate.DefaultParts.ContainsKey(key)) continue;
+            var (isSamePart, isSameState) = Parts[key].IsSamePart(wantedTemplate.DefaultParts[key]);
+            if (!isSamePart || !isSameState) isSameItem = false;
+        }
+
+        GD.Print("Completed");
+        return isSameItem;
+    }
 }
