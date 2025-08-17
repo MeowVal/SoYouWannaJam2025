@@ -49,8 +49,8 @@ public partial class NpcInteractor : Interactible
         if (Engine.IsEditorHint()) return;
         base._Ready();
         if (FindChild("Inventory") is Interactive.Inventory.Inventory inv) Inventory=inv;
-        if (FindChild("CombatTimer") is Timer timer) _combatTimer=timer;
-        _combatTimer.Timeout += OnCombatTimerTimeout;
+        //if (FindChild("CombatTimer") is Timer timer) _combatTimer=timer;
+       // _combatTimer.Timeout += OnCombatTimerTimeout;
         Inventory.RecipeWhitelist = Recipes;
         Inventory.CompileWhitelist();
         _npc = GetParent<Npc>();
