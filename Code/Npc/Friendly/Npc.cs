@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using SoYouWANNAJam2025.Code.Interactive.Inventory;
+using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Npc.Hostile;
 
 namespace SoYouWANNAJam2025.Code.Npc.Friendly;
@@ -39,6 +40,9 @@ public partial class Npc : CharacterBody2D
     private Vector2? _queueTarget = null;
     private Vector2? _lastAssignedSlot = null;
     private Vector2? _queueSlot = null;
+    
+    public ModularItemTemplate WantedItemTemplate;
+    
     public override void _Ready()
     {
         // gets the different nodes in the tree that is a child of the npc 
