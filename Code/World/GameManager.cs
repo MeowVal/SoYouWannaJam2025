@@ -240,16 +240,20 @@ public partial class GameManager : Node2D
 		for (var i = 0; i < partTypes.Length; i++)
 		{
 			if (ModularParts[itemType].Count == 0 || ModularParts[itemType][partTypes[i]].Count == 0) return (null, null);
-			givenTemplate.DefaultParts[partTypes[i]] = ModularParts[itemType][partTypes[i]][GD.RandRange(0, ModularParts[itemType][partTypes[i]].Count - 1)];
+			
+			var availableParts = ModularParts[itemType][partTypes[i]];
+			var newPart = availableParts.PickRandom();
+			
+			givenTemplate.DefaultParts[partTypes[i]] = newPart.Duplicate() as ModularPartTemplate;
 			givenTemplate.DefaultParts[partTypes[i]].PartState = states[i];
 			
 			if (changes[i])
 			{
-				wantedTemplate.DefaultParts[partTypes[i]] = ModularParts[itemType][partTypes[i]][ GD.RandRange(0, ModularParts[itemType][partTypes[i]].Count - 1)];
+				wantedTemplate.DefaultParts[partTypes[i]] = availableParts.PickRandom();
 			}
 			else
 			{
-				wantedTemplate.DefaultParts[partTypes[i]] = givenTemplate.DefaultParts[partTypes[i]];
+				wantedTemplate.DefaultParts[partTypes[i]] = newPart.Duplicate() as ModularPartTemplate;
 			}
 			wantedTemplate.DefaultParts[partTypes[i]].PartState = EPartState.New;
 		}
@@ -284,16 +288,21 @@ public partial class GameManager : Node2D
 		Npc.Friendly.Npc npc = NpcScene.Instantiate<Npc.Friendly.Npc>();
 		NpcSpawning(npc);
 		//GD.Print("NPCCCCCCCCCCCCCC");
-		EModularItemType[] itemTypes = [EModularItemType.Sword, EModularItemType.Spear, EModularItemType.Bow,  EModularItemType.Chestplate, EModularItemType.Staff]; 
-		var (wantedTemplate, givenTemplate) = RandomItemTemplates(itemTypes[GD.RandRange(0, itemTypes.Length - 1)]);
+		EModularItemType[] itemTypes = [EModularItemType.Sword, EModularItemType.Spear, EModularItemType.Bow,  EModularItemType.Chestplate, EModularItemType.Staff];
+		ModularItemTemplate wantedTemplate;
+		ModularItemTemplate givenTemplate;
+		
+		(wantedTemplate, givenTemplate) = RandomItemTemplates(itemTypes[GD.RandRange(0, itemTypes.Length - 1)]);
 		if (wantedTemplate == null || givenTemplate == null) return;
 		
 		var modularItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/ModularItem.tscn");
 		var newItem = modularItemScene.Instantiate<ModularItem>();
 		newItem.ModularItemType = givenTemplate.ModularItemType;
 		newItem.ItemResource = givenTemplate;
+		
 		newItem.OwningNpc = npc;
 		npc.WantedItemTemplate = wantedTemplate;
+		
 		Global.Grid.AddChild(newItem);
 		npc.NpcInventory.PickupItem(newItem, true);
 	}

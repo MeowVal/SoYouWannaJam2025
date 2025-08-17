@@ -13,12 +13,14 @@ public partial class GenericItemTemplate: Resource
     [Export] public float Size = 10;
     [Export] public bool AllowUseAction = false;
     [Export] public PackedScene SceneOverride;
+
+    public int PartId = -1;
     
     public virtual Image GetItemImage(Array<Texture2D> textures = null)
     {
         textures = textures ?? Textures;
         var img = Image.CreateEmpty(32, 32, false, Image.Format.Rgba8);
-        for (var i = 0; i < Textures.Count; i++) 
+        for (var i = 0; i < textures.Count; i++) 
         {
             
             var modulateColor = i < Colours.Count ? Colours[i] :  Colors.White;

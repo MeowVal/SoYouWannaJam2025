@@ -116,7 +116,7 @@ position = Vector2(1517.5, 45)
 position = Vector2(1555, -111.5)
 
 [node name="InspectionStation" parent="GameWorld/Entities" instance=ExtResource("15_panr6")]
-position = Vector2(1617, -86)
+position = Vector2(1406, 66)
 
 [node name="GrindStoneStation" parent="GameWorld/Entities" instance=ExtResource("16_7h5l3")]
 position = Vector2(1592, -4)
@@ -150,7 +150,7 @@ ItemResource = ExtResource("16_xmtv7")
 position = Vector2(1424, -64)
 
 [node name="NpcArrivalArea" type="Node2D" parent="GameWorld/Entities"]
-position = Vector2(472.5, 671.75)
+position = Vector2(1076, 252)
 
 [node name="FrontDesk" type="Node2D" parent="GameWorld/Entities"]
 position = Vector2(1392, 121)

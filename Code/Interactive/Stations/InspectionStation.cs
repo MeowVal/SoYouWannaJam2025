@@ -94,11 +94,22 @@ public partial class InspectionStation : Interactible
         container.AddChild(mContainer);
         mContainer.AddChild(vBox);
 
+        GD.Print("Compare Item:");
+        foreach (var key in modularItem.Parts.Keys)
+        {
+            var wantedPart = modularItem.OwningNpc.WantedItemTemplate.DefaultParts[key];
+            var givenPart = modularItem.Parts[key];
+            
+            GD.Print($"    {key}: {givenPart.PartState} {givenPart.DisplayName} -> {wantedPart.PartState} {wantedPart.DisplayName} | {givenPart.PartId}/{wantedPart.PartId}");
+        }
+
         foreach (var part in modularItem.Parts)
         {
             var hBox = new HBoxContainer();
             var partTexture = new TextureRect();
             var partName = new Label();
+            
+            hBox.Alignment = BoxContainer.AlignmentMode.Center;
             
             partTexture.Texture = ImageTexture.CreateFromImage(part.Value.GetItemImage());
             partName.Text = part.Value.DisplayName;
@@ -108,35 +119,62 @@ public partial class InspectionStation : Interactible
             hBox.AddChild(partName);
             
             var wantedPart = modularItem.OwningNpc.WantedItemTemplate.DefaultParts[part.Key];
-            if (wantedPart == null) return;
-            
-            var checkmark = new Label();
-            if (wantedPart == part.Value)
+            if (wantedPart != null)
             {
-                checkmark.Text = "✔";
-                partName.Modulate = new Color(0, 1, 0, 1);
+                var isSameItem = wantedPart.DisplayName == part.Value.DisplayName;
+                var isSameState = wantedPart.PartState == part.Value.PartState;
+                
+                var checkmark = new Label();
+                if (isSameItem && isSameState)
+                {
+                    checkmark.Text = "✔";
+                    checkmark.Modulate = new Color(0, 1, 0, 1);
+                    partName.Modulate = new Color(0, 1, 0, 1);
+                }
+                else
+                {
+                    checkmark.Text = "❌";
+                    partName.Modulate = new Color(1, 0, 0, 1);
+
+                    var wantedVBox = new VBoxContainer();
+                    vBox.AddChild(wantedVBox);
+                    hBox.Reparent(wantedVBox);
+                    
+                    var wantedHBox = new HBoxContainer();
+                    
+                    var wantedPartName = new Label();
+
+                    wantedHBox.Alignment = BoxContainer.AlignmentMode.Center;
+
+                    var renderTexture = true;
+
+                    if (isSameItem && !isSameState)
+                    {
+                        wantedPartName.Text = "Repair Broken Part";
+                        renderTexture = false;
+                    }
+                    else if (!isSameItem)
+                    {
+                        wantedPartName.Text = $"Replace with:\n{wantedPart.DisplayName}";
+                    }
+                    
+                    wantedPartName.LabelSettings = new LabelSettings();
+                    wantedPartName.LabelSettings.FontSize = 10;
+
+                    wantedVBox.AddChild(wantedHBox);
+                    if (renderTexture)
+                    {
+                        var wantedPartTexture = new TextureRect();
+                        wantedPartTexture.Texture = ImageTexture.CreateFromImage(part.Value.GetItemImage());
+                        wantedHBox.AddChild(wantedPartTexture);
+                    }
+                    
+                    wantedHBox.AddChild(wantedPartName);
+                    
+                }
+
+                hBox.AddChild(checkmark);
             }
-            else 
-            {
-                checkmark.Text = "❌";
-                partName.Modulate = new Color(1, 0, 0, 1);
-                
-                var wantedVBox = new VBoxContainer();
-                vBox.AddChild(wantedVBox);
-                hBox.Reparent(wantedVBox);
-                
-                var wantedHBox = new HBoxContainer();
-                var wantedPartTexture = new TextureRect();
-                var wantedPartName = new Label();
-                
-                wantedPartTexture.Texture = ImageTexture.CreateFromImage(part.Value.GetItemImage());
-                wantedPartName.Text = part.Value.DisplayName;
-            
-                wantedVBox.AddChild(wantedHBox);
-                wantedHBox.AddChild(wantedPartTexture);
-                wantedHBox.AddChild(wantedPartName);
-            }
-            hBox.AddChild(checkmark);
         }
     }
 
