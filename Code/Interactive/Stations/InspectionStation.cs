@@ -106,6 +106,37 @@ public partial class InspectionStation : Interactible
             vBox.AddChild(hBox);
             hBox.AddChild(partTexture);
             hBox.AddChild(partName);
+            
+            var wantedPart = modularItem.OwningNpc.WantedItemTemplate.DefaultParts[part.Key];
+            if (wantedPart == null) return;
+            
+            var checkmark = new Label();
+            if (wantedPart == part.Value)
+            {
+                checkmark.Text = "✔";
+                partName.Modulate = new Color(0, 1, 0, 1);
+            }
+            else 
+            {
+                checkmark.Text = "❌";
+                partName.Modulate = new Color(1, 0, 0, 1);
+                
+                var wantedVBox = new VBoxContainer();
+                vBox.AddChild(wantedVBox);
+                hBox.Reparent(wantedVBox);
+                
+                var wantedHBox = new HBoxContainer();
+                var wantedPartTexture = new TextureRect();
+                var wantedPartName = new Label();
+                
+                wantedPartTexture.Texture = ImageTexture.CreateFromImage(part.Value.GetItemImage());
+                wantedPartName.Text = part.Value.DisplayName;
+            
+                wantedVBox.AddChild(wantedHBox);
+                wantedHBox.AddChild(wantedPartTexture);
+                wantedHBox.AddChild(wantedPartName);
+            }
+            hBox.AddChild(checkmark);
         }
     }
 

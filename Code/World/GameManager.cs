@@ -46,11 +46,11 @@ public partial class GameManager : Node2D
 	[Export] public Vector2I QueueDirection = new Vector2I(0, 1); // Behind the target
 	
 	public Dictionary<EModularItemType, Dictionary<EPartType, Godot.Collections.Array<ModularPartTemplate>>> ModularParts = new();
-	private TileMapLayer _tileLayer; 
+	private TileMapLayer _tileLayer;
 	
 	public override void _Ready()
 	{
-		string[] paths = [ModularPartsFolderPath];
+		string[] paths = [NpcResourceFolderPath, HostileNpcResourceFolderPath, ModularItemFolderPath, ModularPartsFolderPath];
 		foreach (var path in paths)
 		{
 			TraverseDirectory(path,
@@ -87,6 +87,7 @@ public partial class GameManager : Node2D
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 		_hostileNpcSpawnLocation = (PathFollow2D)FindChild("HostileNpcSpawnLocations");
 
+		_tileLayer = GetNode<TileMapLayer>("/root/GameManager/GameWorld/Ground");
 		//npcInteractor.NpcLeft += OnNpcLeft;
 		//GD.Print(CycleLantern);
 		if (CycleLantern == null) return;
@@ -142,34 +143,35 @@ public partial class GameManager : Node2D
 			_npcQueue[i].AssignQueueSlot(positions[i]);
 		}
 	}
-	public ModularItem NewRandomItem(EModularItemType itemType, float brokenPercent = 0.5f)
+	public (ModularItemTemplate wantedTemplate, ModularItemTemplate givenTemplate) RandomItemTemplates(EModularItemType itemType, float brokenPercent = 0.5f, float changePercent = 0.5f)
 	{
-		if (_modularItemScene==null || ModularParts[itemType].Count == 0 ) return null;
+		if (_modularItemScene==null || ModularParts[itemType].Count == 0 ) return (null, null);
 		
-		var itemTemplate = new ModularItemTemplate();
+		var wantedTemplate = new ModularItemTemplate();
+		var givenTemplate = new ModularItemTemplate();
 		EPartType[] partlist;
 		
 		switch (itemType)
 		{
 			case EModularItemType.Sword:
 				partlist = [EPartType.Pummel, EPartType.Grip, EPartType.Crossguard, EPartType.Blade];
-				itemTemplate = GenerateItemTemplate(EModularItemType.Sword, partlist, brokenPercent);
+				(wantedTemplate, givenTemplate) = GenerateItemTemplate(EModularItemType.Sword, partlist, brokenPercent, changePercent);
 				break;
 			case EModularItemType.Spear:
 				partlist = [EPartType.Pole, EPartType.Blade];
-				itemTemplate = GenerateItemTemplate(EModularItemType.Sword, partlist, brokenPercent);
+				(wantedTemplate, givenTemplate) = GenerateItemTemplate(EModularItemType.Spear, partlist, brokenPercent, changePercent);
 				break;
 			case EModularItemType.Chestplate:
 				partlist = [EPartType.Pauldron, EPartType.Plate, EPartType.Trim];
-				itemTemplate = GenerateItemTemplate(EModularItemType.Sword, partlist, brokenPercent);
+				(wantedTemplate, givenTemplate) = GenerateItemTemplate(EModularItemType.Chestplate, partlist, brokenPercent, changePercent);
 				break;
 			case EModularItemType.Staff:
 				partlist = [EPartType.Pole, EPartType.Tip, EPartType.Trim];
-				itemTemplate = GenerateItemTemplate(EModularItemType.Sword, partlist, brokenPercent);
+				(wantedTemplate, givenTemplate) = GenerateItemTemplate(EModularItemType.Staff, partlist, brokenPercent, changePercent);
 				break;
 			case EModularItemType.Bow:
 				partlist = [EPartType.Grip, EPartType.Limb, EPartType.String];
-				itemTemplate = GenerateItemTemplate(EModularItemType.Sword, partlist, brokenPercent);
+				(wantedTemplate, givenTemplate) = GenerateItemTemplate(EModularItemType.Bow, partlist, brokenPercent, changePercent);
 				break;
 			case EModularItemType.Shield:
 			case EModularItemType.Helmet:
@@ -178,16 +180,11 @@ public partial class GameManager : Node2D
 			default:
 				throw new ArgumentOutOfRangeException(nameof(itemType), itemType, null);
 		}
-		if (itemTemplate == null) return null;
-
-		GD.Print("NEW ITEM");
-		var newItem = _modularItemScene.Instantiate<ModularItem>();
-		newItem.ItemResource = itemTemplate;
-		newItem.ModularItemType = itemType;
-		return newItem;
+		if (wantedTemplate == null || givenTemplate == null) return (null, null);
+		return (wantedTemplate, givenTemplate);
 	}
 
-	private ModularItemTemplate GenerateItemTemplate(EModularItemType itemType, EPartType[] partTypes, float brokenPercent)
+	private (ModularItemTemplate wantedTemplate, ModularItemTemplate givenTemplate) GenerateItemTemplate(EModularItemType itemType, EPartType[] partTypes, float brokenPercent, float changePercent)
 	{
 		var brokenCount = (int)(partTypes.Length*brokenPercent);
 		if (brokenCount == 0) brokenCount = 1;
@@ -196,24 +193,52 @@ public partial class GameManager : Node2D
 		while (brokenCount > 0)
 		{
 			var randIndex = GD.RandRange(0, partTypes.Length-1);
-			if (states[randIndex] == EPartState.New)
-			{
-				brokenCount--;
-				states[randIndex] = EPartState.Broken;
-			}
+			if (states[randIndex] != EPartState.New) continue;
+			brokenCount--;
+			states[randIndex] = EPartState.Broken;
 		}
 		
-		var itemTemplate = new ModularItemTemplate();
-		itemTemplate.DefaultParts = [];
+		var changeCount = (int)(partTypes.Length*changePercent);
+		if (changeCount == 0) brokenCount = 1;
+		
+		var changes = new bool[partTypes.Length];
+		while (changeCount > 0)
+		{
+			var randIndex = GD.RandRange(0, partTypes.Length-1);
+			if (changes[randIndex] != false) continue;
+			changeCount--;
+			changes[randIndex] = true;
+		}
+		
+		var wantedTemplate = new ModularItemTemplate()
+		{
+			DefaultParts = [],
+			ModularItemType = itemType,
+		};
+		var givenTemplate = new ModularItemTemplate()
+		{
+			DefaultParts = [],
+			ModularItemType = itemType,
+		};
 		
 		for (var i = 0; i < partTypes.Length; i++)
 		{
-			if (ModularParts[itemType].Count == 0 || ModularParts[itemType][partTypes[i]].Count == 0) return null;
-			itemTemplate.DefaultParts[partTypes[i]] = ModularParts[itemType][partTypes[i]][GD.RandRange(0, ModularParts[itemType][partTypes[i]].Count - 1)];
-			itemTemplate.DefaultParts[partTypes[i]].PartState = states[i];
+			if (ModularParts[itemType].Count == 0 || ModularParts[itemType][partTypes[i]].Count == 0) return (null, null);
+			givenTemplate.DefaultParts[partTypes[i]] = ModularParts[itemType][partTypes[i]][GD.RandRange(0, ModularParts[itemType][partTypes[i]].Count - 1)];
+			givenTemplate.DefaultParts[partTypes[i]].PartState = states[i];
+			
+			if (changes[i])
+			{
+				wantedTemplate.DefaultParts[partTypes[i]] = ModularParts[itemType][partTypes[i]][ GD.RandRange(0, ModularParts[itemType][partTypes[i]].Count - 1)];
+			}
+			else
+			{
+				wantedTemplate.DefaultParts[partTypes[i]] = givenTemplate.DefaultParts[partTypes[i]];
+			}
+			wantedTemplate.DefaultParts[partTypes[i]].PartState = EPartState.New;
 		}
 		
-		return itemTemplate;
+		return (wantedTemplate, givenTemplate);
 	}
 
 	private void OnNpcLeft(Npc.Friendly.Npc npc)
@@ -240,12 +265,18 @@ public partial class GameManager : Node2D
 		//GD.Print("NPC count = "+_npcs.Count);
 		Npc.Friendly.Npc npc = NpcScene.Instantiate<Npc.Friendly.Npc>();
 		NpcSpawning(npc);
-
-		EModularItemType[] itemTypes = [EModularItemType.Sword, EModularItemType.Spear, EModularItemType.Bow,  EModularItemType.Shield, EModularItemType.Staff]; 
-		var newItem = NewRandomItem(itemTypes[GD.RandRange(0, itemTypes.Length - 1)]);
-		Global.Grid.AddChild(newItem);
-		if (newItem.ItemResource == null) return;
+		GD.Print("NPCCCCCCCCCCCCCC");
+		EModularItemType[] itemTypes = [EModularItemType.Sword, EModularItemType.Spear, EModularItemType.Bow,  EModularItemType.Chestplate, EModularItemType.Staff]; 
+		var (wantedTemplate, givenTemplate) = RandomItemTemplates(itemTypes[GD.RandRange(0, itemTypes.Length - 1)]);
+		if (wantedTemplate == null || givenTemplate == null) return;
+		
+		var modularItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/ModularItem.tscn");
+		var newItem = modularItemScene.Instantiate<ModularItem>();
+		newItem.ModularItemType = givenTemplate.ModularItemType;
+		newItem.ItemResource = givenTemplate;
 		newItem.OwningNpc = npc;
+		npc.WantedItemTemplate = wantedTemplate;
+		Global.Grid.AddChild(newItem);
 		npc.NpcInventory.PickupItem(newItem, true);
 	}
 	private void OnHostileNpcTimerTimeout()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=4 uid="uid://cyrhwfj2cgl1v"]
+[gd_scene load_steps=26 format=4 uid="uid://cyrhwfj2cgl1v"]
 
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/Lighting/lighting.tscn" id="1_1ur4q"]
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_m78t2"]
 [ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/Environment/TileMap.tres" id="1_o66vd"]
+[ext_resource type="PackedScene" uid="uid://hxf0gtf3x5pb" path="res://Entities/NPC/Friendly/Npc.tscn" id="2_51mnd"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="2_pk6v5"]
 [ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/Ground.cs" id="3_5y0l8"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="3_d01xk"]
@@ -23,9 +24,13 @@
 [ext_resource type="PackedScene" uid="uid://c0cb2dvv2nwc" path="res://Entities/Interactive/Stations/TinkeringStation.tscn" id="17_5egf7"]
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="17_pyxrn"]
 [ext_resource type="Resource" uid="uid://cpx5y0g6s8hd5" path="res://Resources/Items/Resources/MythrilOre.tres" id="21_5y0l8"]
+[ext_resource type="PackedScene" uid="uid://bce0ppun22nje" path="res://Entities/Interactive/ItemTest.tscn" id="22_51mnd"]
 
-[node name="GameManager" type="Node2D"]
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("CycleLantern")]
 script = ExtResource("1_m78t2")
+NpcScene = ExtResource("2_51mnd")
+HostileNpcScene = ExtResource("2_51mnd")
+CycleLantern = NodePath("GameWorld/Entities/DayCycleLantern")
 
 [node name="NpcTimer" type="Timer" parent="."]
 wait_time = 10.0
@@ -268,11 +273,16 @@ position = Vector2(1665, 121)
 [node name="StorageCrate9" parent="GameWorld/Entities" instance=ExtResource("10_noywq")]
 position = Vector2(1648, 113)
 
+[node name="Interactible" parent="GameWorld/Entities" instance=ExtResource("22_51mnd")]
+position = Vector2(1552, 14)
+
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("3_d01xk")
 FollowingNode = NodePath("../GameWorld/Entities/Character")
 
 [node name="Lighting" parent="Camera" instance=ExtResource("1_1ur4q")]
 z_index = 1
+
+[connection signal="timeout" from="NpcTimer" to="." method="OnNpcTimerTimeout"]
 
 [editable path="Camera/Lighting"]

@@ -29,9 +29,30 @@ public partial class ItemTest : Interactible
 
     private void _updateItem()
     {
+        var (wantedTemplate, givenTemplate) = Global.GameManager.RandomItemTemplates(ItemType);
+        if (wantedTemplate == null || givenTemplate == null) return;
         if (_modularItem != null) _modularItem.QueueFree();
-        _modularItem = Global.GameManager.NewRandomItem(ItemType);
-        AddChild(_modularItem);
+
+        /*var wantedString = "Wanted: ";
+        foreach (var part in wantedTemplate.DefaultParts)
+        {
+            wantedString += $"{part.Value.DisplayName} {part.Value.PartState} |";
+        }
+        GD.Print(wantedString);
+        
+        var givenString = "Given : ";
+        foreach (var part in givenTemplate.DefaultParts)
+        {
+            givenString += $"{part.Value.DisplayName} {part.Value.PartState} |";
+        }
+        GD.Print(givenString);*/
+        
+        var modularItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/ModularItem.tscn");
+        var newItem = modularItemScene.Instantiate<ModularItem>();
+        newItem.ItemResource = givenTemplate;
+        newItem.ModularItemType = ItemType;
+        _modularItem = newItem;
+        AddChild(newItem);
     }
     
     private void OnInteractMethod(Node2D node, TriggerType trigger)
