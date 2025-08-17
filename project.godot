@@ -38,6 +38,7 @@ folder_colors={
 [global_group]
 
 Lantern=""
+Obstacles=""
 
 [input]
 
@@ -113,6 +114,11 @@ UseAction={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Default"
+2d_physics/layer_2="Test"
 
 [rendering]
 

@@ -12,7 +12,7 @@ public partial class WorldMap : TileMapLayer
             //await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
             Callable.From(NotifyRuntimeTileDataUpdate).CallDeferred();
         
-       
+            //this.GetTree().Root.GetNode<TileMapLayer>("%Collisions"); // todo: delete node after.
     }
 
     

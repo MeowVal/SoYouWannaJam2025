@@ -18,12 +18,15 @@ Recipes = Array[ExtResource("2_42l4t")]([ExtResource("3_cl1q5"), ExtResource("4_
 ColliderRadius = 20.0
 
 [node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_f6bxd")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="StationSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("4_cl1q5")
 offset = Vector2(0, -16)
+region_rect = Rect2(0, 0, 32, 32)
 
 [node name="InterfaceLocation" type="Node2D" parent="."]
 position = Vector2(0, -31)
@@ -36,3 +39,9 @@ metadata/_custom_type_script = "uid://usn4a73qqvca"
 position = Vector2(2, -15)
 script = ExtResource("8_vdi6x")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="CollisionBarrier" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
+position = Vector2(6, -5)
+polygon = PackedVector2Array(-10, -3, -4, -8, 3, -3, 3, 5, -10, 5)
