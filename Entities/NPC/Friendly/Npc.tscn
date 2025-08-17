@@ -215,6 +215,10 @@ position = Vector2(0, -16)
 script = ExtResource("5_mrx7r")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
+[node name="CombatTimer" type="Timer" parent="NpcInteractor"]
+wait_time = 10.0
+one_shot = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_bj5yu")
 debug_color = Color(0, 0.6, 0.701961, 0)
@@ -232,6 +236,7 @@ debug_path_custom_color = Color(1, 0.223529, 0.137255, 1)
 
 [node name="MoodTimer" type="Timer" parent="."]
 wait_time = 10.0
+one_shot = true
 autostart = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
