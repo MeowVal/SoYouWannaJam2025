@@ -1,4 +1,5 @@
 using Godot;
+using SoYouWANNAJam2025.Code;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 
@@ -16,11 +17,17 @@ public partial class CraftingTimer : CraftingStationInterface
         _label = GetNode<Label>("Control/MarginContainer/VBoxContainer/HBoxContainer/RecipeName");
         _recipeTimer = GetNode<Timer>("RecipeTimer");
         _recipeTimer.Timeout += _OnRecipeTimer;
-        _recipeTimer.Start(Station.CurrentRecipe.TimeToComplete);
-        _label.Text = Station.CurrentRecipe.DisplayName;
+        switch (Station)
+        {
+            case CraftingStation craftingStation:
+                _recipeTimer.Start(craftingStation.CurrentRecipe.TimeToComplete);
+                _label.Text = craftingStation.CurrentRecipe.DisplayName;
+                break;
+        }
+        
     }
 
-    public override void Init(CraftingStation station)
+    public override void Init(Interactible station)
     {
         base.Init(station);
     }
@@ -40,6 +47,11 @@ public partial class CraftingTimer : CraftingStationInterface
     private void _OnRecipeTimer()
     {
         GD.Print("Recipe Timer Completed");
-        Station.RecipeComplete();
+        switch (Station)
+        {
+            case CraftingStation craftingStation:
+                craftingStation.RecipeComplete();
+                break;
+        }
     }
 }

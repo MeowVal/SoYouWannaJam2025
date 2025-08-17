@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cyrhwfj2cgl1v"]
+[gd_scene load_steps=31 format=4 uid="uid://cyrhwfj2cgl1v"]
 
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/Lighting/lighting.tscn" id="1_1ur4q"]
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_m78t2"]
@@ -10,13 +10,41 @@
 [ext_resource type="PackedScene" uid="uid://b2owtq0jxh0n6" path="res://Entities/Interactive/Items/DayCycleLantern.tscn" id="5_qrjm0"]
 [ext_resource type="PackedScene" uid="uid://u52yg5uejgs6" path="res://Entities/Interactive/Stations/Dispenser.tscn" id="6_qrjm0"]
 [ext_resource type="Resource" uid="uid://mg6flu0e6ji5" path="res://Resources/Items/Resources/IronOre.tres" id="7_eix3d"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="7_ly7nw"]
+[ext_resource type="Resource" uid="uid://bv5xegexuhyr3" path="res://Resources/Recipes/Forge/GoldIngot.tres" id="8_h40y5"]
 [ext_resource type="Resource" uid="uid://cx62c06xp6g8i" path="res://Resources/Items/Resources/GoldOre.tres" id="8_o8xj0"]
+[ext_resource type="Resource" uid="uid://bhmmqxxc646jd" path="res://Resources/Recipes/Forge/IronIngot.tres" id="9_g2a4r"]
 [ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="9_jqfss"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="10_fpqqh"]
 [ext_resource type="PackedScene" uid="uid://cdr1tuqn030c4" path="res://Entities/Interactive/StorageCrate.tscn" id="10_noywq"]
+[ext_resource type="PackedScene" uid="uid://cl07jfhggwrem" path="res://Entities/Interactive/Items/ModularItem.tscn" id="10_urjvg"]
+[ext_resource type="Resource" uid="uid://cpx5y0g6s8hd5" path="res://Resources/Items/Resources/MythrilOre.tres" id="11_14b2p"]
 [ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Entities/Interactive/Stations/CarpentryCraftingStation.tscn" id="11_m78t2"]
-[ext_resource type="PackedScene" uid="uid://byawq00g275sg" path="res://Entities/NPC/Hostile/hostile_npc_path.tscn" id="13_tjnjo"]
+[ext_resource type="PackedScene" path="res://Entities/NPC/Hostile/hostile_npc_path.tscn" id="13_tjnjo"]
+[ext_resource type="Resource" uid="uid://67h4viu7fh8h" path="res://Resources/Items/Resources/Log.tres" id="15_51mnd"]
 [ext_resource type="PackedScene" uid="uid://bwho24gjrxuig" path="res://Entities/Interactive/Stations/InspectionStation.tscn" id="15_panr6"]
+[ext_resource type="Resource" uid="uid://crxmis1swpctc" path="res://Resources/Items/ModularItems/Bow.tres" id="15_tjnjo"]
+[ext_resource type="PackedScene" uid="uid://dfm2tfxw2xbmw" path="res://Entities/Interactive/Stations/GrindStoneStation.tscn" id="16_7h5l3"]
+[ext_resource type="Resource" uid="uid://c6fyadcgfkbot" path="res://Resources/Items/Resources/Cloth.tres" id="16_xmtv7"]
+[ext_resource type="PackedScene" uid="uid://c0cb2dvv2nwc" path="res://Entities/Interactive/Stations/TinkeringStation.tscn" id="17_5egf7"]
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="17_pyxrn"]
+
+[sub_resource type="Resource" id="Resource_tt0f5"]
+metadata/__load_path__ = "res://Assets/Sprites/Materials/MythrilIngot.png"
+
+[sub_resource type="Resource" id="Resource_btpy3"]
+script = ExtResource("7_ly7nw")
+DisplayName = "Mytril Ingot"
+Description = "You need to actually set this lol."
+Icon = SubResource("Resource_tt0f5")
+RecipeType = 0
+RecipeInputs = Array[ExtResource("10_fpqqh")]([ExtResource("11_14b2p")])
+RecipeOutputs = Array[ExtResource("10_fpqqh")]([ExtResource("9_jqfss")])
+WorkType = 2
+TimeToComplete = 3.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_m78t2")
@@ -81,6 +109,26 @@ metadata/_edit_lock_ = true
 
 [node name="ForgeStation" parent="GameWorld/Entities" instance=ExtResource("4_jqfss")]
 position = Vector2(1472.5, -38.5)
+Recipes = Array[ExtResource("7_ly7nw")]([ExtResource("8_h40y5"), ExtResource("9_g2a4r"), SubResource("Resource_btpy3")])
+
+[node name="TinkeringStation" parent="GameWorld/Entities" instance=ExtResource("17_5egf7")]
+position = Vector2(1680, -54)
+
+[node name="AnvilStation" parent="GameWorld/Entities" instance=ExtResource("17_pyxrn")]
+position = Vector2(1517.5, 45)
+
+[node name="CarpentryStation" parent="GameWorld/Entities" instance=ExtResource("11_m78t2")]
+position = Vector2(1555, -111.5)
+
+[node name="InspectionStation" parent="GameWorld/Entities" instance=ExtResource("15_panr6")]
+position = Vector2(1617, -86)
+
+[node name="GrindStoneStation" parent="GameWorld/Entities" instance=ExtResource("16_7h5l3")]
+position = Vector2(1592, -4)
+
+[node name="ModularItem" parent="GameWorld/Entities" instance=ExtResource("10_urjvg")]
+position = Vector2(1632, 58)
+ItemResource = ExtResource("15_tjnjo")
 
 [node name="DayCycleLantern" parent="GameWorld/Entities" node_paths=PackedStringArray("Lighting") instance=ExtResource("5_qrjm0")]
 position = Vector2(1520, 4)
@@ -96,15 +144,15 @@ position = Vector2(1360, -64)
 ItemResource = ExtResource("8_o8xj0")
 
 [node name="Dispenser3" parent="GameWorld/Entities" instance=ExtResource("6_qrjm0")]
-position = Vector2(1328, -48)
-ItemResource = ExtResource("9_jqfss")
+position = Vector2(1500, -102)
+ItemResource = ExtResource("15_51mnd")
+
+[node name="Dispenser13" parent="GameWorld/Entities" instance=ExtResource("6_qrjm0")]
+position = Vector2(1584, 112)
+ItemResource = ExtResource("16_xmtv7")
 
 [node name="StorageCounter" parent="GameWorld/Entities" instance=ExtResource("10_noywq")]
-visible = false
 position = Vector2(1424, -64)
-
-[node name="AnvilStation" parent="GameWorld/Entities" instance=ExtResource("17_pyxrn")]
-position = Vector2(1517.5, 45)
 
 [node name="NpcArrivalArea" type="Node2D" parent="GameWorld/Entities"]
 position = Vector2(472.5, 671.75)
@@ -114,12 +162,6 @@ position = Vector2(1456.5, 104.75)
 
 [node name="HostileNpcPath" parent="GameWorld/Entities" instance=ExtResource("13_tjnjo")]
 position = Vector2(171.75, -1071.25)
-
-[node name="GenericCraftingStation" parent="GameWorld/Entities" instance=ExtResource("11_m78t2")]
-position = Vector2(1555, -111.5)
-
-[node name="InspectionStation" parent="GameWorld/Entities" instance=ExtResource("15_panr6")]
-position = Vector2(1617, -86)
 
 [node name="Character" parent="GameWorld/Entities" instance=ExtResource("2_pk6v5")]
 position = Vector2(1439.25, 2.25)

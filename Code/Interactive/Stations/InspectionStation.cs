@@ -46,9 +46,17 @@ public partial class InspectionStation : Interactible
         _progressBar = _interactionInterface.GetNode<ProgressBar>("Control/MarginContainer/VBoxContainer/ProgressBar");
         _progressTimer = _interactionInterface.GetNode<Timer>("Timer");
         _progressTimer.Timeout += ProgressComplete;
-        _progressTimer.Start(5);
         var label = _interactionInterface.GetNode<Label>("Control/MarginContainer/VBoxContainer/ItemName");
-        label.Text = Inventory.Item.ItemResource.DisplayName;
+        if (Inventory.Item is ModularItem){
+            _progressTimer.Start(5);
+            label.Text = Inventory.Item.ItemResource.DisplayName;
+        } 
+        else if (Inventory.Item.ItemResource is ModularPartTemplate)
+        {
+            _progressTimer.Start(2);
+            label.Text = "...";
+        }
+        
     }
     
     public void ResearchAbort()

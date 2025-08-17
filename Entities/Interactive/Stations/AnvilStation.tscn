@@ -36,7 +36,12 @@ script = ExtResource("7_nkjxm")
 metadata/_custom_type_script = "uid://usn4a73qqvca"
 
 [node name="InventorySlot1" type="Node2D" parent="Inventory"]
-position = Vector2(2, -15)
+position = Vector2(6, -10)
+script = ExtResource("8_vdi6x")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InventorySlot2" type="Node2D" parent="Inventory"]
+position = Vector2(-3, -6)
 script = ExtResource("8_vdi6x")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 

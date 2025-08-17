@@ -1,6 +1,7 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
+using SoYouWANNAJam2025.Code;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.World;
 
@@ -43,6 +44,7 @@ public partial class RecipeSelectionUi : CraftingStationInterface
             var partName = new Label();
             
             _hBoxs = _hBoxs.Append(hBox).ToArray();
+            hBox.Modulate = new Color(0.5f, 0.5f, 0.5f, 1);
 
             partTexture.Texture = ImageTexture.CreateFromImage(img);
             partName.Text = recipe.RecipeOutputs[0].DisplayName;
@@ -52,10 +54,10 @@ public partial class RecipeSelectionUi : CraftingStationInterface
             hBox.AddChild(partName);
         }
 
-        _hBoxs[0].Modulate = new Color(0.5f, 0.5f, 0.5f, 1);
+        _hBoxs[0].Modulate = new Color(1, 1, 1, 1);
     }
 
-    public override void Init(CraftingStation station)
+    public override void Init(Interactible station)
     {
         base.Init(station);
     }
@@ -83,9 +85,15 @@ public partial class RecipeSelectionUi : CraftingStationInterface
         if (_pressed && Input.IsActionJustReleased("UseAction"))
         {
             Global.Player.Frozen = false;
-            Station.KillUI();
-            QueueFree();
-            Station.RecipeBegin(RecipeList[_index]);
+            
+            switch (Station)
+            {
+                case CraftingStation craftingStation:
+                    craftingStation.FreeUi();
+                    QueueFree();
+                    craftingStation.RecipeBegin(RecipeList[_index]);
+                    break;
+            }
             return;
         }
         _pressed = true;
@@ -102,8 +110,8 @@ public partial class RecipeSelectionUi : CraftingStationInterface
 
         for (var i = 0; i < _hBoxs.Length; i++)
         {
-            var col = new Color(1, 1, 1, 1);
-            if (i == _index) col = new Color(0.5f, 0.5f, 0.5f, 1);
+            var col = new Color(0.5f, 0.5f, 0.5f, 1);
+            if (i == _index) col = new Color(1, 1, 1, 1);
             _hBoxs[i].Modulate = col;
         }
     }

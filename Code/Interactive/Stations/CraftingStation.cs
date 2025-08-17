@@ -1,10 +1,6 @@
-using System;
-using System.Diagnostics;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using SoYouWANNAJam2025.Code.Interactive.Inventory;
-using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Npc.Friendly;
 using SoYouWANNAJam2025.Code.World;
@@ -26,8 +22,7 @@ public partial class CraftingStation : Interactible
 
     public Inventory.Inventory Inventory;
     public BaseRecipe CurrentRecipe;
-    private bool _isCrafting = false;
-    //private Player.CharacterControl _player;
+    public bool IsCrafting = false;
     private CraftingStationInterface _interactionInterface;
     private Node2D _interfaceLocation;
     
@@ -45,7 +40,7 @@ public partial class CraftingStation : Interactible
 
     public bool AttemptCraft()
     {
-        if (!Inventory.HasItem() || _isCrafting) return false;
+        if (!Inventory.HasItem() || IsCrafting) return false;
         // Try each recipe until one triggers successfully
         /*foreach (var recipe in Recipes)
         {
@@ -115,7 +110,7 @@ public partial class CraftingStation : Interactible
         return recipeList;
     }
 
-    private void CreateInteractionUi(string path)
+    public void CreateInteractionUi(string path)
     {
         var uiScene = GD.Load<PackedScene>(path);
         _interactionInterface = uiScene.Instantiate<CraftingStationInterface>();
@@ -125,10 +120,10 @@ public partial class CraftingStation : Interactible
     }
 
     // Begin the process of making a specific recipe
-    public void RecipeBegin(BaseRecipe recipe)
+    public virtual void RecipeBegin(BaseRecipe recipe)
     {
         CurrentRecipe = recipe;
-        _isCrafting = true;
+        IsCrafting = true;
 
         GD.Print($"Starting WorkType {CurrentRecipe.WorkType}.");
         switch (CurrentRecipe.WorkType)
@@ -151,26 +146,26 @@ public partial class CraftingStation : Interactible
     }
 
     // Cancel the current recipe's process
-    public bool RecipeAbort()
+    public virtual bool RecipeAbort()
     {
-        KillUI();
+        FreeUi();
         
         GD.Print("Recipe ended before completion");
         return true;
     }
 
-    public void KillUI()
+    public void FreeUi()
     {
-        _isCrafting = false;
+        CurrentRecipe = null;
+        IsCrafting = false;
         if (_interactionInterface == null) return;
         _interactionInterface.QueueFree();
         _interactionInterface = null;
     }
 
     // End the recipe and produce the results
-    public bool RecipeComplete()
+    public virtual bool RecipeComplete()
     {
-        KillUI();
         var val = false;
         switch (CurrentRecipe.RecipeType)
         {
@@ -182,14 +177,14 @@ public partial class CraftingStation : Interactible
                 val = RecipeCompleteModular();
                 break;
         }
-        
+        FreeUi();
         if (AutoCraft) AttemptCraft();
         return val;
     }
 
-    private void OnInteractMethod(Node2D node, TriggerType trigger)
+    public virtual void OnInteractMethod(Node2D node, TriggerType trigger)
     {
-        if (!AutoCraft && _isCrafting) return;
+        if (!AutoCraft && IsCrafting) return;
         if (node is Player.PlayerInteractor interactor)
         {
             switch (trigger)
@@ -213,7 +208,7 @@ public partial class CraftingStation : Interactible
                     if (!AutoCraft) AttemptCraft();
                     break;
             } 
-        } else if (!_isCrafting && node is NpcInteractor npcInteractor)
+        } else if (!IsCrafting && node is NpcInteractor npcInteractor)
         {
             switch (trigger)
             {

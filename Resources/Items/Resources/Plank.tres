@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://cois84q64by2p"]
+
+[ext_resource type="Texture2D" uid="uid://b0pjq35ahk3ke" path="res://Assets/Sprites/Materials/WoodPlanks.png" id="1_4bcfn"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_ausiy"]
+
+[resource]
+script = ExtResource("2_ausiy")
+DisplayName = "Wooden Plank"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_4bcfn")])
+Colours = Array[Color]([Color(1, 1, 1, 1)])
+Size = 10.0
+AllowUseAction = false

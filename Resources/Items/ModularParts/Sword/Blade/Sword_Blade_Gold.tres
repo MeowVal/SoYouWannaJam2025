@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://bxkmrq03huwl"]
+
+[ext_resource type="Texture2D" uid="uid://bnc4s6trjboii" path="res://Assets/Sprites/ModularParts/Blade_Sword.png" id="1_hbqhb"]
+[ext_resource type="Texture2D" uid="uid://ce1rcgn5wvckh" path="res://Assets/Sprites/ModularParts/Blade_Sword_Broken.png" id="1_wt6rj"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_wt6rj"]
+
+[resource]
+script = ExtResource("2_wt6rj")
+PartType = 0
+ModularItemType = 0
+PartState = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_wt6rj")])
+UsedTextures = []
+DisplayName = "Sword Gold Blade"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_hbqhb")])
+Colours = Array[Color]([Color(1, 0.796078, 0.239216, 1)])
+Size = 10.0
+AllowUseAction = false
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

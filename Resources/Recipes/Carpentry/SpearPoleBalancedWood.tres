@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://c2gjfxc4h5ypv"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_vf26r"]
+[ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="2_0mfkd"]
+[ext_resource type="Resource" path="res://Resources/Items/ModularParts/Spear/Pole/Spear_Pole_Wood.tres" id="3_7k2hi"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_heyf3"]
+
+[resource]
+script = ExtResource("4_heyf3")
+DisplayName = "Spear Wooden Pole"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_vf26r")]([ExtResource("2_0mfkd"), ExtResource("2_0mfkd")])
+RecipeOutputs = Array[ExtResource("1_vf26r")]([ExtResource("3_7k2hi")])
+WorkType = 2
+TimeToComplete = 3.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

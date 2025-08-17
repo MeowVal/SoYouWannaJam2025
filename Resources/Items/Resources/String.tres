@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://34h28o2wwwqo"]
+
+[ext_resource type="Texture2D" uid="uid://62vflckj8fx8" path="res://Assets/Sprites/Materials/String.png" id="1_b1254"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_tckom"]
+
+[resource]
+script = ExtResource("2_tckom")
+DisplayName = "String"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_b1254")])
+Colours = Array[Color]([Color(0.670588, 0.654902, 0.564706, 1)])
+Size = 10.0
+AllowUseAction = false

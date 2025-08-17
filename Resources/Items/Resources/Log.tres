@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GenericItemTemplate" load_steps=3 format=3 uid="uid://67h4viu7fh8h"]
+
+[ext_resource type="Texture2D" uid="uid://dbrsaillwnjyq" path="res://Assets/Sprites/Materials/WoodLog.png" id="1_pqimj"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_d75mp"]
+
+[resource]
+script = ExtResource("2_d75mp")
+DisplayName = "Oak Log"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_pqimj")])
+Colours = Array[Color]([Color(1, 1, 1, 1)])
+Size = 10.0
+AllowUseAction = false

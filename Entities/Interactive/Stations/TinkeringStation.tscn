@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0cb2dvv2nwc"]
+
+[ext_resource type="Script" uid="uid://bymjkp618e0v6" path="res://Code/Interactive/Stations/TinkeringStation.cs" id="1_204w4"]
+[ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="2_r12n5"]
+[ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="2_tbd3y"]
+[ext_resource type="Texture2D" uid="uid://dc2iku63wb4ku" path="res://Assets/Sprites/Environment/TinkeringTable.png" id="3_tbd3y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5p8jk"]
+radius = 20.0
+
+[node name="TinkeringStation" type="Area2D"]
+y_sort_enabled = true
+script = ExtResource("1_204w4")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5p8jk")
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
+
+[node name="InterfaceLocation" type="Node2D" parent="."]
+position = Vector2(0, -14)
+
+[node name="Inventory" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource("2_tbd3y")
+AllowAll = true
+AllowModularItem = true
+metadata/_custom_type_script = "uid://usn4a73qqvca"
+
+[node name="InventorySlot1" type="Node2D" parent="Inventory"]
+position = Vector2(12, 18)
+script = ExtResource("2_r12n5")
+AllowAll = true
+AllowModularItem = true
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InventorySlot2" type="Node2D" parent="Inventory"]
+position = Vector2(-9, 8)
+script = ExtResource("2_r12n5")
+AllowAll = true
+AllowModularItem = true
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InventorySlot3" type="Node2D" parent="Inventory"]
+position = Vector2(-23, 0)
+script = ExtResource("2_r12n5")
+AllowAll = true
+AllowModularItem = true
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="StationSprite2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(27, 15)
+texture = ExtResource("3_tbd3y")
+offset = Vector2(-19, -31)
+region_enabled = true
+region_rect = Rect2(16, 0, 48, 32)
+
+[node name="StationSprite3" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-32, 7)
+texture = ExtResource("3_tbd3y")
+offset = Vector2(8, -7)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 64)
+
+[node name="StationSprite4" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-14, 16)
+texture = ExtResource("3_tbd3y")
+offset = Vector2(10, 0)
+region_enabled = true
+region_rect = Rect2(16, 32, 24, 32)
+
+[node name="StationSprite5" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(31, 28)
+texture = ExtResource("3_tbd3y")
+offset = Vector2(-11, -12)
+region_enabled = true
+region_rect = Rect2(40, 32, 24, 32)
+
+[node name="CollisionBarrier" type="StaticBody2D" parent="."]
+position = Vector2(2, 5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
+polygon = PackedVector2Array(-34, 2, -34, -7, -23, -13, 32, 13, 32, 23, 18, 30)

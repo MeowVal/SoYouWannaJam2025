@@ -1,22 +1,32 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqh3oq2qyafiu"]
+[gd_scene load_steps=18 format=3 uid="uid://dqh3oq2qyafiu"]
 
 [ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_3ll2t"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_f16vl"]
-[ext_resource type="Resource" uid="uid://cgodai2grhqmd" path="res://Resources/Recipes/TestSwordBladeReplace.tres" id="3_pxemq"]
+[ext_resource type="Resource" uid="uid://codbpa0b6onke" path="res://Resources/Recipes/Carpentry/Strings.tres" id="3_f16vl"]
 [ext_resource type="Texture2D" uid="uid://bvcgmeveopmmp" path="res://Assets/Sprites/Environment/CarpentryTable.png" id="4_nig01"]
+[ext_resource type="Resource" uid="uid://1tk1618m7r4r" path="res://Resources/Recipes/Carpentry/BowClothString.tres" id="4_pxemq"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="5_b5pwk"]
+[ext_resource type="Resource" uid="uid://b7gpyqh4rfg52" path="res://Resources/Recipes/Carpentry/BowGripCloth.tres" id="5_fqcdd"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="6_fqcdd"]
+[ext_resource type="Resource" uid="uid://28llmq51tn7c" path="res://Resources/Recipes/Carpentry/BowGripWood.tres" id="6_nu3uk"]
+[ext_resource type="Resource" uid="uid://di1fndiyfrbll" path="res://Resources/Recipes/Carpentry/BowLimbAgressiveWood.tres" id="7_3kic1"]
+[ext_resource type="Resource" uid="uid://hfcfjqycfl0y" path="res://Resources/Recipes/Carpentry/BowLimbWood.tres" id="8_faatx"]
+[ext_resource type="Resource" uid="uid://cn1hk6ri0v62" path="res://Resources/Recipes/Carpentry/Planks.tres" id="9_nu3uk"]
+[ext_resource type="Resource" uid="uid://bjo0xtx4jrho6" path="res://Resources/Recipes/Carpentry/SpearPoleWood.tres" id="10_uwrd8"]
+[ext_resource type="Resource" uid="uid://c2gjfxc4h5ypv" path="res://Resources/Recipes/Carpentry/SpearPoleBalancedWood.tres" id="11_fk1a6"]
+[ext_resource type="Resource" uid="uid://v84khpwrpnwt" path="res://Resources/Recipes/Carpentry/SpearPoleBalancedIron.tres" id="12_4nof0"]
+[ext_resource type="Resource" uid="uid://b2ommmbsg4ah" path="res://Resources/Recipes/Carpentry/SpearPoleBalancedGold.tres" id="13_q6bpy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3ll2t"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nu3uk"]
 radius = 16.0
 
 [node name="GenericCraftingStation" type="Area2D"]
 y_sort_enabled = true
 script = ExtResource("1_3ll2t")
-Recipes = Array[ExtResource("2_f16vl")]([ExtResource("3_pxemq")])
+Recipes = Array[ExtResource("2_f16vl")]([ExtResource("3_f16vl"), ExtResource("4_pxemq"), ExtResource("4_pxemq"), ExtResource("5_fqcdd"), ExtResource("6_nu3uk"), ExtResource("7_3kic1"), ExtResource("8_faatx"), ExtResource("9_nu3uk"), ExtResource("10_uwrd8"), ExtResource("11_fk1a6"), ExtResource("12_4nof0"), ExtResource("13_q6bpy")])
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_3ll2t")
+shape = SubResource("CircleShape2D_nu3uk")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="StationSprite" type="Sprite2D" parent="."]
@@ -47,24 +57,26 @@ offset = Vector2(-11, -12)
 region_enabled = true
 region_rect = Rect2(40, 32, 24, 32)
 
-[node name="ItemOffset" type="Node2D" parent="."]
-position = Vector2(0, -7)
-
 [node name="InterfaceLocation" type="Node2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(0, -20)
 
 [node name="Inventory" type="Node2D" parent="."]
+z_index = 1
 script = ExtResource("5_b5pwk")
-AllowModularItem = true
 metadata/_custom_type_script = "uid://usn4a73qqvca"
 
 [node name="InventorySlot1" type="Node2D" parent="Inventory"]
-position = Vector2(-9, -6)
+position = Vector2(12, 13)
 script = ExtResource("6_fqcdd")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="InventorySlot2" type="Node2D" parent="Inventory"]
-position = Vector2(9, -6)
+position = Vector2(-9, 3)
+script = ExtResource("6_fqcdd")
+metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="InventorySlot3" type="Node2D" parent="Inventory"]
+position = Vector2(-23, -5)
 script = ExtResource("6_fqcdd")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 

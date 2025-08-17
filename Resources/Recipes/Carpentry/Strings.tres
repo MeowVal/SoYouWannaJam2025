@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://codbpa0b6onke"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_khkku"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_5q2x7"]
+[ext_resource type="Resource" uid="uid://c6fyadcgfkbot" path="res://Resources/Items/Resources/Cloth.tres" id="2_ot81x"]
+[ext_resource type="Resource" uid="uid://34h28o2wwwqo" path="res://Resources/Items/Resources/String.tres" id="3_sph3g"]
+
+[resource]
+script = ExtResource("2_5q2x7")
+DisplayName = "String"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_khkku")]([ExtResource("2_ot81x")])
+RecipeOutputs = Array[ExtResource("1_khkku")]([ExtResource("3_sph3g"), ExtResource("3_sph3g")])
+WorkType = 2
+TimeToComplete = 3.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

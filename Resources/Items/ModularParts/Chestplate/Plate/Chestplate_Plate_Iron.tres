@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://1fgxckbe41pn"]
+
+[ext_resource type="Texture2D" uid="uid://w3e2hu3aueur" path="res://Assets/Sprites/ModularParts/Plating_Armour.png" id="1_h7nja"]
+[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="1_sakh1"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_h7nja"]
+
+[resource]
+script = ExtResource("2_h7nja")
+PartType = 6
+ModularItemType = 4
+PartState = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_sakh1")])
+UsedTextures = []
+DisplayName = "Unknown"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_h7nja")])
+Colours = Array[Color]([Color(0.831373, 0.890196, 1, 1)])
+Size = 10.0
+AllowUseAction = false
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

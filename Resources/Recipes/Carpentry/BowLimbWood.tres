@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://hfcfjqycfl0y"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_lcdhn"]
+[ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="2_n0os8"]
+[ext_resource type="Resource" uid="uid://b0n7waoyipem0" path="res://Resources/Items/ModularParts/Bow/Limb/Bow_Limb_Wood.tres" id="3_lcdhn"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_o1227"]
+
+[resource]
+script = ExtResource("4_o1227")
+DisplayName = "Bow Wooden Limb"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_lcdhn")]([ExtResource("2_n0os8"), ExtResource("2_n0os8")])
+RecipeOutputs = Array[ExtResource("1_lcdhn")]([ExtResource("3_lcdhn")])
+WorkType = 2
+TimeToComplete = 3.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

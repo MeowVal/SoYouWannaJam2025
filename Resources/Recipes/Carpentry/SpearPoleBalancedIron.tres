@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=6 format=3 uid="uid://v84khpwrpnwt"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_f18hw"]
+[ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="2_u4d68"]
+[ext_resource type="Resource" uid="uid://tvgxu2woqsxh" path="res://Resources/Items/Resources/IronIngot.tres" id="3_u4d68"]
+[ext_resource type="Resource" path="res://Resources/Items/ModularParts/Spear/Pole/Spear_Pole_Iron_Balanced.tres" id="4_6d0fv"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_kpqi6"]
+
+[resource]
+script = ExtResource("4_kpqi6")
+DisplayName = "Spear Iron Balanced Pole"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_f18hw")]([ExtResource("2_u4d68"), ExtResource("3_u4d68")])
+RecipeOutputs = Array[ExtResource("1_f18hw")]([ExtResource("4_6d0fv")])
+WorkType = 2
+TimeToComplete = 3.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

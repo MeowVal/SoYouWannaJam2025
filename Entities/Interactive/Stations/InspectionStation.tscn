@@ -16,10 +16,11 @@ shape = SubResource("CircleShape2D_5p8jk")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="InterfaceLocation" type="Node2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, -14)
 
 [node name="InventorySlot" type="Node2D" parent="."]
-position = Vector2(0, 10)
+z_index = 1
+position = Vector2(0, 12)
 script = ExtResource("5_die6g")
 AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
@@ -61,3 +62,21 @@ position = Vector2(2, 5)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
 polygon = PackedVector2Array(-34, 2, -34, -7, -23, -13, 32, 13, 32, 23, 18, 30)
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 0.999999
+offset_right = 33.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.446804
+pivot_offset = Vector2(40.5, 23)
+text = "Inspection"
+horizontal_alignment = 1

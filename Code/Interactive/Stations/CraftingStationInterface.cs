@@ -5,9 +5,9 @@ namespace SoYouWANNAJam2025.Code.Interactive.Stations;
 [GlobalClass]
 public partial class CraftingStationInterface : Node2D
 {
-    public Interactive.Stations.CraftingStation Station;
+    public Interactible Station;
 
-    public virtual void Init(Interactive.Stations.CraftingStation station)
+    public virtual void Init(Interactible station)
     {
         Station = station;
     }

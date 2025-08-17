@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://bs7838c1fsytu"]
+
+[ext_resource type="Texture2D" uid="uid://ce1rcgn5wvckh" path="res://Assets/Sprites/ModularParts/Blade_Sword_Broken.png" id="1_negre"]
+[ext_resource type="Texture2D" uid="uid://prxt2vvgehoo" path="res://Assets/Sprites/ModularParts/Blade_Sword_Modern.png" id="2_4icxx"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="3_88bb2"]
+
+[resource]
+script = ExtResource("3_88bb2")
+PartType = 0
+ModularItemType = 0
+PartState = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_negre")])
+UsedTextures = []
+DisplayName = "Sword Iron Modern Blade"
+Description = "The blade for a broadsword, cast of pure Iron."
+Textures = Array[Texture2D]([ExtResource("2_4icxx")])
+Colours = Array[Color]([Color(0.831373, 0.890196, 1, 1)])
+Size = 10.0
+AllowUseAction = false
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Godot;
 using SoYouWANNAJam2025.Code.World;
 using Godot.Collections;
+using SoYouWANNAJam2025.Code;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 
@@ -41,10 +42,15 @@ public partial class CraftingInputs : CraftingStationInterface
         _container = GetNode<HBoxContainer>("Control/MarginContainer/VBoxContainer/ArrowContainer");
         _recipeTimer = GetNode<Timer>("RecipeTimer");
         _recipeTimer.Timeout += _OnRecipeTimer;
-        _recipeTimer.Start(Station.CurrentRecipe.TimeToComplete);
-        _label.Text = Station.CurrentRecipe.DisplayName;
-
-        _lenght = Station.CurrentRecipe.SequenceLength;
+        switch (Station)
+        {
+            case CraftingStation craftingStation:
+                _recipeTimer.Start(craftingStation.CurrentRecipe.TimeToComplete);
+                _label.Text = craftingStation.CurrentRecipe.DisplayName;
+                _lenght = craftingStation.CurrentRecipe.SequenceLength;
+                break;
+        }
+        
         
         _sequence = new int[_lenght];
         
@@ -68,7 +74,7 @@ public partial class CraftingInputs : CraftingStationInterface
         }
     }
 
-    public override void Init(CraftingStation station)
+    public override void Init(Interactible station)
     {
         base.Init(station);
     }
@@ -87,7 +93,12 @@ public partial class CraftingInputs : CraftingStationInterface
     
     private void _OnRecipeTimer()
     {
-        Station.RecipeAbort();
+        switch (Station)
+        {
+            case CraftingStation craftingStation:
+                craftingStation.RecipeAbort();
+                break;
+        }
     }
 
     public override void _Input(InputEvent @event)
@@ -119,7 +130,12 @@ public partial class CraftingInputs : CraftingStationInterface
                 GD.Print("WIN!");
                 Global.Player.Frozen = false;
                 _recipeTimer.Stop();
-                Station.RecipeComplete();
+                switch (Station)
+                {
+                    case CraftingStation craftingStation:
+                        craftingStation.RecipeComplete();
+                        break;
+                }
             }
         }
         else

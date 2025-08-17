@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using Godot;
+using SoYouWANNAJam2025.Code;
 using SoYouWANNAJam2025.Code.World;
-using Godot.Collections;
-using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 
 namespace SoYouWANNAJam2025.Scenes.UI.Interactions;
@@ -37,13 +35,19 @@ public partial class CraftingButtonSpam : CraftingStationInterface
         _strengthBar = GetNode<ProgressBar>("Control/MarginContainer/VBoxContainer/ProgressBar");
         _recipeTimer = GetNode<Timer>("RecipeTimer");
         _recipeTimer.Timeout += _OnRecipeTimer;
-        _recipeTimer.Start(Station.CurrentRecipe.TimeToComplete);
-        _label.Text = Station.CurrentRecipe.DisplayName;
-
-        _pressRequired = (int)(Station.CurrentRecipe.SpamPerSecond * Station.CurrentRecipe.TimeToComplete);
+        
+        switch (Station)
+        {
+            case CraftingStation craftingStation:
+                _recipeTimer.Start(craftingStation.CurrentRecipe.TimeToComplete);
+                _label.Text = craftingStation.CurrentRecipe.DisplayName;
+                _pressRequired = (int)(craftingStation.CurrentRecipe.SpamPerSecond * craftingStation.CurrentRecipe.TimeToComplete);
+                break;
+        }
+        
     }
 
-    public override void Init(CraftingStation station)
+    public override void Init(Interactible station)
     {
         base.Init(station);
     }
@@ -67,7 +71,12 @@ public partial class CraftingButtonSpam : CraftingStationInterface
         }*/
         if (_pressCount >= _pressRequired)
         {
-            Station.RecipeComplete();
+            switch (Station)
+            {
+                case CraftingStation craftingStation:
+                    craftingStation.RecipeComplete();
+                    break;
+            }
         }
     }
     
@@ -82,13 +91,12 @@ public partial class CraftingButtonSpam : CraftingStationInterface
 
     private void _OnRecipeTimer()
     {
-        if ((float)_pressCount / _pressRequired > 0.75)
+        var completed = (float)_pressCount / _pressRequired > 0.75;
+        switch (Station)
         {
-            Station.RecipeComplete();
-        }
-        else
-        {
-            Station.RecipeAbort();
+            case CraftingStation craftingStation:
+                if (completed) craftingStation.RecipeComplete(); else craftingStation.RecipeAbort();
+                break;
         }
         
     }

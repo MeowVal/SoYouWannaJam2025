@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://dol46h7xihs7c"]
+
+[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="1_f7y21"]
+[ext_resource type="Texture2D" uid="uid://ddqhktyn8qttb" path="res://Assets/Sprites/ModularParts/Tip_Staff_Horned.png" id="1_o6muj"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_iafsa"]
+
+[resource]
+script = ExtResource("2_iafsa")
+PartType = 5
+ModularItemType = 5
+PartState = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_f7y21")])
+UsedTextures = []
+DisplayName = "Staff Iron Horned Tip"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_o6muj")])
+Colours = Array[Color]([Color(0.831373, 0.890196, 1, 1)])
+Size = 10.0
+AllowUseAction = false
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"
