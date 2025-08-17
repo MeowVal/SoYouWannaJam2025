@@ -39,7 +39,6 @@ y_sort_enabled = true
 texture = ExtResource("2_hjgip")
 
 [node name="CrateOuter" type="Sprite2D" parent="."]
-visible = false
 y_sort_enabled = true
 position = Vector2(0, 16)
 texture = ExtResource("5_cli73")
@@ -48,7 +47,6 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 32)
 
 [node name="CrateOuter2" type="Sprite2D" parent="."]
-visible = false
 y_sort_enabled = true
 position = Vector2(0, 16)
 texture = ExtResource("5_cli73")
@@ -57,6 +55,7 @@ region_enabled = true
 region_rect = Rect2(16, 0, 16, 32)
 
 [node name="OuterSprite" type="Sprite2D" parent="."]
+visible = false
 y_sort_enabled = true
 position = Vector2(0, 16)
 texture = ExtResource("5_cli73")

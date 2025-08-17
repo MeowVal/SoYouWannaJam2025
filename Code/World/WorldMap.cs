@@ -8,11 +8,8 @@ public partial class WorldMap : TileMapLayer
 
     public override void _Ready()
     {
-        
-            //await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-            Callable.From(NotifyRuntimeTileDataUpdate).CallDeferred();
-        
-            //this.GetTree().Root.GetNode<TileMapLayer>("%Collisions"); // todo: delete node after.
+        //await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        Callable.From(NotifyRuntimeTileDataUpdate).CallDeferred();
     }
 
     
