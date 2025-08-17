@@ -2,8 +2,8 @@
 
 [ext_resource type="Resource" uid="uid://bs00i2huqbl5x" path="res://Resources/Items/ModularParts/Sword/Blade/Sword_Blade_Mythril_Modern.tres" id="1_ixshu"]
 [ext_resource type="Script" uid="uid://kfhncm4xxwur" path="res://Code/Interactive/Items/ModularItemTemplate.cs" id="1_v1lhp"]
-[ext_resource type="Resource" path="res://Resources/Items/ModularParts/Sword/Grip/Sword_Grip_Cloth.tres" id="2_ixshu"]
-[ext_resource type="Resource" path="res://Resources/Items/ModularParts/Sword/Pummel/Sword_Pummel_Gold.tres" id="3_4c06g"]
+[ext_resource type="Resource" uid="uid://dk6b53nv7qtnn" path="res://Resources/Items/ModularParts/Sword/Grip/Sword_Grip_Cloth.tres" id="2_ixshu"]
+[ext_resource type="Resource" uid="uid://d0kf8ldv8p21p" path="res://Resources/Items/ModularParts/Sword/Pummel/Sword_Pummel_Gold.tres" id="3_4c06g"]
 [ext_resource type="Resource" uid="uid://dea84xk6o1h6v" path="res://Resources/Items/ModularParts/Sword/Crossguard/Sword_Crossguard_Gold.tres" id="4_4c06g"]
 [ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="5_ixshu"]
 

@@ -42,7 +42,7 @@ public partial class GenericItem : Interactible
         Interact += OnInteractMethod;
     }
 
-    private void OnInteractMethod(Node2D node, TriggerType trigger)
+    public virtual void OnInteractMethod(Node2D node, TriggerType trigger)
     {
         if (node is not Player.PlayerInteractor interactor) return;
         if (trigger is TriggerType.PickupDrop)

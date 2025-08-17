@@ -125,6 +125,7 @@ _data = {
 y_sort_enabled = true
 script = ExtResource("1_l3fy7")
 ScrapItem = ExtResource("2_1ijhs")
+RecipesFolder = "res://Resources/Recipes/Forge/"
 
 [node name="Top" type="Sprite2D" parent="."]
 position = Vector2(1, 34)

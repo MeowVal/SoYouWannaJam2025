@@ -53,7 +53,7 @@ public partial class InspectionStation : Interactible
         } 
         else if (Inventory.Item.ItemResource is ModularPartTemplate)
         {
-            _progressTimer.Start(2);
+            _progressTimer.Start(1);
             label.Text = "...";
         }
         

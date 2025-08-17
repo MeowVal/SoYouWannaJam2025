@@ -11,6 +11,7 @@ radius = 16.0
 [node name="GenericCraftingStation" type="Area2D"]
 y_sort_enabled = true
 script = ExtResource("1_3ll2t")
+RecipesFolder = "res://Resources/Recipes/Carpentry/"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1aci6")
@@ -45,7 +46,7 @@ region_enabled = true
 region_rect = Rect2(40, 32, 24, 32)
 
 [node name="InterfaceLocation" type="Node2D" parent="."]
-z_index = 1
+z_index = 5
 position = Vector2(5, -20)
 
 [node name="Inventory" type="Node2D" parent="."]

@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bce0ppun22nje"]
+[gd_scene load_steps=4 format=3 uid="uid://bce0ppun22nje"]
 
 [ext_resource type="Script" uid="uid://c3bpmyaoh2fts" path="res://Code/Interactive/ItemTest.cs" id="1_80v1m"]
+[ext_resource type="Resource" uid="uid://cjm36mcdecboj" path="res://Resources/Items/ModularItems/Sword.tres" id="2_sntjw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_608qo"]
 radius = 16.0
 
 [node name="Interactible" type="Area2D"]
 script = ExtResource("1_80v1m")
+DefaultItemTemplate = ExtResource("2_sntjw")
 
 [node name="InteractibleCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_608qo")

@@ -30,7 +30,7 @@ public partial class ItemTest : Interactible
     private void _updateItem()
     {
         if (_modularItem != null) _modularItem.QueueFree();
-        _modularItem = Global.GameManager.NewItem(ItemType);
+        _modularItem = Global.GameManager.NewRandomItem(ItemType);
         AddChild(_modularItem);
     }
     
