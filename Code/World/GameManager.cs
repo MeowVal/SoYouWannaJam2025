@@ -48,6 +48,7 @@ public partial class GameManager : Node2D
 	
 	public Dictionary<EModularItemType, Dictionary<EPartType, Godot.Collections.Array<ModularPartTemplate>>> ModularParts = new();
 	private TileMapLayer _tileLayer;
+	private TileMapLayer _entities;
 
 	public override void _EnterTree()
 	{
@@ -101,7 +102,7 @@ public partial class GameManager : Node2D
 		_modularItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/ModularItem.tscn");
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 		_hostileNpcSpawnLocation = (PathFollow2D)FindChild("HostileNpcSpawnLocations");
-
+		_entities = (TileMapLayer)FindChild("Entities");
 		_tileLayer = GetNode<TileMapLayer>("/root/GameManager/GameWorld/Ground");
 		//npcInteractor.NpcLeft += OnNpcLeft;
 		//GD.Print(CycleLantern);
@@ -312,22 +313,23 @@ public partial class GameManager : Node2D
 			if (_hostileNpc.Count >= MaxNpcCount) return;
 			npcHostile.NpcResource = HostileNpcResources[GD.RandRange(0,HostileNpcResources.Count -1)];
 			_hostileNpcSpawnLocation.ProgressRatio = GD.Randf();
-			npcHostile.Position = _hostileNpcSpawnLocation.Position * 4;
-			npcHostile.Scale = Vector2.One * 4;
+			npcHostile.Position = _hostileNpcSpawnLocation.Position;
+			npcHostile.Scale = Vector2.One;
 			_hostileNpc.Add(npcHostile);
-			AddChild(npcHostile);
+			
+			_entities.AddChild(npcHostile);
 			
 		}
 		else if  (npc is Npc.Friendly.Npc npcFriendly)
 		{
 			if (_npcs.Count >= MaxNpcCount)return;
 			npcFriendly.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
-			npcFriendly.Position = _npcSpawnLocation.Position * 4 ;
-			npcFriendly.Scale = Vector2.One * 4;
+			npcFriendly.Position = _npcSpawnLocation.Position;
+			npcFriendly.Scale = Vector2.One;
 			//npc.Target = _frontDesk;
 			npcFriendly.LeaveAreaNode = _leaveAreaNode;
 			_npcs.Add(npcFriendly);
-			AddChild(npcFriendly);
+			_entities.AddChild(npcFriendly);
 			var npcInteractor = (NpcInteractor)npcFriendly.FindChild("NpcInteractor");
 			RequestToJoin(npcFriendly);
 			npcInteractor.RequestComplete += OnRequestComplete;

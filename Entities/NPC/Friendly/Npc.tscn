@@ -227,7 +227,7 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 64.0
 target_desired_distance = 1.0
-path_max_distance = 64.0
+path_max_distance = 128.0
 path_postprocessing = 1
 avoidance_enabled = true
 radius = 32.0
@@ -241,4 +241,5 @@ one_shot = true
 autostart = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
 occluder = SubResource("OccluderPolygon2D_mrx7r")
