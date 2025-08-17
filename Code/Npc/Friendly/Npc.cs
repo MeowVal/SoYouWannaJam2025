@@ -36,6 +36,9 @@ public partial class Npc : CharacterBody2D
     private float _pathUpdateThreshold = 32.0f;  // The distance at which to update the path
     [Export] public Node2D LeaveAreaNode; // The node for where the npc should go to when it leaves when it's not satisfied 
     public bool StartMoodTimer = true;
+    private Vector2? _queueTarget = null;
+    private Vector2? _lastAssignedSlot = null;
+    private Vector2? _queueSlot = null;
     public override void _Ready()
     {
         // gets the different nodes in the tree that is a child of the npc 
@@ -81,7 +84,10 @@ public partial class Npc : CharacterBody2D
         //Makes sure the path only gets updated when necessary 
         if (_lastTargetPosition.DistanceTo(nextPathPosition) > _pathUpdateThreshold)
         {
-            _navAgent.TargetPosition = Target.GlobalPosition;
+            if (_queueTarget != null)
+                _navAgent.TargetPosition = (Vector2)_queueTarget;
+            else
+                _navAgent.TargetPosition = Target.GlobalPosition;
             _lastTargetPosition = nextPathPosition;  
         }
         // Calculate the new direction
@@ -113,6 +119,13 @@ public partial class Npc : CharacterBody2D
         _sprite2D.GlobalPosition = GlobalPosition.Round();
         NpcInventory.GlobalPosition = GlobalPosition.Round();
     }
+
+    public void LeaveQueue()
+    {
+        _lastAssignedSlot = null;
+        _queueSlot = null;
+        _queueTarget = null;
+    }
     
     // Sets up the navigation agent for the pathfinder
     private async void SetupNavAgent()
@@ -132,7 +145,17 @@ public partial class Npc : CharacterBody2D
             GD.PrintErr(e);
         }
     }
-    
+    public void AssignQueueSlot(Vector2 newSlot)
+    {
+        _queueSlot = newSlot;
+
+        if (_lastAssignedSlot == null || _lastAssignedSlot != _queueSlot)
+        {
+            _lastAssignedSlot = _queueSlot;
+            _navAgent.TargetPosition = newSlot;
+            _queueTarget =  newSlot;
+        }
+    }
     // The velocity calculated by the navigation agent for avoiding an obstacle
     private void _VelocityComputed(Vector2 safeVelocity)
     {

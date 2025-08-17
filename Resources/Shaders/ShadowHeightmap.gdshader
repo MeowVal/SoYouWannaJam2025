@@ -30,7 +30,7 @@ bool is_in_shadow(float xyAngle, float zAngle, sampler2D heightMap, vec2 texCoor
   	float height;
   	float otherHeight;
   	float traceHeight;
-	
+
     height  = texture(heightMap, texCoord).r;
 
     for (int i = 0; i < max_shadow_steps; i++) {
@@ -72,6 +72,6 @@ void fragment() {
         alpha = 0.5;
     	}
 	}
-    
+
     COLOR = vec4(0.0, 0.0, 0.0, alpha);
 }

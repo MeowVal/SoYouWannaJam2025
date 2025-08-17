@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://dk6b53nv7qtnn"]
+
+[ext_resource type="Texture2D" uid="uid://c0joiasgv1eth" path="res://Assets/Sprites/ModularParts/Grip_Sword.png" id="1_4pojj"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_pmv6i"]
+
+[resource]
+script = ExtResource("2_pmv6i")
+PartType = 1
+ModularItemType = 0
+PartState = 0
+DisplayName = "Sword Cloth Grip"
+Description = "The grip of a broadsword, intricately carved out of a piece of wood."
+Textures = Array[Texture2D]([ExtResource("1_4pojj")])
+Colours = Array[Color]([Color(0.670588, 0.654902, 0.564706, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

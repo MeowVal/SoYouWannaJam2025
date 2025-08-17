@@ -11,7 +11,7 @@ void fragment(){
 	float traceheight;
 	vec4 col;
 
-	
+
 	//first I calculate the height of the current pixel
 	col = texture(SCREEN_TEXTURE, SCREEN_UV);
 	height = col.r;
@@ -27,10 +27,10 @@ void fragment(){
 		float lookupy =SCREEN_UV.y + (0.001) * 0.0 * dist ;
 		//Height of that pixel
 		lookupheight = texture(SCREEN_TEXTURE, vec2(lookupx,  lookupy)).r;
-		
+
 		if(lookupheight < 1.0){lookupheight = 0.0;}
 		lookupheight = round(lookupheight);
-		
+
 		//If that pixel's height is greater than the height of my current pixel
 		if(lookupheight > height){
 			//I calculate the height that that pixel should be if it was to draw a shadow
@@ -38,7 +38,7 @@ void fragment(){
 			traceheight = dist * tan(zangle) + height;
 			if(traceheight < 1.0){traceheight = 0.0;}
 			traceheight = round(traceheight);
-			
+
 			//If the height of that pixel and the height it needs to be are close enough
 			//then my current pixel needs to be shaded
 			if(abs(traceheight-lookupheight) < 4.0){
@@ -46,7 +46,7 @@ void fragment(){
 			}
 		}
 	}
-	
+
 	//Now I'm juste resetting the pixel's color to it's real value
 	if(col.r > 1.0 || col.g > 1.0 || col.b > 1.0){
 			col.r = mod(col.r, 1.0);

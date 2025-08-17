@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bce0ppun22nje"]
+
+[ext_resource type="Script" uid="uid://c3bpmyaoh2fts" path="res://Code/Interactive/ItemTest.cs" id="1_80v1m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_608qo"]
+radius = 16.0
+
+[node name="Interactible" type="Area2D"]
+script = ExtResource("1_80v1m")
+
+[node name="InteractibleCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_608qo")
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
+
+[node name="Node2D" type="Node2D" parent="."]

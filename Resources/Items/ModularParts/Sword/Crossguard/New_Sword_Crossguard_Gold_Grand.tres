@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://crslwdsp13vxy"]
+
+[ext_resource type="Texture2D" uid="uid://db1jb2x1tivux" path="res://Assets/Sprites/ModularParts/Crossguard_Sword_Grand.png" id="1_ywhr1"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_8bhdk"]
+
+[resource]
+script = ExtResource("2_8bhdk")
+PartType = 3
+ModularItemType = 0
+PartState = 0
+DisplayName = "Sword Golden Grand Crossguard"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_ywhr1")])
+Colours = Array[Color]([Color(1, 0.796078, 0.239216, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

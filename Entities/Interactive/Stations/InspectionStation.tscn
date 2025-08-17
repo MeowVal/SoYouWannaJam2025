@@ -14,14 +14,44 @@ script = ExtResource("1_20cqo")
 shape = SubResource("CircleShape2D_5p8jk")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
-[node name="StationSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_klfgx")
-
 [node name="InterfaceLocation" type="Node2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(0, -4)
 
 [node name="InventorySlot" type="Node2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(0, 10)
 script = ExtResource("5_die6g")
 AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="StationSprite2" type="Sprite2D" parent="."]
+position = Vector2(3, -6)
+texture = ExtResource("2_klfgx")
+offset = Vector2(4, -16)
+region_enabled = true
+region_rect = Rect2(16, 0, 48, 32)
+
+[node name="StationSprite3" type="Sprite2D" parent="."]
+position = Vector2(-33, 1)
+texture = ExtResource("2_klfgx")
+offset = Vector2(8, -7)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 64)
+
+[node name="StationSprite4" type="Sprite2D" parent="."]
+position = Vector2(-15, 10)
+texture = ExtResource("2_klfgx")
+offset = Vector2(10, 0)
+region_enabled = true
+region_rect = Rect2(16, 32, 24, 32)
+
+[node name="StationSprite5" type="Sprite2D" parent="."]
+position = Vector2(30, 22)
+texture = ExtResource("2_klfgx")
+offset = Vector2(-11, -12)
+region_enabled = true
+region_rect = Rect2(40, 32, 24, 32)
+
+[node name="CollisionBarrier" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
+polygon = PackedVector2Array(-34, 2, -34, -7, -23, -13, 32, 13, 32, 23, 18, 30)

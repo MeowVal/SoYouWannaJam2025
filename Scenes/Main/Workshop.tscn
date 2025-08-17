@@ -8,19 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://b2owtq0jxh0n6" path="res://Entities/Interactive/Items/DayCycleLantern.tscn" id="4_hbuku"]
 [ext_resource type="PackedScene" uid="uid://bwho24gjrxuig" path="res://Entities/Interactive/Stations/InspectionStation.tscn" id="4_ieyhc"]
 [ext_resource type="PackedScene" uid="uid://cegbc5yym6dn2" path="res://Entities/Interactive/Items/GenericItem.tscn" id="5_ieyhc"]
-[ext_resource type="TileSet" uid="uid://bwbl1dc80kj88" path="res://Assets/Sprites/Environment/TileMap_Old.tres" id="5_uygh7"]
+[ext_resource type="TileSet" uid="uid://bwbl1dc80kj88" path="res://Assets/Sprites/environment/TileMap_Old.tres" id="5_uygh7"]
 [ext_resource type="PackedScene" uid="uid://dqh3oq2qyafiu" path="res://Entities/Interactive/Stations/CarpentryCraftingStation.tscn" id="7_bdwe5"]
 [ext_resource type="PackedScene" uid="uid://cl07jfhggwrem" path="res://Entities/Interactive/Items/ModularItem.tscn" id="8_14b3v"]
 [ext_resource type="PackedScene" uid="uid://bkawl4uk3bb67" path="res://Entities/leaveArea.tscn" id="9_65kow"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="9_vwcaw"]
-[ext_resource type="Resource" uid="uid://ds4n06wlxsyvo" path="res://Resources/Items/ModularParts/Blade_Spear_Iron.tres" id="10_ggs26"]
-[ext_resource type="Resource" uid="uid://bscvyej1mrkqt" path="res://Resources/Items/ModularParts/Blade/Blade_Sword_Iron.tres" id="11_o07dx"]
-[ext_resource type="Resource" uid="uid://dea84xk6o1h6v" path="res://Resources/Items/ModularParts/Crossguard_Sword_Gold.tres" id="12_i12cv"]
+[ext_resource type="Resource" uid="uid://ds4n06wlxsyvo" path="res://Resources/Items/ModularParts/Spear/Blade/New_Spear_Blade_Iron.tres" id="10_ggs26"]
+[ext_resource type="Resource" uid="uid://bscvyej1mrkqt" path="res://Resources/Items/ModularParts/Sword/Blade/New_Sword_Blade_Iron.tres" id="11_o07dx"]
+[ext_resource type="Resource" uid="uid://dea84xk6o1h6v" path="res://Resources/Items/ModularParts/Sword/Crossguard/New_Sword_Crossguard_Gold.tres" id="12_i12cv"]
 [ext_resource type="Resource" uid="uid://mg6flu0e6ji5" path="res://Resources/Items/Resources/IronOre.tres" id="12_nfpvg"]
 [ext_resource type="Resource" uid="uid://tvgxu2woqsxh" path="res://Resources/Items/Resources/IronIngot.tres" id="13_0roup"]
-[ext_resource type="Resource" uid="uid://tbjlomcklo0" path="res://Resources/Items/ModularParts/Grip_Sword_Wood.tres" id="13_nt8bt"]
-[ext_resource type="Resource" uid="uid://crjv5jcoy4r6w" path="res://Resources/Items/ModularParts/Pole_Spear_Wood.tres" id="14_a2a7c"]
-[ext_resource type="Resource" uid="uid://d0kf8ldv8p21p" path="res://Resources/Items/ModularParts/Pummel_Sword_Gold.tres" id="15_nfpvg"]
+[ext_resource type="Resource" uid="uid://tbjlomcklo0" path="res://Resources/Items/ModularParts/Sword/Grip/New_Sword_Grip_Wood.tres" id="13_nt8bt"]
+[ext_resource type="Resource" uid="uid://crjv5jcoy4r6w" path="res://Resources/Items/ModularParts/Spear/Pole/New_Spear_Pole_Wood.tres" id="14_a2a7c"]
+[ext_resource type="Resource" uid="uid://d0kf8ldv8p21p" path="res://Resources/Items/ModularParts/Sword/Pummel/New_Sword_Pummel_Gold.tres" id="15_nfpvg"]
 [ext_resource type="Texture2D" uid="uid://c8ajx045ysots" path="res://Assets/Sprites/ModularParts/Blade_Spear.png" id="16_fwcsh"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="17_bwn0d"]
 [ext_resource type="Texture2D" uid="uid://kutodpvnijx2" path="res://Assets/Sprites/ModularParts/Crossguard_Sword.png" id="19_gc8ik"]
@@ -31,8 +31,9 @@
 [ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="29_acvf2"]
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="30_4od3e"]
 [ext_resource type="Script" uid="uid://kfhncm4xxwur" path="res://Code/Interactive/Items/ModularItemTemplate.cs" id="30_c1wlf"]
-[ext_resource type="Resource" uid="uid://cvob48mb3vhjv" path="res://Resources/Items/ModularParts/Blade_Sword_Iron_Broken.tres" id="31_8x4g5"]
+[ext_resource type="Resource" uid="uid://cvob48mb3vhjv" path="res://Resources/Items/ModularParts/Sword/Blade/Broken_Sword_Blade_Iron.tres" id="31_8x4g5"]
 [ext_resource type="PackedScene" uid="uid://cgbg8jjt6swx6" path="res://Entities/Interactive/Stations/ForgeStation.tscn" id="31_uygh7"]
+[ext_resource type="PackedScene" uid="uid://byawq00g275sg" path="res://Entities/NPC/Hostile/hostile_npc_path.tscn" id="33_nt2as"]
 [ext_resource type="PackedScene" uid="uid://u52yg5uejgs6" path="res://Entities/Interactive/Stations/Dispenser.tscn" id="33_uygh7"]
 
 [sub_resource type="Resource" id="Resource_8ep5l"]
@@ -155,12 +156,6 @@ height = 128
 fill = 1
 fill_from = Vector2(0.475, 0.475)
 fill_to = Vector2(0.141026, 0.115385)
-
-[sub_resource type="Curve2D" id="Curve2D_uygh7"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 339.75, 807.75, 0, 0, 0, 0, 475, 736, 0, 0, 0, 0, 491.25, 645, 0, 0, 0, 0, 507.25, 508.5, 0, 0, 0, 0, 499.5, 392.25, 0, 0, 0, 0, 460.5, 213, 0, 0, 0, 0, 369.25, 69.5, 0, 0, 0, 0, 275, -52.25, 0, 0, 0, 0, 195.25, -63, 0, 0, 0, 0, 69, -33.75, 0, 0, 0, 0, -637.5, 319.5, 0, 0, 0, 0, 339.75, 807.75)
-}
-point_count = 12
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_knoqw")
@@ -295,15 +290,7 @@ position = Vector2(208, 456)
 [node name="FrontDesk" type="Node2D" parent="Isometric/WorldMap/Entities"]
 position = Vector2(188, 188)
 
-[node name="HostileNpcPath" type="Path2D" parent="Isometric/WorldMap/Entities"]
-curve = SubResource("Curve2D_uygh7")
-
-[node name="HostileNpcSpawnLocations" type="PathFollow2D" parent="Isometric/WorldMap/Entities/HostileNpcPath"]
-position = Vector2(339.75, 807.75)
-rotation = -0.487748
-
-[node name="HostileNpcTimer" type="Timer" parent="Isometric/WorldMap/Entities/HostileNpcPath"]
-autostart = true
+[node name="HostileNpcPath" parent="Isometric/WorldMap/Entities" instance=ExtResource("33_nt2as")]
 
 [node name="Dispenser" parent="Isometric/WorldMap/Entities" instance=ExtResource("33_uygh7")]
 position = Vector2(-65.5, 165.5)
@@ -344,6 +331,5 @@ script = ExtResource("9_vwcaw")
 FollowingNode = NodePath("../Isometric/WorldMap/Entities/Character")
 
 [connection signal="timeout" from="NpcTimer" to="." method="OnNpcTimerTimeout"]
-[connection signal="timeout" from="Isometric/WorldMap/Entities/HostileNpcPath/HostileNpcTimer" to="." method="OnHostileNpcTimerTimeout"]
 
 [editable path="Isometric/WorldMap/Lighting"]

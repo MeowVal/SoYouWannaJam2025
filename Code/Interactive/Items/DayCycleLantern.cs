@@ -68,6 +68,7 @@ public partial class DayCycleLantern : Node2D
         _dawnHandled = false;
         
         //Turn Interaction back on to trigger next day.
+        Global.GameTimer = -1;
         _interact.IsInteractive = true;
         this.GetNode<Sprite2D>("Interactible/Lantern").Frame = 2;
     }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4hvjp22ok276"]
+[gd_scene load_steps=11 format=3 uid="uid://c4hvjp22ok276"]
 
 [ext_resource type="Texture2D" uid="uid://b4j28yud6v4qc" path="res://Assets/Sprites/Mobs/DwarfBlacksmith.png" id="2_bkf2h"]
 [ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/Player/CharacterControl.cs" id="2_l3y44"]
 [ext_resource type="Script" uid="uid://c1fa7ndulywpt" path="res://Code/Player/PlayerInteractor.cs" id="4_yv7du"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_o4cwe"]
+[ext_resource type="Texture2D" uid="uid://cnvcuoeghj5g1" path="res://Assets/Sprites/Environment/Light2DTexture.tres" id="6_bkf2h"]
 [ext_resource type="Shader" uid="uid://br6pkqr38jxvw" path="res://Resources/Shaders/LightShadows.gdshader" id="7_25evy"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_25evy"]
@@ -20,18 +21,6 @@ polygon = PackedVector2Array(0, 8, 8, 8, 16, 0, 16, -8, 8, -16, 0, -16, -8, -16,
 shader = ExtResource("7_25evy")
 shader_parameter/shadow_limit = 0.5
 
-[sub_resource type="Gradient" id="Gradient_31rvx"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bkf2h"]
-gradient = SubResource("Gradient_31rvx")
-width = 128
-height = 128
-use_hdr = true
-fill = 1
-fill_from = Vector2(0.475, 0.475)
-fill_to = Vector2(0.141026, 0.115385)
-
 [node name="Character" type="CharacterBody2D"]
 y_sort_enabled = true
 motion_mode = 1
@@ -45,10 +34,10 @@ texture = ExtResource("2_bkf2h")
 offset = Vector2(0, -15)
 hframes = 2
 vframes = 2
-frame = 1
 region_rect = Rect2(0, 0, 32, 32)
 
 [node name="PlayerInteractor" type="Area2D" parent="."]
+position = Vector2(0, -11)
 monitorable = false
 script = ExtResource("4_yv7du")
 
@@ -61,7 +50,8 @@ wait_time = 0.1
 autostart = true
 
 [node name="InventorySlot" type="Node2D" parent="."]
-position = Vector2(0, -6)
+y_sort_enabled = true
+position = Vector2(0, -15)
 script = ExtResource("5_o4cwe")
 AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
@@ -73,7 +63,11 @@ occluder = SubResource("OccluderPolygon2D_31rvx")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 material = SubResource("ShaderMaterial_bkf2h")
+position = Vector2(-20, -31)
+enabled = false
+color = Color(1, 1, 0.854902, 1)
 energy = 0.35
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.847059)
-texture = SubResource("GradientTexture2D_bkf2h")
+texture = ExtResource("6_bkf2h")
+offset = Vector2(20, 31)

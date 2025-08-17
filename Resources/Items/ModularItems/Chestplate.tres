@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="ModularItemTemplate" load_steps=6 format=3 uid="uid://bdaxeedcoi50l"]
+
+[ext_resource type="Resource" uid="uid://cvv4xgjfaj6qp" path="res://Resources/Items/ModularParts/Chestplate/Pauldron/New_Chestplate_Pauldron_Iron.tres" id="1_b8yat"]
+[ext_resource type="Resource" uid="uid://1fgxckbe41pn" path="res://Resources/Items/ModularParts/Chestplate/Plate/New_Chestplate_Plate_Iron.tres" id="2_8rago"]
+[ext_resource type="Resource" uid="uid://dgjp81eps42qk" path="res://Resources/Items/ModularParts/Chestplate/Trim/New_Chestplate_Trim_Gold.tres" id="3_usoe6"]
+[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="5_x6ww7"]
+[ext_resource type="Script" uid="uid://kfhncm4xxwur" path="res://Code/Interactive/Items/ModularItemTemplate.cs" id="6_2ytvx"]
+
+[resource]
+script = ExtResource("6_2ytvx")
+DefaultParts = Dictionary[int, Object]({
+6: ExtResource("1_b8yat"),
+7: ExtResource("2_8rago"),
+8: ExtResource("3_usoe6")
+})
+ModularItemType = 4
+UseType = 0
+BaseDamage = 10.0
+FireMultiplier = 0.0
+PoisonMultiplier = 0.0
+BaseArmourPenetration = 1.0
+BaseDurability = 20.0
+UnbreakingChance = 1.0
+CritChance = 5.0
+CritMultiplier = 2.0
+CritBonus = 5.0
+DisplayName = "Sword"
+Description = "A standard broadsword. Cant go wrong with one."
+Textures = Array[Texture2D]([ExtResource("5_x6ww7")])
+Colours = Array[Color]([Color(1, 1, 1, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://kfhncm4xxwur"

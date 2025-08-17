@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 using SoYouWANNAJam2025.Code.Interactive.Inventory;
@@ -30,7 +31,7 @@ public partial class GameManager : Node2D
 	[Export] public DayCycleLantern CycleLantern;
 	private Godot.Collections.Array<Npc.Friendly.Npc> _npcs = [] ;
 	private Godot.Collections.Array<Npc.Friendly.Npc> _hostileNpc = [] ;
-	[Export] public int NpcMaxCount = 20;
+	[Export] public int MaxNpcCount = 20;
 	private Node2D _npcSpawnLocation;
 	private Node2D _frontDesk;
 	private Area2D _leaveAreaNode;
@@ -40,12 +41,16 @@ public partial class GameManager : Node2D
 	private const string ModularPartsFolderPath = "res://Resources/Items/ModularParts/";
 	private PackedScene _modularItemScene;
 	private PathFollow2D _hostileNpcSpawnLocation;
+	private List<Vector2> _queuePositions = new List<Vector2>();
+	private List<Npc.Friendly.Npc> _npcQueue = new();
+	[Export] public Vector2I QueueDirection = new Vector2I(0, 1); // Behind the target
 	
 	public Dictionary<EModularItemType, Dictionary<EPartType, Godot.Collections.Array<ModularPartTemplate>>> ModularParts = new();
+	private TileMapLayer _tileLayer; 
 	
 	public override void _Ready()
 	{
-		string[] paths = [NpcResourceFolderPath, HostileNpcResourceFolderPath, ModularItemFolderPath, ModularPartsFolderPath];
+		string[] paths = [ModularPartsFolderPath];
 		foreach (var path in paths)
 		{
 			TraverseDirectory(path,
@@ -82,14 +87,61 @@ public partial class GameManager : Node2D
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 		_hostileNpcSpawnLocation = (PathFollow2D)FindChild("HostileNpcSpawnLocations");
 
-		npcInteractor.NpcLeft += OnNpcLeft;
+		//npcInteractor.NpcLeft += OnNpcLeft;
 		GD.Print(CycleLantern);
 		if (CycleLantern == null) return;
 		CycleLantern.CycleLantern += LanternChanged;
-
 		Global.GameDay = 0;
+		
 	}
 
+	public void RequestToJoin(Npc.Friendly.Npc npc)
+	{
+		if (_npcQueue.Contains(npc) || _npcQueue.Count >= MaxNpcCount)
+			return;
+
+		_npcQueue.Add(npc);
+		AssignQueuePositions();
+	}
+	private List<Vector2> GenerateQueuePositions(Vector2 targetPos, int count)
+	{
+		var list = new List<Vector2>();
+		var startCell = _tileLayer.LocalToMap(targetPos);
+
+		for (int i = 1; i <= count; i++)
+		{
+			Vector2I cell = startCell + QueueDirection * i;
+			Vector2 world = _tileLayer.MapToLocal(cell);
+
+			list.Add(world);
+		}
+
+		return list;
+	}
+
+	private bool IsCellWalkable(Vector2I cell)
+	{
+		// Only returns true if tile is empty or marked as walkable
+		// You can customize this to check tile data or metadata
+		return _tileLayer.GetCellSourceId(cell) == -1;
+	}
+	public void LeaveQueue(Npc.Friendly.Npc npc)
+	{
+		if (!_npcQueue.Contains(npc))
+			return;
+
+		_npcQueue.Remove(npc);
+		AssignQueuePositions();
+	}
+	private void AssignQueuePositions()
+	{
+		var positions = GenerateQueuePositions(_frontDesk.GlobalPosition, _npcQueue.Count);
+
+		for (int i = 0; i < _npcQueue.Count; i++)
+		{
+			_npcQueue[i].AssignQueueSlot(positions[i]);
+		}
+	}
 	public ModularItem NewItem(EModularItemType itemType)
 	{
 		if (_modularItemScene==null || ModularParts[itemType].Count == 0 ) return null;
@@ -100,7 +152,6 @@ public partial class GameManager : Node2D
 		switch (itemType)
 		{
 			case EModularItemType.Sword:
-				itemTemplate.DefaultParts[EPartType.Grip] = null;
 				itemTemplate.DefaultParts[EPartType.Pummel] = _getPartTemplate(itemType, EPartType.Pummel);
 				itemTemplate.DefaultParts[EPartType.Grip] = _getPartTemplate(itemType, EPartType.Grip);
 				itemTemplate.DefaultParts[EPartType.Crossguard] =_getPartTemplate(itemType, EPartType.Crossguard);
@@ -110,14 +161,23 @@ public partial class GameManager : Node2D
 				itemTemplate.DefaultParts[EPartType.Pole] = _getPartTemplate(itemType, EPartType.Pole);
 				itemTemplate.DefaultParts[EPartType.Blade] = _getPartTemplate(itemType, EPartType.Blade);
 				break;
-			case EModularItemType.Shield:
-				break;
-			case EModularItemType.Helmet:
-				break;
 			case EModularItemType.Chestplate:
+				itemTemplate.DefaultParts[EPartType.Pauldron] = _getPartTemplate(itemType, EPartType.Pauldron);
+				itemTemplate.DefaultParts[EPartType.Plate] = _getPartTemplate(itemType, EPartType.Plate);
+				itemTemplate.DefaultParts[EPartType.Trim] = _getPartTemplate(itemType, EPartType.Trim);
 				break;
 			case EModularItemType.Staff:
+				itemTemplate.DefaultParts[EPartType.Pole] = _getPartTemplate(itemType, EPartType.Pole);
+				itemTemplate.DefaultParts[EPartType.Tip] = _getPartTemplate(itemType, EPartType.Tip);
+				itemTemplate.DefaultParts[EPartType.Trim] = _getPartTemplate(itemType, EPartType.Trim);
 				break;
+			case EModularItemType.Bow:
+				itemTemplate.DefaultParts[EPartType.Grip] = _getPartTemplate(itemType, EPartType.Grip);
+				itemTemplate.DefaultParts[EPartType.Limb] = _getPartTemplate(itemType, EPartType.Limb);
+				itemTemplate.DefaultParts[EPartType.String] = _getPartTemplate(itemType, EPartType.String);
+				break;
+			case EModularItemType.Shield:
+			case EModularItemType.Helmet:
 			case EModularItemType.Cloak:
 				break;
 			default:
@@ -131,11 +191,16 @@ public partial class GameManager : Node2D
 		return newItem;
 	}
 
-	private ModularPartTemplate _getPartTemplate(EModularItemType itemType, EPartType partType)
+	private ModularPartTemplate _getPartTemplate(EModularItemType itemType, EPartType partType, EPartState state = EPartState.New)
 	{
 		if (ModularParts[itemType].Count == 0 || ModularParts[itemType][partType].Count == 0) return null;
+		var stateParts = ModularParts[itemType][partType]
+            .Where(part => part.PartState == state)
+            .Select(part => part)
+            .ToArray();
+		if (stateParts.Length == 0) return null;
 		
-		return ModularParts[itemType][partType][GD.RandRange(0, ModularParts[itemType][partType].Count - 1)];
+		return ModularParts[itemType][partType][GD.RandRange(0, stateParts.Length - 1)];
 	}
 
 	private void OnNpcLeft(Npc.Friendly.Npc npc)
@@ -154,6 +219,8 @@ public partial class GameManager : Node2D
 			GD.Print("AWW IT'S NIGHT TIME !");
 		}
 	}
+	
+	
 
 	private void OnNpcTimerTimeout()
 	{
@@ -181,7 +248,7 @@ public partial class GameManager : Node2D
 		//GD.Print(npc.GetType() );
 		if (npc is HostileNpc)
 		{
-			if (_hostileNpc.Count >= NpcMaxCount) return;
+			if (_hostileNpc.Count >= MaxNpcCount) return;
 			npc.NpcResource = HostileNpcResources[GD.RandRange(0,HostileNpcResources.Count -1)];
 			_hostileNpcSpawnLocation.ProgressRatio = GD.Randf();
 			npc.Position = _hostileNpcSpawnLocation.Position * 4;
@@ -192,15 +259,16 @@ public partial class GameManager : Node2D
 		}
 		else if  (npc is Npc.Friendly.Npc)
 		{
-			if (_npcs.Count >= NpcMaxCount)return;
+			if (_npcs.Count >= MaxNpcCount)return;
 			npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
 			npc.Position = _npcSpawnLocation.Position * 4 ;
 			npc.Scale = Vector2.One * 4;
-			npc.Target = _frontDesk;
+			//npc.Target = _frontDesk;
 			npc.LeaveAreaNode = _leaveAreaNode;
 			_npcs.Add(npc);
 			AddChild(npc);
 			var npcInteractor = (NpcInteractor)npc.FindChild("NpcInteractor");
+			RequestToJoin(npc);
 			npcInteractor.RequestComplete += OnRequestComplete;
 		}
 		
@@ -209,6 +277,8 @@ public partial class GameManager : Node2D
 	private void OnRequestComplete(Npc.Friendly.Npc npc)
 	{
 		var hostileTarget = _hostileNpc[GD.RandRange(0, _hostileNpc.Count - 1)];
+		LeaveQueue(npc);
+		npc.LeaveQueue();
 		npc.Target = hostileTarget;
 	}
 	

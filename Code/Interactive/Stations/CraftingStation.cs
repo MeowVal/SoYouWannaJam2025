@@ -8,6 +8,7 @@ using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Npc.Friendly;
 using SoYouWANNAJam2025.Code.World;
+using SoYouWANNAJam2025.Scenes.UI.Interactions;
 
 //using SoYouWANNAJam2025.Scenes.UI.Interactions;
 
@@ -25,7 +26,7 @@ public partial class CraftingStation : Interactible
 
     public Inventory.Inventory Inventory;
     public BaseRecipe CurrentRecipe;
-    public bool IsCrafting = false;
+    private bool _isCrafting = false;
     //private Player.CharacterControl _player;
     private CraftingStationInterface _interactionInterface;
     private Node2D _interfaceLocation;
@@ -44,15 +45,74 @@ public partial class CraftingStation : Interactible
 
     public bool AttemptCraft()
     {
-        if (!Inventory.HasItem() || IsCrafting) return false;
+        if (!Inventory.HasItem() || _isCrafting) return false;
         // Try each recipe until one triggers successfully
-        foreach (var recipe in Recipes)
+        /*foreach (var recipe in Recipes)
         {
             GD.Print($"Attemping Recipe {recipe.DisplayName}");
             if (!RecipeBegin(recipe)) continue;
             return true;
+        }*/
+        var recipeList = GetAvailableRecipes();
+        if (recipeList == null) return false;
+        switch (recipeList.Count)
+        {
+            case 1:
+                RecipeBegin(recipeList[0]);
+                return true;
+            case 0:
+                return false;
         }
+
+        CreateInteractionUi("res://Scenes/UI/Interactions/RecipeSelectionUI.tscn");
+        if (_interactionInterface is not RecipeSelectionUi scene) return false;
+        scene.RecipeList = recipeList;
+        
         return false;
+    }
+
+    private Array<BaseRecipe> GetAvailableRecipes()
+    {
+        Array<BaseRecipe> recipeList = [];
+        
+        foreach (var recipe in Recipes)
+        {
+            if (!Inventory.ContainItem(recipe.RecipeInputs, true)) continue;
+            switch (recipe.RecipeType)
+            {
+                case ERecipeType.Standard:
+                    recipeList.Add(recipe);
+                    break;
+                case ERecipeType.ModularPartSwap:
+                case ERecipeType.ModularPartAdd:
+                    if (recipe.RecipeInputs[0] is not ModularPartTemplate)
+                    {
+                        GD.Print($"Recipe {recipe.DisplayName} at {recipe.ResourcePath} doesn't output a ModularPart Template");
+                        break;
+                    }
+
+                    var part = recipe.RecipeInputs[0] as ModularPartTemplate;
+                    var foundItems = Inventory.Slots
+                        .Where(slot => slot.Item is ModularItem)
+                        .Select(slot => slot.Item)
+                        .Cast<ModularItem>()
+                        .ToArray();
+                    if (foundItems.Length != 1 || foundItems[0].Parts.Count == 0) continue;
+                    var item =  foundItems[0];
+                    switch (recipe.RecipeType)
+                    {
+                        case ERecipeType.ModularPartSwap:
+                            if (item.Parts[part.PartType] != null) recipeList.Add(recipe);
+                            break;
+                        case ERecipeType.ModularPartAdd:
+                            if (item.Parts[part.PartType] == null) recipeList.Add(recipe);
+                            break;
+                    }
+                    break;
+            }
+        }
+
+        return recipeList;
     }
 
     private void CreateInteractionUi(string path)
@@ -65,83 +125,52 @@ public partial class CraftingStation : Interactible
     }
 
     // Begin the process of making a specific recipe
-    public bool RecipeBegin(BaseRecipe recipe)
+    public void RecipeBegin(BaseRecipe recipe)
     {
-        if (!Inventory.ContainItem(recipe.RecipeInputs, true)) return false;
-        switch (recipe.RecipeType)
-        {
-            case ERecipeType.Standard:
-                break;
-            case ERecipeType.ModularPartSwap:
-            case ERecipeType.ModularPartAdd:
-                if (recipe.RecipeInputs[0] is not ModularPartTemplate)
-                {
-                    GD.Print($"Recipe {recipe.DisplayName} at {recipe.ResourcePath} doesn't output a ModularPart Template");
-                    return false;
-                }
-
-                var part = recipe.RecipeInputs[0] as ModularPartTemplate;
-                var foundItems = Inventory.Slots
-                    .Where(slot => slot.Item is ModularItem)
-                    .Select(slot => slot.Item)
-                    .Cast<ModularItem>()
-                    .ToArray();
-                if (foundItems.Length != 1 || foundItems[0].Parts.Count == 0) return false;
-                var item =  foundItems[0];
-                switch (recipe.RecipeType)
-                {
-                    case ERecipeType.ModularPartSwap:
-                        if (item.Parts[part.PartType] == null) return false;
-                        break;
-                    case ERecipeType.ModularPartAdd:
-                        if (item.Parts[part.PartType] != null) return false;
-                        break;
-                }
-                break;
-        }
-        
         CurrentRecipe = recipe;
-        IsCrafting = true;
+        _isCrafting = true;
 
         GD.Print($"Starting WorkType {CurrentRecipe.WorkType}.");
         switch (CurrentRecipe.WorkType)
         {
             case EWorkType.Instant:
                 RecipeComplete();
-                return true;
+                return;
             case EWorkType.Inputs:
                 CreateInteractionUi("res://Scenes/UI/Interactions/CraftingInputs.tscn");
-                return true;
+                return;
             case EWorkType.SpamButton:
                 CreateInteractionUi("res://Scenes/UI/Interactions/CraftingButtonSpam.tscn");
-                return true;
+                return;
             case EWorkType.Timer:
                 CreateInteractionUi("res://Scenes/UI/Interactions/CraftingTimer.tscn");
-                return true;
+                return;
             case EWorkType.ButtonHold:
-                return true;
+                return;
         }
-        return false;
     }
 
     // Cancel the current recipe's process
     public bool RecipeAbort()
     {
-        IsCrafting = false;
-        if (_interactionInterface == null) return false;
-        _interactionInterface.QueueFree();
-        _interactionInterface = null;
+        KillUI();
         
         GD.Print("Recipe ended before completion");
         return true;
     }
 
+    public void KillUI()
+    {
+        _isCrafting = false;
+        if (_interactionInterface == null) return;
+        _interactionInterface.QueueFree();
+        _interactionInterface = null;
+    }
+
     // End the recipe and produce the results
     public bool RecipeComplete()
     {
-        if (_interactionInterface != null) _interactionInterface.QueueFree();
-        _interactionInterface = null;
-        IsCrafting = false;
+        KillUI();
         var val = false;
         switch (CurrentRecipe.RecipeType)
         {
@@ -160,7 +189,7 @@ public partial class CraftingStation : Interactible
 
     private void OnInteractMethod(Node2D node, TriggerType trigger)
     {
-        if (!AutoCraft && IsCrafting) return;
+        if (!AutoCraft && _isCrafting) return;
         if (node is Player.PlayerInteractor interactor)
         {
             switch (trigger)
@@ -170,6 +199,9 @@ public partial class CraftingStation : Interactible
                     {
                         Inventory.TransferTo(interactor.InventorySlot);
                         if (AutoCraft) RecipeAbort();
+                        if (_interactionInterface == null) break;
+                        _interactionInterface.QueueFree();
+                        _interactionInterface = null;
                     }
                     else if (Inventory.HasSpace() && interactor.InventorySlot.HasItem())
                     {
@@ -181,7 +213,7 @@ public partial class CraftingStation : Interactible
                     if (!AutoCraft) AttemptCraft();
                     break;
             } 
-        } else if (!IsCrafting && node is NpcInteractor npcInteractor)
+        } else if (!_isCrafting && node is NpcInteractor npcInteractor)
         {
             switch (trigger)
             {

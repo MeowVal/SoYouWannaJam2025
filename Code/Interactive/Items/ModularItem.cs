@@ -11,13 +11,15 @@ public enum EPartType
     Crossguard,
     Pole,
     Tip,
-    FrontPlate,
+    Plate,
+    Pauldron,
     Trim,
     Body,
     Accessory,
-    Shoulders,
-    Cape,
-    Hood
+    Limb,
+    String,
+    //Cape,
+    //Hood,
 }
 
 public enum EPartState
@@ -35,7 +37,8 @@ public enum EModularItemType
     Helmet,
     Chestplate,
     Staff,
-    Cloak
+    Cloak,
+    Bow
 }
 
 public enum EUseType

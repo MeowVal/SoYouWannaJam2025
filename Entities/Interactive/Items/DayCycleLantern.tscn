@@ -1,31 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2owtq0jxh0n6"]
+[gd_scene load_steps=5 format=3 uid="uid://b2owtq0jxh0n6"]
 
 [ext_resource type="Script" uid="uid://dpx7jbjhg4ox0" path="res://Code/Interactive/Items/DayCycleLantern.cs" id="1_6s3kx"]
 [ext_resource type="PackedScene" uid="uid://c5fknakn4m4yp" path="res://Entities/Interactive/interactible.tscn" id="1_udb3f"]
 [ext_resource type="Texture2D" uid="uid://d1a4tr1xishts" path="res://Assets/Sprites/Lantern.png" id="2_6s3kx"]
-
-[sub_resource type="Gradient" id="Gradient_31rvx"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_6s3kx"]
-gradient = SubResource("Gradient_31rvx")
-width = 128
-height = 128
-fill = 1
-fill_from = Vector2(0.475, 0.475)
-fill_to = Vector2(0.141026, 0.115385)
+[ext_resource type="Texture2D" uid="uid://cnvcuoeghj5g1" path="res://Assets/Sprites/Environment/Light2DTexture.tres" id="4_jmsnv"]
 
 [node name="DayCycleLantern" type="Node2D" groups=["Lantern"]]
 script = ExtResource("1_6s3kx")
 
 [node name="Interactible" parent="." instance=ExtResource("1_udb3f")]
+position = Vector2(0, -16)
 ColliderRadius = 1.0
 
 [node name="Lantern" type="Sprite2D" parent="Interactible"]
 texture = ExtResource("2_6s3kx")
-offset = Vector2(0, -7)
+offset = Vector2(0, -16)
 hframes = 3
 frame = 2
 
 [node name="PointLight2D2" type="PointLight2D" parent="Interactible/Lantern"]
-texture = SubResource("GradientTexture2D_6s3kx")
+color = Color(0.960784, 0.827451, 0.407843, 1)
+texture = ExtResource("4_jmsnv")

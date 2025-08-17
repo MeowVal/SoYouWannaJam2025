@@ -55,9 +55,6 @@ public partial class CharacterControl : CharacterBody2D
 			_interactor.TriggerInteraction(TriggerType.PickupDrop);
 			if (_interactor.InventorySlot.HasItem())
 			{
-				var item = _interactor.InventorySlot.Item;
-				//set item Y value to be visually above the character's head
-				item.GlobalPosition = new Vector2(item.GlobalPosition.X, item.GlobalPosition.Y - 35);
 				_charSprite.Frame = _direction switch
 				{
 					"right" => 3,

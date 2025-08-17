@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://c3huqdamwc1pj"]
+
+[ext_resource type="Texture2D" uid="uid://cxej3qjcibyve" path="res://Assets/Sprites/ModularParts/Pole_Staff.png" id="1_f6fao"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_4xv3n"]
+
+[resource]
+script = ExtResource("2_4xv3n")
+PartType = 4
+ModularItemType = 5
+PartState = 0
+DisplayName = "Staff Wooden Pole"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_f6fao")])
+Colours = Array[Color]([Color(0.678431, 0.392157, 0.168627, 1)])
+Size = 10.0
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

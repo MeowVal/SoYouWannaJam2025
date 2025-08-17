@@ -7,10 +7,6 @@ namespace SoYouWANNAJam2025.Scenes.UI;
 
 public partial class HudManager : CanvasLayer
 {
-    public static string Test = "Hello World";
-
-    private static bool _runClock;
-    private static float _clock;
     private static bool _isDayUpdated;
     
     public override void _Ready()
@@ -22,15 +18,6 @@ public partial class HudManager : CanvasLayer
 
         this.GetNode<Label>("%Date").Text = "Night: " + Global.GameDay.ToString();
         this.GetNode<Label>("%TimeOfDay").Text = "00:00";
-        _runClock = false;
-
-        //Global.DebugConsole += Terminal;
-        Connect("DebugConsole", new Callable(this, nameof(Terminal)));
-    }
-
-    private void Terminal(string command)
-    {
-        GD.Print("THIS IS A CONSOLOE STRING: ;", command);
     }
     
     public override void _Process(double delta)

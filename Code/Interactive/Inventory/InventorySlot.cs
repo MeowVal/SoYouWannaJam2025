@@ -51,10 +51,11 @@ public partial class InventorySlot : Node2D
     {
         if (!HasItem() || !slot.HasSpace()) return false;
 
-        Item.SetZIndexOffset(0);
+        
         // Ensures the item is accepted before doing anything else
         if (slot.PickupItem(Item, forceAdd))
         {
+            Item.SetZIndexOffset(0);
             // Accepted -> Remove from this slot.
             GD.Print($"Transferred {Item.ItemResource.DisplayName} away.");
             Item = null;
@@ -76,7 +77,7 @@ public partial class InventorySlot : Node2D
         // Add item to slot and position in new owning scene.
         Item = item;
         Item.SetHighlight(false);
-        Item.SetZIndexOffset(1);
+        //Item.SetZIndexOffset(1);
         Item.Reparent(this);
         Item.GlobalPosition = GlobalPosition.Round();
         Item.IsInteractive = false;

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://byawq00g275sg"]
+
+[sub_resource type="Curve2D" id="Curve2D_uygh7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 339.75, 807.75, 0, 0, 0, 0, 475, 736, 0, 0, 0, 0, 491.25, 645, 0, 0, 0, 0, 507.25, 508.5, 0, 0, 0, 0, 499.5, 392.25, 0, 0, 0, 0, 460.5, 213, 0, 0, 0, 0, 369.25, 69.5, 0, 0, 0, 0, 275, -52.25, 0, 0, 0, 0, 195.25, -63, 0, 0, 0, 0, 69, -33.75, 0, 0, 0, 0, -637.5, 319.5, 0, 0, 0, 0, 339.75, 807.75)
+}
+point_count = 12
+
+[node name="HostileNpcPath" type="Path2D"]
+curve = SubResource("Curve2D_uygh7")
+
+[node name="HostileNpcSpawnLocations" type="PathFollow2D" parent="."]
+position = Vector2(339.75, 807.75)
+rotation = -0.487748
+
+[node name="HostileNpcTimer" type="Timer" parent="."]
+autostart = true
