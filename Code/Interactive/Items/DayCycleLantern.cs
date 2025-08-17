@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using SoYouWANNAJam2025.Code;
 using SoYouWANNAJam2025.Code.World;
 using SoYouWANNAJam2025.Scenes.UI;
@@ -13,10 +14,15 @@ public partial class DayCycleLantern : Node2D
     [Export] public double CycleTime = 120;
     [Export] public double DawnTime = 5;
     [Export] public double DawnFrame = 0.2;
-
+    [Export] public double DuskFrame = 0.85;
+    
     private Interactible _interact;
     private AnimationPlayer _animator;
     private bool _dawnHandled = false;
+    private bool _duskHandled = false;
+    private bool _isDayTime = false;
+    
+    private List<Sprite2D> _lanternSprites;
 
     public override void _Ready()
     {
@@ -25,12 +31,24 @@ public partial class DayCycleLantern : Node2D
 
         _animator = Lighting.GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
         _animator.Play("DayNightCycle");//Init Animation
+
+        _lanternSprites = new List<Sprite2D>();
         
-        if (Engine.IsEditorHint() || Engine.IsEmbeddedInEditor()) _animator.Seek(0.5, true); //Make default start time Mid-Day for testing in Editor.
+        foreach (var node in GetTree().GetNodesInGroup("Lantern"))
+        {
+            _lanternSprites.Add(node as Sprite2D);
+        }
+        
+        if (Engine.IsEditorHint() || Engine.IsEmbeddedInEditor())
+        {
+            //Make default start time Mid-Day for testing in Editor.
+            _animator.Seek(0.5, true);
+            EnvironmentLight(false);
+            this.GetNode<Sprite2D>("Interactible/Lantern").Frame = 2;
+        } 
         else _animator.Seek(0, true);
         
         _animator.Stop(true);
-        
     }
 
  
@@ -63,10 +81,17 @@ public partial class DayCycleLantern : Node2D
         EmitSignal(SignalName.CycleLantern, true);
     }
 
+    private void OnDuskFrame()
+    {
+        _duskHandled = true;
+        GD.Print("Day is Dusk, closing shop");
+        EmitSignal(SignalName.CycleLantern, false);
+    }
+
     private void OnMidnight()
     {
         GD.Print("DayNightCycle Timed Out");
-        EmitSignal(SignalName.CycleLantern, false);
+        //EmitSignal(SignalName.CycleLantern, false);
         _animator.Stop();
         _dawnHandled = false;
         
@@ -76,20 +101,45 @@ public partial class DayCycleLantern : Node2D
         this.GetNode<Sprite2D>("Interactible/Lantern").Frame = 2;
     }
 
+    private void EnvironmentLight(bool isOn)
+    {
+        if (isOn)
+        {
+            GD.Print("TURN ON LIGHT");
+            foreach (var lantern in _lanternSprites)
+            {
+                lantern.Frame = 0;
+                lantern.GetNode<PointLight2D>("PointLight2D2").Enabled = true;
+            }
+            _isDayTime = false;
+            GD.Print(_isDayTime, "_isDayTime");
+        }
+        else
+        {
+            GD.Print("TURN OFF LIGHT");
+            foreach (var lantern in _lanternSprites)
+            {
+                lantern.Frame = 1;
+                lantern.GetNode<PointLight2D>("PointLight2D2").Enabled = false;
+            }
+            _isDayTime = true;
+            GD.Print(_isDayTime, "_isDayTime");
+        }
+    }
+    
     public override void _Process(double delta)
     {
         if (_animator.IsPlaying())
         {
             
-            if (_animator.CurrentAnimationPosition is < 0.25 or > 0.7)
+            if (_animator.CurrentAnimationPosition is < 0.25 or > 0.7)// || _isDayTime)
             {
-                this.GetNode<Sprite2D>("Interactible/Lantern").Frame = 0; //Turn on lantern.
-                this.GetNode<PointLight2D>("Interactible/Lantern/PointLight2D2").Enabled = true;
+                if (_isDayTime) EnvironmentLight(true);
+                
             }
-            else
+            else if (_animator.CurrentAnimationPosition is > 0.25 or < 0.7)
             {
-                this.GetNode<Sprite2D>("Interactible/Lantern").Frame = 1;
-                this.GetNode<PointLight2D>("Interactible/Lantern/PointLight2D2").Enabled = false;
+                if (!_isDayTime) EnvironmentLight(false);
             }
 
             Global.GameTimer = (float)_animator.CurrentAnimationPosition;
@@ -98,6 +148,11 @@ public partial class DayCycleLantern : Node2D
             {
                 GD.Print("DawnFrameHandled?");
                 OnDawnFrame();
+            }
+            else if (_animator.CurrentAnimationPosition > DuskFrame && _dawnHandled && !_duskHandled)
+            {
+                GD.Print("DuskFrameHandled?");
+                OnDuskFrame();
             }
             else if  (_animator.CurrentAnimationPosition > 0.9995)
             {   

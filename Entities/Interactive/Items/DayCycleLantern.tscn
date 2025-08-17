@@ -12,7 +12,7 @@ script = ExtResource("1_6s3kx")
 position = Vector2(0, -16)
 ColliderRadius = 1.0
 
-[node name="Lantern" type="Sprite2D" parent="Interactible"]
+[node name="Lantern" type="Sprite2D" parent="Interactible" groups=["Lantern"]]
 texture = ExtResource("2_6s3kx")
 offset = Vector2(0, -16)
 hframes = 3
