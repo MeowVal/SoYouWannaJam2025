@@ -11,6 +11,7 @@
 radius = 16.0
 
 [node name="GenericCraftingStation" type="Area2D"]
+y_sort_enabled = true
 script = ExtResource("1_3ll2t")
 Recipes = Array[ExtResource("2_f16vl")]([ExtResource("3_pxemq")])
 
@@ -19,9 +20,9 @@ shape = SubResource("CircleShape2D_3ll2t")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="StationSprite" type="Sprite2D" parent="."]
-position = Vector2(3, -6)
+position = Vector2(26, 9)
 texture = ExtResource("4_nig01")
-offset = Vector2(4, -16)
+offset = Vector2(-19, -31)
 region_enabled = true
 region_rect = Rect2(16, 0, 48, 32)
 

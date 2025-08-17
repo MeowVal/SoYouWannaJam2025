@@ -8,6 +8,7 @@
 radius = 20.0
 
 [node name="InspectionStation" type="Area2D"]
+y_sort_enabled = true
 script = ExtResource("1_20cqo")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -24,34 +25,39 @@ AllowAll = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
 
 [node name="StationSprite2" type="Sprite2D" parent="."]
-position = Vector2(3, -6)
+y_sort_enabled = true
+position = Vector2(27, 15)
 texture = ExtResource("2_klfgx")
-offset = Vector2(4, -16)
+offset = Vector2(-19, -31)
 region_enabled = true
 region_rect = Rect2(16, 0, 48, 32)
 
 [node name="StationSprite3" type="Sprite2D" parent="."]
-position = Vector2(-33, 1)
+y_sort_enabled = true
+position = Vector2(-32, 7)
 texture = ExtResource("2_klfgx")
 offset = Vector2(8, -7)
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 64)
 
 [node name="StationSprite4" type="Sprite2D" parent="."]
-position = Vector2(-15, 10)
+y_sort_enabled = true
+position = Vector2(-14, 16)
 texture = ExtResource("2_klfgx")
 offset = Vector2(10, 0)
 region_enabled = true
 region_rect = Rect2(16, 32, 24, 32)
 
 [node name="StationSprite5" type="Sprite2D" parent="."]
-position = Vector2(30, 22)
+y_sort_enabled = true
+position = Vector2(31, 28)
 texture = ExtResource("2_klfgx")
 offset = Vector2(-11, -12)
 region_enabled = true
 region_rect = Rect2(40, 32, 24, 32)
 
 [node name="CollisionBarrier" type="StaticBody2D" parent="."]
+position = Vector2(2, 5)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
 polygon = PackedVector2Array(-34, 2, -34, -7, -23, -13, 32, 13, 32, 23, 18, 30)

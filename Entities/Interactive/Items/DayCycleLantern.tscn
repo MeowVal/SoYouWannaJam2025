@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d1a4tr1xishts" path="res://Assets/Sprites/Lantern.png" id="2_6s3kx"]
 [ext_resource type="Texture2D" uid="uid://cnvcuoeghj5g1" path="res://Assets/Sprites/Environment/Light2DTexture.tres" id="4_jmsnv"]
 
-[node name="DayCycleLantern" type="Node2D" groups=["Lantern"]]
+[node name="DayCycleLantern" type="Node2D"]
 script = ExtResource("1_6s3kx")
 
 [node name="Interactible" parent="." instance=ExtResource("1_udb3f")]
@@ -20,4 +20,5 @@ frame = 2
 
 [node name="PointLight2D2" type="PointLight2D" parent="Interactible/Lantern"]
 color = Color(0.960784, 0.827451, 0.407843, 1)
+energy = 0.52
 texture = ExtResource("4_jmsnv")

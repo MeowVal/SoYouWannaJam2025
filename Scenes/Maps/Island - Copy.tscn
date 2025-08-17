@@ -76,6 +76,9 @@ metadata/_edit_lock_ = true
 [node name="ForgeStation" parent="GameWorld/Entities" instance=ExtResource("4_jqfss")]
 position = Vector2(1472.5, -38.5)
 
+[node name="Character" parent="GameWorld/Entities" instance=ExtResource("2_pk6v5")]
+position = Vector2(1408.5, 2)
+
 [node name="DayCycleLantern" parent="GameWorld/Entities" node_paths=PackedStringArray("Lighting") instance=ExtResource("5_qrjm0")]
 position = Vector2(1520, 4)
 Lighting = NodePath("../../../Camera2D/Lighting")
@@ -113,9 +116,6 @@ position = Vector2(1555, -111.5)
 
 [node name="InspectionStation" parent="GameWorld/Entities" instance=ExtResource("15_panr6")]
 position = Vector2(1617, -86)
-
-[node name="Character" parent="GameWorld/Entities" instance=ExtResource("2_pk6v5")]
-position = Vector2(1408.5, 2)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("3_d01xk")

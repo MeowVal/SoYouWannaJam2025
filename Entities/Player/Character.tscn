@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://br6pkqr38jxvw" path="res://Resources/Shaders/LightShadows.gdshader" id="7_25evy"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_25evy"]
-a = Vector2(9, 0)
+a = Vector2(6, 0)
 b = Vector2(-8, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c6rmn"]
