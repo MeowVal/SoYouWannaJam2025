@@ -24,8 +24,8 @@ public partial class GameManager : Node2D
 	[Export]
 	public PackedScene HostileNpcScene { get; set; }
 	[ExportGroup("Other stuff")]
-	[Export]
-	public Vector2 TileSize = new Vector2(32, 16);
+	//[Export]
+	//public Vector2 TileSize = new Vector2(32, 16);
 
 	public float Gold = 0; 
 	
@@ -42,7 +42,7 @@ public partial class GameManager : Node2D
 	private const string ModularPartsFolderPath = "res://Resources/Items/ModularParts/";
 	private PackedScene _modularItemScene;
 	private PathFollow2D _hostileNpcSpawnLocation;
-	private List<Vector2> _queuePositions = new List<Vector2>();
+	//private List<Vector2> _queuePositions = new List<Vector2>();
 	private List<Npc.Friendly.Npc> _npcQueue = new();
 	[Export] public Vector2I QueueDirection = new Vector2I(0, 1); // Behind the target
 	
@@ -283,7 +283,7 @@ public partial class GameManager : Node2D
 		//GD.Print("NPC count = "+_npcs.Count);
 		Npc.Friendly.Npc npc = NpcScene.Instantiate<Npc.Friendly.Npc>();
 		NpcSpawning(npc);
-		GD.Print("NPCCCCCCCCCCCCCC");
+		//GD.Print("NPCCCCCCCCCCCCCC");
 		EModularItemType[] itemTypes = [EModularItemType.Sword, EModularItemType.Spear, EModularItemType.Bow,  EModularItemType.Chestplate, EModularItemType.Staff]; 
 		var (wantedTemplate, givenTemplate) = RandomItemTemplates(itemTypes[GD.RandRange(0, itemTypes.Length - 1)]);
 		if (wantedTemplate == null || givenTemplate == null) return;
