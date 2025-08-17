@@ -11,7 +11,6 @@ radius = 16.0
 [node name="GenericCraftingStation" type="Area2D"]
 y_sort_enabled = true
 script = ExtResource("1_3ll2t")
-RecipesFolder = "res://Resources/Recipes/Carpentry/"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1aci6")
