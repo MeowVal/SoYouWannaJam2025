@@ -81,8 +81,7 @@ public partial class Npc : CharacterBody2D
             State = "idle";
             if (Target is not HostileNpc) return;
         }
-        
-        //if (Target == null) return;
+        if (Target == null && _queueTarget == null) return;
         State = "walk";
         
         // Get pathfinding information
@@ -94,7 +93,7 @@ public partial class Npc : CharacterBody2D
             if (_queueTarget != null)
                 _navAgent.TargetPosition = (Vector2)_queueTarget;
             else
-                _navAgent.TargetPosition = Target.GlobalPosition;
+                _navAgent.TargetPosition = Target!.GlobalPosition;
             _lastTargetPosition = nextPathPosition;  
         }
         // Calculate the new direction
