@@ -9,6 +9,8 @@ public partial class Npc : CharacterBody2D
 {
     [Signal]
     public delegate void DoBehaviorEnabledEventHandler(); // Signal for enabling behaviours 
+    [Signal]
+    public delegate void LeftQueueEventHandler(Npc npc);
     [Export] public Timer MoodTimer; // How often the npc's mode decreases
     [Export] public float MoodDecreaseAmount = 10; // How much the npc's mood decreases by
     [Export] private float _speed = 30f; // How fast the npc moves
@@ -194,6 +196,8 @@ public partial class Npc : CharacterBody2D
             if (Target == null) return;
             _navAgent.TargetPosition = Target.GlobalPosition;
             StartMoodTimer =  false;
+            LeaveQueue();
+            EmitSignal(SignalName.LeftQueue, this);
             MoodTimer.Stop();
             
         }

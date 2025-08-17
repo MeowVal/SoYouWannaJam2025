@@ -259,32 +259,42 @@ public partial class GameManager : Node2D
 	private void NpcSpawning( dynamic npc)
 	{
 		//GD.Print(npc.GetType() );
-		if (npc is HostileNpc)
+		if (npc is HostileNpc npcHostile)
 		{
 			if (_hostileNpc.Count >= MaxNpcCount) return;
-			npc.NpcResource = HostileNpcResources[GD.RandRange(0,HostileNpcResources.Count -1)];
+			npcHostile.NpcResource = HostileNpcResources[GD.RandRange(0,HostileNpcResources.Count -1)];
 			_hostileNpcSpawnLocation.ProgressRatio = GD.Randf();
-			npc.Position = _hostileNpcSpawnLocation.Position * 4;
-			npc.Scale = Vector2.One * 4;
-			_hostileNpc.Add(npc);
-			AddChild(npc);
+			npcHostile.Position = _hostileNpcSpawnLocation.Position * 4;
+			npcHostile.Scale = Vector2.One * 4;
+			_hostileNpc.Add(npcHostile);
+			AddChild(npcHostile);
 			
 		}
-		else if  (npc is Npc.Friendly.Npc)
+		else if  (npc is Npc.Friendly.Npc npcFriendly)
 		{
 			if (_npcs.Count >= MaxNpcCount)return;
-			npc.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
-			npc.Position = _npcSpawnLocation.Position * 4 ;
-			npc.Scale = Vector2.One * 4;
+			npcFriendly.NpcResource = NpcResources[GD.RandRange(0,NpcResources.Count -1)];
+			npcFriendly.Position = _npcSpawnLocation.Position * 4 ;
+			npcFriendly.Scale = Vector2.One * 4;
 			//npc.Target = _frontDesk;
-			npc.LeaveAreaNode = _leaveAreaNode;
-			_npcs.Add(npc);
-			AddChild(npc);
-			var npcInteractor = (NpcInteractor)npc.FindChild("NpcInteractor");
-			RequestToJoin(npc);
+			npcFriendly.LeaveAreaNode = _leaveAreaNode;
+			_npcs.Add(npcFriendly);
+			AddChild(npcFriendly);
+			var npcInteractor = (NpcInteractor)npcFriendly.FindChild("NpcInteractor");
+			RequestToJoin(npcFriendly);
 			npcInteractor.RequestComplete += OnRequestComplete;
+			npcFriendly.LeftQueue += LeaveQueue;
+			npcInteractor.CombatEnded += OnCombatEnded;
 		}
 		
+	}
+
+	private void OnCombatEnded(Npc.Friendly.Npc npc, HostileNpc hostileNpc)
+	{
+		_hostileNpc.Remove(hostileNpc);
+		_npcs.Remove(npc);
+		hostileNpc.QueueFree();
+		npc.QueueFree();
 	}
 
 	private void OnRequestComplete(Npc.Friendly.Npc npc)

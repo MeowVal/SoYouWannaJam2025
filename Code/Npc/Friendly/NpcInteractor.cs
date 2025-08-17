@@ -4,6 +4,7 @@ using Godot.Collections;
 using SoYouWANNAJam2025.Code.Interactive.Inventory;
 using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
+using SoYouWANNAJam2025.Code.Npc.Hostile;
 using BaseRecipe = SoYouWANNAJam2025.Code.Interactive.Stations.BaseRecipe;
 
 namespace SoYouWANNAJam2025.Code.Npc.Friendly;
@@ -24,6 +25,8 @@ public partial class NpcInteractor : Interactible
     public delegate void RequestGivenEventHandler();
     [Signal]
     public delegate void RequestCompleteEventHandler(Npc npc);
+    [Signal]
+    public delegate void CombatEndedEventHandler(Npc npc, HostileNpc hostileNpc);
 
     //private Godot.Collections.Array _itemParts = [];
     private EPartType _modularItemPartKey;
@@ -39,12 +42,15 @@ public partial class NpcInteractor : Interactible
     private bool _requestComplete = false;
     private Node2D _interfaceLocation;
     [Export] public Array<BaseRecipe> Recipes = [];
+    private Timer _combatTimer;
+    private HostileNpc _hostileNpc;
     public override void _Ready()
     {
         if (Engine.IsEditorHint()) return;
         base._Ready();
         if (FindChild("Inventory") is Interactive.Inventory.Inventory inv) Inventory=inv;
-        
+        if (FindChild("CombatTimer") is Timer timer) _combatTimer=timer;
+        _combatTimer.Timeout += OnCombatTimerTimeout;
         Inventory.RecipeWhitelist = Recipes;
         Inventory.CompileWhitelist();
         _npc = GetParent<Npc>();
@@ -54,6 +60,11 @@ public partial class NpcInteractor : Interactible
         RequestGiven += OnRequestGiven;
         RequestComplete += OnRequestComplete;
         
+    }
+
+    private void OnCombatTimerTimeout()
+    {
+        EmitSignal(SignalName.CombatEnded, _npc,_hostileNpc);
     }
 
     private void OnRequestComplete(Npc npc)
@@ -75,6 +86,13 @@ public partial class NpcInteractor : Interactible
             {
                 EmitSignal(SignalName.NpcLeft, _npc);
                 _npc.QueueFree();
+            }
+            else if (unknownTarget is NpcInteractor { _npc: HostileNpc hostileNpc })
+            {
+                //_combatTimer.WaitTime = _hostileNpc.Health - _weaponDamage;
+                _combatTimer.WaitTime = 10;
+                _combatTimer.Start();
+                _hostileNpc = hostileNpc; 
             }
             return;
         }
