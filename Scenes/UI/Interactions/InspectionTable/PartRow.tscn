@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3alst8ud5vgl"]
+
+[ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="1_3gr7s"]
+[ext_resource type="Script" uid="uid://8wqu3vnlesx6" path="res://Scenes/UI/Interactions/InspectionTable/PartRow.cs" id="2_bdvwv"]
+[ext_resource type="Texture2D" uid="uid://prxt2vvgehoo" path="res://Assets/Sprites/ModularParts/Blade_Sword_Modern.png" id="2_i35f4"]
+[ext_resource type="Texture2D" uid="uid://udlcs73ykltd" path="res://Assets/Sprites/UI/Icon_Cross.png" id="3_bdvwv"]
+[ext_resource type="Texture2D" uid="uid://eqk36ovbbkyl" path="res://Assets/Sprites/UI/Icon_Replace.png" id="4_fjlwt"]
+
+[node name="PartRow" type="HBoxContainer"]
+offset_right = 294.0
+offset_bottom = 54.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_3gr7s")
+script = ExtResource("2_bdvwv")
+
+[node name="PartIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_i35f4")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="NameContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="NameIcon" type="TextureRect" parent="VBoxContainer/NameContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_bdvwv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="NameText" type="Label" parent="VBoxContainer/NameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "Part Name"
+
+[node name="ActionContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ActionIcon" type="TextureRect" parent="VBoxContainer/ActionContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("4_fjlwt")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ActionVB" type="VBoxContainer" parent="VBoxContainer/ActionContainer"]
+layout_mode = 2
+
+[node name="ActionHB" type="HBoxContainer" parent="VBoxContainer/ActionContainer/ActionVB"]
+layout_mode = 2
+
+[node name="ActionTextStart" type="Label" parent="VBoxContainer/ActionContainer/ActionVB/ActionHB"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "You should"
+
+[node name="ActionTextHighlight" type="Label" parent="VBoxContainer/ActionContainer/ActionVB/ActionHB"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "do something"
+
+[node name="ActionTextEnd" type="Label" parent="VBoxContainer/ActionContainer/ActionVB/ActionHB"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "with this!"
+
+[node name="ActionTextBelow" type="Label" parent="VBoxContainer/ActionContainer/ActionVB"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "with this!"

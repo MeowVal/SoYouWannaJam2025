@@ -18,6 +18,8 @@ public partial class InspectionStation : Interactible
 
     private bool _isInspecting = false;
     private bool _showUi = true;
+
+    private PackedScene _partRow = GD.Load<PackedScene>("res://Scenes/UI/Interactions/InspectionTable/PartRow.tscn");
     
     public override void _Ready()
     {
@@ -40,7 +42,7 @@ public partial class InspectionStation : Interactible
 
     public void ResearchBegin()
     {
-        CreateUiScene("res://Scenes/UI/Interactions/InspectionUITimer.tscn");
+        CreateUiScene("res://Scenes/UI/Interactions/InspectionTable/InspectingTimer.tscn");
         _isInspecting = true;
         
         _progressBar = _interactionInterface.GetNode<ProgressBar>("Control/MarginContainer/VBoxContainer/ProgressBar");
@@ -75,24 +77,21 @@ public partial class InspectionStation : Interactible
         _progressTimer = null;
         _progressBar = null;
 
-        CreateUiScene("res://Scenes/UI/Interactions/InspectionUI.tscn");
+        CreateUiScene("res://Scenes/UI/Interactions/InspectionTable/ModularItemBreakdown.tscn");
         if (_interactionInterface == null || !Inventory.HasItem()) return;
         
         _interactionInterface.SetVisible(_showUi);
         
-        var container = _interactionInterface.GetNode<Control>("Control/MarginContainer/VBoxContainer");
-        
-        var itemTexture = container.GetNode<TextureRect>("HBoxContainer/ItemTexture");
-        var itemName = container.GetNode<Label>("HBoxContainer/ItemName");
-        itemTexture.Texture = Inventory.Item.Sprite.Texture;
-        itemName.Text = Inventory.Item.ItemResource.DisplayName;
-        
+        var container = _interactionInterface.GetNode<VBoxContainer>("Control/VBoxContainer/PartsMarginContainer/PartsVBox");
+        var itemText = _interactionInterface.GetNode<Label>("Control/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/ItemName");
+        var itemIcon = _interactionInterface.GetNode<TextureRect>("Control/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/ItemTexture");
+
+
+
         if (Inventory.Item is not ModularItem modularItem) return;
-        
-        var mContainer = new MarginContainer();
-        var vBox = new VBoxContainer();
-        container.AddChild(mContainer);
-        mContainer.AddChild(vBox);
+
+        itemText.Text = modularItem.ItemResource.DisplayName;
+        itemIcon.Texture = modularItem.Sprite.Texture;
 
         GD.Print("Compare Item:");
         foreach (var key in modularItem.Parts.Keys)
@@ -105,76 +104,36 @@ public partial class InspectionStation : Interactible
 
         foreach (var part in modularItem.Parts)
         {
-            var hBox = new HBoxContainer();
-            var partTexture = new TextureRect();
-            var partName = new Label();
-            
-            hBox.Alignment = BoxContainer.AlignmentMode.Center;
-            
-            partTexture.Texture = ImageTexture.CreateFromImage(part.Value.GetItemImage());
-            partName.Text = part.Value.DisplayName;
-            
-            vBox.AddChild(hBox);
-            hBox.AddChild(partTexture);
-            hBox.AddChild(partName);
-            
             var wantedPart = modularItem.OwningNpc.WantedItemTemplate.DefaultParts[part.Key];
-            if (wantedPart != null)
+            var newRow = _partRow.Instantiate<Scenes.UI.Interactions.InspectionTable.PartRow>();
+            var isSameItem = wantedPart.DisplayName == part.Value.DisplayName;
+            var isSameState = wantedPart.PartState == part.Value.PartState;
+
+            if (!isSameItem)
             {
-                var isSameItem = wantedPart.DisplayName == part.Value.DisplayName;
-                var isSameState = wantedPart.PartState == part.Value.PartState;
-                
-                var checkmark = new Label();
-                if (isSameItem && isSameState)
-                {
-                    checkmark.Text = "✔";
-                    checkmark.Modulate = new Color(0, 1, 0, 1);
-                    partName.Modulate = new Color(0, 1, 0, 1);
-                }
-                else
-                {
-                    checkmark.Text = "❌";
-                    partName.Modulate = new Color(1, 0, 0, 1);
-
-                    var wantedVBox = new VBoxContainer();
-                    vBox.AddChild(wantedVBox);
-                    hBox.Reparent(wantedVBox);
-                    
-                    var wantedHBox = new HBoxContainer();
-                    
-                    var wantedPartName = new Label();
-
-                    wantedHBox.Alignment = BoxContainer.AlignmentMode.Center;
-
-                    var renderTexture = true;
-
-                    if (isSameItem && !isSameState)
-                    {
-                        wantedPartName.Text = "Repair Broken Part";
-                        renderTexture = false;
-                    }
-                    else if (!isSameItem)
-                    {
-                        wantedPartName.Text = $"Replace with:\n{wantedPart.DisplayName}";
-                    }
-                    
-                    wantedPartName.LabelSettings = new LabelSettings();
-                    wantedPartName.LabelSettings.FontSize = 10;
-
-                    wantedVBox.AddChild(wantedHBox);
-                    if (renderTexture)
-                    {
-                        var wantedPartTexture = new TextureRect();
-                        wantedPartTexture.Texture = ImageTexture.CreateFromImage(part.Value.GetItemImage());
-                        wantedHBox.AddChild(wantedPartTexture);
-                    }
-                    
-                    wantedHBox.AddChild(wantedPartName);
-                    
-                }
-
-                hBox.AddChild(checkmark);
+                newRow.Initialise(
+                    part: part.Value,
+                    actionType: Scenes.UI.Interactions.InspectionTable.PartRow.EActionType.Replace,
+                    replacement: wantedPart
+                );
             }
+            else if (isSameItem && !isSameState)
+            {
+                newRow.Initialise(
+                    part: part.Value,
+                    actionType: Scenes.UI.Interactions.InspectionTable.PartRow.EActionType.Repair
+                );
+            }
+            else
+            {
+                newRow.Initialise(
+                    part: part.Value,
+                    actionType: Scenes.UI.Interactions.InspectionTable.PartRow.EActionType.None
+                );
+            }
+
+
+            container.AddChild(newRow);
         }
     }
 
