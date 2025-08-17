@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://csj3qqs6ypkkc"
-path="res://.godot/imported/BucketLava.png-610e29858b0a799bf70386ba1b23fe20.ctex"
+path="res://.godot/imported/BucketLava.png-5a235e80c63f7ee20950e5ca23b3bb9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/environment/BucketLava.png"
-dest_files=["res://.godot/imported/BucketLava.png-610e29858b0a799bf70386ba1b23fe20.ctex"]
+source_file="res://Assets/Sprites/Environment/BucketLava.png"
+dest_files=["res://.godot/imported/BucketLava.png-5a235e80c63f7ee20950e5ca23b3bb9a.ctex"]
 
 [params]
 

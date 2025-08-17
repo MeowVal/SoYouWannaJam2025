@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0mj30ij8daqg"
-path="res://.godot/imported/DippingBucket.png-4dbf8199f771598f865b801f8eb48bdd.ctex"
+path="res://.godot/imported/DippingBucket.png-624fedfe2402af7a797c1163fed007c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/environment/DippingBucket.png"
-dest_files=["res://.godot/imported/DippingBucket.png-4dbf8199f771598f865b801f8eb48bdd.ctex"]
+source_file="res://Assets/Sprites/Environment/DippingBucket.png"
+dest_files=["res://.godot/imported/DippingBucket.png-624fedfe2402af7a797c1163fed007c0.ctex"]
 
 [params]
 

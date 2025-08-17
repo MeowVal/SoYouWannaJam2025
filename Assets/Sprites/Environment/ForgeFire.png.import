@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwfxftgh5kpu5"
-path="res://.godot/imported/ForgeFire.png-698fe5d564b3b5a806ff4fdcba908c4b.ctex"
+path="res://.godot/imported/ForgeFire.png-d73557587f3f9f7ec4f462fc00a4527f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/environment/ForgeFire.png"
-dest_files=["res://.godot/imported/ForgeFire.png-698fe5d564b3b5a806ff4fdcba908c4b.ctex"]
+source_file="res://Assets/Sprites/Environment/ForgeFire.png"
+dest_files=["res://.godot/imported/ForgeFire.png-d73557587f3f9f7ec4f462fc00a4527f.ctex"]
 
 [params]
 

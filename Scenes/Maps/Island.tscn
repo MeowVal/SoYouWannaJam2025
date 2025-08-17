@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/Lighting/lighting.tscn" id="1_1ur4q"]
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_m78t2"]
-[ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/environment/TileMap.tres" id="1_o66vd"]
+[ext_resource type="TileSet" uid="uid://u8qkhniw6s8u" path="res://Assets/Sprites/Environment/TileMap.tres" id="1_o66vd"]
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="2_pk6v5"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="3_d01xk"]
 [ext_resource type="PackedScene" uid="uid://cgbg8jjt6swx6" path="res://Entities/Interactive/Stations/ForgeStation.tscn" id="4_jqfss"]
@@ -13,7 +13,7 @@
 [ext_resource type="Resource" uid="uid://cx62c06xp6g8i" path="res://Resources/Items/Resources/GoldOre.tres" id="8_o8xj0"]
 [ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="9_jqfss"]
 [ext_resource type="PackedScene" uid="uid://cdr1tuqn030c4" path="res://Entities/Interactive/StorageCrate.tscn" id="10_noywq"]
-[ext_resource type="PackedScene" uid="uid://byawq00g275sg" path="res://Entities/NPC/Hostile/hostile_npc_path.tscn" id="13_tjnjo"]
+[ext_resource type="PackedScene" path="res://Entities/NPC/Hostile/hostile_npc_path.tscn" id="13_tjnjo"]
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="17_pyxrn"]
 
 [node name="GameManager" type="Node2D"]
@@ -76,9 +76,6 @@ metadata/_edit_lock_ = true
 [node name="ForgeStation" parent="GameWorld/Entities" instance=ExtResource("4_jqfss")]
 position = Vector2(1472.5, -38.5)
 
-[node name="Character" parent="GameWorld/Entities" instance=ExtResource("2_pk6v5")]
-position = Vector2(1408.5, 2)
-
 [node name="DayCycleLantern" parent="GameWorld/Entities" node_paths=PackedStringArray("Lighting") instance=ExtResource("5_qrjm0")]
 position = Vector2(1520, 4)
 Lighting = NodePath("../../Lighting")
@@ -110,6 +107,9 @@ position = Vector2(1456.5, 104.75)
 
 [node name="HostileNpcPath" parent="GameWorld/Entities" instance=ExtResource("13_tjnjo")]
 position = Vector2(1721, -372.5)
+
+[node name="Character" parent="GameWorld/Entities" instance=ExtResource("2_pk6v5")]
+position = Vector2(1408.5, 2)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("3_d01xk")

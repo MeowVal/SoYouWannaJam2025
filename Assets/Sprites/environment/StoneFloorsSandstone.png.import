@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://mfene7pfc233"
-path="res://.godot/imported/StoneFloorsSandstone.png-3764fd776c44eea524d537c063b21b99.ctex"
+path="res://.godot/imported/StoneFloorsSandstone.png-196dbe867627494b0e21c0cf934212d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/environment/StoneFloorsSandstone.png"
-dest_files=["res://.godot/imported/StoneFloorsSandstone.png-3764fd776c44eea524d537c063b21b99.ctex"]
+source_file="res://Assets/Sprites/Environment/StoneFloorsSandstone.png"
+dest_files=["res://.godot/imported/StoneFloorsSandstone.png-196dbe867627494b0e21c0cf934212d5.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://hl78vvil2ajh"
-path="res://.godot/imported/WoodLog.png-2cad76506fb7a4f801a8808e70897176.ctex"
+path="res://.godot/imported/WoodLog.png-6c8518cfc1755bb2aeaa18ed91029bf7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/environment/WoodLog.png"
-dest_files=["res://.godot/imported/WoodLog.png-2cad76506fb7a4f801a8808e70897176.ctex"]
+source_file="res://Assets/Sprites/Environment/WoodLog.png"
+dest_files=["res://.godot/imported/WoodLog.png-6c8518cfc1755bb2aeaa18ed91029bf7.ctex"]
 
 [params]
 
