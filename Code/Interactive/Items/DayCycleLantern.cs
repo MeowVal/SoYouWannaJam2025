@@ -27,6 +27,7 @@ public partial class DayCycleLantern : Node2D
         _animator.Play("DayNightCycle");//Init Animation
         _animator.Seek(0.5, true);
         _animator.Stop(true);
+        
     }
 
  
@@ -34,9 +35,8 @@ public partial class DayCycleLantern : Node2D
     {
         if (trigger is TriggerType.UseAction && !_animator.IsPlaying())
         {
-            GD.Print(Global.GameDay);
             Global.GameDay += 1;
-            GD.Print(Global.GameDay);
+            
             _interact.IsInteractive = false;
             GD.Print("Started DayNightCycle");
             if (DawnFrame > 0.0)

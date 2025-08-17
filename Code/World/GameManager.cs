@@ -79,7 +79,7 @@ public partial class GameManager : Node2D
 			);
 		}
 		
-		GD.Print(ModularItemResources);
+		//GD.Print(ModularItemResources);
 		_npcSpawnLocation = (Node2D)FindChild("NpcArrivalArea");
 		_frontDesk  = (Node2D)FindChild("FrontDesk");
 		_leaveAreaNode = (Area2D)FindChild("LeaveArea");
@@ -88,7 +88,7 @@ public partial class GameManager : Node2D
 		_hostileNpcSpawnLocation = (PathFollow2D)FindChild("HostileNpcSpawnLocations");
 
 		//npcInteractor.NpcLeft += OnNpcLeft;
-		GD.Print(CycleLantern);
+		//GD.Print(CycleLantern);
 		if (CycleLantern == null) return;
 		CycleLantern.CycleLantern += LanternChanged;
 		Global.GameDay = 0;

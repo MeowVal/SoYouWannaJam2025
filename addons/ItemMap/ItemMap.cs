@@ -72,7 +72,7 @@ public partial class ItemMap : EditorPlugin
 				var node = EditorInterface.Singleton.GetEditedSceneRoot().GetNodeOrNull<TileMapLayer>(WorldMap);
 				if (node != null)
 				{
-					GD.Print(node, "test");
+					//GD.Print(node, "test");
 					_worldMap = node;
 				}
 		}
@@ -86,7 +86,7 @@ public partial class ItemMap : EditorPlugin
 
 	private void OnMainSceneChanged(string sceneNode)
 	{
-		GD.Print(sceneNode);
+		//GD.Print(sceneNode);
 	}
 
 	private void OnSceneClosedChanged(string sceneNode)
@@ -172,7 +172,7 @@ public partial class ItemMap : EditorPlugin
 				//GD.Print(unpackObj);
 				if (_worldMap == null) return;
 				var pos = _worldMap.MapToLocal(_worldMap.LocalToMap(_worldMap.ToLocal(_editor.GetMousePosition())));
-				GD.Print(pos);
+				//GD.Print(pos);
 				var ogName = unpackObj.Name;
 				
 				unpackObj.Position = pos;
