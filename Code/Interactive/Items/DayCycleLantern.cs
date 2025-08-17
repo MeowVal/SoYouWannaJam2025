@@ -25,7 +25,10 @@ public partial class DayCycleLantern : Node2D
 
         _animator = Lighting.GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
         _animator.Play("DayNightCycle");//Init Animation
-        _animator.Seek(0.5, true);
+        
+        if (Engine.IsEditorHint() || Engine.IsEmbeddedInEditor()) _animator.Seek(0.5, true); //Make default start time Mid-Day for testing in Editor.
+        else _animator.Seek(0, true);
+        
         _animator.Stop(true);
         
     }
