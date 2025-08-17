@@ -11,6 +11,7 @@ public partial class GenericItemTemplate: Resource
     [Export] public Array<Texture2D> Textures = [GD.Load<Texture2D>("res://Assets/Sprites/Unknown.png")];
     [Export] public Array<Color> Colours = [Colors.White];
     [Export] public float Size = 10;
+    [Export] public bool AllowUseAction = false;
     
     public virtual Image GetItemImage(Array<Texture2D> textures = null)
     {
