@@ -2,7 +2,7 @@ using Godot;
 
 namespace SoYouWANNAJam2025.Code.World;
 
-public partial class WorldMap : TileMapLayer
+public partial class Ground : TileMapLayer
 {
     //private List<TileMapLayer> _obstacles = new List<TileMapLayer>();
 

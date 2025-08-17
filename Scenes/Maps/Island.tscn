@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c4hvjp22ok276" path="res://Entities/Player/Character.tscn" id="2_pk6v5"]
 [ext_resource type="Script" uid="uid://cfk61wdwaq7r6" path="res://Code/World/Camera.cs" id="3_d01xk"]
 [ext_resource type="PackedScene" uid="uid://cgbg8jjt6swx6" path="res://Entities/Interactive/Stations/ForgeStation.tscn" id="4_jqfss"]
-[ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/WorldMap.cs" id="4_t8qcr"]
+[ext_resource type="Script" uid="uid://2v0xavcjfpwl" path="res://Code/World/Ground.cs" id="4_t8qcr"]
 [ext_resource type="PackedScene" uid="uid://b2owtq0jxh0n6" path="res://Entities/Interactive/Items/DayCycleLantern.tscn" id="5_qrjm0"]
 [ext_resource type="PackedScene" uid="uid://u52yg5uejgs6" path="res://Entities/Interactive/Stations/Dispenser.tscn" id="6_qrjm0"]
 [ext_resource type="Resource" uid="uid://mg6flu0e6ji5" path="res://Resources/Items/Resources/IronOre.tres" id="7_eix3d"]
@@ -99,18 +99,15 @@ metadata/_edit_lock_ = true
 
 [node name="ForgeStation" parent="GameWorld/Entities" instance=ExtResource("4_jqfss")]
 position = Vector2(1472.5, -38.5)
-RecipesFolder = ""
 
 [node name="TinkeringStation" parent="GameWorld/Entities" instance=ExtResource("17_5egf7")]
 position = Vector2(1680, -54)
 
 [node name="AnvilStation" parent="GameWorld/Entities" instance=ExtResource("17_pyxrn")]
 position = Vector2(1517.5, 45)
-RecipesFolder = ""
 
 [node name="CarpentryStation" parent="GameWorld/Entities" instance=ExtResource("11_m78t2")]
 position = Vector2(1555, -111.5)
-RecipesFolder = ""
 
 [node name="InspectionStation" parent="GameWorld/Entities" instance=ExtResource("15_panr6")]
 position = Vector2(1617, -86)
@@ -124,7 +121,7 @@ ItemResource = ExtResource("15_tjnjo")
 
 [node name="DayCycleLantern" parent="GameWorld/Entities" node_paths=PackedStringArray("Lighting") instance=ExtResource("5_qrjm0")]
 position = Vector2(1520, 4)
-Lighting = NodePath("../../../Camera2D/Lighting")
+Lighting = NodePath("../../../Camera/Lighting")
 CycleTime = 300.0
 
 [node name="Dispenser" parent="GameWorld/Entities" instance=ExtResource("6_qrjm0")]
@@ -271,11 +268,11 @@ position = Vector2(1665, 121)
 [node name="StorageCrate9" parent="GameWorld/Entities" instance=ExtResource("10_noywq")]
 position = Vector2(1648, 113)
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("3_d01xk")
 FollowingNode = NodePath("../GameWorld/Entities/Character")
 
-[node name="Lighting" parent="Camera2D" instance=ExtResource("1_1ur4q")]
+[node name="Lighting" parent="Camera" instance=ExtResource("1_1ur4q")]
 z_index = 1
 
-[editable path="Camera2D/Lighting"]
+[editable path="Camera/Lighting"]
