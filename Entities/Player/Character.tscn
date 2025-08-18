@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4hvjp22ok276"]
+[gd_scene load_steps=16 format=3 uid="uid://c4hvjp22ok276"]
 
 [ext_resource type="Texture2D" uid="uid://b4j28yud6v4qc" path="res://Assets/Sprites/Mobs/DwarfBlacksmith.png" id="2_bkf2h"]
 [ext_resource type="Script" uid="uid://cwtxspxxv4tgq" path="res://Code/Player/CharacterControl.cs" id="2_l3y44"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_o4cwe"]
 [ext_resource type="Texture2D" uid="uid://cnvcuoeghj5g1" path="res://Assets/Sprites/Environment/Light2DTexture.tres" id="6_bkf2h"]
 [ext_resource type="Shader" uid="uid://br6pkqr38jxvw" path="res://Resources/Shaders/LightShadows.gdshader" id="7_25evy"]
+[ext_resource type="AudioStream" uid="uid://7c7dgukx2qub" path="res://Assets/Sound/hardbarefoot1.ogg" id="7_lackt"]
+[ext_resource type="AudioStream" uid="uid://2l55tuxpdb3s" path="res://Assets/Sound/hardbarefoot2.ogg" id="8_7f5j7"]
+[ext_resource type="AudioStream" uid="uid://clpk2rxt2pgwl" path="res://Assets/Sound/hardbarefoot3.ogg" id="9_84v3m"]
+[ext_resource type="AudioStream" uid="uid://cn6nvvmrcuq6u" path="res://Assets/Sound/hardbarefoot4.ogg" id="10_aq4pt"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_25evy"]
 a = Vector2(6, 0)
@@ -20,6 +24,15 @@ polygon = PackedVector2Array(0, 8, 8, 8, 16, 0, 16, -8, 8, -16, 0, -16, -8, -16,
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bkf2h"]
 shader = ExtResource("7_25evy")
 shader_parameter/shadow_limit = 0.5
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_dysyf"]
+shuffle = true
+loop = false
+stream_count = 4
+stream_0 = ExtResource("7_lackt")
+stream_1 = ExtResource("8_7f5j7")
+stream_2 = ExtResource("9_84v3m")
+stream_3 = ExtResource("10_aq4pt")
 
 [node name="Character" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -70,3 +83,7 @@ shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.847059)
 texture = ExtResource("6_bkf2h")
 offset = Vector2(20, 31)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamPlaylist_dysyf")
+volume_db = -2.0

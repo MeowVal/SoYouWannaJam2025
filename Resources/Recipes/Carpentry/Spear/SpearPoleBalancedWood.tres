@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("4_heyf3")
-DisplayName = "Spear Wooden Pole"
+DisplayName = "Spear Wooden Balanced Pole"
 Description = "You need to actually set this lol."
 RecipeType = 0
 RecipeInputs = [ExtResource("2_0mfkd"), ExtResource("2_0mfkd")]

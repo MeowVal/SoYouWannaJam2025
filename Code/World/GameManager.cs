@@ -359,6 +359,7 @@ public partial class GameManager : Node2D
 			_entities.AddChild(npcFriendly);
 			var npcInteractor = (NpcInteractor)npcFriendly.FindChild("NpcInteractor");
 			RequestToJoin(npcFriendly);
+			npcInteractor.NpcLeft += OnNpcLeft;
 			npcInteractor.RequestComplete += OnRequestComplete;
 			npcFriendly.LeftQueue += LeaveQueue;
 			npcInteractor.CombatEnded += OnCombatEnded;
