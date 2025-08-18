@@ -8,7 +8,7 @@
 script = ExtResource("2_s0o4u")
 PartType = 11
 ModularItemType = 7
-PartState = 2
+PartState = 0
 BrokenTextures = Array[Texture2D]([ExtResource("1_k7j0c")])
 UsedTextures = []
 DisplayName = "Aggressive Wooden Bow Limbs"

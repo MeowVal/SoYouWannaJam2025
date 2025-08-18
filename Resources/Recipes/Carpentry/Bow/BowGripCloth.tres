@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://b7gpyqh4rfg52"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://b7gpyqh4rfg52"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_74lpv"]
 [ext_resource type="Resource" uid="uid://c6fyadcgfkbot" path="res://Resources/Items/Resources/Cloth.tres" id="2_74lpv"]
 [ext_resource type="Resource" uid="uid://cbm631sgcufn3" path="res://Resources/Items/ModularParts/Bow/Grip/Bow_Grip_Cloth.tres" id="3_al4c0"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_oxio8"]
@@ -10,8 +9,8 @@ script = ExtResource("4_oxio8")
 DisplayName = "Bow Cloth Grip"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_74lpv")]([ExtResource("2_74lpv")])
-RecipeOutputs = Array[ExtResource("1_74lpv")]([ExtResource("3_al4c0")])
+RecipeInputs = [ExtResource("2_74lpv")]
+RecipeOutputs = [ExtResource("3_al4c0")]
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6

@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://gt0hga3bomy6"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://gt0hga3bomy6"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_h6q3p"]
-[ext_resource type="Resource" uid="uid://67h4viu7fh8h" path="res://Resources/Items/Resources/Log.tres" id="2_iyts2"]
+[ext_resource type="Resource" uid="uid://c3huqdamwc1pj" path="res://Resources/Items/ModularParts/Staff/Pole/Staff_Pole_Wood.tres" id="2_j7tor"]
 [ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="3_g4mah"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_mb50m"]
 
 [resource]
 script = ExtResource("4_mb50m")
-DisplayName = "Planks"
+DisplayName = "Staff Wodden Pole"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_h6q3p")]([ExtResource("2_iyts2")])
-RecipeOutputs = Array[ExtResource("1_h6q3p")]([ExtResource("3_g4mah"), ExtResource("3_g4mah")])
+RecipeInputs = [ExtResource("3_g4mah"), ExtResource("3_g4mah")]
+RecipeOutputs = [ExtResource("2_j7tor")]
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6

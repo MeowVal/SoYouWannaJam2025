@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://do62ijkfswe3v"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://do62ijkfswe3v"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_nqcos"]
 [ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="2_ksuim"]
 [ext_resource type="Resource" uid="uid://emas6m4341ii" path="res://Resources/Items/ModularParts/Spear/Blade/Spear_Blade_Iron_Voulge.tres" id="3_sixgv"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_xgs4i"]
@@ -10,8 +9,8 @@ script = ExtResource("4_xgs4i")
 DisplayName = "Spear Iron Voulge Blade"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_nqcos")]([ExtResource("2_ksuim")])
-RecipeOutputs = Array[ExtResource("1_nqcos")]([ExtResource("3_sixgv")])
+RecipeInputs = [ExtResource("2_ksuim")]
+RecipeOutputs = [ExtResource("3_sixgv")]
 WorkType = 0
 TimeToComplete = 5.0
 SequenceLength = 6

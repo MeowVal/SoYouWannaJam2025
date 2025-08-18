@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://cvukrjmm46y8g"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://cvukrjmm46y8g"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_c3k80"]
 [ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="2_c3k80"]
 [ext_resource type="Resource" uid="uid://tbjlomcklo0" path="res://Resources/Items/ModularParts/Sword/Grip/Sword_Grip_Wood.tres" id="3_wx805"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_7fb38"]
 
 [resource]
 script = ExtResource("4_7fb38")
-DisplayName = "Unknown"
+DisplayName = "Sword Wooden Grip"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_c3k80")]([ExtResource("2_c3k80")])
-RecipeOutputs = Array[ExtResource("1_c3k80")]([ExtResource("3_wx805")])
+RecipeInputs = [ExtResource("2_c3k80")]
+RecipeOutputs = [ExtResource("3_wx805")]
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://cyrhwfj2cgl1v"]
+[gd_scene load_steps=29 format=4 uid="uid://cyrhwfj2cgl1v"]
 
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/Lighting/lighting.tscn" id="1_1ur4q"]
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_m78t2"]
@@ -21,9 +21,11 @@
 [ext_resource type="Resource" uid="uid://c6fyadcgfkbot" path="res://Resources/Items/Resources/Cloth.tres" id="16_xmtv7"]
 [ext_resource type="PackedScene" uid="uid://c0cb2dvv2nwc" path="res://Entities/Interactive/Stations/TinkeringStation.tscn" id="17_5egf7"]
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="17_pyxrn"]
-[ext_resource type="Script" path="res://Scenes/Maps/FrontDesk.cs" id="18_51mnd"]
+[ext_resource type="Script" uid="uid://d4i4at3b80g40" path="res://Scenes/Maps/FrontDesk.cs" id="18_51mnd"]
 [ext_resource type="Resource" uid="uid://cpx5y0g6s8hd5" path="res://Resources/Items/Resources/MythrilOre.tres" id="21_5y0l8"]
 [ext_resource type="PackedScene" uid="uid://bce0ppun22nje" path="res://Entities/Interactive/ItemTest.tscn" id="22_51mnd"]
+[ext_resource type="PackedScene" uid="uid://cl07jfhggwrem" path="res://Entities/Interactive/Items/ModularItem.tscn" id="23_51mnd"]
+[ext_resource type="Resource" uid="uid://crxmis1swpctc" path="res://Resources/Items/ModularItems/Bow.tres" id="24_prxtf"]
 [ext_resource type="PackedScene" path="res://Entities/Lighting/Lantern.tscn" id="24_xmtv7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xmtv7"]
@@ -290,6 +292,18 @@ position = Vector2(1552, 14)
 [node name="Lantern" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
 position = Vector2(1472, 524)
 
+[node name="Lantern28" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
+position = Vector2(1574, -76)
+
+[node name="Lantern29" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
+position = Vector2(1572, 12)
+
+[node name="Lantern30" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
+position = Vector2(1326, 34)
+
+[node name="Lantern31" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
+position = Vector2(1712, -12)
+
 [node name="Lantern2" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
 position = Vector2(1695, 604)
 
@@ -367,6 +381,11 @@ position = Vector2(160, -68)
 
 [node name="Lantern27" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
 position = Vector2(368, -204)
+
+[node name="ModularItem" parent="GameWorld/Entities" instance=ExtResource("23_51mnd")]
+position = Vector2(1616, 64)
+ModularItemType = 7
+ItemResource = ExtResource("24_prxtf")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("FollowingNode")]
 script = ExtResource("3_d01xk")

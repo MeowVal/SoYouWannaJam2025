@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://cn1hk6ri0v62"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://cn1hk6ri0v62"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_13i4i"]
 [ext_resource type="Resource" uid="uid://67h4viu7fh8h" path="res://Resources/Items/Resources/Log.tres" id="2_13i4i"]
 [ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="3_ybrf5"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_c7rkb"]
@@ -10,8 +9,8 @@ script = ExtResource("4_c7rkb")
 DisplayName = "Planks"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_13i4i")]([ExtResource("2_13i4i")])
-RecipeOutputs = Array[ExtResource("1_13i4i")]([ExtResource("3_ybrf5"), ExtResource("3_ybrf5")])
+RecipeInputs = [ExtResource("2_13i4i")]
+RecipeOutputs = [ExtResource("3_ybrf5"), ExtResource("3_ybrf5")]
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6

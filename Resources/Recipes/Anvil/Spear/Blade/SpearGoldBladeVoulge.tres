@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://ncfcigr5voln"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://ncfcigr5voln"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_5alv8"]
 [ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="2_14q1e"]
 [ext_resource type="Resource" uid="uid://d3uv5yp8mbndl" path="res://Resources/Items/ModularParts/Spear/Blade/Spear_Blade_Gold_Voulge.tres" id="3_g0vts"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_qhb2k"]
@@ -10,8 +9,8 @@ script = ExtResource("4_qhb2k")
 DisplayName = "Spear Gold Voulge Blade"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_5alv8")]([ExtResource("2_14q1e")])
-RecipeOutputs = Array[ExtResource("1_5alv8")]([ExtResource("3_g0vts")])
+RecipeInputs = [ExtResource("2_14q1e")]
+RecipeOutputs = [ExtResource("3_g0vts")]
 WorkType = 0
 TimeToComplete = 5.0
 SequenceLength = 6

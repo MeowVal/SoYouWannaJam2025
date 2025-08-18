@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://d0mivlay2nc1h"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://d0mivlay2nc1h"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_8fyqb"]
 [ext_resource type="Resource" uid="uid://c6fyadcgfkbot" path="res://Resources/Items/Resources/Cloth.tres" id="2_e6kxq"]
 [ext_resource type="Resource" uid="uid://dk6b53nv7qtnn" path="res://Resources/Items/ModularParts/Sword/Grip/Sword_Grip_Cloth.tres" id="3_g6v8v"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_bys1l"]
 
 [resource]
 script = ExtResource("4_bys1l")
-DisplayName = "Unknown"
+DisplayName = "Sword Cloth Grip"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_8fyqb")]([ExtResource("2_e6kxq")])
-RecipeOutputs = Array[ExtResource("1_8fyqb")]([ExtResource("3_g6v8v")])
+RecipeInputs = [ExtResource("2_e6kxq")]
+RecipeOutputs = [ExtResource("3_g6v8v")]
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6

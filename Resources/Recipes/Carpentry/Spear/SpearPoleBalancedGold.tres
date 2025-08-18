@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://b2ommmbsg4ah"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_ugqru"]
 [ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="2_eyiba"]
-[ext_resource type="Resource" uid="uid://c3huqdamwc1pj" path="res://Resources/Items/ModularParts/Staff/Pole/Staff_Pole_Wood.tres" id="3_yfkud"]
+[ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="2_yfkud"]
+[ext_resource type="Resource" uid="uid://bayyv3s6hf304" path="res://Resources/Items/ModularParts/Spear/Pole/Spear_Pole_Gold_Balanced.tres" id="3_q7per"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_2mhs5"]
 
 [resource]
@@ -10,8 +10,8 @@ script = ExtResource("4_2mhs5")
 DisplayName = "Spear Gold Balanced Pole"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_ugqru")]([ExtResource("2_eyiba"), ExtResource("2_eyiba")])
-RecipeOutputs = Array[ExtResource("1_ugqru")]([ExtResource("3_yfkud")])
+RecipeInputs = [ExtResource("2_eyiba"), ExtResource("2_yfkud")]
+RecipeOutputs = [ExtResource("3_q7per")]
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6

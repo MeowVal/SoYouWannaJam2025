@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://1tk1618m7r4r"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://1tk1618m7r4r"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_ruq55"]
 [ext_resource type="Resource" uid="uid://34h28o2wwwqo" path="res://Resources/Items/Resources/String.tres" id="3_60dbu"]
 [ext_resource type="Resource" uid="uid://c6b21gyhcdn04" path="res://Resources/Items/ModularParts/Bow/String/Bow_String_Cloth.tres" id="3_ruq55"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_ccdan"]
@@ -10,8 +9,8 @@ script = ExtResource("4_ccdan")
 DisplayName = "Bow String"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_ruq55")]([ExtResource("3_60dbu"), ExtResource("3_60dbu")])
-RecipeOutputs = Array[ExtResource("1_ruq55")]([ExtResource("3_ruq55")])
+RecipeInputs = [ExtResource("3_60dbu"), ExtResource("3_60dbu")]
+RecipeOutputs = [ExtResource("3_ruq55")]
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6

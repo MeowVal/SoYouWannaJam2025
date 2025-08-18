@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=5 format=3 uid="uid://cs34i6n3jn05e"]
+
+[ext_resource type="Texture2D" uid="uid://cueilt1ut6n8i" path="res://Assets/Sprites/ModularParts/Pole_Spear_Broken.png" id="1_wt5yx"]
+[ext_resource type="Texture2D" uid="uid://cvkgmamq7tyox" path="res://Assets/Sprites/ModularParts/Pole_Spear_Balanced.png" id="2_2mu16"]
+[ext_resource type="Texture2D" uid="uid://bdk1i76vfc32g" path="res://Assets/Sprites/ModularParts/Pole_Spear_Balanced2.png" id="3_kelya"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="4_8vhgt"]
+
+[resource]
+script = ExtResource("4_8vhgt")
+PartType = 4
+ModularItemType = 1
+PartState = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_wt5yx"), ExtResource("3_kelya")])
+UsedTextures = []
+DisplayName = "Spear Mythril Balanced Pole"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("2_2mu16"), ExtResource("3_kelya")])
+Colours = Array[Color]([Color(0.678431, 0.392157, 0.168627, 1), Color(0.552941, 1, 0.835294, 1)])
+Size = 10.0
+AllowUseAction = false
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

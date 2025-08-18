@@ -60,10 +60,10 @@ public partial class CraftingInputs : CraftingStationInterface
                 {
                     _icon.Texture = craftingStation.CurrentRecipe.Icon;
                 }
-                else
+                /*else
                 {
                     _icon.Texture = ImageTexture.CreateFromImage(craftingStation.CurrentRecipe.RecipeOutputs[0].GetItemImage());
-                }
+                }*/
                 _lenght = craftingStation.CurrentRecipe.SequenceLength;
                 break;
         }

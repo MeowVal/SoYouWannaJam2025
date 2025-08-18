@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://di1fndiyfrbll"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://di1fndiyfrbll"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_jp1bg"]
 [ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="2_6jqrl"]
 [ext_resource type="Resource" uid="uid://ii5nrqstcw3i" path="res://Resources/Items/ModularParts/Bow/Limb/Bow_Limb_Aggressive_Wood.tres" id="3_jp1bg"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_7210r"]
@@ -10,8 +9,8 @@ script = ExtResource("4_7210r")
 DisplayName = "Bow Wooden Limb"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_jp1bg")]([ExtResource("2_6jqrl"), ExtResource("2_6jqrl")])
-RecipeOutputs = Array[ExtResource("1_jp1bg")]([ExtResource("3_jp1bg")])
+RecipeInputs = [ExtResource("2_6jqrl"), ExtResource("2_6jqrl")]
+RecipeOutputs = [ExtResource("3_jp1bg")]
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6

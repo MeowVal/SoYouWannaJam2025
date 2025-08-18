@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="7_nkjxm"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="8_vdi6x"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cl1q5"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wm3iv"]
 radius = 20.0
 
 [node name="AnvilStation" type="Area2D"]
@@ -17,7 +17,7 @@ ColliderRadius = 20.0
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
-shape = SubResource("CircleShape2D_cl1q5")
+shape = SubResource("CircleShape2D_wm3iv")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="StationSprite" type="Sprite2D" parent="."]

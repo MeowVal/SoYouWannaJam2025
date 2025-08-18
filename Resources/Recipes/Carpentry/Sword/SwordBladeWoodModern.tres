@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://2clqu3txbusg"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://2clqu3txbusg"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_gikwr"]
 [ext_resource type="Resource" uid="uid://cois84q64by2p" path="res://Resources/Items/Resources/Plank.tres" id="2_pkkt8"]
 [ext_resource type="Resource" uid="uid://c8urcqo0hkd0h" path="res://Resources/Items/ModularParts/Sword/Blade/Sword_Blade_Wood_Modern.tres" id="3_ggk7x"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_ye46j"]
 
 [resource]
 script = ExtResource("4_ye46j")
-DisplayName = "Unknown"
+DisplayName = "Sword Wooden Modern Blade"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("1_gikwr")]([ExtResource("2_pkkt8"), ExtResource("2_pkkt8")])
-RecipeOutputs = Array[ExtResource("1_gikwr")]([ExtResource("3_ggk7x")])
+RecipeInputs = [ExtResource("2_pkkt8"), ExtResource("2_pkkt8")]
+RecipeOutputs = [ExtResource("3_ggk7x")]
 WorkType = 2
 TimeToComplete = 3.0
 SequenceLength = 6
