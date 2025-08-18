@@ -60,7 +60,7 @@ theme_override_constants/margin_bottom = 4
 
 [node name="TitleText" type="Label" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 14
 text = "Select a recipe..."
 horizontal_alignment = 1
 
