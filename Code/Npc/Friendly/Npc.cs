@@ -17,7 +17,7 @@ public partial class Npc : CharacterBody2D
     [Export] public Sprite2D MoodSpriteX;
     [Export] public Sprite2D MoodSpriteY;
     [Export] public ProgressBar MoodBar;
-    [Export] public float MoodDecreaseAmount = 10; // How much the npc's mood decreases by
+    [Export] public float MoodDecreaseAmount = 5; // How much the npc's mood decreases by
     [Export] public float Speed = 60f; // How fast the npc moves
     public string State = "idle"; // The animation stat the npc is in
     public Vector2 Direction = Vector2.Down; // The direction the npc is facing
@@ -85,11 +85,6 @@ public partial class Npc : CharacterBody2D
         if (_navAgent.IsNavigationFinished())
         {
             State = "idle";
-            if (RequestComplete)
-            {
-                QueueFree();
-                GD.Print("Goodbye, my finale message");
-            }
             if (Target is not HostileNpc) return;
         }
         if (Target == null && _queueTarget == null) return;

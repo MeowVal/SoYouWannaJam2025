@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://j5rymn3wigc8"]
+
+[ext_resource type="Script" uid="uid://cpob5gr6ersi1" path="res://Code/Interactive/GuideShelf.cs" id="1_lc5vo"]
+[ext_resource type="Texture2D" uid="uid://c5kjjbq6b6vhi" path="res://Assets/Sprites/Environment/Bookcase.png" id="2_lc5vo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_608qo"]
+radius = 16.0
+
+[node name="Interactible" type="Area2D"]
+y_sort_enabled = true
+script = ExtResource("1_lc5vo")
+metadata/_custom_type_script = "uid://de26gdg7krlfk"
+
+[node name="InteractibleCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_608qo")
+debug_color = Color(0.674557, 0.304912, 1, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, 32)
+texture = ExtResource("2_lc5vo")
+offset = Vector2(0, -32)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 64)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, 27)
+texture = ExtResource("2_lc5vo")
+offset = Vector2(8, -27)
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 64)
