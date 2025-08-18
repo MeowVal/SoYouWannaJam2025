@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cap3sumopwofs"]
+[gd_scene load_steps=8 format=3 uid="uid://cap3sumopwofs"]
 
 [ext_resource type="Script" uid="uid://4nekk08px7sj" path="res://Scenes/UI/Interactions/CraftingInputs.cs" id="1_kbfh3"]
 [ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="2_lkhr4"]
-[ext_resource type="Texture2D" uid="uid://dcl6i2n7nhifq" path="res://Assets/Sprites/UI/Background1.png" id="3_8yk0b"]
+[ext_resource type="Texture2D" uid="uid://nlmbdj8cygjx" path="res://Assets/Sprites/UI/Background2.png" id="3_6wq0g"]
+[ext_resource type="Texture2D" uid="uid://dvaed8hkr48fy" path="res://Assets/Sprites/UI/Background3.png" id="4_5iw0m"]
+[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="5_kie1e"]
+[ext_resource type="Texture2D" uid="uid://byhbr2v6jyqee" path="res://Assets/Sprites/UI/ProgressBarFillRed.png" id="6_drig2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_je30t"]
+texture = ExtResource("6_drig2")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
 [node name="CraftingStationInterface" type="Node2D"]
 script = ExtResource("1_kbfh3")
@@ -11,59 +21,111 @@ metadata/_custom_type_script = "uid://bywn575awil60"
 [node name="RecipeTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Control" type="PanelContainer" parent="."]
+[node name="Control2" type="PanelContainer" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -118.0
-offset_top = -85.0
-offset_right = 118.0
+offset_left = -220.0
+offset_top = -151.0
+offset_right = 220.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_vertical = 8
 theme = ExtResource("2_lkhr4")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Control2"]
 layout_mode = 2
-texture = ExtResource("3_8yk0b")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+texture = ExtResource("3_6wq0g")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control2"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control2/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Control2/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("4_5iw0m")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+[node name="ItemTexture" type="TextureRect" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+texture = ExtResource("5_kie1e")
 
-[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ItemName" type="Label" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "Crafting: "
-
-[node name="RecipeName" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "Recipe Name"
+horizontal_alignment = 1
 
-[node name="ArrowContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+[node name="BarsMarginContainer" type="MarginContainer" parent="Control2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BarsVBox" type="VBoxContainer" parent="Control2/VBoxContainer/BarsMarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ArrowContainer" type="HBoxContainer" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 alignment = 1
 
-[node name="RecipeProgress" type="ProgressBar" parent="Control/MarginContainer/VBoxContainer"]
+[node name="RecipeProgress" type="ProgressBar" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxTexture_je30t")
 max_value = 1.0
+value = 0.68
 
-[node name="Instruction" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 layout_mode = 2
-text = "Input the right
-sequence of direction"
+theme_override_constants/separation = 0
+
+[node name="Instruction" type="Label" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Press the correct '"
+horizontal_alignment = 1
+
+[node name="Instruction2" type="Label" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox/HBoxContainer"]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Movement Keys"
+horizontal_alignment = 1
+
+[node name="Instruction3" type="Label" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "' in the order shown."
 horizontal_alignment = 1

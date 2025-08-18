@@ -10,6 +10,7 @@ public partial class CraftingButtonSpam : CraftingStationInterface
     private ProgressBar _bar;
     private Label _label;
     private Timer _recipeTimer;
+    private TextureRect _icon;
 
     
     private int _pressCount = 0;
@@ -30,9 +31,10 @@ public partial class CraftingButtonSpam : CraftingStationInterface
 
     public override void _Ready()
     {
-        _bar = GetNode<ProgressBar>("Control/MarginContainer/VBoxContainer/RecipeProgress");
-        _label = GetNode<Label>("Control/MarginContainer/VBoxContainer/HBoxContainer/RecipeName");
-        _strengthBar = GetNode<ProgressBar>("Control/MarginContainer/VBoxContainer/ProgressBar");
+        _bar = GetNode<ProgressBar>("Control2/VBoxContainer/BarsMarginContainer/BarsVBox/RecipeProgress");
+        _label = GetNode<Label>("Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/ItemName");
+        _icon = GetNode<TextureRect>("Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/ItemTexture");
+        _strengthBar = GetNode<ProgressBar>("Control2/VBoxContainer/BarsMarginContainer/BarsVBox/ProgressBar");
         _recipeTimer = GetNode<Timer>("RecipeTimer");
         _recipeTimer.Timeout += _OnRecipeTimer;
         
@@ -41,6 +43,15 @@ public partial class CraftingButtonSpam : CraftingStationInterface
             case CraftingStation craftingStation:
                 //_recipeTimer.Start(craftingStation.CurrentRecipe.TimeToComplete);
                 _label.Text = craftingStation.CurrentRecipe.DisplayName;
+                if (craftingStation.CurrentRecipe.Icon != null)
+                {
+                    _icon.Texture = craftingStation.CurrentRecipe.Icon;
+                }
+                else
+                {
+                    _icon.Texture = ImageTexture.CreateFromImage(craftingStation.CurrentRecipe.RecipeOutputs[0].GetItemImage());
+                }
+
                 _pressRequired = (int)(craftingStation.CurrentRecipe.SpamPerSecond * craftingStation.CurrentRecipe.TimeToComplete);
                 break;
         }

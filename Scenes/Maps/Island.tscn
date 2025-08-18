@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="17_pyxrn"]
 [ext_resource type="Resource" uid="uid://cpx5y0g6s8hd5" path="res://Resources/Items/Resources/MythrilOre.tres" id="21_5y0l8"]
 [ext_resource type="PackedScene" uid="uid://bce0ppun22nje" path="res://Entities/Interactive/ItemTest.tscn" id="22_51mnd"]
-[ext_resource type="PackedScene" path="res://Entities/Lighting/Lantern.tscn" id="24_xmtv7"]
+[ext_resource type="PackedScene" uid="uid://dgu4iw0i0j6tj" path="res://Entities/Lighting/Lantern.tscn" id="24_xmtv7"]
 
 [node name="GameManager" type="Node2D" node_paths=PackedStringArray("NpcTimer", "CycleLantern")]
 script = ExtResource("1_m78t2")

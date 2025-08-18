@@ -13,14 +13,22 @@ public partial class CraftingInputs : CraftingStationInterface
     private ProgressBar _bar;
     private Label _label;
     private HBoxContainer _container;
+    private TextureRect _icon;
 
     private int _index = 0;
     private int[] _sequence = [];
     private int _lenght = 6;
-    private Array<Label> _labels = [];
+    private Array<TextureRect> _arrowRects = [];
     
     private bool[] _lastDirection = [false, false, false, false];
     private Timer _recipeTimer;
+
+    private Array<Texture2D> _arrows = [
+        GD.Load<Texture2D>("res://Assets/Sprites/UI/Icon_Up.png"),
+        GD.Load<Texture2D>("res://Assets/Sprites/UI/Icon_Down.png"),
+        GD.Load<Texture2D>("res://Assets/Sprites/UI/Icon_Left.png"),
+        GD.Load<Texture2D>("res://Assets/Sprites/UI/Icon_Right.png")
+    ];
 
     
     public override void _EnterTree()
@@ -37,9 +45,10 @@ public partial class CraftingInputs : CraftingStationInterface
 
     public override void _Ready()
     {
-        _bar = GetNode<ProgressBar>("Control/MarginContainer/VBoxContainer/RecipeProgress");
-        _label = GetNode<Label>("Control/MarginContainer/VBoxContainer/HBoxContainer/RecipeName");
-        _container = GetNode<HBoxContainer>("Control/MarginContainer/VBoxContainer/ArrowContainer");
+        _bar = GetNode<ProgressBar>("Control2/VBoxContainer/BarsMarginContainer/BarsVBox/RecipeProgress");
+        _label = GetNode<Label>("Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/ItemName");
+        _icon = GetNode<TextureRect>("Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/ItemTexture");
+        _container = GetNode<HBoxContainer>("Control2/VBoxContainer/BarsMarginContainer/BarsVBox/ArrowContainer");
         _recipeTimer = GetNode<Timer>("RecipeTimer");
         _recipeTimer.Timeout += _OnRecipeTimer;
         switch (Station)
@@ -47,6 +56,14 @@ public partial class CraftingInputs : CraftingStationInterface
             case CraftingStation craftingStation:
                 _recipeTimer.Start(craftingStation.CurrentRecipe.TimeToComplete);
                 _label.Text = craftingStation.CurrentRecipe.DisplayName;
+                if (craftingStation.CurrentRecipe.Icon != null)
+                {
+                    _icon.Texture = craftingStation.CurrentRecipe.Icon;
+                }
+                else
+                {
+                    _icon.Texture = ImageTexture.CreateFromImage(craftingStation.CurrentRecipe.RecipeOutputs[0].GetItemImage());
+                }
                 _lenght = craftingStation.CurrentRecipe.SequenceLength;
                 break;
         }
@@ -55,22 +72,15 @@ public partial class CraftingInputs : CraftingStationInterface
         _sequence = new int[_lenght];
         
         var rng = new RandomNumberGenerator();
-        string[] arrows = ["🠅","🠇","🠄","🠆"];
-        
 
         for (var i = 0; i < _lenght; i++)
         {
-            var newLabel = new Label();
-            
-            newLabel.Name = "Label"+i;
-            newLabel.LabelSettings = new LabelSettings();
-            newLabel.LabelSettings.FontSize = 32;
-            newLabel.Modulate = new Color(1, 0, 0, 1);
+            var newArrow = new TextureRect();
             _sequence[i] = rng.RandiRange(0, 3);
-            newLabel.Text = arrows[_sequence[i]];
-            
-            _labels.Add(newLabel);
-            _container.AddChild(newLabel);
+            newArrow.Texture = _arrows[_sequence[i]];
+            newArrow.SetCustomMinimumSize(new Vector2(16,16));
+            _arrowRects.Add(newArrow);
+            _container.AddChild(newArrow);
         }
     }
 
@@ -151,7 +161,17 @@ public partial class CraftingInputs : CraftingStationInterface
         
         for (var i = 0; i < _lenght; i++)
         {
-            _labels[i].Modulate = i < _index ? new Color(0, 1, 0, 1): new Color(1, 0, 0, 1);
+            if (i < _index)
+            {
+                _arrowRects[i].Modulate = Colors.Yellow;
+            } else if (i > _index)
+            {
+                _arrowRects[i].Modulate = Colors.DimGray;
+            }
+            else
+            {
+                _arrowRects[i].Modulate = Colors.White;
+            }
         }
     }
 }

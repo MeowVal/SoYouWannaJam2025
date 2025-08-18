@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvp2rmutei38a"]
+[gd_scene load_steps=8 format=3 uid="uid://dvp2rmutei38a"]
 
 [ext_resource type="Script" uid="uid://b5p4e5wo8qsxf" path="res://Scenes/UI/Interactions/CraftingButtonSpam.cs" id="1_ck7c2"]
 [ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="2_fjq4c"]
-[ext_resource type="Texture2D" uid="uid://dcl6i2n7nhifq" path="res://Assets/Sprites/UI/Background1.png" id="3_3a2ub"]
+[ext_resource type="Texture2D" uid="uid://nlmbdj8cygjx" path="res://Assets/Sprites/UI/Background2.png" id="4_ojb6j"]
+[ext_resource type="Texture2D" uid="uid://dvaed8hkr48fy" path="res://Assets/Sprites/UI/Background3.png" id="5_gyjbm"]
+[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="6_v2pot"]
+[ext_resource type="Texture2D" uid="uid://byhbr2v6jyqee" path="res://Assets/Sprites/UI/ProgressBarFillRed.png" id="7_vu3rk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_svhl4"]
+texture = ExtResource("7_vu3rk")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
 [node name="CraftingStationInterface" type="Node2D"]
 script = ExtResource("1_ck7c2")
@@ -11,58 +21,111 @@ metadata/_custom_type_script = "uid://bywn575awil60"
 [node name="RecipeTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Control" type="PanelContainer" parent="."]
+[node name="Control2" type="PanelContainer" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -112.5
-offset_top = -85.0
-offset_right = 112.5
+offset_left = -94.0
+offset_top = -56.0
+offset_right = 94.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_vertical = 8
 theme = ExtResource("2_fjq4c")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Control2"]
 layout_mode = 2
-texture = ExtResource("3_3a2ub")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+texture = ExtResource("4_ojb6j")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control2"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control2/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Control2/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("5_gyjbm")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+[node name="ItemTexture" type="TextureRect" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+texture = ExtResource("6_v2pot")
 
-[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ItemName" type="Label" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "Crafting:"
-
-[node name="RecipeName" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "Recipe Name"
+horizontal_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Control/MarginContainer/VBoxContainer"]
+[node name="BarsMarginContainer" type="MarginContainer" parent="Control2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BarsVBox" type="VBoxContainer" parent="Control2/VBoxContainer/BarsMarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ProgressBar" type="ProgressBar" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 layout_mode = 2
 max_value = 1.0
+value = 0.19
 
-[node name="RecipeProgress" type="ProgressBar" parent="Control/MarginContainer/VBoxContainer"]
+[node name="RecipeProgress" type="ProgressBar" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxTexture_svhl4")
 max_value = 1.0
+value = 0.68
 
-[node name="Instruction" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 layout_mode = 2
-text = "Mash use/pickup"
+theme_override_constants/separation = 0
+
+[node name="Instruction" type="Label" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Rapidly press the '"
+horizontal_alignment = 1
+
+[node name="Instruction2" type="Label" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox/HBoxContainer"]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Use Action"
+horizontal_alignment = 1
+
+[node name="Instruction3" type="Label" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "' Key!"
 horizontal_alignment = 1
