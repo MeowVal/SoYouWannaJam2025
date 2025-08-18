@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccxhqwfuyr60"]
+[gd_scene load_steps=6 format=3 uid="uid://ccxhqwfuyr60"]
 
 [ext_resource type="Script" uid="uid://chlnug22al4rf" path="res://Scenes/UI/HudManager.cs" id="1_4bm6u"]
 [ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="1_qc5w2"]
-[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="3_xaom8"]
+[ext_resource type="Texture2D" uid="uid://b4j28yud6v4qc" path="res://Assets/Sprites/Mobs/DwarfBlacksmith.png" id="4_4bm6u"]
 [ext_resource type="Texture2D" uid="uid://bc1u5ejsy8igo" path="res://Assets/Sprites/UI/TopLeftHud.png" id="4_ykvyr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykvyr"]
+atlas = ExtResource("4_4bm6u")
+region = Rect2(40, 0, 16, 16)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_4bm6u")
@@ -79,4 +83,4 @@ anchor_left = 0.073
 anchor_top = 0.206
 anchor_right = 0.335
 anchor_bottom = 0.764
-texture = ExtResource("3_xaom8")
+texture = SubResource("AtlasTexture_ykvyr")
