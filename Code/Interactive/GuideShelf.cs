@@ -30,7 +30,7 @@ public partial class GuideShelf : Interactible
             case TriggerType.PickupDrop:
                 break;
             case TriggerType.UseAction:
-                if (_guideBookNode == null) OpenPopup();
+                if (_guideBookNode == null) OnOpenGuideBook();
                 break;
         }
     }
@@ -41,11 +41,11 @@ public partial class GuideShelf : Interactible
 
         if (_guideBookNode != null && Input.IsActionJustPressed("ui_cancel"))
         {
-            ClosePopup();
+            OnCloseGuideBook();
         }
     }
 
-    private void OpenPopup()
+    private void OnOpenGuideBook()
     {
         if (_uiNode != null) _uiNode.Hide();
         if (_hudNode == null) return;
@@ -53,12 +53,15 @@ public partial class GuideShelf : Interactible
         var uiScene = GD.Load<PackedScene>("res://Scenes/UI/Guidebook.tscn");
         _guideBookNode = uiScene.Instantiate<Control>();
         _hudNode.AddChild(_guideBookNode);
+        
+        _guideBookNode.GetNode<Button>("%CloseGuidebook").Pressed += OnCloseGuideBook;
     }
     
-    private void ClosePopup()
+    private void OnCloseGuideBook()
     {
         if (_uiNode != null) _uiNode.Show();
         Global.Player.Frozen = false;
+        _guideBookNode.GetNode<Button>("%CloseGuidebook").Pressed -= OnCloseGuideBook;
         
         if (_guideBookNode == null) return;
         _guideBookNode.QueueFree();

@@ -64,6 +64,8 @@ public partial class DayCycleLantern : Node2D
             {
                 _animator.SetSpeedScale(1 / (float)DawnTime * (1-(float)DawnFrame));
                 _animator.Play();
+                var startLabel = GetNodeOrNull<Label>("%StartLabel");
+                if (startLabel != null) startLabel.Hide();
             }
             else
             {

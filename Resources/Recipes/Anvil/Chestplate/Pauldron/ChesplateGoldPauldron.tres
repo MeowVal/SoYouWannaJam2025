@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://bskd06fnxukk0"]
+
+[ext_resource type="Resource" uid="uid://c6fyadcgfkbot" path="res://Resources/Items/Resources/Cloth.tres" id="1_p7uqc"]
+[ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="2_p7uqc"]
+[ext_resource type="Resource" uid="uid://c22u7sca2888u" path="res://Resources/Items/ModularParts/Chestplate/Pauldron/Chestplate_Pauldron_Gold.tres" id="3_jya6l"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_spfeb"]
+
+[resource]
+script = ExtResource("4_spfeb")
+DisplayName = "Chesplate Gold Pauldron"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = [ExtResource("1_p7uqc"), ExtResource("2_p7uqc")]
+RecipeOutputs = [ExtResource("3_jya6l")]
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

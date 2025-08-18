@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://delmqxpg4cqcr"]
+
+[ext_resource type="Resource" uid="uid://c6fyadcgfkbot" path="res://Resources/Items/Resources/Cloth.tres" id="1_p7uqc"]
+[ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="2_p7uqc"]
+[ext_resource type="Resource" uid="uid://duvcpp8blb2gv" path="res://Resources/Items/ModularParts/Chestplate/Plate/Chestplate_Plate_Gold_Studded.tres" id="3_ym7os"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_spfeb"]
+
+[resource]
+script = ExtResource("4_spfeb")
+DisplayName = "Chesplate Gold Studded Plate"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = [ExtResource("1_p7uqc"), ExtResource("2_p7uqc")]
+RecipeOutputs = [ExtResource("3_ym7os")]
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

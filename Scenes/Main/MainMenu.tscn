@@ -1291,21 +1291,21 @@ text = "Dave's Blacksmith Shop"
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme = ExtResource("1_lq24o")
 text = "PLAY"
 
-[node name="Button3" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+[node name="GuideButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme = ExtResource("1_lq24o")
 text = "GUIDE"
 
-[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
@@ -1315,5 +1315,4 @@ text = "QUIT"
 stream = ExtResource("10_d4706")
 volume_db = -8.0
 autoplay = true
-stream_paused = true
 parameters/looping = true

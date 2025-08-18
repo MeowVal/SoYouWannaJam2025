@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bd5ctlsaoixe0"]
+[gd_scene load_steps=40 format=3 uid="uid://ctnw7kgglbyh2"]
 
 [ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="1_dalyi"]
 [ext_resource type="Texture2D" uid="uid://btjahwi5bo7rt" path="res://Assets/Sprites/UI/Background4Large.png" id="2_ahgf5"]
@@ -117,7 +117,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="CloseButton" type="Button" parent="Control/PanelContainer/VBoxContainer2/PanelContainer/MarginContainer/HBoxContainer/Control"]
+[node name="CloseGuidebook" type="Button" parent="Control/PanelContainer/VBoxContainer2/PanelContainer/MarginContainer/HBoxContainer/Control"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 1
@@ -135,7 +135,7 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/PanelContainer/MarginContainer/HBoxContainer/Control/CloseButton"]
+[node name="TextureRect" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/PanelContainer/MarginContainer/HBoxContainer/Control/CloseGuidebook"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

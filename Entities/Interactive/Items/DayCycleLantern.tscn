@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2owtq0jxh0n6"]
+[gd_scene load_steps=6 format=3 uid="uid://b2owtq0jxh0n6"]
 
 [ext_resource type="Script" uid="uid://dpx7jbjhg4ox0" path="res://Code/Interactive/Items/DayCycleLantern.cs" id="1_6s3kx"]
 [ext_resource type="PackedScene" uid="uid://c5fknakn4m4yp" path="res://Entities/Interactive/interactible.tscn" id="1_udb3f"]
 [ext_resource type="Texture2D" uid="uid://d1a4tr1xishts" path="res://Assets/Sprites/Lantern.png" id="2_6s3kx"]
 [ext_resource type="Texture2D" uid="uid://cnvcuoeghj5g1" path="res://Assets/Sprites/Environment/Light2DTexture.tres" id="4_jmsnv"]
+[ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="5_kmv3u"]
 
 [node name="DayCycleLantern" type="Node2D"]
 script = ExtResource("1_6s3kx")
@@ -22,3 +23,20 @@ frame = 2
 color = Color(0.960784, 0.827451, 0.407843, 1)
 energy = 0.52
 texture = ExtResource("4_jmsnv")
+
+[node name="StartLabel" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -67.0
+offset_right = 28.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_kmv3u")
+text = "Start"
+horizontal_alignment = 1

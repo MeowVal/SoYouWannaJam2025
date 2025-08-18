@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://cyrhwfj2cgl1v"]
+[gd_scene load_steps=27 format=4 uid="uid://cyrhwfj2cgl1v"]
 
 [ext_resource type="PackedScene" uid="uid://bn7d21rek2i16" path="res://Entities/Lighting/lighting.tscn" id="1_1ur4q"]
 [ext_resource type="Script" uid="uid://c5cobquhtss63" path="res://Code/World/GameManager.cs" id="1_m78t2"]
@@ -23,9 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="17_pyxrn"]
 [ext_resource type="Script" uid="uid://d4i4at3b80g40" path="res://Scenes/Maps/FrontDesk.cs" id="18_51mnd"]
 [ext_resource type="Resource" uid="uid://cpx5y0g6s8hd5" path="res://Resources/Items/Resources/MythrilOre.tres" id="21_5y0l8"]
-[ext_resource type="PackedScene" uid="uid://bce0ppun22nje" path="res://Entities/Interactive/ItemTest.tscn" id="22_51mnd"]
-[ext_resource type="PackedScene" uid="uid://cl07jfhggwrem" path="res://Entities/Interactive/Items/ModularItem.tscn" id="23_51mnd"]
-[ext_resource type="Resource" uid="uid://crxmis1swpctc" path="res://Resources/Items/ModularItems/Bow.tres" id="24_prxtf"]
 [ext_resource type="PackedScene" path="res://Entities/Lighting/Lantern.tscn" id="24_xmtv7"]
 [ext_resource type="PackedScene" uid="uid://j5rymn3wigc8" path="res://Entities/Interactive/GuideShelf.tscn" id="26_ly7nw"]
 
@@ -117,12 +114,10 @@ position = Vector2(1680, -54)
 [node name="AnvilStation" parent="GameWorld/Entities" instance=ExtResource("17_pyxrn")]
 position = Vector2(1517.5, 45)
 DisplayName = "Unknown Crafting Station"
-RecipesFolder = ""
 ColliderRadius = 16.0
 
 [node name="CarpentryStation" parent="GameWorld/Entities" instance=ExtResource("11_m78t2")]
 position = Vector2(1555, -111.5)
-RecipesFolder = ""
 
 [node name="InspectionStation" parent="GameWorld/Entities" instance=ExtResource("15_panr6")]
 position = Vector2(1406, 66)
@@ -131,7 +126,7 @@ position = Vector2(1406, 66)
 position = Vector2(1630, -54)
 
 [node name="DayCycleLantern" parent="GameWorld/Entities" node_paths=PackedStringArray("Lighting") instance=ExtResource("5_qrjm0")]
-position = Vector2(1520, 4)
+position = Vector2(1427.5, 187)
 Lighting = NodePath("../../../Camera/Lighting")
 CycleTime = 300.0
 
@@ -161,8 +156,11 @@ position = Vector2(1424, -64)
 [node name="NpcArrivalArea" type="Node2D" parent="GameWorld/Entities"]
 position = Vector2(1070, 246.25)
 
-[node name="NpcLeaveArea" type="Node2D" parent="GameWorld/Entities"]
+[node name="NpcLeaveArea" type="Area2D" parent="GameWorld/Entities"]
 position = Vector2(574.75, -448.75)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GameWorld/Entities/NpcLeaveArea"]
+polygon = PackedVector2Array(-22.75, 42.25, 55.5, -0.75, 16.25, -29.5, -43.75, -0.25)
 
 [node name="FrontDesk" type="Area2D" parent="GameWorld/Entities"]
 position = Vector2(1392, 121)
@@ -286,9 +284,6 @@ position = Vector2(1600, -86)
 [node name="StorageCrate5" parent="GameWorld/Entities" instance=ExtResource("10_noywq")]
 position = Vector2(1760, 105)
 
-[node name="Interactible" parent="GameWorld/Entities" instance=ExtResource("22_51mnd")]
-position = Vector2(1552, 14)
-
 [node name="Lantern" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
 position = Vector2(1472, 524)
 
@@ -381,11 +376,6 @@ position = Vector2(160, -68)
 
 [node name="Lantern27" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
 position = Vector2(368, -204)
-
-[node name="ModularItem" parent="GameWorld/Entities" instance=ExtResource("23_51mnd")]
-position = Vector2(1616, 64)
-ModularItemType = 7
-ItemResource = ExtResource("24_prxtf")
 
 [node name="Interactible2" parent="GameWorld/Entities" instance=ExtResource("26_ly7nw")]
 position = Vector2(1360, -86)
