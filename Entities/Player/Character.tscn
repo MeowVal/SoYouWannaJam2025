@@ -25,9 +25,8 @@ polygon = PackedVector2Array(0, 8, 8, 8, 16, 0, 16, -8, 8, -16, 0, -16, -8, -16,
 shader = ExtResource("7_25evy")
 shader_parameter/shadow_limit = 0.5
 
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_dysyf"]
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_kh5ty"]
 shuffle = true
-loop = false
 stream_count = 4
 stream_0 = ExtResource("7_lackt")
 stream_1 = ExtResource("8_7f5j7")
@@ -85,5 +84,9 @@ texture = ExtResource("6_bkf2h")
 offset = Vector2(20, 31)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamPlaylist_dysyf")
+stream = SubResource("AudioStreamPlaylist_kh5ty")
+volume_db = -2.0
+
+[node name="PlayerSound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamPlaylist_kh5ty")
 volume_db = -2.0

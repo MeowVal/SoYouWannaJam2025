@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfm2tfxw2xbmw"]
+[gd_scene load_steps=6 format=3 uid="uid://dfm2tfxw2xbmw"]
 
 [ext_resource type="Script" uid="uid://d23vmpyriml4w" path="res://Code/Interactive/Stations/GrindingStation.cs" id="1_5ml2f"]
 [ext_resource type="AudioStream" uid="uid://b84nty8lxoi20" path="res://Assets/Sound/grinding.ogg" id="5_dw181"]
@@ -6,17 +6,12 @@
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_d1asv"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="7_6p6ah"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_k1wm0"]
-radius = 20.0
-
 [node name="GrindStoneStation" type="Area2D"]
 script = ExtResource("1_5ml2f")
 AutoCraft = true
 
-[node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
-shape = SubResource("CircleShape2D_k1wm0")
-debug_color = Color(0.674557, 0.304912, 1, 0.42)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-28, -4, 0, -23, 25, -12, -6, 6)
 
 [node name="StationSprite" type="Sprite2D" parent="."]
 texture = ExtResource("5_k1wm0")

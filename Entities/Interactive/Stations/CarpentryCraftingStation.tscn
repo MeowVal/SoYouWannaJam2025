@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqh3oq2qyafiu"]
+[gd_scene load_steps=6 format=3 uid="uid://dqh3oq2qyafiu"]
 
 [ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_3ll2t"]
 [ext_resource type="Texture2D" uid="uid://bvcgmeveopmmp" path="res://Assets/Sprites/Environment/CarpentryTable.png" id="4_nig01"]
@@ -6,17 +6,13 @@
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="5_b5pwk"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="6_fqcdd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5ja0s"]
-radius = 16.0
-
 [node name="GenericCraftingStation" type="Area2D"]
 y_sort_enabled = true
 script = ExtResource("1_3ll2t")
 RecipesFolder = "res://Resources/Recipes/Carpentry/"
 
-[node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_5ja0s")
-debug_color = Color(0.674557, 0.304912, 1, 0.42)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-44, 6, -34, 2, 18, 30, 7, 36)
 
 [node name="StationSprite" type="Sprite2D" parent="."]
 position = Vector2(26, 9)
