@@ -14,6 +14,9 @@ public partial class Npc : CharacterBody2D
     [Signal]
     public delegate void LeftQueueEventHandler(Npc npc);
     [Export] public Timer MoodTimer; // How often the npc's mode decreases
+    [Export] public Sprite2D MoodSpriteX;
+    [Export] public Sprite2D MoodSpriteY;
+    [Export] public ProgressBar MoodBar;
     [Export] public float MoodDecreaseAmount = 10; // How much the npc's mood decreases by
     [Export] public float Speed = 60f; // How fast the npc moves
     public string State = "idle"; // The animation stat the npc is in
@@ -65,6 +68,7 @@ public partial class Npc : CharacterBody2D
         CallDeferred("SetupNavAgent");
         // Starts the MoodTimer
         //MoodTimer.Start();
+        //GetNode<ProgressBar>("MoodBar").Visible = true;
         // Connects to the signal from the navigation agent 
         Callable callable = new Callable(this, "_VelocityComputed");
         _navAgent.Connect("velocity_computed", callable);
@@ -202,12 +206,15 @@ public partial class Npc : CharacterBody2D
     public void UpdateMood()
     {
         Mood -= MoodDecreaseAmount;
+        MoodBar.Value = Mood;
         //GD.Print("Mood: " + Mood);
         //GD.Print(Mood <= 0);
         if(Mood <= 0)
         {
             //GD.Print("Leaving");
             
+            MoodSpriteX.Visible = true;
+            MoodBar.Visible = false;
             StartMoodTimer =  false;
             LeaveQueue();
             MoodTimer.Stop();

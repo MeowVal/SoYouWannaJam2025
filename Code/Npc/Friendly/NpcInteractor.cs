@@ -50,7 +50,7 @@ public partial class NpcInteractor : Interactible
 
     private void OnInteractableEntered(Node2D unknownTarget)
     {
-        if (unknownTarget is not CraftingStation target)
+        if (unknownTarget is not FrontDesk target)
         {
             if (unknownTarget.Name == "LeaveArea")
             {
@@ -68,8 +68,9 @@ public partial class NpcInteractor : Interactible
         }
         _npc.Mood = 100;
         _npc.MoodTimer.Start();
-        target.TriggerInteraction(this,TriggerType.PickupDrop);
-        //GD.Print("Crafting table reached");
+        _npc.MoodBar.Visible = true;
+        //target.TriggerInteraction(this,TriggerType.PickupDrop);
+        GD.Print("Crafting table reached");
 
     }
     private void OnInteractMethod(Node2D node, TriggerType trigger)
@@ -83,10 +84,12 @@ public partial class NpcInteractor : Interactible
                 {
                     if (_npc.RequestComplete) break;
                     Inventory.TransferTo(interactor.InventorySlot);
+                    
                     if (_npc.RequestGiven == false)
                     {
                         _npc.Mood = 100;
                         _npc.MoodTimer.Start();
+                        _npc.MoodBar.Visible = true;
                     }
                     
                 }
@@ -103,6 +106,8 @@ public partial class NpcInteractor : Interactible
                             _npc.LeaveQueue();
                             _npc.StartMoodTimer =  false;
                             _npc.MoodTimer.Stop();
+                            _npc.MoodBar.Visible = false;
+                            _npc.MoodSpriteY.Visible = true;
                             interactor.InventorySlot.TransferTo(Inventory, true);
                         }
                         else if (modularItem.OwningNpc == _npc)
