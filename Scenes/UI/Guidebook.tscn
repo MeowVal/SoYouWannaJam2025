@@ -1,7 +1,8 @@
-[gd_scene load_steps=39 format=3 uid="uid://bd5ctlsaoixe0"]
+[gd_scene load_steps=40 format=3 uid="uid://bd5ctlsaoixe0"]
 
 [ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="1_dalyi"]
 [ext_resource type="Texture2D" uid="uid://btjahwi5bo7rt" path="res://Assets/Sprites/UI/Background4Large.png" id="2_ahgf5"]
+[ext_resource type="Texture2D" uid="uid://ow0do4u6cgnc" path="res://Assets/Sprites/UI/Icon_Left.png" id="3_5806b"]
 [ext_resource type="Texture2D" uid="uid://cpnflp3gsnfbf" path="res://Assets/Sprites/Mobs/HumanGeneric1.png" id="3_f3t26"]
 [ext_resource type="Texture2D" uid="uid://ckv3yxb3knuq8" path="res://Assets/Sprites/Mobs/HumanGeneric2.png" id="4_58y83"]
 [ext_resource type="Texture2D" uid="uid://b7ww2rhodhp06" path="res://Assets/Sprites/Mobs/HumanGeneric3.png" id="5_a0uhv"]
@@ -57,20 +58,28 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_dalyi")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Control" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -371.0
-offset_top = 13.0
-offset_right = 371.0
-offset_bottom = -13.0
+offset_left = -398.0
+offset_top = 12.0
+offset_right = 398.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/PanelContainer"]
 layout_mode = 2
 texture = ExtResource("2_ahgf5")
 patch_margin_left = 16
@@ -78,14 +87,14 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/PanelContainer"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/PanelContainer/VBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("1_dalyi")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer2/PanelContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/PanelContainer/VBoxContainer2/PanelContainer"]
 layout_mode = 2
 texture = ExtResource("2_ahgf5")
 patch_margin_left = 16
@@ -93,20 +102,61 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer2/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer/VBoxContainer2/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Control/PanelContainer/VBoxContainer2/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CloseButton" type="Button" parent="Control/PanelContainer/VBoxContainer2/PanelContainer/MarginContainer/HBoxContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -16.0
+offset_right = 25.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/PanelContainer/MarginContainer/HBoxContainer/Control/CloseButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_5806b")
+
+[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
 theme_override_font_sizes/font_size = 31
 text = "The Blacksmith's Guidebook"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
@@ -114,21 +164,21 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer2/MarginContainer"]
+[node name="TabContainer" type="TabContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/side_margin = 0
 tab_alignment = 1
 current_tab = 0
 
-[node name="Introduction" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer"]
+[node name="Introduction" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 12
 metadata/_tab_index = 0
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+[node name="Label2" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
 modulate = Color(1, 0.733333, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -136,7 +186,7 @@ theme_override_font_sizes/font_size = 20
 text = "Welcome!"
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -145,7 +195,7 @@ text = "Greetings, come on in to the workshop, make yourself at home. This book 
 "
 autowrap_mode = 3
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
 modulate = Color(1, 0.733333, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -153,7 +203,7 @@ theme_override_font_sizes/font_size = 20
 text = "Your Customers"
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+[node name="Label3" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -162,10 +212,10 @@ text = "The fine people of the local area will come to your shop, asking for all
 "
 autowrap_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/VBoxContainer"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/VBoxContainer"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -173,31 +223,31 @@ theme_override_font_sizes/font_size = 16
 text = "Customers"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 32
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/VBoxContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 8
 texture = SubResource("AtlasTexture_xtgb6")
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/VBoxContainer/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 8
 texture = SubResource("AtlasTexture_dvqjk")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/VBoxContainer/HBoxContainer"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 8
 texture = SubResource("AtlasTexture_iwa2u")
 
-[node name="Label5" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+[node name="Label5" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
 modulate = Color(1, 0.733333, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -205,10 +255,10 @@ theme_override_font_sizes/font_size = 20
 text = "Final Note..."
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
 layout_mode = 2
 
-[node name="Label6" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer2"]
+[node name="Label6" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer2"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -216,12 +266,12 @@ theme_override_font_sizes/font_size = 16
 text = "If you are in doubt, come back and check this guide. You should find spare copies in your bookshelf. Good Luck!"
 autowrap_mode = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer2/VBoxContainer2"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer2/VBoxContainer2"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -229,17 +279,17 @@ theme_override_font_sizes/font_size = 16
 text = "Bookcase"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer2/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer2/VBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("6_u78y7")
 
-[node name="The Workshop & You" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer"]
+[node name="The Workshop & You" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -247,7 +297,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 12
 metadata/_tab_index = 1
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+[node name="Label2" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
 modulate = Color(1, 0.733333, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -255,7 +305,7 @@ theme_override_font_sizes/font_size = 20
 text = "Where am I?"
 vertical_alignment = 1
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -263,10 +313,10 @@ theme_override_font_sizes/font_size = 16
 text = "About the workshop you'll find many devices and structures that are here to help you work."
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -274,12 +324,12 @@ theme_override_font_sizes/font_size = 16
 text = "You can pick up new materials from storage crates in the side room. We will handle resupplying them, so make use of whatever you need."
 autowrap_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -287,32 +337,32 @@ theme_override_font_sizes/font_size = 16
 text = "Pickup Drop"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("6_cfey5")
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("7_3puij")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -320,17 +370,17 @@ theme_override_font_sizes/font_size = 16
 text = "Storage Crate"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("8_f04v5")
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2/HBoxContainer/TextureRect2"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2/HBoxContainer/TextureRect2"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 offset_right = 64.0
@@ -338,12 +388,12 @@ offset_bottom = 64.0
 size_flags_horizontal = 4
 texture = ExtResource("9_awi6u")
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -351,34 +401,34 @@ theme_override_font_sizes/font_size = 16
 text = "Iron/Gold/Mythril Ore"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("10_cs7t3")
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("11_tnuvs")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4/HBoxContainer"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("12_00trl")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -386,23 +436,23 @@ theme_override_font_sizes/font_size = 16
 text = "Wood/Cloth"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("13_dmd1o")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3/HBoxContainer"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("14_oe0mu")
 
-[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+[node name="Label3" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
 modulate = Color(1, 0.733333, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -410,10 +460,10 @@ theme_override_font_sizes/font_size = 20
 text = "Crafting Stations"
 vertical_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -421,12 +471,12 @@ theme_override_font_sizes/font_size = 16
 text = "Within the staff areas of the workshop you'll find the different crafting stations. Such as the mighty Forge or Tinker's Table. Each one with a list of goods you can make and repair there. Have a play and find out what works best at each one."
 autowrap_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -434,32 +484,32 @@ theme_override_font_sizes/font_size = 16
 text = "Use Action"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("15_cs7t3")
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("16_tnuvs")
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer2"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer2"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -467,23 +517,23 @@ theme_override_font_sizes/font_size = 16
 text = "The Forge"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer2/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("15_f04v5")
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer4"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer4"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -491,17 +541,17 @@ theme_override_font_sizes/font_size = 16
 text = "Tinker's Table"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer4/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer4/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("16_awi6u")
 
-[node name="Repair Journey" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer"]
+[node name="Repair Journey" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -509,7 +559,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 12
 metadata/_tab_index = 2
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
+[node name="Label2" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
 modulate = Color(1, 0.733333, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -517,10 +567,10 @@ theme_override_font_sizes/font_size = 20
 text = "Initial Interactions"
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer2"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer2"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -529,12 +579,12 @@ theme_override_font_sizes/font_size = 16
 text = "Customers will enter your shop, looking for your assistance. They will provide you an item to work with, go ahead and inspect it on the bench behind you to see what's wrong with it. The notes left around it should give a hint as to how to go about those tasks too."
 autowrap_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 8
 alignment = 1
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer2/VBoxContainer"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer2/VBoxContainer"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -542,17 +592,17 @@ theme_override_font_sizes/font_size = 16
 text = "Inspection Bench"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer2/VBoxContainer/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer2/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("19_piw4m")
 
-[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
+[node name="Label3" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
 modulate = Color(1, 0.733333, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -560,17 +610,17 @@ theme_override_font_sizes/font_size = 20
 text = "Repairs"
 vertical_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer3"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer3"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("20_35rcx")
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer3"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer3"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -579,7 +629,7 @@ theme_override_font_sizes/font_size = 16
 text = "Parts that need repairs will have this purple icon. Often they will need a simple material and a bit of work to bring back into mint condition."
 autowrap_mode = 3
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
 modulate = Color(1, 0.733333, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -587,17 +637,17 @@ theme_override_font_sizes/font_size = 20
 text = "Replacements"
 vertical_alignment = 1
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer4"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer4"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("21_xgn83")
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer4"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer4"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -606,7 +656,7 @@ theme_override_font_sizes/font_size = 16
 text = "Parts that a customer wants to replace outright will have a yellow icon. Below it should indicate the specific replacement part they want, make it and then attach it to their item before returning it."
 autowrap_mode = 3
 
-[node name="Label5" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
+[node name="Label5" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
 modulate = Color(1, 0.733333, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -614,27 +664,27 @@ theme_override_font_sizes/font_size = 20
 text = "Results"
 vertical_alignment = 1
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer5"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer5"]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer5/VBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer5/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("22_unr2x")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer5/VBoxContainer"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer5/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("23_rya85")
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer5"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Repair Journey/HBoxContainer5"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -643,7 +693,7 @@ theme_override_font_sizes/font_size = 16
 text = "Once their item has been returned, a customer will leave happily, indicated by a green tick. Equally if you fail to provide a service in enough time, you'll see them walk off in frustration and a red cross."
 autowrap_mode = 3
 
-[node name="Recipe Reference" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer"]
+[node name="Recipe Reference" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -651,7 +701,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 12
 metadata/_tab_index = 3
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference"]
+[node name="Label2" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference"]
 modulate = Color(1, 0.733333, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -659,7 +709,7 @@ theme_override_font_sizes/font_size = 20
 text = "Recipe References"
 vertical_alignment = 1
 
-[node name="Label6" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference"]
+[node name="Label6" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -668,16 +718,16 @@ theme_override_font_sizes/font_size = 16
 text = "Below are some of the most common recipes and resources you will be using."
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference"]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -685,97 +735,97 @@ theme_override_font_sizes/font_size = 16
 text = "Metallurgy"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("10_cs7t3")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("24_rya85")
 
-[node name="TextureRect5" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="TextureRect5" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("25_31xw5")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("11_tnuvs")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("24_rya85")
 
-[node name="TextureRect5" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="TextureRect5" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("26_myd7m")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("12_00trl")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("24_rya85")
 
-[node name="TextureRect5" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="TextureRect5" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("27_2vggr")
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("15_f04v5")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -783,76 +833,76 @@ theme_override_font_sizes/font_size = 16
 text = "Carpentry"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("13_dmd1o")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("24_rya85")
 
-[node name="TextureRect5" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+[node name="TextureRect5" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("28_myd7m")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("14_oe0mu")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("24_rya85")
 
-[node name="TextureRect5" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
+[node name="TextureRect5" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("29_2vggr")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer3"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("28_myd7m")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer3"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("24_rya85")
 
-[node name="TextureRect5" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer3"]
+[node name="TextureRect5" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer3"]
 modulate = Color(0.71, 0.441147, 0.2059, 1)
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -860,19 +910,19 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("30_3eu5s")
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("31_u78y7")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 size_flags_vertical = 0
@@ -880,59 +930,59 @@ theme_override_font_sizes/font_size = 16
 text = "Blacksmithing"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("25_31xw5")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("24_rya85")
 
-[node name="TextureRect5" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer"]
+[node name="TextureRect5" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("32_5806b")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer2"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("25_31xw5")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer2"]
+[node name="TextureRect4" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("24_rya85")
 
-[node name="TextureRect5" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer2"]
+[node name="TextureRect5" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("33_pyf7t")
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3"]
+[node name="TextureRect3" type="TextureRect" parent="Control/PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Recipe Reference/HBoxContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
