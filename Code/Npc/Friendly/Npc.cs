@@ -202,7 +202,7 @@ public partial class Npc : CharacterBody2D
     {
         Mood -= MoodDecreaseAmount;
         MoodBar.Value = Mood;
-        //GD.Print("Mood: " + Mood);
+        GD.Print("Mood: " + Mood);
         //GD.Print(Mood <= 0);
         if(Mood <= 0)
         {

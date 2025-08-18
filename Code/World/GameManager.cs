@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Godot;
 
 using SoYouWANNAJam2025.Code.Interactive.Inventory;
@@ -394,7 +395,6 @@ public partial class GameManager : Node2D
 	{
 		var dirStack = new Stack<string>();
 		dirStack.Push(rootPath);
-		const string remapExtension = ".remap";
 
 		while (dirStack.Count > 0)
 		{
@@ -408,11 +408,8 @@ public partial class GameManager : Node2D
 			while (fileName != "")
 			{
 				string fullPath = currentPath.TrimEnd('/') + "/" + fileName;
-				if (fullPath.EndsWith(remapExtension))
-				{
-					fullPath = fullPath.Substring(0, fullPath.Length - remapExtension.Length);
-				}
 				//GD.Print(fullPath);
+				fullPath = CleanResourcePath(fullPath);
 
 				if (dir.CurrentIsDir())
 				{
@@ -430,6 +427,18 @@ public partial class GameManager : Node2D
 			}
 			dir.ListDirEnd();
 		}
+	}
+	public static string CleanResourcePath(string path)
+	{
+		if (path.EndsWith(".remap"))
+			path = path.Substring(0, path.Length - ".remap".Length);
+		//GD.Print(path);
+
+		// Remove suffix like ~RF1ea611c.TMP
+		path = Regex.Replace(path, @"~[^/\\]+$", "");
+		//GD.Print(path);
+
+		return path;
 	}
 	public (bool,GenericItem) NewItem(GenericItemTemplate itemTemplate)
 	{
