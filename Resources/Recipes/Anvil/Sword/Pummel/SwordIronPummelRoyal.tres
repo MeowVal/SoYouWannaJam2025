@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://elkvejcr83ck"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_r4jfn"]
+[ext_resource type="Resource" uid="uid://dt3nbwu1e1oth" path="res://Resources/Items/ModularParts/Sword/Pummel/Sword_Pummel_Iron_Royal .tres" id="3_7cb20"]
+[ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="3_xqdls"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="5_6pedj"]
+
+[resource]
+script = ExtResource("5_6pedj")
+DisplayName = "Sword Iron Royal Pummel"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("2_r4jfn")]([ExtResource("3_xqdls")])
+RecipeOutputs = Array[ExtResource("2_r4jfn")]([ExtResource("3_7cb20")])
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

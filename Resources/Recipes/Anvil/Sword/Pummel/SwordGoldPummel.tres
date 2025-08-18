@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://dlmn0cvvbursd"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_arq87"]
+[ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="3_x7q5i"]
+[ext_resource type="Resource" uid="uid://d0kf8ldv8p21p" path="res://Resources/Items/ModularParts/Sword/Pummel/Sword_Pummel_Gold.tres" id="3_xp351"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="5_smcax"]
+
+[resource]
+script = ExtResource("5_smcax")
+DisplayName = "Sword Gold Pummel"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("2_arq87")]([ExtResource("3_x7q5i")])
+RecipeOutputs = Array[ExtResource("2_arq87")]([ExtResource("3_xp351")])
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

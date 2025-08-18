@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://mclwjg8l8wsh"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_c8ueq"]
+[ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="2_cwn8r"]
+[ext_resource type="Resource" uid="uid://bs00i2huqbl5x" path="res://Resources/Items/ModularParts/Sword/Blade/Sword_Blade_Mythril_Modern.tres" id="3_hxxs7"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_dfcip"]
+
+[resource]
+script = ExtResource("4_dfcip")
+DisplayName = "Sword Mythril Modern Blade"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_c8ueq")]([ExtResource("2_cwn8r"), ExtResource("2_cwn8r")])
+RecipeOutputs = Array[ExtResource("1_c8ueq")]([ExtResource("3_hxxs7")])
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

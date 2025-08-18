@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=6 format=3 uid="uid://mclwjg8l8wsh"]
+
+[ext_resource type="Texture2D" uid="uid://bnc4s6trjboii" path="res://Assets/Sprites/ModularParts/Blade_Sword.png" id="1_klmsk"]
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_marbd"]
+[ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="3_klmsk"]
+[ext_resource type="Resource" uid="uid://cbfs4i4dknmnh" path="res://Resources/Items/ModularParts/Sword/Blade/Sword_Blade_Mythril.tres" id="4_marbd"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="5_7hs7k"]
+
+[resource]
+script = ExtResource("5_7hs7k")
+DisplayName = "Sword Gold Modern Blade"
+Description = "You need to actually set this lol."
+Icon = ExtResource("1_klmsk")
+RecipeType = 0
+RecipeInputs = Array[ExtResource("2_marbd")]([ExtResource("3_klmsk")])
+RecipeOutputs = Array[ExtResource("2_marbd")]([ExtResource("4_marbd")])
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

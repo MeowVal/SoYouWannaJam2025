@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://bj8xw5oc62a4j"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_1y8no"]
+[ext_resource type="Resource" uid="uid://tvgxu2woqsxh" path="res://Resources/Items/Resources/IronIngot.tres" id="2_861fr"]
+[ext_resource type="Resource" uid="uid://drjvtc3g01gc4" path="res://Resources/Items/ModularParts/Spear/Blade/Spear_Blade_Iron_Wide.tres" id="3_buloa"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_dqi71"]
+
+[resource]
+script = ExtResource("4_dqi71")
+DisplayName = "Spear Iron Wide Blade"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_1y8no")]([ExtResource("2_861fr")])
+RecipeOutputs = Array[ExtResource("1_1y8no")]([ExtResource("3_buloa")])
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"
