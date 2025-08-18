@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ModularItemTemplate" load_steps=6 format=3 uid="uid://iuwcxktjlbft"]
 
-[ext_resource type="Resource" path="res://Resources/Items/ModularParts/Staff/Pole/Pole_Wood.tres" id="1_kmstn"]
-[ext_resource type="Resource" path="res://Resources/Items/ModularParts/Staff/Tip/Staff_Tip_Iron_Horned.tres" id="2_qjla2"]
+[ext_resource type="Resource" uid="uid://c3huqdamwc1pj" path="res://Resources/Items/ModularParts/Staff/Pole/Staff_Pole_Wood.tres" id="1_kmstn"]
+[ext_resource type="Resource" uid="uid://dol46h7xihs7c" path="res://Resources/Items/ModularParts/Staff/Tip/Staff_Tip_Iron_Horned.tres" id="2_qjla2"]
 [ext_resource type="Resource" uid="uid://wqcy18hwjpoc" path="res://Resources/Items/ModularParts/Staff/Trim/New_Staff_Trim_Gold.tres" id="3_jnmop"]
 [ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="5_gusb2"]
 [ext_resource type="Script" uid="uid://kfhncm4xxwur" path="res://Code/Interactive/Items/ModularItemTemplate.cs" id="6_7l74w"]

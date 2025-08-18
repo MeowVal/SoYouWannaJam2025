@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://d3m4buyajo3d8"]
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://d3m4buyajo3d8"]
 
 [ext_resource type="Texture2D" uid="uid://b4jbdku4d2ttt" path="res://Assets/Sprites/ModularParts/Blade_Spear_Voulge.png" id="1_g2oob"]
+[ext_resource type="Texture2D" uid="uid://dbaffjt2e80i8" path="res://Assets/Sprites/ModularParts/Blade_Spear_Broken.png" id="1_gxdxv"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_gcjv7"]
 
 [resource]
@@ -8,9 +9,12 @@ script = ExtResource("2_gcjv7")
 PartType = 0
 ModularItemType = 1
 PartState = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_gxdxv")])
+UsedTextures = null
 DisplayName = "Spear Mythril Voulge Blade"
 Description = "The blade for a spear, cast of pure Iron."
-Textures = [ExtResource("1_g2oob")]
+Textures = Array[Texture2D]([ExtResource("1_g2oob")])
 Colours = Array[Color]([Color(0.552941, 1, 0.835294, 1)])
 Size = 10.0
+AllowUseAction = false
 metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

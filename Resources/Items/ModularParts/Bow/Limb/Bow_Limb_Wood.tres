@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://b0n7waoyipem0"]
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://b0n7waoyipem0"]
 
+[ext_resource type="Texture2D" uid="uid://wkbppcx30bst" path="res://Assets/Sprites/ModularParts/Limbs_Bow_Brokenb.png" id="1_a03yx"]
 [ext_resource type="Texture2D" uid="uid://c0u5muxq15ejg" path="res://Assets/Sprites/ModularParts/Limbs_Bow.png" id="1_hrd2d"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_eld73"]
 
@@ -8,9 +9,12 @@ script = ExtResource("2_eld73")
 PartType = 11
 ModularItemType = 7
 PartState = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_a03yx")])
+UsedTextures = null
 DisplayName = "Wooden Bow Limbs"
 Description = "You need to actually set this lol."
 Textures = Array[Texture2D]([ExtResource("1_hrd2d")])
 Colours = Array[Color]([Color(0.678431, 0.392157, 0.168627, 1)])
 Size = 10.0
+AllowUseAction = false
 metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

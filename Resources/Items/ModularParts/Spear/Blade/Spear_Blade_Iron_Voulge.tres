@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://emas6m4341ii"]
 
 [ext_resource type="Texture2D" uid="uid://b4jbdku4d2ttt" path="res://Assets/Sprites/ModularParts/Blade_Spear_Voulge.png" id="1_dlfj8"]
-[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="1_fhxf0"]
+[ext_resource type="Texture2D" uid="uid://dbaffjt2e80i8" path="res://Assets/Sprites/ModularParts/Blade_Spear_Broken.png" id="1_fhxf0"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_ci7jl"]
 
 [resource]

@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://cbm631sgcufn3"]
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://cbm631sgcufn3"]
 
-[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="1_1je6a"]
 [ext_resource type="Texture2D" uid="uid://bttj2coroveub" path="res://Assets/Sprites/ModularParts/Grip_Bow.png" id="1_vh6yj"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_bukfe"]
 
@@ -9,7 +8,7 @@ script = ExtResource("2_bukfe")
 PartType = 1
 ModularItemType = 7
 PartState = 0
-BrokenTextures = Array[Texture2D]([ExtResource("1_1je6a")])
+BrokenTextures = Array[Texture2D]([ExtResource("1_vh6yj")])
 UsedTextures = []
 DisplayName = "Bow Cloth Grip"
 Description = "You need to actually set this lol."

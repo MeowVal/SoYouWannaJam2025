@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=5 format=3 uid="uid://csu0cbnpa2xi4"]
 
-[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="1_5a0x2"]
+[ext_resource type="Texture2D" uid="uid://cueilt1ut6n8i" path="res://Assets/Sprites/ModularParts/Pole_Spear_Broken.png" id="1_5a0x2"]
 [ext_resource type="Texture2D" uid="uid://cvkgmamq7tyox" path="res://Assets/Sprites/ModularParts/Pole_Spear_Balanced.png" id="1_p52ku"]
 [ext_resource type="Texture2D" uid="uid://bdk1i76vfc32g" path="res://Assets/Sprites/ModularParts/Pole_Spear_Balanced2.png" id="2_cplgl"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="3_yopq8"]

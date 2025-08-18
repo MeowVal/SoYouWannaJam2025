@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://duvcpp8blb2gv"]
+
+[ext_resource type="Texture2D" uid="uid://dhux67cqubv5c" path="res://Assets/Sprites/ModularParts/Plating_Armour_Studded.png" id="1_ubgx8"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_eve3f"]
+
+[resource]
+script = ExtResource("2_eve3f")
+PartType = 6
+ModularItemType = 4
+PartState = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_ubgx8")])
+UsedTextures = []
+DisplayName = "Chestplate Gold Studded Plate"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_ubgx8")])
+Colours = Array[Color]([Color(1, 0.796078, 0.239216, 1)])
+Size = 10.0
+AllowUseAction = false
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

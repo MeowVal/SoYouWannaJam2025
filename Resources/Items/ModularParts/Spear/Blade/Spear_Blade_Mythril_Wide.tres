@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://rqg3ub057t0f"]
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://rqg3ub057t0f"]
 
+[ext_resource type="Texture2D" uid="uid://dbaffjt2e80i8" path="res://Assets/Sprites/ModularParts/Blade_Spear_Broken.png" id="1_m3lfj"]
 [ext_resource type="Texture2D" uid="uid://crwmpxy1reutn" path="res://Assets/Sprites/ModularParts/Blade_Spear_Wide.png" id="1_tkg5h"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_gcjv7"]
 
@@ -8,9 +9,12 @@ script = ExtResource("2_gcjv7")
 PartType = 0
 ModularItemType = 1
 PartState = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_m3lfj")])
+UsedTextures = null
 DisplayName = "Spear Mythril Wide Blade"
 Description = "The blade for a spear, cast of pure Iron."
 Textures = Array[Texture2D]([ExtResource("1_tkg5h")])
 Colours = Array[Color]([Color(0.552941, 1, 0.835294, 1)])
 Size = 10.0
+AllowUseAction = false
 metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

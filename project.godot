@@ -35,6 +35,8 @@ folder_colors={
 "res://Code/": "yellow",
 "res://Entities/": "green",
 "res://Resources/": "blue",
+"res://Resources/Items/": "purple",
+"res://Resources/Recipes/": "teal",
 "res://Scenes/": "purple",
 "res://addons/": "gray"
 }

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://1fgxckbe41pn"]
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://cax8padva3t2o"]
 
-[ext_resource type="Texture2D" uid="uid://w3e2hu3aueur" path="res://Assets/Sprites/ModularParts/Plating_Armour.png" id="1_h7nja"]
+[ext_resource type="Texture2D" uid="uid://dhux67cqubv5c" path="res://Assets/Sprites/ModularParts/Plating_Armour_Studded.png" id="1_62y2i"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_h7nja"]
 
 [resource]
@@ -8,11 +8,11 @@ script = ExtResource("2_h7nja")
 PartType = 6
 ModularItemType = 4
 PartState = 0
-BrokenTextures = Array[Texture2D]([ExtResource("1_h7nja")])
+BrokenTextures = Array[Texture2D]([ExtResource("1_62y2i")])
 UsedTextures = []
-DisplayName = "Chestplate Iron Studded Plate"
+DisplayName = "Chestplate Iron Plate"
 Description = "You need to actually set this lol."
-Textures = Array[Texture2D]([ExtResource("1_h7nja")])
+Textures = Array[Texture2D]([ExtResource("1_62y2i")])
 Colours = Array[Color]([Color(0.831373, 0.890196, 1, 1)])
 Size = 10.0
 AllowUseAction = false

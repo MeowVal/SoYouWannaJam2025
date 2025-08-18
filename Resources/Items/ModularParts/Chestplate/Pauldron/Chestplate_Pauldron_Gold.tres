@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://cvv4xgjfaj6qp"]
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://c22u7sca2888u"]
 
 [ext_resource type="Texture2D" uid="uid://b6jok56gfbks7" path="res://Assets/Sprites/ModularParts/Pauldrons_Armour.png" id="1_txxqk"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_n5itt"]
@@ -10,10 +10,10 @@ ModularItemType = 4
 PartState = 0
 BrokenTextures = Array[Texture2D]([ExtResource("1_txxqk")])
 UsedTextures = []
-DisplayName = "Chestplate Iron Pauldron"
+DisplayName = "Chestplate Gold Pauldron"
 Description = "You need to actually set this lol."
 Textures = Array[Texture2D]([ExtResource("1_txxqk")])
-Colours = Array[Color]([Color(0.831373, 0.890196, 1, 1)])
+Colours = Array[Color]([Color(1, 0.796078, 0.239216, 1)])
 Size = 10.0
 AllowUseAction = false
 metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"

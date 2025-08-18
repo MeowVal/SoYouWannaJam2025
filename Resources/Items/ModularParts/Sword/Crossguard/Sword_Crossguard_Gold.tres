@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://dea84xk6o1h6v"]
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://dea84xk6o1h6v"]
 
 [ext_resource type="Texture2D" uid="uid://kutodpvnijx2" path="res://Assets/Sprites/ModularParts/Crossguard_Sword.png" id="1_6freb"]
-[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="1_52od6"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_0lx62"]
 
 [resource]
@@ -9,7 +8,7 @@ script = ExtResource("2_0lx62")
 PartType = 3
 ModularItemType = 0
 PartState = 0
-BrokenTextures = Array[Texture2D]([ExtResource("1_52od6")])
+BrokenTextures = Array[Texture2D]([ExtResource("1_6freb")])
 UsedTextures = []
 DisplayName = "Sword Golden Crossguard"
 Description = "While flashy, this crossguard probably doesnt do a lot to protect your fingers."

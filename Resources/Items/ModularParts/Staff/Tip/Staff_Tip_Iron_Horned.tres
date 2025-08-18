@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=4 format=3 uid="uid://dol46h7xihs7c"]
 
-[ext_resource type="Texture2D" uid="uid://dm2v3pghlca2g" path="res://Assets/Sprites/Unknown.png" id="1_f7y21"]
+[ext_resource type="Texture2D" uid="uid://b1rv0ys0ebw1p" path="res://Assets/Sprites/ModularParts/Tip_Staff_Broken.png" id="1_f7y21"]
 [ext_resource type="Texture2D" uid="uid://ddqhktyn8qttb" path="res://Assets/Sprites/ModularParts/Tip_Staff_Horned.png" id="1_o6muj"]
 [ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="2_iafsa"]
 

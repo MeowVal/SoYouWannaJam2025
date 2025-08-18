@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ModularPartTemplate" load_steps=3 format=3 uid="uid://5qa7xnfbbps3"]
+
+[ext_resource type="Texture2D" uid="uid://bq2cjtaddsc60" path="res://Assets/Sprites/ModularParts/Pauldrons_Armour_Spiked.png" id="1_m3py6"]
+[ext_resource type="Script" uid="uid://dqgq0n6qnhxmx" path="res://Code/Interactive/Items/ModularPartTemplate.cs" id="3_c8q3f"]
+
+[resource]
+script = ExtResource("3_c8q3f")
+PartType = 7
+ModularItemType = 4
+PartState = 0
+BrokenTextures = Array[Texture2D]([ExtResource("1_m3py6")])
+UsedTextures = []
+DisplayName = "Chestplate Gold Spiked Pauldron"
+Description = "You need to actually set this lol."
+Textures = Array[Texture2D]([ExtResource("1_m3py6")])
+Colours = Array[Color]([Color(1, 0.796078, 0.239216, 1)])
+Size = 10.0
+AllowUseAction = false
+metadata/_custom_type_script = "uid://dqgq0n6qnhxmx"
