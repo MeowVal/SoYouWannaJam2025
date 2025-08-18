@@ -99,6 +99,7 @@ theme_override_constants/separation = 8
 [node name="ArrowContainer" type="HBoxContainer" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+theme_override_constants/separation = 8
 alignment = 1
 
 [node name="RecipeProgress" type="ProgressBar" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]

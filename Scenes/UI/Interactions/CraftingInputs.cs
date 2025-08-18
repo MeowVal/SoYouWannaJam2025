@@ -78,9 +78,23 @@ public partial class CraftingInputs : CraftingStationInterface
             var newArrow = new TextureRect();
             _sequence[i] = rng.RandiRange(0, 3);
             newArrow.Texture = _arrows[_sequence[i]];
-            newArrow.SetCustomMinimumSize(new Vector2(16,16));
+            newArrow.CustomMinimumSize = new Vector2(64, 64);
+            newArrow.Size = new Vector2(64, 64);
+            newArrow.SetAnchorsPreset(Control.LayoutPreset.Center);
             _arrowRects.Add(newArrow);
             _container.AddChild(newArrow);
+            if (i < _index)
+            {
+                newArrow.Modulate = Colors.DimGray;
+            }
+            else if (i > _index)
+            {
+                newArrow.Modulate = Colors.White;
+            }
+            else
+            {
+                newArrow.Modulate = Colors.Cyan;
+            }
         }
     }
 
@@ -165,14 +179,15 @@ public partial class CraftingInputs : CraftingStationInterface
         {
             if (i < _index)
             {
-                _arrowRects[i].Modulate = Colors.Yellow;
-            } else if (i > _index)
-            {
                 _arrowRects[i].Modulate = Colors.DimGray;
+            }
+            else if (i > _index)
+            {
+                _arrowRects[i].Modulate = Colors.White;
             }
             else
             {
-                _arrowRects[i].Modulate = Colors.White;
+                _arrowRects[i].Modulate = Colors.Cyan;
             }
         }
     }
