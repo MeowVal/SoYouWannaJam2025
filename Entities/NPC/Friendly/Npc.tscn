@@ -167,13 +167,16 @@ height = 12.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mrx7r"]
 polygon = PackedVector2Array(2, 4, 6, 3, 8, 1, 8, 0, 7, -2, 5, -4, 2, -5, -2, -5, -5, -4, -7, -2, -8, 0, -8, 1, -6, 3, -2, 4)
 
-[node name="Npc" type="CharacterBody2D" node_paths=PackedStringArray("MoodTimer")]
+[node name="Npc" type="CharacterBody2D" node_paths=PackedStringArray("MoodTimer", "MoodSpriteX", "MoodSpriteY", "MoodBar")]
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_623a7")
 MoodTimer = NodePath("MoodTimer")
-_speed = 60.0
+MoodSpriteX = NodePath("Done")
+MoodSpriteY = NodePath("NotHappy")
+MoodBar = NodePath("MoodBar")
+MoodDecreaseAmount = 10.0
 NpcResource = ExtResource("2_jvg37")
 
 [node name="NpcInteractor" type="Area2D" parent="."]

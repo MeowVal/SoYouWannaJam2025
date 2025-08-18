@@ -39,6 +39,10 @@ public partial class InventorySlot : Node2D
         Whitelist = ItemWhitelist;
         foreach (var recipe in RecipeWhitelist)
         {
+            
+            if (recipe == null){ GD.Print("recipe is null ");
+                continue;
+            }
             foreach (var input in recipe.RecipeInputs)
             {
                 Whitelist.Add(input);
