@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn1i82rbhalh"]
+[gd_scene load_steps=12 format=3 uid="uid://bn1i82rbhalh"]
 
 [ext_resource type="Script" uid="uid://d31ph5saobugd" path="res://Code/World/MainMenu.cs" id="1_db2sy"]
 [ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="1_lq24o"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cd0xah6k8a351" path="res://Assets/Sprites/TestBow.png" id="6_lck1b"]
 [ext_resource type="Texture2D" uid="uid://rrml2wgyebp" path="res://Assets/Sprites/TestStaff.png" id="7_hd5et"]
 [ext_resource type="Texture2D" uid="uid://c7tlmk7b3w5wj" path="res://Assets/Sprites/TestSword.png" id="8_hqltq"]
+[ext_resource type="AudioStream" uid="uid://b7m3nk6ub32uh" path="res://Assets/Sound/Of-Legends-and-Fables-3.mp3" id="10_d4706"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cu5nb"]
 atlas = ExtResource("3_l53to")
@@ -1309,3 +1310,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "QUIT"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_d4706")
+volume_db = -8.0
+autoplay = true
+stream_paused = true
+parameters/looping = true

@@ -11,7 +11,6 @@ using RecipeSelectionUi = SoYouWANNAJam2025.Scenes.UI.Interactions.RecipeSelecti
 
 namespace SoYouWANNAJam2025.Code.Interactive.Stations;
 
-[Tool]
 public partial class CraftingStation : Interactible
 {
     [ExportGroup("Info")]

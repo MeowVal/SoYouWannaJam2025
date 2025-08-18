@@ -20,6 +20,13 @@ config/icon="uid://c3hoqvnueuekg"
 Global="*res://Code/World/Global.cs"
 HUD="*res://Scenes/UI/HUD.tscn"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+
 [dotnet]
 
 project/assembly_name="So You WANNA Jam 2025"
