@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://b87f20h7iym4o"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_arq87"]
+[ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="3_x7q5i"]
+[ext_resource type="Resource" uid="uid://dyasfgiofdngv" path="res://Resources/Items/ModularParts/Spear/Blade/Spear_Blade_Gold_Wide.tres" id="3_yirm2"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="5_smcax"]
+
+[resource]
+script = ExtResource("5_smcax")
+DisplayName = "Spear Gold Wide Blade"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("2_arq87")]([ExtResource("3_x7q5i")])
+RecipeOutputs = Array[ExtResource("2_arq87")]([ExtResource("3_yirm2")])
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://ic3soev6roi2"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_6i474"]
+[ext_resource type="Resource" uid="uid://tvgxu2woqsxh" path="res://Resources/Items/Resources/IronIngot.tres" id="2_2lid2"]
+[ext_resource type="Resource" uid="uid://bscvyej1mrkqt" path="res://Resources/Items/ModularParts/Sword/Blade/Sword_Blade_Iron.tres" id="3_3vp48"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_cmqnc"]
+
+[resource]
+script = ExtResource("4_cmqnc")
+DisplayName = "Sword Iron Blade"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_6i474")]([ExtResource("2_2lid2"), ExtResource("2_2lid2")])
+RecipeOutputs = Array[ExtResource("1_6i474")]([ExtResource("3_3vp48")])
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

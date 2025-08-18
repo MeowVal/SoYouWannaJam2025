@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://djbjcihkgctcs"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_5alv8"]
+[ext_resource type="Resource" uid="uid://di3ljq21fm45k" path="res://Resources/Items/Resources/GoldIngot.tres" id="2_14q1e"]
+[ext_resource type="Resource" uid="uid://bpmfwyv6ev7dp" path="res://Resources/Items/ModularParts/Staff/Tip/Staff_Tip_Gold_Bolt.tres" id="3_a1sv0"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_qhb2k"]
+
+[resource]
+script = ExtResource("4_qhb2k")
+DisplayName = "Staff Gold Bolt Tip"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_5alv8")]([ExtResource("2_14q1e")])
+RecipeOutputs = Array[ExtResource("1_5alv8")]([ExtResource("3_a1sv0")])
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"
