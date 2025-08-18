@@ -30,7 +30,7 @@ public partial class RecipeSelectionUi : CraftingStationInterface
     private void BuildRecipeList()
     {
         _rows = [];
-        var vBox = GetNode<VBoxContainer>("Control/MarginContainer/VBoxContainer");
+        var vBox = GetNode<VBoxContainer>("Control2/VBoxContainer/RecipesMarginContainer/RecipesVBox");
         foreach (var child in vBox.GetChildren())
         {
             child.QueueFree();

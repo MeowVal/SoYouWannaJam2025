@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1w5hoo4cnyt4"]
+[gd_scene load_steps=5 format=3 uid="uid://d1w5hoo4cnyt4"]
 
 [ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="1_2drb8"]
 [ext_resource type="Script" uid="uid://ckumry7oh0jjx" path="res://Scenes/UI/Interactions/RecipeSelection/RecipeSelectionUi.cs" id="1_2441t"]
-[ext_resource type="Texture2D" uid="uid://dcl6i2n7nhifq" path="res://Assets/Sprites/UI/Background1.png" id="2_2441t"]
+[ext_resource type="Texture2D" uid="uid://nlmbdj8cygjx" path="res://Assets/Sprites/UI/Background2.png" id="3_x6qef"]
+[ext_resource type="Texture2D" uid="uid://dvaed8hkr48fy" path="res://Assets/Sprites/UI/Background3.png" id="4_x36us"]
 
 [node name="Node2D" type="Node2D"]
 z_index = 10
 script = ExtResource("1_2441t")
 
-[node name="Control" type="PanelContainer" parent="."]
+[node name="Control2" type="PanelContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -22,26 +23,54 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_2drb8")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Control2"]
 layout_mode = 2
-texture = ExtResource("2_2441t")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+texture = ExtResource("3_x6qef")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control2"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control2/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Control2/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("4_x36us")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+[node name="TitleText" type="Label" parent="Control2/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 18
-text = "Select a recipe"
+text = "Select a recipe..."
+horizontal_alignment = 1
+
+[node name="RecipesMarginContainer" type="MarginContainer" parent="Control2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="RecipesVBox" type="VBoxContainer" parent="Control2/VBoxContainer/RecipesMarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
