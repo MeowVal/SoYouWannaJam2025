@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://bkcendkeqj6vk"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="1_o2d0r"]
+[ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="2_p6mgm"]
+[ext_resource type="Resource" uid="uid://cbfs4i4dknmnh" path="res://Resources/Items/ModularParts/Sword/Blade/Sword_Blade_Mythril.tres" id="3_7nq7c"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="4_ajwk3"]
+
+[resource]
+script = ExtResource("4_ajwk3")
+DisplayName = "Sword Gold Blade"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("1_o2d0r")]([ExtResource("2_p6mgm"), ExtResource("2_p6mgm")])
+RecipeOutputs = Array[ExtResource("1_o2d0r")]([ExtResource("3_7nq7c")])
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://br3p1kb2a6do6"]
+
+[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_unk2p"]
+[ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="3_uv7ul"]
+[ext_resource type="Resource" uid="uid://b2tghlvh3wx74" path="res://Resources/Items/ModularParts/Sword/Crossguard/Sword_Crossguard_Mythril_Grand.tres" id="4_a7hma"]
+[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="5_ia760"]
+
+[resource]
+script = ExtResource("5_ia760")
+DisplayName = "Sword Mythril Grand Crossguard"
+Description = "You need to actually set this lol."
+RecipeType = 0
+RecipeInputs = Array[ExtResource("2_unk2p")]([ExtResource("3_uv7ul")])
+RecipeOutputs = Array[ExtResource("2_unk2p")]([ExtResource("4_a7hma")])
+WorkType = 0
+TimeToComplete = 5.0
+SequenceLength = 6
+SpamPerSecond = 5
+metadata/_custom_type_script = "uid://dpq804w6fy4nf"

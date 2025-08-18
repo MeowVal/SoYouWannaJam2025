@@ -50,7 +50,7 @@ public partial class InspectionStation : Interactible
         _progressTimer.Timeout += ProgressComplete;
         var label = _interactionInterface.GetNode<Label>("Control/MarginContainer/VBoxContainer/ItemName");
         if (Inventory.Item is ModularItem){
-            _progressTimer.Start(5);
+            _progressTimer.Start(3);
             label.Text = Inventory.Item.ItemResource.DisplayName;
         } 
         else if (Inventory.Item.ItemResource is ModularPartTemplate)

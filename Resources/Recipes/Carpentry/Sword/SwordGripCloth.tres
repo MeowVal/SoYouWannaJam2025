@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("4_bys1l")
-DisplayName = "Planks"
+DisplayName = "Unknown"
 Description = "You need to actually set this lol."
 RecipeType = 0
 RecipeInputs = Array[ExtResource("1_8fyqb")]([ExtResource("2_e6kxq")])
