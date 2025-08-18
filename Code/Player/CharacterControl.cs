@@ -27,7 +27,8 @@ public partial class CharacterControl : CharacterBody2D
 	private Player.PlayerInteractor _interactor;
 
 	private Node2D _camera;
-	private string _target; 
+	private string _target;
+	private AudioStreamPlayer2D _audioStreamPlayer;
 	
 	public override void _Ready()
 	{
@@ -37,6 +38,7 @@ public partial class CharacterControl : CharacterBody2D
 		_camera = GetTree().Root.GetCamera2D(); // Gives controls over Camera properties and get a reference to it.
 		_camera.Scale = new Vector2(World.Global.GameScale, World.Global.GameScale);
 		Global.Player = GetNode<CharacterControl>(".");
+		_audioStreamPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -103,49 +105,17 @@ public partial class CharacterControl : CharacterBody2D
 		
 		if (Frozen) moveDir = Vector2.Zero;
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left))
-		{
-			_targetPos = GetGlobalMousePosition();
-			if (_targetPos != Vector2.Zero)
-			{
-				var direction = (_targetPos - GlobalPosition).Normalized();
-				var distance = GlobalPosition.DistanceTo(_targetPos);
-				
-				if (distance < _moveThreshold) //idle
-				{
-					_targetPos = Vector2.Zero;
-				}
-				else //movement
-				{
-					moveDir = direction;
-				}
-			}
-		}
 
 		if (moveDir != Vector2.Zero)
 		{
-			//moveDir = moveDir.Rotated(Mathf.DegToRad(30));
 			Velocity = Velocity.MoveToward(moveDir * (MoveSpeed * World.Global.GameScale), (float)(AccelerationSpeed * World.Global.GameScale));
-			//GD.Print(Velocity);
+			if (!_audioStreamPlayer.Playing) _audioStreamPlayer.Play();
+			
 		}
 		else
 		{
 			Velocity = Velocity.MoveToward(Vector2.Zero, (float)(DecelerationSpeed * World.Global.GameScale));
-			/*switch (_direction)
-			{
-				case "right":
-					_charSprite.Play("idleNE");
-					break;
-				case "left":
-					_charSprite.Play("idleSW");
-					break;
-				case "up":
-					_charSprite.Play("idleNW");
-					break;
-				case "down":
-					_charSprite.Play("idleSE");
-					break;
-			}*/
+			if (_audioStreamPlayer.Playing) _audioStreamPlayer.Stop();
 		}
 		MoveAndSlide();
 	}

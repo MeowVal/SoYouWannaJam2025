@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw7yx6b35ysh0"]
+[gd_scene load_steps=6 format=3 uid="uid://cw7yx6b35ysh0"]
 
 [ext_resource type="Script" uid="uid://dbwddwgt2enxn" path="res://Entities/Interactive/Wheelbarrow.cs" id="1_upq10"]
 [ext_resource type="Texture2D" uid="uid://bo5bafdnpkpbe" path="res://Assets/Sprites/Environment/Wheelbarrow.png" id="3_2o2l4"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="3_17u5e"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="4_gyh6y"]
-[ext_resource type="Texture2D" uid="uid://bj0bl6ie3w3oi" path="res://Assets/Sprites/Environment/CrateOuter.png" id="5_pdgf0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m7g5a"]
 radius = 16.0
@@ -18,7 +17,7 @@ position = Vector2(0, -14)
 shape = SubResource("CircleShape2D_m7g5a")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
-[node name="InnerSprite" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("3_2o2l4")
 
@@ -42,8 +41,3 @@ metadata/_custom_type_script = "uid://1cpfasjkacse"
 position = Vector2(5, 1)
 script = ExtResource("4_gyh6y")
 metadata/_custom_type_script = "uid://1cpfasjkacse"
-
-[node name="OuterSprite" type="Sprite2D" parent="."]
-visible = false
-self_modulate = Color(1, 0, 1, 1)
-texture = ExtResource("5_pdgf0")
