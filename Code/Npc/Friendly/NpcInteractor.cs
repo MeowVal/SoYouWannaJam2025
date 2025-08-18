@@ -52,7 +52,7 @@ public partial class NpcInteractor : Interactible
     {
         if (unknownTarget is not FrontDesk target)
         {
-            if (unknownTarget.Name == "LeaveArea")
+            if (unknownTarget.Name == "NpcLeaveArea")
             {
                 EmitSignal(SignalName.NpcLeft, _npc);
                 _npc.QueueFree();

@@ -34,8 +34,8 @@ public partial class GameManager : Node2D
 	private Godot.Collections.Array<Npc.Friendly.Npc> _hostileNpc = [] ;
 	[Export] public int MaxNpcCount = 20;
 	private Node2D _npcSpawnLocation;
-	private Node2D _frontDesk;
-	private Node2D _leaveAreaNode;
+	private Area2D _frontDesk;
+	private Area2D _leaveAreaNode;
 	private const string NpcResourceFolderPath = "res://Resources/Npcs/Friendly/";
 	private const string HostileNpcResourceFolderPath = "res://Resources/Npcs/Hostile/";
 	private const string ModularItemFolderPath = "res://Resources/Items/ModularItems/";
@@ -99,8 +99,8 @@ public partial class GameManager : Node2D
 		
 		//GD.Print(ModularItemResources);
 		_npcSpawnLocation = (Node2D)FindChild("NpcArrivalArea");
-		_frontDesk  = (Node2D)FindChild("FrontDesk");
-		_leaveAreaNode = (Node2D)FindChild("NpcLeaveArea");
+		_frontDesk  = (Area2D)FindChild("FrontDesk");
+		_leaveAreaNode = (Area2D)FindChild("NpcLeaveArea");
 		_modularItemScene = GD.Load<PackedScene>("res://Entities/Interactive/Items/ModularItem.tscn");
 		var npcInteractor = (NpcInteractor)FindChild("NpcInteractor");
 		_hostileNpcSpawnLocation = (PathFollow2D)FindChild("HostileNpcSpawnLocations");
