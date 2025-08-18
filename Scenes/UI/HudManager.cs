@@ -21,8 +21,8 @@ public partial class HudManager : CanvasLayer
         this.Visible = sceneName switch
         {
             "MainMenu" => false,
-            "Island" => true,
-            //_ => this.Visible
+            //"Island" => true,
+            _ => true
         };
     }
 

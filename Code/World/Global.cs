@@ -15,6 +15,7 @@ public partial class Global : Node2D
     public static TileMapLayer Grid;
     public static GameManager GameManager;
     public static Camera Camera;
+    public static bool FreezeDay = false;
     [Signal]
     public delegate void CurrentSceneChangedEventHandler(string sceneName);
     

@@ -23,9 +23,9 @@ public partial class GameManager : Node2D
 	public PackedScene NpcScene { get; set; }
 	[Export]
 	public PackedScene HostileNpcScene { get; set; }
-	[ExportGroup("Other stuff")]
-	//[Export]
-	//public Vector2 TileSize = new Vector2(32, 16);
+
+	[ExportGroup("Other stuff")] 
+	[Export] public Timer NpcTimer;
 
 	public float Gold = 0; 
 	
@@ -52,9 +52,11 @@ public partial class GameManager : Node2D
 
 	public override void _EnterTree()
 	{
+		var global = GetNode<Global>("/root/Global");
 		Global.Grid = GetNode<TileMapLayer>("/root/GameManager/GameWorld/Entities");
 		Global.GameManager = GetNode<GameManager>("/root/GameManager");
 		Global.Camera = GetNode<Camera>("/root/GameManager/Camera");
+		global.CurrentScene = "Island";
 	}
 
 	public override void _ExitTree()
@@ -110,6 +112,8 @@ public partial class GameManager : Node2D
 		CycleLantern.CycleLantern += LanternChanged;
 		Global.GameDay = 0;
 		
+		MaxNpcCount = 0;
+		NpcTimer.SetWaitTime(double.MaxValue);
 	}
 
 	public void RequestToJoin(Npc.Friendly.Npc npc)
@@ -265,17 +269,25 @@ public partial class GameManager : Node2D
 	{
 		_npcs.Remove(npc);
 	}
-	private void LanternChanged(bool onCycleLantern)
+	private void LanternChanged(bool onCycleLantern, float dayLenght)
 	{
 		if (onCycleLantern)
 		{
 			GD.Print("IT'S DAY TIME !");
+			
+			MaxNpcCount = 5 + (2 * Global.GameDay);
+			NpcTimer.SetWaitTime((dayLenght/MaxNpcCount)/1.5);
+			NpcTimer.Start();
+
 			//Example of changing the Camera Target.
 			//Global.Camera.SmoothingSpeed = 1;
 			//Global.Camera.FollowingNode = GetNode("GameWorld/Entities/Dispenser14") as Node2D;
 		}
 		else
 		{
+			if (_npcQueue.Count > 0) Global.FreezeDay = true;
+			MaxNpcCount = 0;
+			NpcTimer.SetWaitTime(double.MaxValue);
 			GD.Print("AWW IT'S NIGHT TIME !");
 		}
 	}
@@ -284,7 +296,8 @@ public partial class GameManager : Node2D
 
 	private void OnNpcTimerTimeout()
 	{
-		//GD.Print("NPC count = "+_npcs.Count);
+		//GD.Print("WOLOLO !?");
+		GD.Print("NPC count = "+_npcs.Count);
 		Npc.Friendly.Npc npc = NpcScene.Instantiate<Npc.Friendly.Npc>();
 		if (!NpcSpawning(npc)) return;
 		EModularItemType[] itemTypes = [EModularItemType.Sword, EModularItemType.Spear, EModularItemType.Bow,  EModularItemType.Chestplate, EModularItemType.Staff];

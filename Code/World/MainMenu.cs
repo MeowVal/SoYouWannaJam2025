@@ -24,7 +24,7 @@ public partial class MainMenu : Control
     private void OnPressed()
     {
         GetTree().ChangeSceneToFile("res://Scenes/Maps/Island.tscn");
-        _global.CurrentScene = "Island";
+        //_global.CurrentScene = "Island";
     }
     
     private void OnPressed2()

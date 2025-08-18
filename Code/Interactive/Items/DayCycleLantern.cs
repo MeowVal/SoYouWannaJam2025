@@ -8,13 +8,13 @@ using SoYouWANNAJam2025.Scenes.UI;
 public partial class DayCycleLantern : Node2D
 {
     [Signal]
-    public delegate void CycleLanternEventHandler(bool onCycleLantern);
+    public delegate void CycleLanternEventHandler(bool onCycleLantern, float dayLenght);
 
     [Export] public Node2D Lighting;
     [Export] public double CycleTime = 120;
     [Export] public double DawnTime = 5;
     [Export] public double DawnFrame = 0.2;
-    [Export] public double DuskFrame = 0.85;
+    [Export] public double DuskFrame = 0.8;
     
     private Interactible _interact;
     private AnimationPlayer _animator;
@@ -78,14 +78,14 @@ public partial class DayCycleLantern : Node2D
     {
         _dawnHandled = true;
         _animator.SetSpeedScale(1/(float)CycleTime * (1-(float)DawnFrame));
-        EmitSignal(SignalName.CycleLantern, true);
+        EmitSignal(SignalName.CycleLantern, true, CycleTime);
     }
 
     private void OnDuskFrame()
     {
         _duskHandled = true;
         GD.Print("Day is Dusk, closing shop");
-        EmitSignal(SignalName.CycleLantern, false);
+        EmitSignal(SignalName.CycleLantern, false, CycleTime);
     }
 
     private void OnMidnight()
@@ -106,6 +106,7 @@ public partial class DayCycleLantern : Node2D
         if (isOn)
         {
             GD.Print("TURN ON LIGHT");
+            //Global.Player.GetNode<PointLight2D>("PointLight2D").Energy = 0.65f;
             foreach (var lantern in _lanternSprites)
             {
                 lantern.Frame = 0;
@@ -117,6 +118,7 @@ public partial class DayCycleLantern : Node2D
         else
         {
             GD.Print("TURN OFF LIGHT");
+            //Global.Player.GetNode<PointLight2D>("PointLight2D").Energy = 0.25f;
             foreach (var lantern in _lanternSprites)
             {
                 lantern.Frame = 1;
@@ -126,9 +128,21 @@ public partial class DayCycleLantern : Node2D
             GD.Print(_isDayTime, "_isDayTime");
         }
     }
+
+    private bool _isFrozen = false;
     
     public override void _Process(double delta)
     {
+        if (Global.FreezeDay && !_isFrozen)
+        {
+            _isFrozen = true;
+            _animator.Pause();
+        }
+        else if (!Global.FreezeDay && _isFrozen)
+        {
+            _isFrozen = false;
+            _animator.Play();
+        }
         if (_animator.IsPlaying())
         {
             

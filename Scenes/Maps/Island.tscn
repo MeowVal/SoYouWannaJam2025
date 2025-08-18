@@ -23,18 +23,17 @@
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="17_pyxrn"]
 [ext_resource type="Resource" uid="uid://cpx5y0g6s8hd5" path="res://Resources/Items/Resources/MythrilOre.tres" id="21_5y0l8"]
 [ext_resource type="PackedScene" uid="uid://bce0ppun22nje" path="res://Entities/Interactive/ItemTest.tscn" id="22_51mnd"]
-[ext_resource type="PackedScene" path="res://Entities/Lighting/Lantern.tscn" id="24_xmtv7"]
+[ext_resource type="PackedScene" uid="uid://dgu4iw0i0j6tj" path="res://Entities/Lighting/Lantern.tscn" id="24_xmtv7"]
 
-[node name="GameManager" type="Node2D" node_paths=PackedStringArray("CycleLantern")]
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("NpcTimer", "CycleLantern")]
 script = ExtResource("1_m78t2")
 NpcScene = ExtResource("2_51mnd")
 HostileNpcScene = ExtResource("2_51mnd")
+NpcTimer = NodePath("NpcTimer")
 CycleLantern = NodePath("GameWorld/Entities/DayCycleLantern")
 MaxNpcCount = 5
 
 [node name="NpcTimer" type="Timer" parent="."]
-wait_time = 20.0
-autostart = true
 
 [node name="GameWorld" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -123,6 +122,8 @@ position = Vector2(1592, -4)
 [node name="DayCycleLantern" parent="GameWorld/Entities" node_paths=PackedStringArray("Lighting") instance=ExtResource("5_qrjm0")]
 position = Vector2(1520, 4)
 Lighting = NodePath("../../../Camera/Lighting")
+CycleTime = 300.0
+DuskFrame = 0.85
 
 [node name="Dispenser" parent="GameWorld/Entities" instance=ExtResource("6_qrjm0")]
 position = Vector2(1392, -80)
@@ -299,7 +300,7 @@ position = Vector2(1248, 172)
 position = Vector2(1328, 212)
 
 [node name="Lantern9" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
-position = Vector2(1360, 104)
+position = Vector2(1358, 105)
 
 [node name="Lantern10" parent="GameWorld/Entities" instance=ExtResource("24_xmtv7")]
 position = Vector2(368, 68)

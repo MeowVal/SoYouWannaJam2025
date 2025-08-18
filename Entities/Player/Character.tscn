@@ -64,7 +64,6 @@ occluder = SubResource("OccluderPolygon2D_31rvx")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 material = SubResource("ShaderMaterial_bkf2h")
 position = Vector2(-20, -31)
-enabled = false
 color = Color(1, 1, 0.854902, 1)
 energy = 0.35
 shadow_enabled = true
