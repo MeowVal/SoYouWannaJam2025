@@ -220,11 +220,18 @@ public partial class GameManager : Node2D
 		
 		var changeCount = (int)(partTypes.Length*changePercent);
 		if (changeCount == 0) brokenCount = 1;
+		var retry = 5;
 		
 		var changes = new bool[partTypes.Length];
-		while (changeCount > 0)
+		while (changeCount > 0 || retry == 0)
 		{
 			var randIndex = GD.RandRange(0, partTypes.Length-1);
+			if (partTypes[randIndex] == EPartType.Trim)
+			{
+				retry--;
+				continue;
+			};
+			
 			if (changes[randIndex] != false) continue;
 			changeCount--;
 			changes[randIndex] = true;

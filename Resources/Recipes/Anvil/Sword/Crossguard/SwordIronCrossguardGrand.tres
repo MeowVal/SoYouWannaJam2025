@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="BaseRecipe" load_steps=5 format=3 uid="uid://cx8yoa3b2khgl"]
+[gd_resource type="Resource" script_class="BaseRecipe" load_steps=4 format=3 uid="uid://cx8yoa3b2khgl"]
 
-[ext_resource type="Script" uid="uid://bvp0bfdpjbbk2" path="res://Code/Interactive/Items/GenericItemTemplate.cs" id="2_r4jfn"]
+[ext_resource type="Resource" uid="uid://tvgxu2woqsxh" path="res://Resources/Items/Resources/IronIngot.tres" id="1_vcpry"]
 [ext_resource type="Resource" uid="uid://dw3b27gsg7lj1" path="res://Resources/Items/ModularParts/Sword/Crossguard/Sword_Crossguard_Iron_Grand.tres" id="3_h58jo"]
-[ext_resource type="Resource" uid="uid://c5f64u5c6jfj2" path="res://Resources/Items/Resources/MythrilIngot.tres" id="3_xqdls"]
 [ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="5_6pedj"]
 
 [resource]
@@ -10,8 +9,8 @@ script = ExtResource("5_6pedj")
 DisplayName = "Sword Iron Grand Crossguard"
 Description = "You need to actually set this lol."
 RecipeType = 0
-RecipeInputs = Array[ExtResource("2_r4jfn")]([ExtResource("3_xqdls")])
-RecipeOutputs = Array[ExtResource("2_r4jfn")]([ExtResource("3_h58jo")])
+RecipeInputs = [ExtResource("1_vcpry")]
+RecipeOutputs = [ExtResource("3_h58jo")]
 WorkType = 0
 TimeToComplete = 5.0
 SequenceLength = 6

@@ -6,7 +6,7 @@ using SoYouWANNAJam2025.Code.Player;
 
 namespace SoYouWANNAJam2025.Code.Interactive.Stations;
 
-public partial class TinkeringStation : CraftingStation
+public partial class GrindingStation : CraftingStation
 {
     private CraftingStationInterface _interactionInterface;
     private Node2D _interfaceLocation;
@@ -19,20 +19,19 @@ public partial class TinkeringStation : CraftingStation
     public void Begin()
     {
         if (AttemptCraft()) return;
+        if (Inventory.Slots[0].Item is not ModularItem modularItem) return;
+        if (!HasBrokenPart(modularItem)) return;
         
-        var (found, item, part) = FindParts();
-        if (!found) return;
         CurrentRecipe = new BaseRecipe()
         {
-            TimeToComplete = 6,
-            SpamPerSecond = 6,
-            DisplayName = "Tinkering"
+            RecipeType = ERecipeType.Standard,
+            TimeToComplete = 5,
+            DisplayName = "Grinding"
         };
         if (AudioPlayer != null) AudioPlayer.Play();
         IsCrafting = true;
-        CreateInteractionUi("res://Scenes/UI/Interactions/CraftingInputs.tscn");
+        CreateInteractionUi("res://Scenes/UI/Interactions/CraftingTimer.tscn");
         CurrentRecipe = null;
-        GD.Print(item.ModularItemType, part.DisplayName);
     }
 
     public override bool RecipeComplete()
@@ -40,39 +39,22 @@ public partial class TinkeringStation : CraftingStation
         if (CurrentRecipe != null) return base.RecipeComplete();
         FreeUi();
         
-        var (found, item, part) = FindParts();
-        if (!found) return false;
-        if (!item.AddPart(part)) return false;
-        
-        Array<GenericItemTemplate> list = [part];
-        
-        if (!Inventory.DestroyItem(list)) return false;
-        if (AutoCraft) Begin();
-        return true;
-    }
-
-    private (bool, ModularItem, ModularPartTemplate) FindParts()
-    {
-        ModularItem targetItem = null;
-        ModularPartTemplate targetPart = null;
-        foreach (var slot in Inventory.Slots)
+        if (!Inventory.Slots[0].HasItem()) return false;
+        if (Inventory.Slots[0].Item is ModularItem modularItem)
         {
-            if (!slot.HasItem()) continue;
-            if (slot.Item is ModularItem modularItem)
+            foreach (var part in modularItem.Parts)
             {
-                if (targetItem != null) return (false, null, null);
-                targetItem = modularItem;
+                if (part.Value.PartState == EPartState.Broken)
+                {
+                    part.Value.PartState = EPartState.New;
+                    break;
+                }
             }
-            else if (slot.Item.ItemResource is ModularPartTemplate modularPartItem)
-            {
-                if (targetPart != null) return (false, null, null);
-                targetPart = modularPartItem;
-            }
+            modularItem.DrawSprite();
         }
 
-        if (targetItem == null || targetPart == null) return (false, null, null);
-        
-        return (true, targetItem, targetPart);
+        //if (AutoCraft) Begin();
+        return true;
     }
     
     public override void OnInteractMethod(Node2D node, TriggerType trigger)
@@ -89,14 +71,29 @@ public partial class TinkeringStation : CraftingStation
                 }
                 else if (Inventory.HasSpace() && interactor.InventorySlot.HasItem())
                 {
-                    if (interactor.InventorySlot.Item.ItemResource is not (ModularPartTemplate or ModularItemTemplate)) return;
+                    if (IsCrafting || interactor.InventorySlot.Item is not ModularItem modularItem) return;
+                    if (!HasBrokenPart(modularItem)) return;
                     interactor.InventorySlot.TransferTo(Inventory);
-                    if (AutoCraft) Begin();
+                    Begin();
                 }
                 break;
             case TriggerType.UseAction:
                 if (!IsCrafting) Begin();
                 break;
         }
+    }
+
+    private static bool HasBrokenPart(ModularItem modularItem)
+    {
+        var found = false;
+        foreach (var part in modularItem.Parts)
+        {
+            if (part.Value.PartState == EPartState.Broken)
+            {
+                found = true;
+                break;
+            }
+        }
+        return found;
     }
 }

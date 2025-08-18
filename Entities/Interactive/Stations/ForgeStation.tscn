@@ -1,10 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://cgbg8jjt6swx6"]
+[gd_scene load_steps=21 format=3 uid="uid://cgbg8jjt6swx6"]
 
 [ext_resource type="Script" uid="uid://b0wqbfkxbfgpt" path="res://Code/Interactive/Stations/ForgeStation.cs" id="1_l3fy7"]
 [ext_resource type="Resource" uid="uid://bdf10ddikdxmx" path="res://Resources/Items/Resources/ScrapMetal.tres" id="2_1ijhs"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_skwst"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="7_wai8b"]
+[ext_resource type="AudioStream" uid="uid://bbd1yn2pbnoii" path="res://Assets/Sound/fireplace.ogg" id="9_g4254"]
 [ext_resource type="Texture2D" uid="uid://bos0scnb0a4n2" path="res://Assets/Sprites/Environment/ForgeTop.png" id="9_wai8b"]
+[ext_resource type="AudioStream" uid="uid://bd8qs8r7mgqlp" path="res://Assets/Sound/campfire_whoosh.ogg" id="10_1qnlg"]
 [ext_resource type="Texture2D" uid="uid://dviu4hqdy0jgi" path="res://Assets/Sprites/Environment/ForgeBase.png" id="10_dqlfn"]
 [ext_resource type="Texture2D" uid="uid://bwfxftgh5kpu5" path="res://Assets/Sprites/Environment/ForgeFire.png" id="13_1p836"]
 [ext_resource type="Texture2D" uid="uid://d4bfrhlsdyolj" path="res://Assets/Generated Assets/ForgeLight.png" id="14_dqlfn"]
@@ -208,3 +210,15 @@ libraries = {
 }
 autoplay = "glow"
 speed_scale = 0.3
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_g4254")
+volume_db = -10.0
+autoplay = true
+max_distance = 500.0
+parameters/looping = true
+
+[node name="CraftingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_1qnlg")
+volume_db = -10.0
+max_distance = 500.0

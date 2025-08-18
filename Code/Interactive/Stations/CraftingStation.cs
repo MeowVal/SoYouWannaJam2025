@@ -27,12 +27,14 @@ public partial class CraftingStation : Interactible
     public bool IsCrafting = false;
     private CraftingStationInterface _interactionInterface;
     private Node2D _interfaceLocation;
+    public AudioStreamPlayer2D AudioPlayer;
     
     public override void _Ready()
     {
         if (Engine.IsEditorHint()) return;
         base._Ready();
         _interfaceLocation = GetNode<Node2D>("InterfaceLocation");
+        AudioPlayer = GetNode<AudioStreamPlayer2D>("CraftingSound");
         Interact += OnInteractMethod;
         
         if (RecipesFolder != "") Global.GameManager.TraverseDirectory(RecipesFolder,
@@ -125,6 +127,7 @@ public partial class CraftingStation : Interactible
     // Begin the process of making a specific recipe
     public virtual void RecipeBegin(BaseRecipe recipe)
     {
+        if (AudioPlayer != null) AudioPlayer.Play();
         CurrentRecipe = recipe;
         IsCrafting = true;
 

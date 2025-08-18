@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0cb2dvv2nwc"]
+[gd_scene load_steps=7 format=3 uid="uid://c0cb2dvv2nwc"]
 
 [ext_resource type="Script" uid="uid://bymjkp618e0v6" path="res://Code/Interactive/Stations/TinkeringStation.cs" id="1_204w4"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="2_r12n5"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="2_tbd3y"]
 [ext_resource type="Texture2D" uid="uid://dc2iku63wb4ku" path="res://Assets/Sprites/Environment/TinkeringTable.png" id="3_tbd3y"]
+[ext_resource type="AudioStream" uid="uid://cuosbis8fmmuy" path="res://Assets/Sound/ratchet-socket-wrench-tool-95253.mp3" id="5_tpgw5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5p8jk"]
 radius = 20.0
@@ -85,3 +86,8 @@ position = Vector2(2, 5)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
 polygon = PackedVector2Array(-34, 2, -34, -7, -23, -13, 32, 13, 32, 23, 18, 30)
+
+[node name="CraftingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_tpgw5")
+volume_db = -5.0
+max_distance = 500.0

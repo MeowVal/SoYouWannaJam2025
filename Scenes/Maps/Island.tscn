@@ -21,10 +21,10 @@
 [ext_resource type="Resource" uid="uid://c6fyadcgfkbot" path="res://Resources/Items/Resources/Cloth.tres" id="16_xmtv7"]
 [ext_resource type="PackedScene" uid="uid://c0cb2dvv2nwc" path="res://Entities/Interactive/Stations/TinkeringStation.tscn" id="17_5egf7"]
 [ext_resource type="PackedScene" uid="uid://2f5qwcem3nao" path="res://Entities/Interactive/Stations/AnvilStation.tscn" id="17_pyxrn"]
-[ext_resource type="Script" uid="uid://d4i4at3b80g40" path="res://Scenes/Maps/FrontDesk.cs" id="18_51mnd"]
+[ext_resource type="Script" path="res://Scenes/Maps/FrontDesk.cs" id="18_51mnd"]
 [ext_resource type="Resource" uid="uid://cpx5y0g6s8hd5" path="res://Resources/Items/Resources/MythrilOre.tres" id="21_5y0l8"]
 [ext_resource type="PackedScene" uid="uid://bce0ppun22nje" path="res://Entities/Interactive/ItemTest.tscn" id="22_51mnd"]
-[ext_resource type="PackedScene" uid="uid://dgu4iw0i0j6tj" path="res://Entities/Lighting/Lantern.tscn" id="24_xmtv7"]
+[ext_resource type="PackedScene" path="res://Entities/Lighting/Lantern.tscn" id="24_xmtv7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xmtv7"]
 radius = 32.0

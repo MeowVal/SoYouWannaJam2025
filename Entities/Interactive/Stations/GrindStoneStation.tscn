@@ -1,22 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfm2tfxw2xbmw"]
+[gd_scene load_steps=7 format=3 uid="uid://dfm2tfxw2xbmw"]
 
-[ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_k1wm0"]
-[ext_resource type="Script" uid="uid://dpq804w6fy4nf" path="res://Code/Interactive/Stations/BaseRecipe.cs" id="2_f43sv"]
-[ext_resource type="Resource" uid="uid://ic3soev6roi2" path="res://Resources/Recipes/Anvil/Sword/Blade/SwordIronBlade.tres" id="3_ge7dg"]
-[ext_resource type="Resource" uid="uid://cu8exs63i5gp4" path="res://Resources/Recipes/Anvil/Sword/Blade/SwordIronBladeModern.tres" id="4_aslt3"]
+[ext_resource type="Script" uid="uid://d23vmpyriml4w" path="res://Code/Interactive/Stations/GrindingStation.cs" id="1_5ml2f"]
+[ext_resource type="AudioStream" uid="uid://b84nty8lxoi20" path="res://Assets/Sound/grinding.ogg" id="5_dw181"]
 [ext_resource type="Texture2D" uid="uid://cctli7yewhy0k" path="res://Assets/Sprites/Environment/Grindstone.png" id="5_k1wm0"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_d1asv"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="7_6p6ah"]
-
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1wm0"]
 radius = 20.0
 
 [node name="GrindStoneStation" type="Area2D"]
-script = ExtResource("1_k1wm0")
-DisplayName = "Anvil Station"
-Recipes = Array[ExtResource("2_f43sv")]([ExtResource("3_ge7dg"), ExtResource("4_aslt3")])
-ColliderRadius = 20.0
+script = ExtResource("1_5ml2f")
+AutoCraft = true
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
@@ -32,9 +27,16 @@ position = Vector2(0, -31)
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("6_d1asv")
+AllowModularItem = true
 metadata/_custom_type_script = "uid://usn4a73qqvca"
 
 [node name="InventorySlot1" type="Node2D" parent="Inventory"]
-position = Vector2(2, -15)
+position = Vector2(5, 0)
 script = ExtResource("7_6p6ah")
+AllowModularItem = true
 metadata/_custom_type_script = "uid://1cpfasjkacse"
+
+[node name="CraftingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_dw181")
+volume_db = 13.0
+max_distance = 500.0

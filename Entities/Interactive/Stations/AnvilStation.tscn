@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://2f5qwcem3nao"]
+[gd_scene load_steps=7 format=3 uid="uid://2f5qwcem3nao"]
 
 [ext_resource type="Script" uid="uid://4dq54v6r2woy" path="res://Code/Interactive/Stations/CraftingStation.cs" id="1_av5sn"]
 [ext_resource type="Texture2D" uid="uid://cbll641aetbtj" path="res://Assets/Sprites/Environment/Anvil.png" id="4_cl1q5"]
+[ext_resource type="AudioStream" uid="uid://c3kcu2uxyw8od" path="res://Assets/Sound/Anvil_Medium_Fast_Rythmic_Tapping_Ringing.ogg" id="5_wm3iv"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="7_nkjxm"]
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="8_vdi6x"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7gx17"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_cl1q5"]
 radius = 20.0
 
 [node name="AnvilStation" type="Area2D"]
@@ -16,7 +17,7 @@ ColliderRadius = 20.0
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
-shape = SubResource("CircleShape2D_7gx17")
+shape = SubResource("CircleShape2D_cl1q5")
 debug_color = Color(0.674557, 0.304912, 1, 0.42)
 
 [node name="StationSprite" type="Sprite2D" parent="."]
@@ -53,3 +54,8 @@ metadata/_custom_type_script = "uid://1cpfasjkacse"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBarrier"]
 position = Vector2(6, -5)
 polygon = PackedVector2Array(-10, -3, -4, -8, 3, -3, 3, 5, -10, 5)
+
+[node name="CraftingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_wm3iv")
+volume_db = 4.0
+max_distance = 500.0
