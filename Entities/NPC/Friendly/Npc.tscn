@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://hxf0gtf3x5pb"]
+[gd_scene load_steps=22 format=3 uid="uid://hxf0gtf3x5pb"]
 
 [ext_resource type="Script" uid="uid://b4ntrd6icymju" path="res://Code/Npc/Friendly/Npc.cs" id="1_623a7"]
 [ext_resource type="Resource" uid="uid://chl1fym108awa" path="res://Resources/Npcs/Friendly/Npc01.tres" id="2_jvg37"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://1cpfasjkacse" path="res://Code/Interactive/Inventory/InventorySlot.cs" id="5_mrx7r"]
 [ext_resource type="Script" uid="uid://usn4a73qqvca" path="res://Code/Interactive/Inventory/Inventory.cs" id="6_2i02p"]
 [ext_resource type="Script" uid="uid://bbqx7jgoyn746" path="res://Code/Npc/Friendly/NpcInteractor.cs" id="6_c6mha"]
+[ext_resource type="Texture2D" uid="uid://bkihaqmvfpwjc" path="res://Assets/Sprites/UI/Icon_Tick.png" id="7_rmqlh"]
+[ext_resource type="Texture2D" uid="uid://udlcs73ykltd" path="res://Assets/Sprites/UI/Icon_Cross.png" id="8_ovo4b"]
 
 [sub_resource type="Animation" id="Animation_jvg37"]
 length = 0.001
@@ -165,12 +167,15 @@ height = 12.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mrx7r"]
 polygon = PackedVector2Array(2, 4, 6, 3, 8, 1, 8, 0, 7, -2, 5, -4, 2, -5, -2, -5, -5, -4, -7, -2, -8, 0, -8, 1, -6, 3, -2, 4)
 
-[node name="Npc" type="CharacterBody2D" node_paths=PackedStringArray("MoodTimer")]
+[node name="Npc" type="CharacterBody2D" node_paths=PackedStringArray("MoodTimer", "MoodSpriteX", "MoodSpriteY", "MoodBar")]
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_623a7")
 MoodTimer = NodePath("MoodTimer")
+MoodSpriteX = NodePath("NotHappy")
+MoodSpriteY = NodePath("Done")
+MoodBar = NodePath("MoodBar")
 NpcResource = ExtResource("2_jvg37")
 
 [node name="NpcInteractor" type="Area2D" parent="."]
@@ -232,14 +237,43 @@ path_postprocessing = 1
 avoidance_enabled = true
 radius = 32.0
 avoidance_layers = 3
-debug_enabled = true
 debug_path_custom_color = Color(1, 0.223529, 0.137255, 1)
 
 [node name="MoodTimer" type="Timer" parent="."]
 wait_time = 10.0
-one_shot = true
-autostart = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_mrx7r")
+
+[node name="Done" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(0, -40)
+texture = ExtResource("7_rmqlh")
+
+[node name="NotHappy" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(0, -40)
+texture = ExtResource("8_ovo4b")
+
+[node name="MoodBar" type="ProgressBar" parent="."]
+visible = false
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -179.0
+offset_right = 57.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(61.0002, 179)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+value = 100.0
