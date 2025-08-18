@@ -431,50 +431,6 @@ public partial class GameManager : Node2D
 			dir.ListDirEnd();
 		}
 	}
-	/*
-	public static void TraverseDirectory(string rootPath, Action<string> fileAction)
-	{
-		var dirStack = new Stack<string>();
-		dirStack.Push(rootPath);
-
-		while (dirStack.Count > 0)
-		{
-			var currentPath = dirStack.Pop();
-			var dir = DirAccess.Open(currentPath);
-			if (dir == null)
-			{
-				GD.PrintErr($"Failed to open directory: {currentPath}");
-				continue;
-			}
-
-			dir.ListDirBegin();
-			string fileName = dir.GetNext();
-			while (!string.IsNullOrEmpty(fileName))
-			{
-				// Skip special directories
-				if (fileName == "." || fileName == "..")
-				{
-					fileName = dir.GetNext();
-					continue;
-				}
-
-				string fullPath = currentPath.TrimEnd('/') + "/" + fileName;
-
-				if (dir.CurrentIsDir())
-				{
-					dirStack.Push(fullPath);
-				}
-				else
-				{
-					fileAction?.Invoke(fullPath);
-				}
-
-				fileName = dir.GetNext();
-			}
-			dir.ListDirEnd();
-		}
-	}
-	*/
 	public (bool,GenericItem) NewItem(GenericItemTemplate itemTemplate)
 	{
 		if (itemTemplate == null) return (false, null);
