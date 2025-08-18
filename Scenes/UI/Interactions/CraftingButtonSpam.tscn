@@ -98,14 +98,13 @@ theme_override_constants/separation = 8
 
 [node name="ProgressBar" type="ProgressBar" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 layout_mode = 2
+theme = ExtResource("2_fjq4c")
 max_value = 1.0
-value = 0.19
 
 [node name="RecipeProgress" type="ProgressBar" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxTexture_svhl4")
 max_value = 1.0
-value = 0.68
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 layout_mode = 2

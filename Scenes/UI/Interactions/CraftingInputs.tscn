@@ -28,7 +28,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -220.0
-offset_top = -151.0
+offset_top = -136.0
 offset_right = 220.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -103,9 +103,9 @@ alignment = 1
 
 [node name="RecipeProgress" type="ProgressBar" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 layout_mode = 2
+theme = ExtResource("2_lkhr4")
 theme_override_styles/fill = SubResource("StyleBoxTexture_je30t")
 max_value = 1.0
-value = 0.68
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control2/VBoxContainer/BarsMarginContainer/BarsVBox"]
 layout_mode = 2

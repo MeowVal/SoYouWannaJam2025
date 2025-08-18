@@ -135,6 +135,8 @@ public partial class CraftingInputs : CraftingStationInterface
         if (_lastDirection == direction) return;
         _lastDirection = direction;
 
+        if (_index >= _lenght) return;
+
         if (direction[_sequence[_index]])
         {
             GD.Print($"{_index} Success");

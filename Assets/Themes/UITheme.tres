@@ -1,9 +1,11 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://cv00iqe8ukusx"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://cv00iqe8ukusx"]
 
 [ext_resource type="Texture2D" uid="uid://gavnit6km87y" path="res://Assets/Sprites/UI/Button2Small.png" id="1_kbbo4"]
 [ext_resource type="FontFile" uid="uid://dagapmb331y8e" path="res://Assets/Fonts/Monocraft.ttc" id="1_vs3nw"]
 [ext_resource type="Texture2D" uid="uid://cibpurbsy7rxh" path="res://Assets/Sprites/UI/Button1Small.png" id="2_fqcbt"]
 [ext_resource type="Texture2D" uid="uid://bfjkbb227t12v" path="res://Assets/Sprites/UI/Button3Small.png" id="3_q2mks"]
+[ext_resource type="Texture2D" uid="uid://csmh7m0wklypg" path="res://Assets/Sprites/UI/ProgressBarBackground.png" id="4_q2mks"]
+[ext_resource type="Texture2D" uid="uid://6r44shb4l0ro" path="res://Assets/Sprites/UI/ProgressBarFillGold.png" id="5_nmuvt"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nmuvt"]
 texture = ExtResource("1_kbbo4")
@@ -28,9 +30,25 @@ texture_margin_bottom = 16.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbbo4"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mw6dp"]
+texture = ExtResource("4_q2mks")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wbyhr"]
+texture = ExtResource("5_nmuvt")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
 [resource]
 default_font = ExtResource("1_vs3nw")
 Button/styles/hover = SubResource("StyleBoxTexture_nmuvt")
 Button/styles/normal = SubResource("StyleBoxTexture_b6oe6")
 Button/styles/pressed = SubResource("StyleBoxTexture_d2db3")
 PanelContainer/styles/panel = SubResource("StyleBoxEmpty_kbbo4")
+ProgressBar/styles/background = SubResource("StyleBoxTexture_mw6dp")
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_wbyhr")
