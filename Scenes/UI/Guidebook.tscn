@@ -1,0 +1,423 @@
+[gd_scene load_steps=22 format=3 uid="uid://bd5ctlsaoixe0"]
+
+[ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="1_dalyi"]
+[ext_resource type="Texture2D" uid="uid://btjahwi5bo7rt" path="res://Assets/Sprites/UI/Background4Large.png" id="2_ahgf5"]
+[ext_resource type="Texture2D" uid="uid://cpnflp3gsnfbf" path="res://Assets/Sprites/Mobs/HumanGeneric1.png" id="3_f3t26"]
+[ext_resource type="Texture2D" uid="uid://ckv3yxb3knuq8" path="res://Assets/Sprites/Mobs/HumanGeneric2.png" id="4_58y83"]
+[ext_resource type="Texture2D" uid="uid://b7ww2rhodhp06" path="res://Assets/Sprites/Mobs/HumanGeneric3.png" id="5_a0uhv"]
+[ext_resource type="Texture2D" uid="uid://ca7pn1xq8ibev" path="res://Assets/Sprites/UI/Keybinds/Controller_A.png" id="6_cfey5"]
+[ext_resource type="Texture2D" uid="uid://d4f636uq73cjs" path="res://Assets/Sprites/UI/Keybinds/Keyboard_Space.png" id="7_3puij"]
+[ext_resource type="Texture2D" uid="uid://k8st5trg81aq" path="res://Assets/Sprites/Environment/CrateInner.png" id="8_f04v5"]
+[ext_resource type="Texture2D" uid="uid://bj0bl6ie3w3oi" path="res://Assets/Sprites/Environment/CrateOuter.png" id="9_awi6u"]
+[ext_resource type="Texture2D" uid="uid://cntctpqgwvtyl" path="res://Assets/Sprites/Materials/IronOre2.png" id="10_cs7t3"]
+[ext_resource type="Texture2D" uid="uid://bcv31dx5df7at" path="res://Assets/Sprites/Materials/GoldOre.png" id="11_tnuvs"]
+[ext_resource type="Texture2D" uid="uid://br8brdd1yngwx" path="res://Assets/Sprites/Materials/MythrilOre.png" id="12_00trl"]
+[ext_resource type="Texture2D" uid="uid://dbrsaillwnjyq" path="res://Assets/Sprites/Materials/WoodLog.png" id="13_dmd1o"]
+[ext_resource type="Texture2D" uid="uid://b3qqps5m78rdf" path="res://Assets/Sprites/Materials/Cloth.png" id="14_oe0mu"]
+[ext_resource type="Texture2D" uid="uid://b4nvkm4ifxef3" path="res://Assets/Sprites/UI/Keybinds/Controller_X.png" id="15_cs7t3"]
+[ext_resource type="Texture2D" uid="uid://cr24elq4q4eye" path="res://Assets/Sprites/Environment/Forge.png" id="15_f04v5"]
+[ext_resource type="Texture2D" uid="uid://dc2iku63wb4ku" path="res://Assets/Sprites/Environment/TinkeringTable.png" id="16_awi6u"]
+[ext_resource type="Texture2D" uid="uid://dy1ndr1ulvqtv" path="res://Assets/Sprites/UI/Keybinds/Keyboard_F.png" id="16_tnuvs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtgb6"]
+atlas = ExtResource("3_f3t26")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvqjk"]
+atlas = ExtResource("4_58y83")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwa2u"]
+atlas = ExtResource("5_a0uhv")
+region = Rect2(0, 0, 32, 32)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dalyi")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -371.0
+offset_top = 13.0
+offset_right = 371.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+layout_mode = 2
+texture = ExtResource("2_ahgf5")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_dalyi")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("2_ahgf5")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 31
+text = "The Blacksmith's Guidebook"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/side_margin = 0
+tab_alignment = 1
+current_tab = 1
+
+[node name="Introduction" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+metadata/_tab_index = 0
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+modulate = Color(1, 0.733333, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "Welcome!"
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Greetings, come on in to the workshop, make yourself at home. This book should teach you all you need to know about the masterful craft of weaponsmithing, tailoring, carpentry and fletchering.
+"
+autowrap_mode = 3
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+modulate = Color(1, 0.733333, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "Your Customers
+"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "The fine people of the local area will come to your shop, asking for all manner of services. Most often for yourself will be Repairs and Replacements. Doing these patchwork jobs on their fine possessions will help you start your career and build up a friendly reputation with the community.
+"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = SubResource("AtlasTexture_xtgb6")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = SubResource("AtlasTexture_dvqjk")
+
+[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/Introduction/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = SubResource("AtlasTexture_iwa2u")
+
+[node name="The Workshop & You" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+metadata/_tab_index = 1
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+modulate = Color(1, 0.733333, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "The Workshop & You"
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "About the workshop you'll find many devices and structures that are here to help you work."
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "You can pick up new materials from storage crates in the side room. We will handle resupplying them, so make use of whatever you need."
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer"]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Pickup Drop"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("6_cfey5")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("7_3puij")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2"]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Storage Crate"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("8_f04v5")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer2/HBoxContainer/TextureRect2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_horizontal = 4
+texture = ExtResource("9_awi6u")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4"]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Iron/Gold/Mythril Ore"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("10_cs7t3")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("11_tnuvs")
+
+[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("12_00trl")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3"]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Wood/Cloth"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("13_dmd1o")
+
+[node name="TextureRect4" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer2/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("14_oe0mu")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Within the staff areas of the workshop you'll find the different crafting stations. Such as the mighty Forge or Tinker's Table. Each one with a list of goods you can make and repair there. Have a play and find out what works best at each one."
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer"]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Use Action"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("15_cs7t3")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("16_tnuvs")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer2"]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "The Forge"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_f04v5")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer4"]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Tinker's Table"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/VBoxContainer2/MarginContainer/TabContainer/The Workshop & You/HBoxContainer4/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("16_awi6u")
