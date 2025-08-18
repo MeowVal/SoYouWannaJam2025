@@ -70,7 +70,7 @@ public partial class NpcInteractor : Interactible
         _npc.MoodTimer.Start();
         _npc.MoodBar.Visible = true;
         //target.TriggerInteraction(this,TriggerType.PickupDrop);
-        GD.Print("Crafting table reached");
+        //GD.Print("Crafting table reached");
 
     }
     private void OnInteractMethod(Node2D node, TriggerType trigger)
@@ -100,7 +100,7 @@ public partial class NpcInteractor : Interactible
                     {
                         if (modularItem.IsCompleted())
                         {
-                            GD.Print("NPC Complete");
+                            //GD.Print("NPC Complete");
                         
                             _npc.RequestComplete = true;
                             _npc.LeaveQueue();
