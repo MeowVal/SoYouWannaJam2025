@@ -5,6 +5,7 @@ using SoYouWANNAJam2025.Code.Interactive.Items;
 using SoYouWANNAJam2025.Code.Npc.Friendly;
 using SoYouWANNAJam2025.Code.World;
 using SoYouWANNAJam2025.Scenes.UI.Interactions;
+using RecipeSelectionUi = SoYouWANNAJam2025.Scenes.UI.Interactions.RecipeSelection.RecipeSelectionUi;
 
 //using SoYouWANNAJam2025.Scenes.UI.Interactions;
 
@@ -61,7 +62,7 @@ public partial class CraftingStation : Interactible
                 return false;
         }
 
-        CreateInteractionUi("res://Scenes/UI/Interactions/RecipeSelectionUI.tscn");
+        CreateInteractionUi("res://Scenes/UI/Interactions/RecipeSelection/RecipeSelectionUI.tscn");
         if (_interactionInterface is not RecipeSelectionUi scene) return false;
         scene.RecipeList = recipeList;
         

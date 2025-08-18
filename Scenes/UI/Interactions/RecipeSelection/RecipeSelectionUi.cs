@@ -1,11 +1,10 @@
-using System.Linq;
 using Godot;
 using Godot.Collections;
 using SoYouWANNAJam2025.Code;
 using SoYouWANNAJam2025.Code.Interactive.Stations;
 using SoYouWANNAJam2025.Code.World;
 
-namespace SoYouWANNAJam2025.Scenes.UI.Interactions;
+namespace SoYouWANNAJam2025.Scenes.UI.Interactions.RecipeSelection;
 
 public partial class RecipeSelectionUi : CraftingStationInterface
 {
@@ -14,7 +13,9 @@ public partial class RecipeSelectionUi : CraftingStationInterface
     private int _index = 0;
     private bool _pressed = false;
 
-    private HBoxContainer[] _hBoxs;
+    private PackedScene _rowScene = GD.Load<PackedScene>("res://Scenes/UI/Interactions/RecipeSelection/RecipeRow.tscn");
+
+    private Array<RecipeRow> _rows = [];
 
     public Array<BaseRecipe> RecipeList
     {
@@ -28,7 +29,7 @@ public partial class RecipeSelectionUi : CraftingStationInterface
 
     private void BuildRecipeList()
     {
-        _hBoxs = [];
+        _rows = [];
         var vBox = GetNode<VBoxContainer>("Control/MarginContainer/VBoxContainer");
         foreach (var child in vBox.GetChildren())
         {
@@ -37,31 +38,13 @@ public partial class RecipeSelectionUi : CraftingStationInterface
         foreach (var recipe in RecipeList)
         {
             GD.Print(recipe.DisplayName);
-            var img = recipe.RecipeOutputs[0].GetItemImage();
-            
-            var hBox = new HBoxContainer();
-            var partTexture = new TextureRect();
-            var partName = new Label();
-            
-            _hBoxs = _hBoxs.Append(hBox).ToArray();
-            hBox.Modulate = new Color(0.5f, 0.5f, 0.5f, 1);
-            if (recipe.Icon != null)
-            {
-                partTexture.Texture = recipe.Icon;
-            }
-            else
-            {
-                partTexture.Texture = ImageTexture.CreateFromImage(img);
-            }
-            
-            partName.Text = recipe.RecipeOutputs[0].DisplayName;
-            
-            vBox.AddChild(hBox);
-            hBox.AddChild(partTexture);
-            hBox.AddChild(partName);
+            var newRow = _rowScene.Instantiate<RecipeRow>();
+            vBox.AddChild(newRow);
+            newRow.SetRecipe(recipe);
+            newRow.SetHighlighted(false);
+            _rows.Add(newRow);
         }
-
-        _hBoxs[0].Modulate = new Color(1, 1, 1, 1);
+        _rows[_index].SetHighlighted(true);
     }
 
     public override void Init(Interactible station)
@@ -119,11 +102,9 @@ public partial class RecipeSelectionUi : CraftingStationInterface
             _index += 1;
         }
 
-        for (var i = 0; i < _hBoxs.Length; i++)
+        for (var i = 0; i < _rows.Count; i++)
         {
-            var col = new Color(0.5f, 0.5f, 0.5f, 1);
-            if (i == _index) col = new Color(1, 1, 1, 1);
-            _hBoxs[i].Modulate = col;
+            _rows[i].SetHighlighted(i == _index);
         }
     }
 }

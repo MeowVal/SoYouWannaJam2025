@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://5bnhv66qnppv"]
+
+[ext_resource type="Theme" uid="uid://cv00iqe8ukusx" path="res://Assets/Themes/UITheme.tres" id="1_5rg67"]
+[ext_resource type="Texture2D" uid="uid://b0pjq35ahk3ke" path="res://Assets/Sprites/Materials/WoodPlanks.png" id="2_5rg67"]
+[ext_resource type="Script" uid="uid://dpyq05t67hpax" path="res://Scenes/UI/Interactions/RecipeSelection/RecipeRow.cs" id="2_yopkv"]
+[ext_resource type="Texture2D" uid="uid://ow0do4u6cgnc" path="res://Assets/Sprites/UI/Icon_Left.png" id="4_c2dog"]
+
+[node name="RecipeRow" type="PanelContainer"]
+theme = ExtResource("1_5rg67")
+script = ExtResource("2_yopkv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ItemIcon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_5rg67")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ItemText" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "A very very very very very loooooooong name :3"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HighlightArrow" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_c2dog")
+expand_mode = 1
+stretch_mode = 4
